@@ -1,0 +1,97 @@
+.container {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    grid-template-rows: 100rem;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+.navbar a.active {
+    background-color: #575757;
+}
+
+.navButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+    gap: 2rem;
+}
+
+.collapseButton {
+    border-radius: 50px;
+    align-self: flex-end;
+}
+
+.navbar button {
+    background-color: #575757;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.navbar button:hover {
+    background-color: #777777;
+}
+
+.notExpanded {
+    width: 4rem;
+    font-size: 0;
+}
+
+.heading {
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.headingRightPart {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.headingRightPart input[type="text"] {
+    padding: 10px;
+    margin-right: 3rem;
+    border: whitesmoke solid;
+    border-radius: 20%;
+}
+
+main button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+main button:hover {
+    background-color: #575757;
+}
