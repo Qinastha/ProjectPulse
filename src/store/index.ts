@@ -1,7 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
+import user from './projectsSlice'
 
 const store = configureStore ({
-    reducer: {},
+    reducer: {
+        user,
+    },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 })
 export default store

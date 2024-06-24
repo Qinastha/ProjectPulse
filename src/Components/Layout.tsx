@@ -1,4 +1,4 @@
-import {NavLink, Outlet, useLocation} from "react-router-dom";
+import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import './Layout.css';
 import {useState} from "react";
 import {NewProjectPop} from "./NewProjectPop";
@@ -7,6 +7,7 @@ export const Layout: React.FC=() => {
     const {pathname}=useLocation();
     const [isExpand, setIsExpand]=useState(true);
     const [open, setOpen]=useState(false);
+    const navigate=useNavigate();
     const toggleNav=(): void => {
         setIsExpand(!isExpand);
     };
@@ -18,6 +19,11 @@ export const Layout: React.FC=() => {
     const handleClose=(): void => {
         setOpen(false);
     };
+
+    const handleLogout=(): void => {
+    localStorage.removeItem('token');
+    navigate("/login");
+    }
 
 
     const getPageTitle=(pathname: string): string => {
@@ -38,8 +44,6 @@ export const Layout: React.FC=() => {
                 return "Project Template";
             case "/settings":
                 return "Menu Settings";
-            case "/registration":
-                return "Register a new User";
             default:
                 return "Unknown";
         };
@@ -64,7 +68,6 @@ export const Layout: React.FC=() => {
                 <NavLink to="/resources"> Resource Mgnt </NavLink>
                 <NavLink to="/users"> User </NavLink>
                 <NavLink to="/templates"> Project Template </NavLink>
-                <NavLink to="/settings"> Menu Settings </NavLink>
             </header>
 
             <main>
@@ -72,7 +75,9 @@ export const Layout: React.FC=() => {
                     <h1 >{getPageTitle(pathname)}</h1>
                     <div className="headingRightPart">
                         <input type='text' placeholder="Search for anything..." />
-                        <NavLink to="/registration"> User Image or Blank </NavLink>
+                        {/* button dropdown to profile settings with 2 pages */}
+                        <NavLink to="/settings"> & </NavLink>
+                        <button onClick={handleLogout}>LogOut</button>
                     </div>
                 </div>
                 <Outlet />
