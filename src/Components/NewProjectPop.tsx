@@ -26,33 +26,53 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
                         event.preventDefault();
                         const formData=new FormData(event.currentTarget);
                         const formJson=Object.fromEntries((formData as any).entries());
-                        const email=formJson.email;
-                        console.log(email);
+                        const { projectName, projectBudget, projectDeadline } = formJson;
+                        console.log(projectName, projectBudget, projectDeadline);
                         handleClose();
                     },
                 }}
             >
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle>New Project</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We
-                        will send updates occasionally.
+                        Please provide information about project
                     </DialogContentText>
                     <TextField
                         autoFocus
                         required
                         margin="dense"
                         id="name"
-                        name="email"
-                        label="Email Address"
-                        type="email"
+                        name="projectName"
+                        label="Project Name"
+                        type="text"
                         fullWidth
                         variant="standard"
+                    />
+                    <TextField
+                        required
+                        margin="dense"
+                        id="budget"
+                        name="projectBudget"
+                        label="Project Budget"
+                        type="number"
+                        fullWidth
+                        variant="standard"
+                    />
+                    <TextField
+                        required
+                        margin="dense"
+                        id="deadline"
+                        name="projectDeadline"
+                        label="Deadline"
+                        type="date"
+                        fullWidth
+                        variant="standard"
+                        InputLabelProps={{shrink: true}}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Subscribe</Button>
+                    <Button type="submit">Submit</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>
