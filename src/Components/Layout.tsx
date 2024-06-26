@@ -2,12 +2,16 @@ import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import './Layout.css';
 import {useState} from "react";
 import {NewProjectPop} from "./NewProjectPop";
+import PinkBlossom from "../assets/PinkBlossom.png";
+
 
 export const Layout: React.FC=() => {
     const {pathname}=useLocation();
     const [isExpand, setIsExpand]=useState(true);
     const [open, setOpen]=useState(false);
+    const [isOpen, setIsOpen]=useState(false);
     const navigate=useNavigate();
+
     const toggleNav=(): void => {
         setIsExpand(!isExpand);
     };
@@ -21,9 +25,9 @@ export const Layout: React.FC=() => {
     };
 
     const handleLogout=(): void => {
-    localStorage.removeItem('token');
-    navigate("/login");
-    }
+        localStorage.removeItem('token');
+        navigate("/login");
+    };
 
 
     const getPageTitle=(pathname: string): string => {
@@ -42,8 +46,10 @@ export const Layout: React.FC=() => {
                 return "User";
             case "/templates":
                 return "Project Template";
-            case "/settings":
-                return "Menu Settings";
+            case "/settings/app":
+                return "Global Settings";
+            case "/settings/profile":
+                return "User Settings";
             default:
                 return "Unknown";
         };
@@ -56,7 +62,7 @@ export const Layout: React.FC=() => {
                     <button className="collapseButton" type="button" onClick={toggleNav}>&#8656;</button>
                     <button type="button" onClick={handleClickOpen}> Create New Project</button>
                 </div>
-                
+
                 <div>
                     <NewProjectPop handleClose={handleClose} open={open} />
                 </div>
@@ -71,16 +77,33 @@ export const Layout: React.FC=() => {
             </header>
 
             <main>
-                <div className="heading">
-                    <h1 >{getPageTitle(pathname)}</h1>
-                    <div className="headingRightPart">
-                        <input type='text' placeholder="Search for anything..." />
-                        {/* button dropdown to profile settings with 2 pages */}
-                        <NavLink to="/settings"> & </NavLink>
-                        <button onClick={handleLogout}>LogOut</button>
+                <div className="coreContent">
+                    <div className="heading">
+                        <h1 >{getPageTitle(pathname)}</h1>
+                        <div className="headingRightPart">
+                            <input type='text' placeholder="Search for anything..." />
+                            <div className="dropdown-container">
+                                <img
+                                    className="settingIcon"
+                                    src={PinkBlossom}
+                                    alt="Setiings"
+                                    onClick={(): void => setIsOpen(!isOpen)
+                                    }
+                                />
+                                {isOpen&&(
+                                    <div className="dropdown-menu">
+                                        <NavLink to='/settings/app'> Global Settings</NavLink>
+                                        <NavLink to='/settings/profile'> Global Settings</NavLink>
+                                    </div>
+                                )}
+                            </div>
+                            <button onClick={handleLogout}>LogOut</button>
+                        </div>
                     </div>
                 </div>
-                <Outlet />
+                <div className="outlet">
+                    <Outlet />
+                </div>
             </main>
         </div>
     );
