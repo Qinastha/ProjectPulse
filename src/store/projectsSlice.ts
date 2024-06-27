@@ -1,45 +1,46 @@
-import {PayloadAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {UserRole} from "../core/types/userRole.type";
-import { IProfile } from "../core/interfaces/iProfile";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { UserRole } from "../core/types/userRole.type";
 import { UserPosition } from "../core/types/userPosition";
-import axios from 'axios';
+import axios from "axios";
+import { IProfile } from "../core/interfaces/IProfile";
 
 interface IUser {
-    email: string;
-    password: string;
-    role: UserRole|null;
-    firstName: string;
-    lastName: string;
-    userName: string;
-    dateOfBirth: Date;
-    position: UserPosition|null;
-    profile: IProfile|null;
-    createdAt: Date|null;
-    updatedAt: Date|null;
-    lastActiveAt: Date|null;
+  email: string;
+  password: string;
+  role: UserRole | null;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  dateOfBirth: Date;
+  position: UserPosition | null;
+  profile: IProfile | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  lastActiveAt: Date | null;
 }
 
-const initialState: IUser={
-    email: "",
-    password: "",
-    role: null,
-    profile: null,
-    firstName: "",
-    lastName: "",
-    userName: "",
-    dateOfBirth: new Date(),
-    position: null,
-    createdAt: null,
-    updatedAt: null,
-    lastActiveAt: null,
+const initialState: IUser = {
+  email: "",
+  password: "",
+  role: null,
+  profile: null,
+  firstName: "",
+  lastName: "",
+  userName: "",
+  dateOfBirth: new Date(),
+  position: null,
+  createdAt: null,
+  updatedAt: null,
+  lastActiveAt: null,
 };
 
-export const reqUsers=createAsyncThunk(
-    'users/reqUsers',
-    async (payload, thunkAPI) => {
-        const response=await axios.get("http://localhost:4000/api/user/");
-        return response.data.value as IUser;
-    });
+export const reqUsers = createAsyncThunk(
+  "users/reqUsers",
+  async (payload, thunkAPI) => {
+    const response = await axios.get("http://localhost:4000/api/user/");
+    return response.data.value as IUser;
+  },
+);
 
 export const user=createSlice({
     name: 'user',
@@ -58,6 +59,6 @@ export const user=createSlice({
     }
 });
 
-export const {getUser, getProfile}=user.selectors;
+export const { getUser, getProfile } = user.selectors;
 
 export default user.reducer;

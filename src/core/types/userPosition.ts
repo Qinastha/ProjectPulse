@@ -1,1 +1,5 @@
-export type UserPosition = 'project manager' | 'developer' | 'designer' | 'tester'
+export type UserPosition =
+  | "project manager"
+  | "developer"
+  | "designer"
+  | "tester";

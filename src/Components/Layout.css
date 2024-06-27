@@ -1,219 +1,219 @@
 .container {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    height: 100vh;
-    font-family: 'Noto Sans JP', sans-serif;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  height: 100vh;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 .navbar {
-    background-color: #ffe4e1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-right: 1px solid #ddd;
+  background-color: #ffe4e1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 1px solid #ddd;
 }
 
 .navbar.notExpanded {
-    width: 60px;
-    transition: width 0.3s;
-    font-size: 0;
+  width: 60px;
+  transition: width 0.3s;
+  font-size: 0;
 }
 
 .navbar a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .navbar a:hover {
-    background-color: #ffb6c1;
-    color: #fff;
+  background-color: #ffb6c1;
+  color: #fff;
 }
 
 .navButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .collapseButton {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #333;
-    margin-bottom: 20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .collapseButton:hover {
-    color: #ffb6c1;
+  color: #ffb6c1;
 }
 
 .navbar button {
-    padding: 10px;
-    background-color: #ffb6c1;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
+  padding: 10px;
+  background-color: #ffb6c1;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
 }
 
 .navbar button:hover {
-    background-color: #ff9eb0;
+  background-color: #ff9eb0;
 }
 
 main {
-    padding: 20px;
-    background-color: #fefefe;
+  padding: 20px;
+  background-color: #fefefe;
 }
 
 .coreContent {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .heading h1 {
-    font-size: 24px;
-    color: #333;
+  font-size: 24px;
+  color: #333;
 }
 
 .headingRightPart {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
 }
 
 .headingRightPart input,
 .headingRightPart select {
-    padding: 10px;
-    font-size: 16px;
-    border: whitesmoke solid;
-    border-radius: 20%;
+  padding: 10px;
+  font-size: 16px;
+  border: whitesmoke solid;
+  border-radius: 20%;
 }
 
 .headingRightPart button {
-    padding: 10px 20px;
-    background-color: #ffb6c1;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: #ffb6c1;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
 }
 
 .headingRightPart button:hover {
-    background-color: #ff9eb0;
+  background-color: #ff9eb0;
 }
 
 .outlet {
-    margin: 2rem;
+  margin: 2rem;
 }
 
 .settingIcon {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
 
 .dropdown-menu a {
-    text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .dropdown-menu a:hover {
-    background-color: #ffb6c1;
-    color: #fff;
+  background-color: #ffb6c1;
+  color: #fff;
 }
 
 @media (max-width: 768px) {
-    .container {
-        grid-template-columns: 1fr;
-        width: 100%;
-    }
+  .container {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
 
-    .navbar {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    .navbar.notExpanded {
-        width: 100%;
-        flex-direction: row;
-    }
+  .navbar.notExpanded {
+    width: 100%;
+    flex-direction: row;
+  }
 
-    .collapseButton {
-        display: none;
-    }
+  .collapseButton {
+    display: none;
+  }
 }
 
 .container {
-    background-size: cover;
-    color: #333;
+  background-size: cover;
+  color: #333;
 }
 
 .navbar {
-    background-image: linear-gradient(to right, #ffe4e1, #ffb6c1);
-    border-right: 1px solid #ccc;
+  background-image: linear-gradient(to right, #ffe4e1, #ffb6c1);
+  border-right: 1px solid #ccc;
 }
 
 .navbar a {
-    font-family: 'Noto Serif JP', serif;
-    font-weight: bold;
+  font-family: "Noto Serif JP", serif;
+  font-weight: bold;
 }
 
 .navButtons button {
-    font-family: 'Noto Serif JP', serif;
+  font-family: "Noto Serif JP", serif;
 }
 
 .navbar button {
-    font-family: 'Noto Serif JP', serif;
-    transition: transform 0.2s;
+  font-family: "Noto Serif JP", serif;
+  transition: transform 0.2s;
 }
 
 .navbar button:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .heading h1 {
-    border-bottom: 2px solid #ffb6c1;
-    padding-bottom: 10px;
+  border-bottom: 2px solid #ffb6c1;
+  padding-bottom: 10px;
 }
 
 .headingRightPart input {
-    border: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 .settingIcon {
-    transition: transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .settingIcon:hover {
-    transform: rotate(20deg);
+  transform: rotate(20deg);
 }
 
 .dropdown-menu a {
-    background-image: linear-gradient(to right, #ffe4e1, #ffb6c1);
-    font-family: 'Noto Serif JP', serif;
+  background-image: linear-gradient(to right, #ffe4e1, #ffb6c1);
+  font-family: "Noto Serif JP", serif;
 }

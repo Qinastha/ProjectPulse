@@ -1,39 +1,50 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 import { Layout } from "./Components/Layout";
-import { Dashboard } from './Pages/Dashboard';
+import { Dashboard } from "./Pages/Dashboard";
 import { Projects } from "./Pages/Projects";
 import { Tasks } from "./Pages/Tasks";
 import { TimeLog } from "./Pages/TimeLog";
-import { ResourceMgnt } from './Pages/ResourceMgnt';
-import { Users } from './Pages/Users';
-import { ProjectTemplate } from './Pages/ProjectTemplate';
-import { AppSetings } from './Pages/AppSetings';
-import { Login } from './Pages/Login';
-import { Register } from './Pages/Register';
+import { ResourceMgnt } from "./Pages/ResourceMgnt";
+import { Users } from "./Pages/Users";
+import { ProjectTemplate } from "./Pages/ProjectTemplate";
+import { AppSetings } from "./Pages/AppSetings";
+import { Login } from "./Pages/Login";
+import { Register } from "./Pages/Register";
 import { PrivateRoute } from "./Components/PrivateRout";
 import { PageNotFound } from "./Pages/PageNotFound";
-import { ProfileCreate } from './Pages/ProfileCreate';
+import { ProfileCreate } from "./Pages/ProfileCreate";
 import { ProfileSettings } from "./Pages/ProfileSettings";
 
-
-const router = createBrowserRouter(createRoutesFromElements(
+const router = createBrowserRouter(
+  createRoutesFromElements(
     <Route>
-        <Route path='/' element={ <PrivateRoute><Layout /></PrivateRoute> } >
-            <Route index element={ <Dashboard /> } />
-            <Route path='projects' element={ <Projects /> } />
-            <Route path='tasks' element={ <Tasks /> } />
-            <Route path='logs' element={ <TimeLog /> } />
-            <Route path='resources' element={ <ResourceMgnt /> } />
-            <Route path='users' element={ <Users /> } />
-            <Route path='templates' element={ <ProjectTemplate /> } />
-            <Route path='settings/app' element={ <AppSetings /> } />
-            <Route path='settings/profile' element={ <ProfileSettings /> } />
-        </Route>
-        <Route path='login' element={ <Login /> } />
-        <Route path='register' element={ <Register /> } />
-        <Route path='profile/create' element={ <ProfileCreate /> } />
-        <Route path='*' element={ <PageNotFound /> } />
-    </Route>
-));
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        }>
+        <Route index element={<Dashboard />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="tasks" element={<Tasks />} />
+        <Route path="logs" element={<TimeLog />} />
+        <Route path="resources" element={<ResourceMgnt />} />
+        <Route path="users" element={<Users />} />
+        <Route path="templates" element={<ProjectTemplate />} />
+        <Route path="settings/app" element={<AppSetings />} />
+        <Route path="settings/profile" element={<ProfileSettings />} />
+      </Route>
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="profile/create" element={<ProfileCreate />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Route>,
+  ),
+);
 
 export default router;
