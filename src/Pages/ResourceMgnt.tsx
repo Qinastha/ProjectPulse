@@ -1,6 +1,3 @@
-
 export const ResourceMgnt: React.FC = () => {
-    return (
-        <div>Hello</div>
-    )
-    }
+  return <div>Hello</div>;
+};

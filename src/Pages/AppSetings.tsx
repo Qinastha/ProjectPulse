@@ -1,5 +1,3 @@
 export const AppSetings: React.FC = () => {
-    return (
-        <div>Hello</div>
-    )
-    }
+  return <div>Hello</div>;
+};
