@@ -37,9 +37,7 @@
     "lint:fix": "eslint --fix .",
     "prettier": "prettier --write ."
   },
-  "eslintConfig": {
-
-  },
+  "eslintConfig": {},
   "browserslist": {
     "production": [
       ">0.2%",
