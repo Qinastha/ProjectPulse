@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { reqUsers } from "../store/projectsSlice";
 import { getProfile } from "../store/projectsSlice";
 import axios from "axios";
-import { IProfile } from "../core/interfaces/iProfile";
+import {IProfile} from "../core/interfaces/IProfile";
 
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();

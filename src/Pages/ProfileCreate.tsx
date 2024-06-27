@@ -46,22 +46,22 @@ export const ProfileCreate: React.FC=() => {
 
     const handleSubmit=async (e: React.FormEvent, formData: any) => {
         e.preventDefault();
-        const token=localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         try {
-            const response=await axios.post('http://localhost:4000/api/profile/new', {
-                avatar: formData.avatar,
-                phoneNumber: formData.phoneNumber,
-                gender: formData.gender,
-                address: {
-                    street: formData.address.street,
-                    street2: formData.address.street2,
-                    city: formData.address.city,
-                    country: formData.address.country,
-                    zipCode: formData.address.zipCode,
+            const response = await axios.post('http://localhost:4000/api/profile/new', {
+                    avatar: formData.avatar,
+                    phoneNumber: formData.phoneNumber,
+                    gender: formData.gender,
+                    address: {
+                        street: formData.address.street,
+                        street2: formData.address.street2,
+                        city: formData.address.city,
+                        country: formData.address.country,
+                        zipCode: formData.address.zipCode,
+                    },
+                    language: formData.language,
+                    timeZone: formData.timeZone,
                 },
-                language: formData.language,
-                timeZone: formData.timeZone,
-            },
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -69,16 +69,17 @@ export const ProfileCreate: React.FC=() => {
                     }
                 });
             console.log(response);
-            if(response) {
+            if (response) {
                 dispatch(reqUsers);
                 navigate('/')
             }
-
-        } catch(error) {
+        }catch(error) {
             console.error("Error during updating profile:", error);
             alert("An error occurred. Please try again.");
         }
     };
+
+
 
     return (
         <div className="profileContainer">
@@ -211,7 +212,6 @@ export const ProfileCreate: React.FC=() => {
                 </div>
                 <button type="submit"> Save Changes </button>
             </form>
-
-        </div>
+            </div>
     );
 };
