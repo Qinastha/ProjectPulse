@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import "./Login.css";
 
 const Login: React.FC=() => {
     const [email, setEmail]=useState('');
@@ -35,32 +36,37 @@ const Login: React.FC=() => {
     };
 
     return (
-        <form onSubmit={handleLogin}>
-            <h2>Login</h2>
-            <div>
-                <label>
-                    Email:
+        <div className='loginContainer'>
+            <form onSubmit={handleLogin}>
+                <h2>Login</h2>
+                <div>
+                    <label>
+                        Email:
+                    </label>
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Password:
+
+                </div>
+                <div>
+                    <label>
+                        Password:
+                    </label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                </label>
-            </div>
-            <button type="submit">Login</button>
-        </form>
+
+                </div>
+                <button type="submit">Login</button>
+                <button className='goRegistration' onClick={(): void => navigate('/register')}>Move to registration page</button>
+            </form>
+        </div>
     );
 };
 

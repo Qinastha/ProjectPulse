@@ -1,9 +1,10 @@
-import {ProfilePosition} from "../types/profilePositions.type"
+import {UserAddress} from "./userAdress";
 
 export interface IProfile {
-    firstName: string;
-    lastName: string;
     avatar: string;
-    language: string;
-    position: ProfilePosition
+    phoneNumber: string,
+    gender: string,
+    address: UserAddress,
+    language: string,
+    timeZone: string,
 }

@@ -1,4 +1,4 @@
-export const Settings: React.FC = () => {
+export const AppSetings: React.FC = () => {
     return (
         <div>Hello</div>
     )
