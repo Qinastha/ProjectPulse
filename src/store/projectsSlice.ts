@@ -44,10 +44,11 @@ export const reqUsers=createAsyncThunk(
 export const user=createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+    },
     selectors: {
         getUser: (state) => state,
-        getProfile: (state) => state.profile
+        getProfile: (state) => state.profile,
     },
     extraReducers: (builder) => {
         builder

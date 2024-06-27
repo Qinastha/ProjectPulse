@@ -4,7 +4,7 @@ import axios from "axios";
 import {reqUsers} from "../store/projectsSlice";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getUser} from "../store/projectsSlice";
-import './ProfileCreate.css'
+import './ProfileCreate.css';
 
 export const ProfileCreate: React.FC=() => {
     const navigate=useNavigate();
@@ -31,7 +31,7 @@ export const ProfileCreate: React.FC=() => {
             navigate("/login");
         }
         dispatch(reqUsers);
-    }, [dispatch, navigate]);
+    }, [dispatch, "token"]);
 
     const updateFormData=(e: any, isAddress: boolean=false) => {
         let {name, value}=e.target;
@@ -64,10 +64,15 @@ export const ProfileCreate: React.FC=() => {
             },
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     }
                 });
             console.log(response);
+            if(response) {
+                dispatch(reqUsers);
+                navigate('/')
+            }
 
         } catch(error) {
             console.error("Error during updating profile:", error);
@@ -105,7 +110,7 @@ export const ProfileCreate: React.FC=() => {
                         required
                     />
                 </div>
-                
+
                 <div>
                     <label>
                         Gender
@@ -115,10 +120,10 @@ export const ProfileCreate: React.FC=() => {
                         value={formData.gender}
                         onChange={(e) => updateFormData(e)}
                         required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Non-binary</option>
-                        </select>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Non-binary</option>
+                    </select>
                 </div>
                 <div>
                     <label>

@@ -19,6 +19,10 @@ export const PrivateRoute: React.FC<PrivateRouteProps>=({children}) => {
         if(isAuthenticated&&!profile) {
             navigate("/profile/create");
         }
+        else {
+            navigate("/");
+        }
+
     }, [isAuthenticated, profile]);
 
     return isAuthenticated&&profile? children:null;
