@@ -42,22 +42,21 @@ export const reqUsers = createAsyncThunk(
   },
 );
 
-export const user = createSlice({
-  name: "user",
-  initialState,
-  reducers: {},
-  selectors: {
-    getUser: state => state,
-    getProfile: state => state.profile,
-  },
-  extraReducers: builder => {
-    builder.addCase(
-      reqUsers.fulfilled,
-      (state, action: PayloadAction<IUser>) => {
-        state = action.payload;
-      },
-    );
-  },
+export const user=createSlice({
+    name: 'user',
+    initialState,
+    reducers: {
+    },
+    selectors: {
+        getUser: (state) => state,
+        getProfile: (state) => state.profile,
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(reqUsers.fulfilled, (state, action: PayloadAction<IUser>) => {
+                state=action.payload;
+            });
+    }
 });
 
 export const { getUser, getProfile } = user.selectors;

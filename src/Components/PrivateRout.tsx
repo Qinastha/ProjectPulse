@@ -12,14 +12,18 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   let isAuthenticated = localStorage.getItem("token");
   const profile = useAppSelector(getProfile);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-    if (isAuthenticated && !profile) {
-      navigate("/profile/create");
-    }
-  }, [isAuthenticated, profile]);
+    useEffect(() => {
+        if(!isAuthenticated) {
+            navigate("/login");
+        }
+        if(isAuthenticated&&!profile) {
+            navigate("/profile/create");
+        }
+        else {
+            navigate("/");
+        }
+
+    }, [isAuthenticated, profile]);
 
   return isAuthenticated && profile ? children : null;
 };
