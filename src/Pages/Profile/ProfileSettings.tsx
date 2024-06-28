@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { updateProfile, getProfile } from "../../store/projectsSlice";
+import { updateProfile, getProfile, reqUsers } from "../../store/projectsSlice";
 import axios from "axios";
 import { IProfile } from "../../core/interfaces/IProfile";
 import "./Profile.css";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const profileExist = localStorage.getItem("profile");
   const profile = useAppSelector(getProfile);
 
   type Country =
@@ -60,27 +61,46 @@ export const ProfileSettings: React.FC = () => {
   ];
 
   const [formData, setFormData] = useState<IProfile>({
-    avatar: profile?.avatar || "",
-    phoneNumber: profile?.phoneNumber || "",
-    gender: profile?.gender || "",
+    avatar: "",
+    phoneNumber: "",
+    gender: "",
     address: {
-      street: profile?.address?.street || "",
-      street2: profile?.address?.street2 || "",
-      city: profile?.address?.city || "",
-      country: profile?.address?.country || "",
-      zipCode: profile?.address?.zipCode || "",
+      street: "",
+      street2: "",
+      city: "",
+      country: "",
+      zipCode: "",
     },
-    language: profile?.language || "",
-    timeZone: profile?.timeZone || "",
+    language: "",
+    timeZone: "",
   });
 
-  useEffect((): void => {
-    if (!profile) {
+  const initializeFormData = () => {
+    if (profile) {
+      setFormData({
+        avatar: profile.avatar || "",
+        phoneNumber: profile.phoneNumber || "",
+        gender: profile.gender || "",
+        address: {
+          street: profile.address?.street || "",
+          street2: profile.address?.street2 || "",
+          city: profile.address?.city || "",
+          country: profile.address?.country || "",
+          zipCode: profile.address?.zipCode || "",
+        },
+        language: profile.language || "",
+        timeZone: profile.timeZone || "",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!profileExist) {
       navigate("/register");
     } else {
-      setFormData(profile);
+      initializeFormData();
     }
-  }, [profile]);
+  }, [navigate, profileExist]);
 
   const updateFormData = (e: any, isAddress: boolean = false) => {
     let { name, value } = e.target;
@@ -93,8 +113,7 @@ export const ProfileSettings: React.FC = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent, formData: any) => {
-    e.preventDefault();
+  const handleSubmit = async (formData: any) => {
     try {
       const response = await axios.put(
         "http://localhost:4000/api/profile/update",
@@ -112,8 +131,14 @@ export const ProfileSettings: React.FC = () => {
           language: formData.language,
           timeZone: formData.timeZone,
         },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        },
       );
-      console.log(response);
+      console.log(response.data);
       if (response.data) {
         dispatch(updateProfile(response.data.value));
         alert("Profile updated successfully");
@@ -126,10 +151,35 @@ export const ProfileSettings: React.FC = () => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        "http://localhost:4000/api/user/delete",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      console.log(response);
+      if (response) {
+        localStorage.removeItem("profile");
+        localStorage.removeItem("token");
+        navigate("/register");
+        alert("Profile deleted successfully");
+      } else {
+        alert("Failed to delete profile");
+      }
+    } catch (error) {
+      console.error("Error during deleting profile:", error);
+      alert("An error occurred. Please try again.");
+    }
+  };
+
   return (
     <div className="profileContainer">
       <h2> Please provide an information about yourself</h2>
-      <form onSubmit={() => handleSubmit}>
+      <form>
         <div>
           <label>Avatar</label>
           <input
@@ -137,7 +187,6 @@ export const ProfileSettings: React.FC = () => {
             name="avatar"
             value={formData.avatar}
             onChange={e => updateFormData(e)}
-            required
           />
         </div>
         <div>
@@ -147,7 +196,6 @@ export const ProfileSettings: React.FC = () => {
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={e => updateFormData(e)}
-            required
           />
         </div>
 
@@ -156,8 +204,7 @@ export const ProfileSettings: React.FC = () => {
           <select
             name="gender"
             value={formData.gender}
-            onChange={e => updateFormData(e)}
-            required>
+            onChange={e => updateFormData(e)}>
             <option value="">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -171,7 +218,6 @@ export const ProfileSettings: React.FC = () => {
             name="street"
             value={formData.address.street}
             onChange={e => updateFormData(e, true)}
-            required
           />
         </div>
         <div>
@@ -181,7 +227,6 @@ export const ProfileSettings: React.FC = () => {
             name="street2"
             value={formData.address.street2}
             onChange={e => updateFormData(e, true)}
-            required
           />
         </div>
         <div>
@@ -191,7 +236,6 @@ export const ProfileSettings: React.FC = () => {
             name="city"
             value={formData.address.city}
             onChange={e => updateFormData(e, true)}
-            required
           />
         </div>
         <div>
@@ -199,8 +243,7 @@ export const ProfileSettings: React.FC = () => {
           <select
             name="country"
             value={formData.address.country}
-            onChange={e => updateFormData(e, true)}
-            required>
+            onChange={e => updateFormData(e, true)}>
             <option value="">Select one</option>
             {countries.sort().map((country, index) => (
               <option key={index} value={country}>
@@ -216,7 +259,6 @@ export const ProfileSettings: React.FC = () => {
             name="zipCode"
             value={formData.address.zipCode}
             onChange={e => updateFormData(e, true)}
-            required
           />
         </div>
         <div>
@@ -224,8 +266,7 @@ export const ProfileSettings: React.FC = () => {
           <select
             name="language"
             value={formData.language}
-            onChange={e => updateFormData(e)}
-            required>
+            onChange={e => updateFormData(e)}>
             <option value="">Select one</option>
             {languages.sort().map((language, index) => (
               <option key={index} value={language}>
@@ -241,11 +282,17 @@ export const ProfileSettings: React.FC = () => {
             name="timeZone"
             value={formData.timeZone}
             onChange={e => updateFormData(e)}
-            required
           />
         </div>
-        <button type="submit"> Save Changes </button>
+        <button type="button" onClick={() => handleSubmit(formData)}>
+          {" "}
+          Save Changes{" "}
+        </button>
       </form>
+      <button type="button" onClick={handleDelete}>
+        {" "}
+        Delete User{" "}
+      </button>
     </div>
   );
 };

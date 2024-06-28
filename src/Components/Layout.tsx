@@ -25,6 +25,7 @@ export const Layout: React.FC = () => {
 
   const handleLogout = (): void => {
     localStorage.removeItem("token");
+    localStorage.removeItem("profile");
     navigate("/login");
   };
 

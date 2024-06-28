@@ -77,7 +77,6 @@ export const ProfileCreate: React.FC = () => {
     if (!token) {
       navigate("/login");
     }
-    dispatch(reqUsers);
   }, [dispatch, "token"]);
 
   const updateFormData = (e: any, isAddress: boolean = false) => {
@@ -117,10 +116,10 @@ export const ProfileCreate: React.FC = () => {
           },
         },
       );
-      console.log(response);
-      if (response) {
+      if (response.data?.value) {
         dispatch(updateProfile(response.data.value));
         console.log(response.data.value);
+        localStorage.setItem("profile", response.data.value);
         navigate("/");
       }
     } catch (error) {

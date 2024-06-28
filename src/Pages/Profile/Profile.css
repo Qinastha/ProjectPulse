@@ -55,6 +55,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem;
 }
 
 .profileContainer button:hover {
@@ -79,7 +80,7 @@
   font-style: italic;
 }
 
-.profileContainer button::after {
+.profileContainer button::after:first {
   content: "  ⛩️";
   display: inline-block;
   margin-left: 5px;

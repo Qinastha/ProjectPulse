@@ -9,10 +9,8 @@ const App: React.FC = () => {
   const user = useAppSelector(getUser);
 
   useEffect(() => {
-    if (!user) {
-      dispatch(reqUsers());
-    }
-  }, [dispatch]);
+    dispatch(reqUsers());
+  }, []);
 
   return <RouterProvider router={router} />;
 };

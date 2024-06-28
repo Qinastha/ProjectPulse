@@ -10,7 +10,7 @@ interface PrivateRouteProps {
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const navigate = useNavigate();
   const isAuthenticated = localStorage.getItem("token");
-  const profile = useAppSelector(getProfile);
+  const profile = localStorage.getItem("profile");
 
   useEffect(() => {
     if (!isAuthenticated) {

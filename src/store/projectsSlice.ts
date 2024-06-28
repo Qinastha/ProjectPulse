@@ -11,7 +11,7 @@ interface IUser {
   firstName: string;
   lastName: string;
   userName: string;
-  dateOfBirth: Date;
+  dateOfBirth: Date | string;
   position: UserPosition | null;
   profile: IProfile | null;
   createdAt: Date | null;
@@ -27,7 +27,7 @@ const initialState: IUser = {
   firstName: "",
   lastName: "",
   userName: "",
-  dateOfBirth: new Date(),
+  dateOfBirth: new Date().toISOString(),
   position: null,
   createdAt: null,
   updatedAt: null,
@@ -36,8 +36,14 @@ const initialState: IUser = {
 
 export const reqUsers = createAsyncThunk(
   "users/reqUsers",
-  async (payload, thunkAPI) => {
-    const response = await axios.get("http://localhost:4000/api/user/");
+  async (_, thunkAPI) => {
+    const response = await axios.get("http://localhost:4000/api/user/", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
     return response.data.value as IUser;
   },
 );
