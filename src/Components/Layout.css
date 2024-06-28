@@ -1,8 +1,32 @@
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar.notExpanded {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .collapseButton {
+    display: none;
+  }
+}
+
 .container {
   display: grid;
   grid-template-columns: auto 1fr;
   height: 100vh;
   font-family: "Noto Sans JP", sans-serif;
+  background-size: cover;
+  color: #333;
 }
 
 .navbar {
@@ -127,10 +151,21 @@ main {
   margin-right: 10px;
 }
 
+.dropdown-container {
+  position: relative;
+}
+
 .dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width:9rem;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1;
 }
 
 .dropdown-menu a {
@@ -146,31 +181,17 @@ main {
   color: #fff;
 }
 
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-    width: 100%;
-  }
-
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .navbar.notExpanded {
-    width: 100%;
-    flex-direction: row;
-  }
-
-  .collapseButton {
-    display: none;
-  }
+.settingIcon {
+  transition: transform 0.2s;
 }
 
-.container {
-  background-size: cover;
-  color: #333;
+.settingIcon:hover {
+  transform: rotate(20deg);
+}
+
+.dropdown-menu a {
+  background-image: linear-gradient(to right, #ffe4e1, #ffb6c1);
+  font-family: "Noto Serif JP", serif;
 }
 
 .navbar {
@@ -205,15 +226,3 @@ main {
   border: 1px solid #ccc;
 }
 
-.settingIcon {
-  transition: transform 0.2s;
-}
-
-.settingIcon:hover {
-  transform: rotate(20deg);
-}
-
-.dropdown-menu a {
-  background-image: linear-gradient(to right, #ffe4e1, #ffb6c1);
-  font-family: "Noto Serif JP", serif;
-}

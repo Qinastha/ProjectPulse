@@ -2,7 +2,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Layout.css";
 import { useState } from "react";
 import { NewProjectPop } from "./NewProjectPop";
-import PinkBlossom from "../assets/PinkBlossom.png";
+import pinkBlossom from "../assets/pinkBlossom.png";
 
 export const Layout: React.FC = () => {
   const { pathname } = useLocation();
@@ -47,7 +47,7 @@ export const Layout: React.FC = () => {
       case "/settings/app":
         return "Global Settings";
       case "/settings/profile":
-        return "User Settings";
+        return "Profile Settings";
       default:
         return "Unknown";
     }
@@ -87,14 +87,14 @@ export const Layout: React.FC = () => {
               <div className="dropdown-container">
                 <img
                   className="settingIcon"
-                  src={PinkBlossom}
+                  src={pinkBlossom}
                   alt="Setiings"
                   onClick={(): void => setIsOpen(!isOpen)}
                 />
                 {isOpen && (
                   <div className="dropdown-menu">
                     <NavLink to="/settings/app"> Global Settings</NavLink>
-                    <NavLink to="/settings/profile"> Global Settings</NavLink>
+                    <NavLink to="/settings/profile"> Profile Settings</NavLink>
                   </div>
                 )}
               </div>

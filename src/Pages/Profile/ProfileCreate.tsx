@@ -1,15 +1,21 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {reqUsers} from "../store/projectsSlice";
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {getUser} from "../store/projectsSlice";
-import './ProfileCreate.css';
+import {reqUsers, updateProfile} from "../../store/projectsSlice";
+import {useAppDispatch} from "../../hooks";
+import './Profile.css';
 
 export const ProfileCreate: React.FC=() => {
     const navigate=useNavigate();
     const dispatch=useAppDispatch();
-    const [user, setUser]=useState(useAppSelector(getUser));
+    const token=localStorage.getItem('token');
+
+    type Country="United States"|"Canada"|"United Kingdom"|"Australia"|"Japan"|"Ukraine"|"Germany"|"Spain"|"Poland"|"Portugal"|"France";
+    type Language="English"|"Spanish"|"French"|"German"|"Japanese"|"Polish"|"Portuguese"|"Ukrainian"|"Russian";
+
+    const countries: Country[]=["United States", "Canada", "United Kingdom", "Australia", "Japan", "Ukraine", "Germany", "Spain", "Poland", "Portugal", "France"];
+    const languages: Language[]=["English", "Spanish", "French", "German", "Japanese", "Polish", "Portuguese", "Ukrainian", "Russian"];
+
     const [formData, setFormData]=useState({
         avatar: "",
         phoneNumber: "",
@@ -26,7 +32,6 @@ export const ProfileCreate: React.FC=() => {
     });
 
     useEffect(() => {
-        const token=localStorage.getItem("token");
         if(!token) {
             navigate("/login");
         }
@@ -44,24 +49,24 @@ export const ProfileCreate: React.FC=() => {
         });
     };
 
+
     const handleSubmit=async (e: React.FormEvent, formData: any) => {
         e.preventDefault();
-        const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:4000/api/profile/new', {
-                    avatar: formData.avatar,
-                    phoneNumber: formData.phoneNumber,
-                    gender: formData.gender,
-                    address: {
-                        street: formData.address.street,
-                        street2: formData.address.street2,
-                        city: formData.address.city,
-                        country: formData.address.country,
-                        zipCode: formData.address.zipCode,
-                    },
-                    language: formData.language,
-                    timeZone: formData.timeZone,
+            const response=await axios.post('http://localhost:4000/api/profile/new', {
+                avatar: formData.avatar,
+                phoneNumber: formData.phoneNumber,
+                gender: formData.gender,
+                address: {
+                    street: formData.address.street,
+                    street2: formData.address.street2,
+                    city: formData.address.city,
+                    country: formData.address.country,
+                    zipCode: formData.address.zipCode,
                 },
+                language: formData.language,
+                timeZone: formData.timeZone,
+            },
                 {
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -69,22 +74,19 @@ export const ProfileCreate: React.FC=() => {
                     }
                 });
             console.log(response);
-            if (response) {
-                dispatch(reqUsers);
-                navigate('/')
+            if(response) {
+                dispatch(updateProfile(response.data.value));
+                console.log(response.data.value);
+                navigate('/');
             }
-        }catch(error) {
+        } catch(error) {
             console.error("Error during updating profile:", error);
             alert("An error occurred. Please try again.");
         }
     };
 
-
-
     return (
         <div className="profileContainer">
-            {/* <div><pre>{JSON.stringify(user, null, 2)}</pre>
-            </div> */}
             <h2> Please provide an information about yourself</h2>
             <form onSubmit={(e) => handleSubmit(e, formData)}>
                 <div>
@@ -120,7 +122,8 @@ export const ProfileCreate: React.FC=() => {
                         name="gender"
                         value={formData.gender}
                         onChange={(e) => updateFormData(e)}
-                        required>
+                    >
+                        <option value="">Select one</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Non-binary</option>
@@ -166,13 +169,16 @@ export const ProfileCreate: React.FC=() => {
                     <label>
                         Country
                     </label>
-                    <input
-                        type="text"
+                    <select
                         name="country"
                         value={formData.address.country}
                         onChange={(e) => updateFormData(e, true)}
-                        required
-                    />
+                        required>
+                        <option value="">Select one</option>
+                        {countries.sort().map((country, index) => (
+                            <option key={index} value={country}>{country}</option>
+                        ))}
+                    </select>
                 </div>
                 <div>
                     <label>
@@ -188,15 +194,18 @@ export const ProfileCreate: React.FC=() => {
                 </div>
                 <div>
                     <label>
-                        Language
+                        Preffered Language
                     </label>
-                    <input
-                        type="text"
+                    <select
                         name="language"
                         value={formData.language}
                         onChange={(e) => updateFormData(e)}
-                        required
-                    />
+                        required>
+                        <option value="">Select one</option>
+                        {languages.sort().map((language, index) => (
+                            <option key={index} value={language}>{language}</option>
+                        ))}
+                    </select>
                 </div>
                 <div>
                     <label>
@@ -212,6 +221,6 @@ export const ProfileCreate: React.FC=() => {
                 </div>
                 <button type="submit"> Save Changes </button>
             </form>
-            </div>
+        </div>
     );
 };
