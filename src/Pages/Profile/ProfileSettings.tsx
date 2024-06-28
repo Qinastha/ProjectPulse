@@ -1,82 +1,126 @@
-import {useEffect, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {updateProfile, getProfile} from "../../store/projectsSlice";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { updateProfile, getProfile } from "../../store/projectsSlice";
 import axios from "axios";
-import {IProfile} from "../../core/interfaces/IProfile";
-import './Profile.css';
-import {useNavigate} from "react-router-dom";
+import { IProfile } from "../../core/interfaces/IProfile";
+import "./Profile.css";
+import { useNavigate } from "react-router-dom";
 
-export const ProfileSettings: React.FC=() => {
-  const dispatch=useAppDispatch();
-  const navigate=useNavigate();
-  const profile=useAppSelector(getProfile);
+export const ProfileSettings: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const profile = useAppSelector(getProfile);
 
-  type Country="United States"|"Canada"|"United Kingdom"|"Australia"|"Japan"|"Ukraine"|"Germany"|"Spain"|"Poland"|"Portugal"|"France";
-  type Language="English"|"Spanish"|"French"|"German"|"Japanese"|"Polish"|"Portuguese"|"Ukrainian"|"Russian";
+  type Country =
+    | "United States"
+    | "Canada"
+    | "United Kingdom"
+    | "Australia"
+    | "Japan"
+    | "Ukraine"
+    | "Germany"
+    | "Spain"
+    | "Poland"
+    | "Portugal"
+    | "France";
+  type Language =
+    | "English"
+    | "Spanish"
+    | "French"
+    | "German"
+    | "Japanese"
+    | "Polish"
+    | "Portuguese"
+    | "Ukrainian"
+    | "Russian";
 
-  const countries: Country[]=["United States", "Canada", "United Kingdom", "Australia", "Japan", "Ukraine", "Germany", "Spain", "Poland", "Portugal", "France"];
-  const languages: Language[]=["English", "Spanish", "French", "German", "Japanese", "Polish", "Portuguese", "Ukrainian", "Russian"];
+  const countries: Country[] = [
+    "United States",
+    "Canada",
+    "United Kingdom",
+    "Australia",
+    "Japan",
+    "Ukraine",
+    "Germany",
+    "Spain",
+    "Poland",
+    "Portugal",
+    "France",
+  ];
+  const languages: Language[] = [
+    "English",
+    "Spanish",
+    "French",
+    "German",
+    "Japanese",
+    "Polish",
+    "Portuguese",
+    "Ukrainian",
+    "Russian",
+  ];
 
-  const [formData, setFormData]=useState<IProfile>({
-    avatar: profile?.avatar||"",
-    phoneNumber: profile?.phoneNumber||"",
-    gender: profile?.gender||"",
+  const [formData, setFormData] = useState<IProfile>({
+    avatar: profile?.avatar || "",
+    phoneNumber: profile?.phoneNumber || "",
+    gender: profile?.gender || "",
     address: {
-      street: profile?.address?.street||"",
-      street2: profile?.address?.street2||"",
-      city: profile?.address?.city||"",
-      country: profile?.address?.country||"",
-      zipCode: profile?.address?.zipCode||"",
+      street: profile?.address?.street || "",
+      street2: profile?.address?.street2 || "",
+      city: profile?.address?.city || "",
+      country: profile?.address?.country || "",
+      zipCode: profile?.address?.zipCode || "",
     },
-    language: profile?.language||"",
-    timeZone: profile?.timeZone||"",
+    language: profile?.language || "",
+    timeZone: profile?.timeZone || "",
   });
 
   useEffect((): void => {
-    if(!profile) {
-      navigate('/register');
+    if (!profile) {
+      navigate("/register");
     } else {
       setFormData(profile);
     }
   }, [profile]);
 
-  const updateFormData=(e: any, isAddress: boolean=false) => {
-    let {name, value}=e.target;
-    const addressName=name;
-    name=[isAddress? "address":name];
-    value=isAddress? {...formData.address, [addressName]: value}:value;
+  const updateFormData = (e: any, isAddress: boolean = false) => {
+    let { name, value } = e.target;
+    const addressName = name;
+    name = [isAddress ? "address" : name];
+    value = isAddress ? { ...formData.address, [addressName]: value } : value;
     setFormData({
       ...formData,
       [name]: value,
     });
   };
 
-  const handleSubmit=async (e: React.FormEvent, formData: any) => {
+  const handleSubmit = async (e: React.FormEvent, formData: any) => {
     e.preventDefault();
     try {
-      const response=await axios.put(
-        "http://localhost:4000/api/profile/update", {
-        avatar: formData.avatar,
-        phoneNumber: formData.phoneNumber,
-        gender: formData.gender,
-        address: {
-          street: formData.address.street,
-          street2: formData.address.street2,
-          city: formData.address.city,
-          country: formData.address.country,
-          zipCode: formData.address.zipCode,
+      const response = await axios.put(
+        "http://localhost:4000/api/profile/update",
+        {
+          avatar: formData.avatar,
+          phoneNumber: formData.phoneNumber,
+          gender: formData.gender,
+          address: {
+            street: formData.address.street,
+            street2: formData.address.street2,
+            city: formData.address.city,
+            country: formData.address.country,
+            zipCode: formData.address.zipCode,
+          },
+          language: formData.language,
+          timeZone: formData.timeZone,
         },
-        language: formData.language,
-        timeZone: formData.timeZone,
-      });
+      );
       console.log(response);
-      if(response.data) {
+      if (response.data) {
         dispatch(updateProfile(response.data.value));
         alert("Profile updated successfully");
       } else {
         alert("Failed to update profile");
       }
-    } catch(error) {
+    } catch (error) {
       console.error("Error during updating profile:", error);
       alert("An error occurred. Please try again.");
     }
@@ -151,17 +195,17 @@ export const ProfileSettings: React.FC=() => {
           />
         </div>
         <div>
-          <label>
-            Country
-          </label>
+          <label>Country</label>
           <select
             name="country"
             value={formData.address.country}
-            onChange={(e) => updateFormData(e, true)}
+            onChange={e => updateFormData(e, true)}
             required>
             <option value="">Select one</option>
             {countries.sort().map((country, index) => (
-              <option key={index} value={country}>{country}</option>
+              <option key={index} value={country}>
+                {country}
+              </option>
             ))}
           </select>
         </div>
@@ -176,17 +220,17 @@ export const ProfileSettings: React.FC=() => {
           />
         </div>
         <div>
-          <label>
-            Preffered Language
-          </label>
+          <label>Preffered Language</label>
           <select
             name="language"
             value={formData.language}
-            onChange={(e) => updateFormData(e)}
+            onChange={e => updateFormData(e)}
             required>
             <option value="">Select one</option>
             {languages.sort().map((language, index) => (
-              <option key={index} value={language}>{language}</option>
+              <option key={index} value={language}>
+                {language}
+              </option>
             ))}
           </select>
         </div>

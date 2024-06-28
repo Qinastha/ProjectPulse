@@ -159,7 +159,7 @@ main {
   position: absolute;
   top: 40px;
   right: 0;
-  width:9rem;
+  width: 9rem;
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -225,4 +225,3 @@ main {
 .headingRightPart input {
   border: 1px solid #ccc;
 }
-

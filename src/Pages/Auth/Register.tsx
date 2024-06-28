@@ -1,32 +1,32 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css";
-import {Google} from "@mui/icons-material";
-import {GitHub} from "@mui/icons-material";
-import {Apple} from "@mui/icons-material";
+import { Google } from "@mui/icons-material";
+import { GitHub } from "@mui/icons-material";
+import { Apple } from "@mui/icons-material";
 
-const Register: React.FC=() => {
-  const [email, setEmail]=useState("");
-  const [password, setPassword]=useState("");
-  const [firstName, setFirstName]=useState("");
-  const [lastName, setLastName]=useState("");
-  const [userName, setUserName]=useState("");
-  const [dateOfBirth, setDateOfBirth]=useState(new Date().toISOString());
-  const [position, setPosition]=useState("");
+const Register: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString());
+  const [position, setPosition] = useState("");
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect((): void => {
-    if(localStorage.getItem("token")) {
+    if (localStorage.getItem("token")) {
       navigate("/");
     }
   }, []);
 
-  const handleRegister=async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response=await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/api/auth/register",
         {
           email,
@@ -40,7 +40,7 @@ const Register: React.FC=() => {
         },
       );
       console.log(response);
-      if(response.data?.value) {
+      if (response.data?.value) {
         localStorage.setItem("token", response.data.value);
 
         alert("Registration successful");
@@ -48,7 +48,7 @@ const Register: React.FC=() => {
       } else {
         alert("Registration failed");
       }
-    } catch(error) {
+    } catch (error) {
       console.error("Error during registration:", error);
       alert("An error occurred. Please try again.");
     }
@@ -57,8 +57,12 @@ const Register: React.FC=() => {
   return (
     <div className="registerContainer">
       <h1>Register a new User</h1>
-      <p>If you already have an account then <span className="loginLink" onClick={(): void => navigate("/login")}>
-        visit this page</span></p>
+      <p>
+        If you already have an account then{" "}
+        <span className="loginLink" onClick={(): void => navigate("/login")}>
+          visit this page
+        </span>
+      </p>
       <form onSubmit={handleRegister}>
         <div>
           <label>Email:</label>
@@ -130,10 +134,10 @@ const Register: React.FC=() => {
             onChange={e =>
               setPosition(
                 e.target.value as
-                |"project manager"
-                |"developer"
-                |"designer"
-                |"tester",
+                  | "project manager"
+                  | "developer"
+                  | "designer"
+                  | "tester",
               )
             }
             required>
@@ -144,19 +148,21 @@ const Register: React.FC=() => {
             <option value="tester">Tester</option>
           </select>
         </div>
-        <button className="registerButton" type="submit">Register</button>
+        <button className="registerButton" type="submit">
+          Register
+        </button>
       </form>
       <div className="authSocialButtons">
         <span className="orText">or</span>
         <div className="socialIcons">
           <a href="#">
-            <Google style={{fontSize: 40}} />
+            <Google style={{ fontSize: 40 }} />
           </a>
           <a href="#">
-            <GitHub style={{fontSize: 40}} />
+            <GitHub style={{ fontSize: 40 }} />
           </a>
           <a href="#">
-            <Apple style={{fontSize: 40}} />
+            <Apple style={{ fontSize: 40 }} />
           </a>
         </div>
       </div>
@@ -164,4 +170,4 @@ const Register: React.FC=() => {
   );
 };
 
-export {Register};
+export { Register };
