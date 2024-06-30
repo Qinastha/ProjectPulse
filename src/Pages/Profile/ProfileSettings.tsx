@@ -1,6 +1,7 @@
+
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { updateProfile, getProfile, reqUsers } from "../../store/userSlice";
+import { updateProfile, getProfile, getAvatar } from "../../store/userSlice";
 import axios from "axios";
 import { IProfile } from "../../core/interfaces/IProfile";
 import "./Profile.css";
@@ -13,18 +14,20 @@ import {
   getLanguage,
   getTimezone,
 } from "../../store/dataSlice";
-import { DragAndDropImage } from "../../Components/Drag&Drop";
+import {DragAvatar} from "../../Components/DragAvatar";
+import { FormData } from "../../core/interfaces/formData";
 
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const profile = useAppSelector(getProfile);
+  const avatar = useAppSelector(getAvatar);
   const countries = useAppSelector(getCountry);
   const languages = useAppSelector(getLanguage);
   const timezones = useAppSelector(getTimezone);
 
-  const [formData, setFormData] = useState<IProfile>({
-    avatar: null,
+  const [formData, setFormData] = useState<FormData>({
+    avatar: profile?.avatar || "",
     phoneNumber: "",
     gender: "",
     address: {
@@ -41,7 +44,7 @@ export const ProfileSettings: React.FC = () => {
   const initializeFormData = () => {
     if (profile) {
       setFormData({
-        avatar: profile.avatar || null,
+        avatar: profile.avatar || "",
         phoneNumber: profile.phoneNumber || "",
         gender: profile.gender || "",
         address: {
@@ -68,16 +71,17 @@ export const ProfileSettings: React.FC = () => {
     }
   }, [navigate, profile]);
 
-  const updateFormData = (e: any, isAddress: boolean = false) => {
-    let { name, value } = e.target;
-    const addressName = name;
-    name = [isAddress ? "address" : name];
-    value = isAddress ? { ...formData.address, [addressName]: value } : value;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  const updateFormData = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const isAddress = ['street', 'street2', 'city', 'country', 'zipCode'].includes(name);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [isAddress ? 'address' : name]: isAddress
+        ? { ...prevData.address, [name]: value }
+        : value,
+    }));
+  };  
 
   const handleSubmit = async (formData: any) => {
     try {
@@ -145,9 +149,9 @@ export const ProfileSettings: React.FC = () => {
     <div className="profileContainer">
       <h2> Please provide an information about yourself</h2>
       <form className="profileForm">
-        <div>
+         <div>
           <label>Avatar</label>
-          <DragAndDropImage />
+          <DragAvatar />
         </div>
         <div>
           <label>Phone Number</label>
@@ -177,7 +181,7 @@ export const ProfileSettings: React.FC = () => {
             type="text"
             name="street"
             value={formData.address.street}
-            onChange={e => updateFormData(e, true)}
+            onChange={e => updateFormData(e)}
           />
         </div>
         <div>
@@ -186,7 +190,7 @@ export const ProfileSettings: React.FC = () => {
             type="text"
             name="street2"
             value={formData.address.street2}
-            onChange={e => updateFormData(e, true)}
+            onChange={e => updateFormData(e)}
           />
         </div>
         <div>
@@ -195,7 +199,7 @@ export const ProfileSettings: React.FC = () => {
             type="text"
             name="city"
             value={formData.address.city}
-            onChange={e => updateFormData(e, true)}
+            onChange={e => updateFormData(e)}
           />
         </div>
         <div>
@@ -203,7 +207,7 @@ export const ProfileSettings: React.FC = () => {
           <select
             name="country"
             value={formData.address.country}
-            onChange={e => updateFormData(e, true)}>
+            onChange={e => updateFormData(e)}>
             <option value="">Select your country</option>
             {countries.map(country => (
               <option key={country.code} value={country.name}>
@@ -219,7 +223,7 @@ export const ProfileSettings: React.FC = () => {
             type="text"
             name="zipCode"
             value={formData.address.zipCode}
-            onChange={e => updateFormData(e, true)}
+            onChange={e => updateFormData(e)}
           />
         </div>
         <div>

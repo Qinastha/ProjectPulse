@@ -69,7 +69,7 @@ export const user = createSlice({
     setIsInitial: create.reducer((state, action: PayloadAction<boolean>) => {
       return { ...state, isInitial: action.payload };
     }),
-    setAvatar: create.reducer((state, action: PayloadAction<File | null>) => {
+    setAvatar: create.reducer((state, action: PayloadAction<string>) => {
       if (state.profile) {
         state.profile.avatar = action.payload;
       } else {
