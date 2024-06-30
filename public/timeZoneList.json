@@ -1,0 +1,152 @@
+[
+  {
+    "zone": "Pacific/Midway",
+    "gmt": "(GMT-11:00)",
+    "name": "Midway Island"
+  },
+  {
+    "zone": "US/Hawaii",
+    "gmt": "(GMT-10:00)",
+    "name": "Hawaii"
+  },
+  {
+    "zone": "US/Alaska",
+    "gmt": "(GMT-09:00)",
+    "name": "Alaska"
+  },
+  {
+    "zone": "US/Pacific",
+    "gmt": "(GMT-08:00)",
+    "name": "Pacific Time (US & Canada)"
+  },
+  {
+    "zone": "US/Mountain",
+    "gmt": "(GMT-07:00)",
+    "name": "Mountain Time (US & Canada)"
+  },
+  {
+    "zone": "America/Mexico_City",
+    "gmt": "(GMT-06:00)",
+    "name": "Mexico City"
+  },
+  {
+    "zone": "US/Eastern",
+    "gmt": "(GMT-05:00)",
+    "name": "Eastern Time (US & Canada)"
+  },
+  {
+    "zone": "America/Caracas",
+    "gmt": "(GMT-04:30)",
+    "name": "Caracas"
+  },
+  {
+    "zone": "Canada/Atlantic",
+    "gmt": "(GMT-04:00)",
+    "name": "Atlantic Time (Canada)"
+  },
+  {
+    "zone": "America/Buenos_Aires",
+    "gmt": "(GMT-03:00)",
+    "name": "Buenos Aires"
+  },
+  {
+    "zone": "Atlantic/Stanley",
+    "gmt": "(GMT-02:00)",
+    "name": "Stanley"
+  },
+  {
+    "zone": "Atlantic/Azores",
+    "gmt": "(GMT-01:00)",
+    "name": "Azores"
+  },
+  {
+    "zone": "Europe/London",
+    "gmt": "(GMT)",
+    "name": "London"
+  },
+  {
+    "zone": "Europe/Paris",
+    "gmt": "(GMT+01:00)",
+    "name": "Paris"
+  },
+  {
+    "zone": "Europe/Athens",
+    "gmt": "(GMT+02:00)",
+    "name": "Athens"
+  },
+  {
+    "zone": "Asia/Baghdad",
+    "gmt": "(GMT+03:00)",
+    "name": "Baghdad"
+  },
+  {
+    "zone": "Asia/Tehran",
+    "gmt": "(GMT+03:30)",
+    "name": "Tehran"
+  },
+  {
+    "zone": "Europe/Moscow",
+    "gmt": "(GMT+04:00)",
+    "name": "Moscow"
+  },
+  {
+    "zone": "Asia/Kabul",
+    "gmt": "(GMT+04:30)",
+    "name": "Kabul"
+  },
+  {
+    "zone": "Asia/Karachi",
+    "gmt": "(GMT+05:00)",
+    "name": "Karachi"
+  },
+  {
+    "zone": "Asia/Kolkata",
+    "gmt": "(GMT+05:30)",
+    "name": "Kolkata"
+  },
+  {
+    "zone": "Asia/Kathmandu",
+    "gmt": "(GMT+05:45)",
+    "name": "Kathmandu"
+  },
+  {
+    "zone": "Asia/Dhaka",
+    "gmt": "(GMT+06:00)",
+    "name": "Dhaka"
+  },
+  {
+    "zone": "Asia/Novosibirsk",
+    "gmt": "(GMT+07:00)",
+    "name": "Novosibirsk"
+  },
+  {
+    "zone": "Asia/Hong_Kong",
+    "gmt": "(GMT+08:00)",
+    "name": "Hong Kong"
+  },
+  {
+    "zone": "Asia/Tokyo",
+    "gmt": "(GMT+09:00)",
+    "name": "Tokyo"
+  },
+  {
+    "zone": "Australia/Adelaide",
+    "gmt": "(GMT+09:30)",
+    "name": "Adelaide"
+  },
+  {
+    "zone": "Asia/Yakutsk",
+    "gmt": "(GMT+10:00)",
+    "name": "Yakutsk"
+  },
+  {
+    "zone": "Asia/Vladivostok",
+    "gmt": "(GMT+11:00)",
+    "name": "Vladivostok"
+  },
+  {
+    "zone": "Pacific/Fiji",
+    "gmt": "(GMT+12:00)",
+    "name": "Fiji"
+  }
+]

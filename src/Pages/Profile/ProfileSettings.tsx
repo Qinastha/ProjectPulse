@@ -1,67 +1,30 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { updateProfile, getProfile, reqUsers } from "../../store/projectsSlice";
+import { updateProfile, getProfile, reqUsers } from "../../store/userSlice";
 import axios from "axios";
 import { IProfile } from "../../core/interfaces/IProfile";
 import "./Profile.css";
 import { useNavigate } from "react-router-dom";
+import {
+  fetchCountries,
+  fetchLanguages,
+  fetchTimezones,
+  getCountry,
+  getLanguage,
+  getTimezone,
+} from "../../store/dataSlice";
+import { DragAndDropImage } from "../../Components/Drag&Drop";
 
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const profileExist = localStorage.getItem("profile");
   const profile = useAppSelector(getProfile);
-
-  type Country =
-    | "United States"
-    | "Canada"
-    | "United Kingdom"
-    | "Australia"
-    | "Japan"
-    | "Ukraine"
-    | "Germany"
-    | "Spain"
-    | "Poland"
-    | "Portugal"
-    | "France";
-  type Language =
-    | "English"
-    | "Spanish"
-    | "French"
-    | "German"
-    | "Japanese"
-    | "Polish"
-    | "Portuguese"
-    | "Ukrainian"
-    | "Russian";
-
-  const countries: Country[] = [
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Australia",
-    "Japan",
-    "Ukraine",
-    "Germany",
-    "Spain",
-    "Poland",
-    "Portugal",
-    "France",
-  ];
-  const languages: Language[] = [
-    "English",
-    "Spanish",
-    "French",
-    "German",
-    "Japanese",
-    "Polish",
-    "Portuguese",
-    "Ukrainian",
-    "Russian",
-  ];
+  const countries = useAppSelector(getCountry);
+  const languages = useAppSelector(getLanguage);
+  const timezones = useAppSelector(getTimezone);
 
   const [formData, setFormData] = useState<IProfile>({
-    avatar: "",
+    avatar: null,
     phoneNumber: "",
     gender: "",
     address: {
@@ -78,7 +41,7 @@ export const ProfileSettings: React.FC = () => {
   const initializeFormData = () => {
     if (profile) {
       setFormData({
-        avatar: profile.avatar || "",
+        avatar: profile.avatar || null,
         phoneNumber: profile.phoneNumber || "",
         gender: profile.gender || "",
         address: {
@@ -95,12 +58,15 @@ export const ProfileSettings: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!profileExist) {
+    if (!profile) {
       navigate("/register");
     } else {
       initializeFormData();
+      dispatch(fetchCountries());
+      dispatch(fetchLanguages());
+      dispatch(fetchTimezones());
     }
-  }, [navigate, profileExist]);
+  }, [navigate, profile]);
 
   const updateFormData = (e: any, isAddress: boolean = false) => {
     let { name, value } = e.target;
@@ -163,7 +129,6 @@ export const ProfileSettings: React.FC = () => {
       );
       console.log(response);
       if (response) {
-        localStorage.removeItem("profile");
         localStorage.removeItem("token");
         navigate("/register");
         alert("Profile deleted successfully");
@@ -179,15 +144,10 @@ export const ProfileSettings: React.FC = () => {
   return (
     <div className="profileContainer">
       <h2> Please provide an information about yourself</h2>
-      <form>
+      <form className="profileForm">
         <div>
           <label>Avatar</label>
-          <input
-            type="text"
-            name="avatar"
-            value={formData.avatar}
-            onChange={e => updateFormData(e)}
-          />
+          <DragAndDropImage />
         </div>
         <div>
           <label>Phone Number</label>
@@ -244,10 +204,11 @@ export const ProfileSettings: React.FC = () => {
             name="country"
             value={formData.address.country}
             onChange={e => updateFormData(e, true)}>
-            <option value="">Select one</option>
-            {countries.sort().map((country, index) => (
-              <option key={index} value={country}>
-                {country}
+            <option value="">Select your country</option>
+            {countries.map(country => (
+              <option key={country.code} value={country.name}>
+                {country.flag}
+                {country.name}
               </option>
             ))}
           </select>
@@ -267,29 +228,40 @@ export const ProfileSettings: React.FC = () => {
             name="language"
             value={formData.language}
             onChange={e => updateFormData(e)}>
-            <option value="">Select one</option>
-            {languages.sort().map((language, index) => (
-              <option key={index} value={language}>
-                {language}
+            <option value="">Select your language</option>
+            {languages.map(language => (
+              <option key={language.code} value={language.name}>
+                {language.flag}
+                {language.name}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label>Time zone</label>
-          <input
-            type="text"
+          <label>Choose your timezone</label>
+          <select
             name="timeZone"
             value={formData.timeZone}
             onChange={e => updateFormData(e)}
-          />
+            required>
+            <option value="">Select your timezone</option>
+            {timezones.map(timezone => (
+              <option key={timezone.name} value={timezone.gmt}>
+                {timezone.zone}
+                {timezone.gmt}
+              </option>
+            ))}
+          </select>
         </div>
-        <button type="button" onClick={() => handleSubmit(formData)}>
+        <button
+          type="button"
+          onClick={() => handleSubmit(formData)}
+          className="submitButton">
           {" "}
           Save Changes{" "}
         </button>
       </form>
-      <button type="button" onClick={handleDelete}>
+      <button type="button" onClick={handleDelete} className="deleteUserButton">
         {" "}
         Delete User{" "}
       </button>

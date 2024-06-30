@@ -5,6 +5,7 @@ import "./Auth.css";
 import { Google } from "@mui/icons-material";
 import { GitHub } from "@mui/icons-material";
 import { Apple } from "@mui/icons-material";
+import { useAppSelector } from "../../hooks";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");

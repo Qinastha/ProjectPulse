@@ -1,65 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { reqUsers, updateProfile } from "../../store/projectsSlice";
-import { useAppDispatch } from "../../hooks";
+import { updateProfile } from "../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import "./Profile.css";
+import {
+  fetchCountries,
+  fetchLanguages,
+  fetchTimezones,
+  getCountry,
+  getLanguage,
+  getTimezone,
+} from "../../store/dataSlice";
+import { DragAndDropImage } from "../../Components/Drag&Drop";
 
 export const ProfileCreate: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const countries = useAppSelector(getCountry);
+  const languages = useAppSelector(getLanguage);
+  const timezones = useAppSelector(getTimezone);
   const token = localStorage.getItem("token");
 
-  type Country =
-    | "United States"
-    | "Canada"
-    | "United Kingdom"
-    | "Australia"
-    | "Japan"
-    | "Ukraine"
-    | "Germany"
-    | "Spain"
-    | "Poland"
-    | "Portugal"
-    | "France";
-  type Language =
-    | "English"
-    | "Spanish"
-    | "French"
-    | "German"
-    | "Japanese"
-    | "Polish"
-    | "Portuguese"
-    | "Ukrainian"
-    | "Russian";
-
-  const countries: Country[] = [
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Australia",
-    "Japan",
-    "Ukraine",
-    "Germany",
-    "Spain",
-    "Poland",
-    "Portugal",
-    "France",
-  ];
-  const languages: Language[] = [
-    "English",
-    "Spanish",
-    "French",
-    "German",
-    "Japanese",
-    "Polish",
-    "Portuguese",
-    "Ukrainian",
-    "Russian",
-  ];
-
   const [formData, setFormData] = useState({
-    avatar: "",
+    avatar: null,
     phoneNumber: "",
     gender: "",
     address: {
@@ -76,8 +40,12 @@ export const ProfileCreate: React.FC = () => {
   useEffect(() => {
     if (!token) {
       navigate("/login");
+    } else {
+      dispatch(fetchCountries());
+      dispatch(fetchLanguages());
+      dispatch(fetchTimezones());
     }
-  }, [dispatch, "token"]);
+  }, [dispatch, token]);
 
   const updateFormData = (e: any, isAddress: boolean = false) => {
     let { name, value } = e.target;
@@ -119,7 +87,6 @@ export const ProfileCreate: React.FC = () => {
       if (response.data?.value) {
         dispatch(updateProfile(response.data.value));
         console.log(response.data.value);
-        localStorage.setItem("profile", response.data.value);
         navigate("/");
       }
     } catch (error) {
@@ -134,13 +101,7 @@ export const ProfileCreate: React.FC = () => {
       <form onSubmit={e => handleSubmit(e, formData)}>
         <div>
           <label>Avatar</label>
-          <input
-            type="text"
-            name="avatar"
-            value={formData.avatar}
-            onChange={e => updateFormData(e)}
-            required
-          />
+          <DragAndDropImage />
         </div>
         <div>
           <label>Phone Number</label>
@@ -202,10 +163,11 @@ export const ProfileCreate: React.FC = () => {
             value={formData.address.country}
             onChange={e => updateFormData(e, true)}
             required>
-            <option value="">Select one</option>
-            {countries.sort().map((country, index) => (
-              <option key={index} value={country}>
-                {country}
+            <option value="">Select your country</option>
+            {countries.map(country => (
+              <option key={country.code} value={country.name}>
+                {country.flag}
+                {country.name}
               </option>
             ))}
           </select>
@@ -227,25 +189,35 @@ export const ProfileCreate: React.FC = () => {
             value={formData.language}
             onChange={e => updateFormData(e)}
             required>
-            <option value="">Select one</option>
-            {languages.sort().map((language, index) => (
-              <option key={index} value={language}>
-                {language}
+            <option value="">Select your language</option>
+            {languages.map(language => (
+              <option key={language.code} value={language.name}>
+                {language.flag}
+                {language.name}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label>Time zone</label>
-          <input
-            type="text"
+          <label>Choose your timezone</label>
+          <select
             name="timeZone"
             value={formData.timeZone}
             onChange={e => updateFormData(e)}
-            required
-          />
+            required>
+            <option value="">Select your timezone</option>
+            {timezones.map(timezone => (
+              <option key={timezone.name} value={timezone.gmt}>
+                {timezone.zone}
+                {timezone.gmt}
+              </option>
+            ))}
+          </select>
         </div>
-        <button type="submit"> Save Changes </button>
+        <button type="submit" className="submitButton">
+          {" "}
+          Save Changes{" "}
+        </button>
       </form>
     </div>
   );

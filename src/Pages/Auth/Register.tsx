@@ -62,7 +62,7 @@ const Register: React.FC = () => {
           visit this page
         </span>
       </p>
-      <form onSubmit={handleRegister}>
+      <form onSubmit={handleRegister} autoComplete="off">
         <div>
           <label>Email:</label>
           <input
@@ -71,7 +71,6 @@ const Register: React.FC = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            autoComplete="false"
           />
         </div>
         <div>
@@ -82,7 +81,6 @@ const Register: React.FC = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
-            autoComplete="false"
           />
         </div>
         <div>
@@ -93,7 +91,6 @@ const Register: React.FC = () => {
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
             required
-            autoComplete="false"
           />
         </div>
         <div>
@@ -104,7 +101,6 @@ const Register: React.FC = () => {
             value={lastName}
             onChange={e => setLastName(e.target.value)}
             required
-            autoComplete="false"
           />
         </div>
         <div>
@@ -115,7 +111,6 @@ const Register: React.FC = () => {
             value={userName}
             onChange={e => setUserName(e.target.value)}
             required
-            autoComplete="false"
           />
         </div>
         <div>
@@ -128,7 +123,6 @@ const Register: React.FC = () => {
             value={dateOfBirth}
             onChange={e => setDateOfBirth(e.target.value)}
             required
-            autoComplete="false"
           />
         </div>
         <div>
@@ -145,8 +139,7 @@ const Register: React.FC = () => {
                   | "tester",
               )
             }
-            required
-            autoComplete="false">
+            required>
             <option value="">Select</option>
             <option value="project manager">Project Manager</option>
             <option value="developer">Developer</option>

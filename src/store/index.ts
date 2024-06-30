@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import user from "./projectsSlice";
+import user from "./userSlice";
+import data from "./dataSlice";
 
 const store = configureStore({
   reducer: {
     user,
+    data,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });
