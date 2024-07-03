@@ -1,9 +1,4 @@
-import {
-  reqUsers,
-  getUser,
-  getIsInitial,
-  setIsInitial,
-} from "./store/userSlice";
+import { reqUsers, getUser, getIsInitial } from "./store/userSlice";
 import store from "./store";
 
 export const userLoader = async () => {

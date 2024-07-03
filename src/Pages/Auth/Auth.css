@@ -207,3 +207,13 @@
 .loginLink::after {
   transform-origin: left;
 }
+
+.errorInput {
+  border: 1px solid red;
+}
+
+.errorText {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+}

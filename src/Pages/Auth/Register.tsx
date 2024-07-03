@@ -23,8 +23,29 @@ const Register: React.FC = () => {
     }
   }, []);
 
+  const [validations, setValidations] = useState({
+    email: true,
+    password: true,
+    firstName: true,
+    lastName: true,
+    userName: true,
+  });
+
+  const validateForm = () => {
+    const newValidations = {
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+      password: /^(?=.*[A-Z])(?=.*[0-9]).{8,20}$/.test(password),
+      firstName: /^[a-zA-Z]{1,50}$/.test(firstName),
+      lastName: /^[a-zA-Z]{1,50}$/.test(lastName),
+      userName: /^[a-zA-Z0-9]{1,50}$/.test(userName),
+    };
+    setValidations(newValidations);
+    return Object.values(newValidations).every(Boolean);
+  };
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
     try {
       const response = await axios.post(
         "http://localhost:4000/api/auth/register",
@@ -68,50 +89,78 @@ const Register: React.FC = () => {
           <input
             type="email"
             name="email"
+            className={!validations.email ? "errorInput" : ""}
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
           />
+          {!validations.email && (
+            <span className="errorText">
+              Please enter a valid email address
+            </span>
+          )}
         </div>
         <div>
           <label>Password:</label>
           <input
             type="password"
             name="password"
+            className={!validations.email ? "errorInput" : ""}
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
           />
+          {!validations.password && (
+            <span className="errorText">
+              Password must contain at least 1 uppercase letter, 1 number, and
+              be at least 8 characters long
+            </span>
+          )}
         </div>
         <div>
           <label>First Name:</label>
           <input
             type="text"
             name="firstName"
+            className={!validations.email ? "errorInput" : ""}
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
             required
           />
+          {!validations.firstName && (
+            <span className="errorText">Please enter a valid first name</span>
+          )}
         </div>
         <div>
           <label>Last Name:</label>
           <input
             type="text"
             name="lastName"
+            className={!validations.email ? "errorInput" : ""}
             value={lastName}
             onChange={e => setLastName(e.target.value)}
             required
           />
+          {!validations.lastName && (
+            <span className="errorText">Please enter a valid last name</span>
+          )}
         </div>
         <div>
           <label>Username:</label>
           <input
             type="text"
             name="userName"
+            className={!validations.email ? "errorInput" : ""}
             value={userName}
             onChange={e => setUserName(e.target.value)}
             required
           />
+          {!validations.userName && (
+            <span className="errorText">
+              Username must contain only letters and numbers, and be 1-50
+              characters long
+            </span>
+          )}
         </div>
         <div>
           <label>Date of Birth:</label>

@@ -128,12 +128,11 @@
 }
 
 .dragAvatar {
-  border: 2px dotted #ffb6c1;;
+  border: 2px dotted #ffb6c1;
   padding: 0.8rem;
   text-align: center;
   cursor: pointer;
   margin-bottom: 10px;
-
 }
 
 .dragAvatar img {
@@ -141,7 +140,10 @@
   height: auto;
 }
 
-
+.dragAvatar input {
+  display: none;
+}
+/* 
 .dragAvatar input {
   background-color: #ffb6c1;
   color: #fff;
@@ -152,8 +154,18 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .dragAvatar input:hover {
   background-color: #ff9eb0;
+}
+
+.errorInput {
+  border: 1px solid red;
+}
+
+.errorText {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
 }

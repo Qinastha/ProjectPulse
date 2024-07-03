@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { updateProfile, getProfile, getAvatar } from "../../store/userSlice";
@@ -14,7 +13,7 @@ import {
   getLanguage,
   getTimezone,
 } from "../../store/dataSlice";
-import {DragAvatar} from "../../Components/DragAvatar";
+import { DragAvatar } from "../../Components/DragAvatar";
 import { FormData } from "../../core/interfaces/formData";
 
 export const ProfileSettings: React.FC = () => {
@@ -25,6 +24,7 @@ export const ProfileSettings: React.FC = () => {
   const countries = useAppSelector(getCountry);
   const languages = useAppSelector(getLanguage);
   const timezones = useAppSelector(getTimezone);
+  const [errors, setErrors] = useState<any>({});
 
   const [formData, setFormData] = useState<FormData>({
     avatar: profile?.avatar || "",
@@ -71,17 +71,70 @@ export const ProfileSettings: React.FC = () => {
     }
   }, [navigate, profile]);
 
-  const updateFormData = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    const isAddress = ['street', 'street2', 'city', 'country', 'zipCode'].includes(name);
+  const validateFormData = () => {
+    let formIsValid = true;
+    const newErrors: any = {};
 
-    setFormData((prevData) => ({
+    const phoneNumberRegex = /^\+?[1-9]\d{1,14}$/;
+    const addressRegex = /^[^\W_](.*[^\W_])?$/;
+    const zipCodeRegex = /^\d{1,10}$/;
+
+    if (!phoneNumberRegex.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Invalid phone number format.";
+      formIsValid = false;
+    }
+
+    if (
+      !addressRegex.test(formData.address.street) ||
+      formData.address.street.length === 0
+    ) {
+      newErrors.street =
+        "Street address cannot start with symbols or be empty.";
+      formIsValid = false;
+    }
+
+    if (!addressRegex.test(formData.address.street2)) {
+      newErrors.street2 = "Street2 address cannot start with symbols.";
+      formIsValid = false;
+    }
+
+    if (
+      !addressRegex.test(formData.address.city) ||
+      formData.address.city.length === 0
+    ) {
+      newErrors.city = "City cannot start with symbols or be empty.";
+      formIsValid = false;
+    }
+
+    if (!zipCodeRegex.test(formData.address.zipCode)) {
+      newErrors.zipCode =
+        "Zip code must be numeric and no more than 10 digits.";
+      formIsValid = false;
+    }
+
+    setErrors(newErrors);
+    return formIsValid;
+  };
+
+  const updateFormData = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    const isAddress = [
+      "street",
+      "street2",
+      "city",
+      "country",
+      "zipCode",
+    ].includes(name);
+
+    setFormData(prevData => ({
       ...prevData,
-      [isAddress ? 'address' : name]: isAddress
+      [isAddress ? "address" : name]: isAddress
         ? { ...prevData.address, [name]: value }
         : value,
     }));
-  };  
+  };
 
   const handleSubmit = async (formData: any) => {
     try {
@@ -149,7 +202,7 @@ export const ProfileSettings: React.FC = () => {
     <div className="profileContainer">
       <h2> Please provide an information about yourself</h2>
       <form className="profileForm">
-         <div>
+        <div>
           <label>Avatar</label>
           <DragAvatar />
         </div>
@@ -158,9 +211,13 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="tel"
             name="phoneNumber"
+            className={!errors.phoneNumber ? "errorInput" : ""}
             value={formData.phoneNumber}
             onChange={e => updateFormData(e)}
           />
+          {errors.phoneNumber && (
+            <span className="errorText">{errors.phoneNumber}</span>
+          )}
         </div>
 
         <div>
@@ -180,27 +237,35 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="text"
             name="street"
+            className={!errors.street ? "errorInput" : ""}
             value={formData.address.street}
             onChange={e => updateFormData(e)}
           />
+          {errors.street && <span className="errorText">{errors.street}</span>}
         </div>
         <div>
           <label>Street2</label>
           <input
             type="text"
             name="street2"
+            className={!errors.street2 ? "errorInput" : ""}
             value={formData.address.street2}
             onChange={e => updateFormData(e)}
           />
+          {errors.street2 && (
+            <span className="errorText">{errors.street2}</span>
+          )}
         </div>
         <div>
           <label>City</label>
           <input
             type="text"
             name="city"
+            className={!errors.city ? "errorInput" : ""}
             value={formData.address.city}
             onChange={e => updateFormData(e)}
           />
+          {errors.city && <span className="errorText">{errors.city}</span>}
         </div>
         <div>
           <label>Country</label>
@@ -222,9 +287,13 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="text"
             name="zipCode"
+            className={!errors.zipCode ? "errorInput" : ""}
             value={formData.address.zipCode}
             onChange={e => updateFormData(e)}
           />
+          {errors.zipCode && (
+            <span className="errorText">{errors.zipCode}</span>
+          )}
         </div>
         <div>
           <label>Preffered Language</label>
