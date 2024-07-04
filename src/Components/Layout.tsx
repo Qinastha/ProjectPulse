@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./Layout.css";
+import "./Layout.sass";
 import { useState } from "react";
 import { NewProjectPop } from "./NewProjectPop";
 import pinkBlossom from "../assets/pinkBlossom.png";

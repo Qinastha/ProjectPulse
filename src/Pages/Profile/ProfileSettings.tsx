@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { updateProfile, getProfile, getAvatar } from "../../store/userSlice";
 import axios from "axios";
-import { IProfile } from "../../core/interfaces/IProfile";
-import "./Profile.css";
+import "./Profile.sass";
 import { useNavigate } from "react-router-dom";
 import {
   fetchCountries,
@@ -137,6 +136,9 @@ export const ProfileSettings: React.FC = () => {
   };
 
   const handleSubmit = async (formData: any) => {
+    if(!validateFormData) {
+      return
+    }
     try {
       const response = await axios.put(
         "http://localhost:4000/api/profile/update",
@@ -211,7 +213,7 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="tel"
             name="phoneNumber"
-            className={!errors.phoneNumber ? "errorInput" : ""}
+            className={errors.phoneNumber ? "errorInput" : ""}
             value={formData.phoneNumber}
             onChange={e => updateFormData(e)}
           />
@@ -237,7 +239,7 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="text"
             name="street"
-            className={!errors.street ? "errorInput" : ""}
+            className={errors.street ? "errorInput" : ""}
             value={formData.address.street}
             onChange={e => updateFormData(e)}
           />
@@ -248,7 +250,7 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="text"
             name="street2"
-            className={!errors.street2 ? "errorInput" : ""}
+            className={errors.street2 ? "errorInput" : ""}
             value={formData.address.street2}
             onChange={e => updateFormData(e)}
           />
@@ -261,7 +263,7 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="text"
             name="city"
-            className={!errors.city ? "errorInput" : ""}
+            className={errors.city ? "errorInput" : ""}
             value={formData.address.city}
             onChange={e => updateFormData(e)}
           />
@@ -287,7 +289,7 @@ export const ProfileSettings: React.FC = () => {
           <input
             type="text"
             name="zipCode"
-            className={!errors.zipCode ? "errorInput" : ""}
+            className={errors.zipCode ? "errorInput" : ""}
             value={formData.address.zipCode}
             onChange={e => updateFormData(e)}
           />

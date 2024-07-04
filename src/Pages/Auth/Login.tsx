@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Auth.css";
+import "./Auth.sass";
 import { Google } from "@mui/icons-material";
 import { GitHub } from "@mui/icons-material";
 import { Apple } from "@mui/icons-material";
@@ -60,6 +60,7 @@ const Login: React.FC = () => {
             type="email"
             name="email"
             value={email}
+            placeholder="Please enter your email address"
             onChange={e => setEmail(e.target.value)}
             required
           />
@@ -70,6 +71,7 @@ const Login: React.FC = () => {
             type="password"
             name="password"
             value={password}
+            placeholder="Please enter your password"
             onChange={e => setPassword(e.target.value)}
             required
           />
