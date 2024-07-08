@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {getProfile, updateProfile} from "../../store/userSlice";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import "./Profile.sass";
+import "./Profile.scss";
 import {
   fetchCountries,
   fetchLanguages,

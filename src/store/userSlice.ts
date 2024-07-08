@@ -9,7 +9,7 @@ import { UserRole } from "../core/types/userRole.type";
 import { UserPosition } from "../core/types/userPosition";
 import axios from "axios";
 
-interface IUser {
+export interface IUser {
   email: string;
   password: string;
   role: UserRole | null;
@@ -43,8 +43,9 @@ const initialState: IUser = {
   isInitial: true,
 };
 
-export const reqUsers = createAsyncThunk(
-  "users/reqUsers",
+
+export const reqUser = createAsyncThunk(
+  "users/reqUser",
   async (_, thunkAPI) => {
     const response = await axios.get("http://localhost:4000/api/user/", {
       headers: {
@@ -84,16 +85,16 @@ export const user = createSlice({
     getAvatar: state => state.profile?.avatar,
   },
   extraReducers: builder => {
-    builder.addCase(reqUsers.pending, state => {
+    builder.addCase(reqUser.pending, state => {
       state.status = "loading";
     });
     builder.addCase(
-      reqUsers.fulfilled,
+      reqUser.fulfilled,
       (state, action: PayloadAction<IUser>) => {
         return { ...state, ...action.payload, status: "resolved" };
       },
     );
-    builder.addCase(reqUsers.rejected, state => {
+    builder.addCase(reqUser.rejected, state => {
       state.status = "rejected";
     });
   },

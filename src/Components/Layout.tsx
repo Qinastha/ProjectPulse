@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./Layout.sass";
+import "./Layout.scss";
 import { useState } from "react";
 import { NewProjectPop } from "./NewProjectPop";
 import pinkBlossom from "../assets/pinkBlossom.png";
@@ -53,6 +53,7 @@ export const Layout: React.FC = () => {
         return "Unknown";
     }
   };
+
   return (
     <div className="container">
       <header className={`navbar ${isExpand ? "" : "notExpanded"}`}>
@@ -60,8 +61,7 @@ export const Layout: React.FC = () => {
           <button className="collapseButton" type="button" onClick={toggleNav}>
             &#8656;
           </button>
-          <button type="button" onClick={handleClickOpen}>
-            {" "}
+          <button className="newProjectButton" type="button" onClick={handleClickOpen}>
             Create New Project
           </button>
         </div>
@@ -89,7 +89,7 @@ export const Layout: React.FC = () => {
                 <img
                   className="settingIcon"
                   src={pinkBlossom}
-                  alt="Setiings"
+                  alt="Settings"
                   onClick={(): void => setIsOpen(!isOpen)}
                 />
                 {isOpen && (
@@ -99,7 +99,9 @@ export const Layout: React.FC = () => {
                   </div>
                 )}
               </div>
-              <button onClick={handleLogout}>LogOut</button>
+              <button className="logoutButton" onClick={handleLogout}>
+                LogOut
+              </button>
             </div>
           </div>
         </div>

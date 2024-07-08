@@ -1,4 +1,4 @@
-import { reqUsers, getUser, getIsInitial } from "./store/userSlice";
+import { reqUser, getUser, getIsInitial } from "./store/userSlice";
 import store from "./store";
 
 export const userLoader = async () => {
@@ -7,7 +7,7 @@ export const userLoader = async () => {
   const isInitial = getIsInitial(state);
 
   if (isInitial == true) {
-    await dispatch(reqUsers());
+    await dispatch(reqUser());
     dispatch({ type: "user/setIsInitial", payload: false });
   }
 

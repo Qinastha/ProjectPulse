@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import "./Auth.sass";
+import "./Auth.scss";
 import {Google} from "@mui/icons-material";
 import {GitHub} from "@mui/icons-material";
 import {Apple} from "@mui/icons-material";
@@ -34,26 +34,28 @@ const Register: React.FC=() => {
       formIsValid=false;
     }
 
-    const passwordRegex=/^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const passwordRegex=/^(?=.*[A-Z])(?=.*\d).{8,16}$/;
     if(!passwordRegex.test(password)) {
       newErrors.password=
         "Password must contain at least one capital letter and one number, and be at least 8 characters long.";
       formIsValid=false;
     }
 
-    const nameRegex=/^[^\W_](.*[^\W_])?$/;
-    if(!nameRegex.test(firstName)||firstName.length===0) {
-      newErrors.firstName="First name cannot start with symbols or be empty.";
-      formIsValid=false;
+    const nameRegex = /^[A-Z][a-zA-Z]*$/;
+    if (!nameRegex.test(firstName) || firstName.length === 0) {
+      newErrors.firstName = "First name must start with a capital letter and contain only letters.";
+      formIsValid = false;
     }
-    if(!nameRegex.test(lastName)||lastName.length===0) {
-      newErrors.lastName="Last name cannot start with symbols or be empty.";
-      formIsValid=false;
+    if (!nameRegex.test(lastName) || lastName.length === 0) {
+      newErrors.lastName = "Last name must start with a capital letter and contain only letters.";
+      formIsValid = false;
     }
 
-    if(!nameRegex.test(userName)||userName.length===0) {
-      newErrors.userName="Username cannot start with symbols or be empty.";
-      formIsValid=false;
+    // Username validation: length > 0, no symbols at start
+    const usernameRegex = /^[^\W_](.*[^\W_])?$/;
+    if (!usernameRegex.test(userName) || userName.length === 0) {
+      newErrors.userName = "Username cannot start with symbols or be empty.";
+      formIsValid = false;
     }
 
     const today=new Date();

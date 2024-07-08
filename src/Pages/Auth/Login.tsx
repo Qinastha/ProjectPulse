@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Auth.sass";
+import "./Auth.scss";
 import { Google } from "@mui/icons-material";
 import { GitHub } from "@mui/icons-material";
 import { Apple } from "@mui/icons-material";
@@ -29,8 +29,8 @@ const Login: React.FC = () => {
         },
       );
 
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
+      if (response?.data?.value) {
+        localStorage.setItem("token", response.data.value);
         alert("Login successful");
         navigate("/");
       } else {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { updateProfile, getProfile, getAvatar } from "../../store/userSlice";
 import axios from "axios";
-import "./Profile.sass";
+import "./Profile.scss";
 import { useNavigate } from "react-router-dom";
 import {
   fetchCountries,

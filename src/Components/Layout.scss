@@ -1,0 +1,212 @@
+$primary-color: #ffb6c1;
+$secondary-color: #ffe4e1;
+$text-color: #333;
+$background-color: #fefefe;
+$box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+$font-family: "Noto Sans JP", sans-serif;
+$font-family-serif: "Noto Serif JP", serif;
+
+@mixin transition($property, $duration, $timing-function: ease) {
+  transition: $property $duration $timing-function;
+}
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin gradient-bg($start-color, $end-color) {
+  background-image: linear-gradient(to right, $start-color, $end-color);
+}
+
+@mixin responsive-container {
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  height: 100vh;
+  font-family: $font-family;
+  background-size: cover;
+  color: $text-color;
+
+  @include responsive-container;
+}
+
+.navbar {
+  @include gradient-bg($secondary-color, $primary-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 1px solid #ccc;
+
+  &.notExpanded {
+    width: 60px;
+    font-size: 0;
+    @include transition(width, 0.3s);
+  }
+
+  .navButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .collapseButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: $text-color;
+    margin-bottom: 20px;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  .newProjectButton {
+    padding: 10px;
+    background-color: $primary-color;
+    border: none;
+    @include border-radius(5px);
+    color: #fff;
+    cursor: pointer;
+
+    &:hover {
+      background-color: lighten($primary-color, 5%);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.navbar a {
+  text-decoration: none;
+  color: $text-color;
+  padding: 10px 15px;
+  border-bottom: 0.5px solid black;
+  @include border-radius(5px);
+  @include transition(background-color, 0.3s);
+
+  &:hover {
+    background-color: $primary-color;
+    color: #fff;
+  }
+}
+
+main {
+  padding: 20px;
+  background-color: $background-color;
+}
+
+.coreContent {
+  background-color: #fff;
+  @include border-radius(10px);
+  padding: 20px;
+  @include box-shadow($box-shadow);
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 24px;
+    color: $text-color;
+    border-bottom: 2px solid $primary-color;
+    padding-bottom: 10px;
+  }
+
+  .headingRightPart {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+
+    input,
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid $primary-color;
+      @include border-radius(20%);
+    }
+    
+    input:focus {
+      outline: none;
+    }
+
+    .logoutButton {
+      padding: 10px 20px;
+      background-color: $primary-color;
+      border: none;
+      @include border-radius(5px);
+      color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($primary-color, 5%);
+      }
+    }
+  }
+}
+
+.outlet {
+  margin: 2rem;
+}
+
+.settingIcon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  @include transition(transform, 0.2s);
+
+  &:hover {
+    transform: rotate(20deg);
+  }
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 9rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  @include box-shadow($box-shadow);
+  @include border-radius(5px);
+  z-index: 1;
+
+  a {
+    text-decoration: none;
+    color: $text-color;
+    padding: 10px 15px;
+    @include border-radius(5px);
+    @include transition(background-color, 0.3s);
+
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+    }
+  }
+}
