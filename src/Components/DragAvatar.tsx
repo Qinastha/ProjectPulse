@@ -1,27 +1,42 @@
-// src/components/DragAndDropInput.tsx
 import { useCallback, useState, useEffect } from "react";
 import { setAvatar, getAvatar } from "../store/userSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 
-export const DragAvatar: React.FC = () => {
+interface DragAvatarProps {
+  open?: boolean;
+  handleAddLogo?: (e: string) => void;
+}
+
+export const DragAvatar: React.FC<DragAvatarProps> = ({
+  handleAddLogo,
+  open,
+}) => {
   const dispatch = useAppDispatch();
   const avatar = useAppSelector(getAvatar);
 
   const [preview, setPreview] = useState<string | null>(null);
+  const [projectLogo, setProjectLogo] = useState<string | null>(null);
 
   useEffect(() => {
-    if (avatar) {
+    if (avatar && !open) {
       setPreview(avatar);
+    } else if (projectLogo && open) {
+      setPreview(projectLogo);
     }
-  }, [avatar]);
+  }, [avatar, projectLogo, open]);
 
   const handleFileRead = (file: File) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       if (reader.result) {
         console.log("FileReader result:", reader.result);
-        setPreview(reader.result as string);
-        dispatch(setAvatar(reader.result as string));
+        if (!open) {
+          dispatch(setAvatar(reader.result as string));
+          setPreview(reader.result as string);
+        } else {
+          handleAddLogo?.(reader.result as string);
+          setProjectLogo(reader.result as string);
+        }
       }
     };
     reader.readAsDataURL(file);
@@ -30,25 +45,25 @@ export const DragAvatar: React.FC = () => {
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
-      e.stopPropagation();
       const file = e.dataTransfer.files[0];
       console.log("Dropped file:", file);
       if (file) {
         handleFileRead(file);
       }
     },
-    [dispatch],
+    [handleFileRead],
   );
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
       const file = e.target.files?.[0];
       console.log("Selected file:", file);
       if (file) {
         handleFileRead(file);
       }
     },
-    [dispatch],
+    [handleFileRead],
   );
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -66,9 +81,16 @@ export const DragAvatar: React.FC = () => {
       onDragOver={handleDragOver}
       onClick={handleClick}>
       {preview ? (
-        <img src={preview} alt="Avatar Preview" />
+        <img
+          src={open ? projectLogo ?? undefined : preview ?? undefined}
+          alt={open ? "Project Logo Preview" : "Avatar Preview"}
+        />
       ) : (
-        <p>Drag and drop an avatar here, or click to select one</p>
+        <p>
+          {open
+            ? "Drag and drop a project logo here, or click to select one"
+            : "Drag and drop an avatar here, or click to select one"}
+        </p>
       )}
       <input id="fileInput" type="file" onChange={handleChange} />
     </div>

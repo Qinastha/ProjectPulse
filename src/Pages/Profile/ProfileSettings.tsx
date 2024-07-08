@@ -136,8 +136,8 @@ export const ProfileSettings: React.FC = () => {
   };
 
   const handleSubmit = async (formData: any) => {
-    if(!validateFormData) {
-      return
+    if (!validateFormData()) {
+      return;
     }
     try {
       const response = await axios.put(

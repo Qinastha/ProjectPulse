@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {getProfile, updateProfile} from "../../store/userSlice";
-import {useAppDispatch, useAppSelector} from "../../hooks";
+import { getProfile, updateProfile } from "../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import "./Profile.scss";
 import {
   fetchCountries,
@@ -12,21 +12,21 @@ import {
   getLanguage,
   getTimezone,
 } from "../../store/dataSlice";
-import {DragAvatar} from "../../Components/DragAvatar";
-import {FormData} from "../../core/interfaces/formData";
+import { DragAvatar } from "../../Components/DragAvatar";
+import { FormData } from "../../core/interfaces/formData";
 
-export const ProfileCreate: React.FC=() => {
-  const navigate=useNavigate();
-  const dispatch=useAppDispatch();
-  const countries=useAppSelector(getCountry);
-  const languages=useAppSelector(getLanguage);
-  const timezones=useAppSelector(getTimezone);
-  const profile=useAppSelector(getProfile);
-  const token=localStorage.getItem("token");
-  const [errors, setErrors]=useState<any>({});
+export const ProfileCreate: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const countries = useAppSelector(getCountry);
+  const languages = useAppSelector(getLanguage);
+  const timezones = useAppSelector(getTimezone);
+  const profile = useAppSelector(getProfile);
+  const token = localStorage.getItem("token");
+  const [errors, setErrors] = useState<any>({});
 
-  const [formData, setFormData]=useState<FormData>({
-    avatar: profile?.avatar??"",
+  const [formData, setFormData] = useState<FormData>({
+    avatar: profile?.avatar ?? "",
     phoneNumber: "",
     gender: "",
     address: {
@@ -41,7 +41,7 @@ export const ProfileCreate: React.FC=() => {
   });
 
   useEffect(() => {
-    if(!token) {
+    if (!token) {
       navigate("/login");
     } else {
       dispatch(fetchCountries());
@@ -50,56 +50,56 @@ export const ProfileCreate: React.FC=() => {
     }
   }, [dispatch, token]);
 
-  const validateFormData=() => {
-    let formIsValid=true;
-    const newErrors: any={};
+  const validateFormData = () => {
+    let formIsValid = true;
+    const newErrors: any = {};
 
-    const phoneNumberRegex=/^\+?[1-9]\d{1,14}$/;
-    const addressRegex=/^[^\W_](.*[^\W_])?$/;
-    const zipCodeRegex=/^\d{1,10}$/;
+    const phoneNumberRegex = /^\+?[1-9]\d{1,14}$/;
+    const addressRegex = /^[^\W_](.*[^\W_])?$/;
+    const zipCodeRegex = /^\d{1,10}$/;
 
-    if(!phoneNumberRegex.test(formData.phoneNumber)) {
-      newErrors.phoneNumber="Invalid phone number format.";
-      formIsValid=false;
+    if (!phoneNumberRegex.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Invalid phone number format.";
+      formIsValid = false;
     }
 
-    if(
-      !addressRegex.test(formData.address.street)||
-      formData.address.street.length===0
+    if (
+      !addressRegex.test(formData.address.street) ||
+      formData.address.street.length === 0
     ) {
-      newErrors.street=
+      newErrors.street =
         "Street address cannot start with symbols or be empty.";
-      formIsValid=false;
+      formIsValid = false;
     }
 
-    if(!addressRegex.test(formData.address.street2)) {
-      newErrors.street2="Street2 address cannot start with symbols.";
-      formIsValid=false;
+    if (!addressRegex.test(formData.address.street2)) {
+      newErrors.street2 = "Street2 address cannot start with symbols.";
+      formIsValid = false;
     }
 
-    if(
-      !addressRegex.test(formData.address.city)||
-      formData.address.city.length===0
+    if (
+      !addressRegex.test(formData.address.city) ||
+      formData.address.city.length === 0
     ) {
-      newErrors.city="City cannot start with symbols or be empty.";
-      formIsValid=false;
+      newErrors.city = "City cannot start with symbols or be empty.";
+      formIsValid = false;
     }
 
-    if(!zipCodeRegex.test(formData.address.zipCode)) {
-      newErrors.zipCode=
+    if (!zipCodeRegex.test(formData.address.zipCode)) {
+      newErrors.zipCode =
         "Zip code must be numeric and no more than 10 digits.";
-      formIsValid=false;
+      formIsValid = false;
     }
 
     setErrors(newErrors);
     return formIsValid;
   };
 
-  const updateFormData=(
-    e: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>,
+  const updateFormData = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const {name, value}=e.target;
-    const isAddress=[
+    const { name, value } = e.target;
+    const isAddress = [
       "street",
       "street2",
       "city",
@@ -109,17 +109,17 @@ export const ProfileCreate: React.FC=() => {
 
     setFormData(prevData => ({
       ...prevData,
-      [isAddress? "address":name]: isAddress
-        ? {...prevData.address, [name]: value}
-        :value,
+      [isAddress ? "address" : name]: isAddress
+        ? { ...prevData.address, [name]: value }
+        : value,
     }));
   };
 
-  const handleSubmit=async (e: React.FormEvent, formData: any) => {
+  const handleSubmit = async (e: React.FormEvent, formData: any) => {
     e.preventDefault();
-    if(!validateFormData()) return;
+    if (!validateFormData()) return;
     try {
-      const response=await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/api/profile/new",
         {
           avatar: profile?.avatar,
@@ -142,12 +142,12 @@ export const ProfileCreate: React.FC=() => {
           },
         },
       );
-      if(response.data?.value) {
+      if (response.data?.value) {
         dispatch(updateProfile(response.data.value));
         console.log(response.data.value);
         navigate("/");
       }
-    } catch(error) {
+    } catch (error) {
       console.error("Error during updating profile:", error);
       alert("An error occurred. Please try again.");
     }
@@ -166,15 +166,13 @@ export const ProfileCreate: React.FC=() => {
           <input
             type="tel"
             name="phoneNumber"
-            className={errors.phoneNumber? "errorInput":""}
+            className={errors.phoneNumber ? "errorInput" : ""}
             value={formData.phoneNumber}
             onChange={e => updateFormData(e)}
             required
           />
-          {errors.phoneNumber&&(
-            <span className="errorText">
-              {errors.phoneNumber}
-            </span>
+          {errors.phoneNumber && (
+            <span className="errorText">{errors.phoneNumber}</span>
           )}
         </div>
 
@@ -195,31 +193,25 @@ export const ProfileCreate: React.FC=() => {
           <input
             type="text"
             name="street"
-            className={errors.street? "errorInput":""}
+            className={errors.street ? "errorInput" : ""}
             value={formData.address.street}
             onChange={updateFormData}
             required
           />
-          {errors.street&&(
-            <span className="errorText">
-              {errors.street}
-            </span>
-          )}
+          {errors.street && <span className="errorText">{errors.street}</span>}
         </div>
         <div>
           <label>Street2</label>
           <input
             type="text"
             name="street2"
-            className={errors.street2? "errorInput":""}
+            className={errors.street2 ? "errorInput" : ""}
             value={formData.address.street2}
             onChange={e => updateFormData(e)}
             required
           />
-          {errors.street2&&(
-            <span className="errorText">
-              {errors.street2}
-            </span>
+          {errors.street2 && (
+            <span className="errorText">{errors.street2}</span>
           )}
         </div>
         <div>
@@ -227,16 +219,12 @@ export const ProfileCreate: React.FC=() => {
           <input
             type="text"
             name="city"
-            className={errors.city? "errorInput":""}
+            className={errors.city ? "errorInput" : ""}
             value={formData.address.city}
             onChange={e => updateFormData(e)}
             required
           />
-          {errors.city&&(
-            <span className="errorText">
-              {errors.city}
-            </span>
-          )}
+          {errors.city && <span className="errorText">{errors.city}</span>}
         </div>
         <div>
           <label>Country</label>
@@ -259,15 +247,13 @@ export const ProfileCreate: React.FC=() => {
           <input
             type="text"
             name="zipCode"
-            className={errors.zipCode? "errorInput":""}
+            className={errors.zipCode ? "errorInput" : ""}
             value={formData.address.zipCode}
             onChange={e => updateFormData(e)}
             required
           />
-          {errors.zipCode&&(
-            <span className="errorText">
-              {errors.zipCode}
-            </span>
+          {errors.zipCode && (
+            <span className="errorText">{errors.zipCode}</span>
           )}
         </div>
         <div>

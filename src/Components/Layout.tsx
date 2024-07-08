@@ -25,7 +25,6 @@ export const Layout: React.FC = () => {
 
   const handleLogout = (): void => {
     localStorage.removeItem("token");
-    localStorage.removeItem("profile");
     navigate("/login");
   };
 
@@ -61,7 +60,10 @@ export const Layout: React.FC = () => {
           <button className="collapseButton" type="button" onClick={toggleNav}>
             &#8656;
           </button>
-          <button className="newProjectButton" type="button" onClick={handleClickOpen}>
+          <button
+            className="newProjectButton"
+            type="button"
+            onClick={handleClickOpen}>
             Create New Project
           </button>
         </div>

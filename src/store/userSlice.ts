@@ -43,7 +43,6 @@ const initialState: IUser = {
   isInitial: true,
 };
 
-
 export const reqUser = createAsyncThunk(
   "users/reqUser",
   async (_, thunkAPI) => {

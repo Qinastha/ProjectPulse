@@ -2,6 +2,7 @@ $primary-color: #ffb6c1;
 $secondary-color: #ffe4e1;
 $text-color: #333;
 $background-color: #fefefe;
+$sakura-border-color: #ffb6c1;
 $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 $font-family: "Noto Sans JP", sans-serif;
 $font-family-serif: "Noto Serif JP", serif;
@@ -102,7 +103,8 @@ $font-family-serif: "Noto Serif JP", serif;
   @include border-radius(5px);
   @include transition(background-color, 0.3s);
 
-  &:hover {
+  &:hover,
+  &.active {
     background-color: $primary-color;
     color: #fff;
   }
@@ -146,7 +148,7 @@ main {
       border: 1px solid $primary-color;
       @include border-radius(20%);
     }
-    
+
     input:focus {
       outline: none;
     }
