@@ -66,7 +66,7 @@ export const user = createSlice({
         return { ...state, ...action.payload };
       },
     ),
-    setIsInitial: create.reducer((state, action: PayloadAction<boolean>) => {
+    setUserInitial: create.reducer((state, action: PayloadAction<boolean>) => {
       return { ...state, isInitial: action.payload };
     }),
     setAvatar: create.reducer((state, action: PayloadAction<string>) => {
@@ -80,7 +80,7 @@ export const user = createSlice({
   selectors: {
     getUser: state => state,
     getProfile: state => state.profile,
-    getIsInitial: state => state.isInitial,
+    getUserInitial: state => state.isInitial,
     getAvatar: state => state.profile?.avatar,
   },
   extraReducers: builder => {
@@ -99,8 +99,8 @@ export const user = createSlice({
   },
 });
 
-export const { getUser, getProfile, getIsInitial, getAvatar } = user.selectors;
+export const { getUser, getProfile, getUserInitial, getAvatar } = user.selectors;
 
-export const { updateProfile, setIsInitial, setAvatar } = user.actions;
+export const { updateProfile, setUserInitial, setAvatar } = user.actions;
 
 export default user.reducer;

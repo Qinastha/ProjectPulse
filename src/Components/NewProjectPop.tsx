@@ -9,6 +9,7 @@ interface NewProjectPopProps {
   handleClose: () => void;
   open: boolean;
 }
+
 type Members=Partial<IUser>&{
   firstName: string;
   lastName: string;
