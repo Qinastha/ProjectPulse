@@ -5,6 +5,10 @@ $background-color: #fefefe;
 $font-family: "Noto Sans JP", sans-serif;
 $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
 .fallback-loader {
   display: flex;
   justify-content: center;

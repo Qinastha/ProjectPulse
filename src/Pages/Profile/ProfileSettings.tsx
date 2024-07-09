@@ -43,7 +43,7 @@ export const ProfileSettings: React.FC = () => {
   const initializeFormData = () => {
     if (profile) {
       setFormData({
-        avatar: profile.avatar || "",
+        avatar: avatar || "",
         phoneNumber: profile.phoneNumber || "",
         gender: profile.gender || "",
         address: {

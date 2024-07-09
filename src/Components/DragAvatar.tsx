@@ -80,17 +80,18 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onClick={handleClick}>
-      {preview ? (
-        <img
-          src={open ? projectLogo ?? undefined : preview ?? undefined}
-          alt={open ? "Project Logo Preview" : "Avatar Preview"}
-        />
-      ) : (
+      {(!preview || (open && !projectLogo)) && (
         <p>
           {open
             ? "Drag and drop a project logo here, or click to select one"
             : "Drag and drop an avatar here, or click to select one"}
         </p>
+      )}
+      {(preview && (open ? projectLogo : preview)) && (
+        <img
+          src={open ? projectLogo ?? preview ?? undefined : preview ?? undefined}
+          alt={open ? "Project Logo Preview" : "Avatar Preview"}
+        />
       )}
       <input id="fileInput" type="file" onChange={handleChange} />
     </div>

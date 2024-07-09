@@ -1,32 +1,32 @@
-import { IProfile } from "../core/interfaces/IProfile";
+import {IProfile} from "../core/interfaces/IProfile";
 import {
   PayloadAction,
   ReducerCreators,
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
-import { UserRole } from "../core/types/userRole.type";
-import { UserPosition } from "../core/types/userPosition";
+import {UserRole} from "../core/types/userRole.type";
+import {UserPosition} from "../core/types/userPosition";
 import axios from "axios";
 
 export interface IUser {
   email: string;
   password: string;
-  role: UserRole | null;
+  role: UserRole|null;
   firstName: string;
   lastName: string;
   userName: string;
-  dateOfBirth: Date | string;
-  position: UserPosition | null;
-  profile: IProfile | null;
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  lastActiveAt: Date | null;
-  status: "idle" | "loading" | "resolved" | "rejected";
+  dateOfBirth: Date|string;
+  position: UserPosition|null;
+  profile: IProfile|null;
+  createdAt: Date|null;
+  updatedAt: Date|null;
+  lastActiveAt: Date|null;
+  status: "idle"|"loading"|"resolved"|"rejected";
   isInitial: boolean;
 }
 
-const initialState: IUser = {
+const initialState: IUser={
   email: "",
   password: "",
   role: null,
@@ -43,10 +43,10 @@ const initialState: IUser = {
   isInitial: true,
 };
 
-export const reqUser = createAsyncThunk(
+export const reqUser=createAsyncThunk(
   "users/reqUser",
   async (_, thunkAPI) => {
-    const response = await axios.get("http://localhost:4000/api/user/", {
+    const response=await axios.get("http://localhost:4000/api/user/", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -57,23 +57,23 @@ export const reqUser = createAsyncThunk(
   },
 );
 
-export const user = createSlice({
+export const user=createSlice({
   name: "user",
   initialState,
   reducers: (create: ReducerCreators<IUser>) => ({
     updateProfile: create.reducer(
       (state, action: PayloadAction<Partial<IProfile>>) => {
-        return { ...state, ...action.payload };
+        return {...state, ...action.payload};
       },
     ),
     setUserInitial: create.reducer((state, action: PayloadAction<boolean>) => {
-      return { ...state, isInitial: action.payload };
+      return {...state, isInitial: action.payload};
     }),
     setAvatar: create.reducer((state, action: PayloadAction<string>) => {
-      if (state.profile) {
-        state.profile.avatar = action.payload;
+      if(state.profile) {
+        state.profile.avatar=action.payload;
       } else {
-        state.profile = { avatar: action.payload } as IProfile;
+        state.profile={avatar: action.payload} as IProfile;
       }
     }),
   }),
@@ -85,22 +85,22 @@ export const user = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(reqUser.pending, state => {
-      state.status = "loading";
+      state.status="loading";
     });
     builder.addCase(
       reqUser.fulfilled,
       (state, action: PayloadAction<IUser>) => {
-        return { ...state, ...action.payload, status: "resolved" };
+        return {...state, ...action.payload, status: "resolved"};
       },
     );
     builder.addCase(reqUser.rejected, state => {
-      state.status = "rejected";
+      state.status="rejected";
     });
   },
 });
 
-export const { getUser, getProfile, getUserInitial, getAvatar } = user.selectors;
+export const {getUser, getProfile, getUserInitial, getAvatar}=user.selectors;
 
-export const { updateProfile, setUserInitial, setAvatar } = user.actions;
+export const {updateProfile, setUserInitial, setAvatar}=user.actions;
 
 export default user.reducer;
