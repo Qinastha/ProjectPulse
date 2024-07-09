@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import {useState, useEffect, useRef} from "react";
 import "./NewProjectPop.scss";
-import { IUser } from "../store/userSlice";
-import { DragAvatar } from "./DragAvatar";
+import {IUser} from "../store/userSlice";
+import {DragAvatar} from "./DragAvatar";
+import {useDebounce} from "../hooks";
 
 interface NewProjectPopProps {
   handleClose: () => void;
   open: boolean;
 }
-type Members = Partial<IUser> & {
+type Members=Partial<IUser>&{
   firstName: string;
   lastName: string;
   userName: string;
@@ -17,7 +18,7 @@ type Members = Partial<IUser> & {
   avatar?: string;
 };
 
-const memberFilterCheck = [
+const memberFilterCheck=[
   {
     firstName: "John",
     lastName: "Doe",
@@ -32,20 +33,35 @@ const memberFilterCheck = [
   },
 ];
 
-const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
-  const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectLogo, setProjectLogo] = useState("");
-  const [memberSearch, setMemberSearch] = useState("");
-  const token = localStorage.getItem("token");
-  const [members, setMembers] = useState<Members[]>(memberFilterCheck);
-  const [filteredMembers, setFilteredMembers] = useState<Members[]>([]);
-  const [selectedMembers, setSelectedMembers] = useState<Members[]>([]);
+
+const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
+  const [projectName, setProjectName]=useState("");
+  const [projectDescription, setProjectDescription]=useState("");
+  const [projectLogo, setProjectLogo]=useState("");
+  const [memberSearch, setMemberSearch]=useState("");
+  const debouncedMembers = useDebounce(memberSearch, 1000)
+  const token=localStorage.getItem("token");
+  const [members, setMembers]=useState<Members[]>(memberFilterCheck);
+  const [filteredMembers, setFilteredMembers]=useState<Members[]>([]);
+  const [selectedMembers, setSelectedMembers]=useState<Members[]>([]);
+  const popupRef=useRef<HTMLFormElement>(null);
+
+  const handleClickOutside=(event: MouseEvent) => {
+    if(popupRef.current&&!popupRef.current.contains(event.target as Node)) {
+      handleClose();
+    }
+  };
+
+  if(open) {
+    document.addEventListener('mousedown', handleClickOutside);
+  } else {
+    document.removeEventListener('mousedown', handleClickOutside);
+  }
 
   useEffect(() => {
-    const fetchAllUsers = async () => {
+    const fetchAllUsers=async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/user/all", {
+        const response=await axios.get("http://localhost:4000/api/user/all", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -53,49 +69,50 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
         });
         console.log(response);
         setMembers(response.data.value);
-      } catch (error) {
+      } catch(error) {
         console.error("Error fetching users:", error);
       }
     };
     fetchAllUsers();
   }, []);
 
+
   useEffect(() => {
-    if (memberSearch.trim() !== "") {
-      const filter = members.filter(
+    if(debouncedMembers.trim()!=="") {
+      const filter=members.filter(
         (member: Members) =>
-          member.firstName.toLowerCase().includes(memberSearch.toLowerCase()) ||
-          member.lastName.toLowerCase().includes(memberSearch.toLowerCase()) ||
-          member.userName.toLowerCase().includes(memberSearch.toLowerCase()) ||
+          member.firstName.toLowerCase().includes(memberSearch.toLowerCase())||
+          member.lastName.toLowerCase().includes(memberSearch.toLowerCase())||
+          member.userName.toLowerCase().includes(memberSearch.toLowerCase())||
           member.email.toLowerCase().includes(memberSearch.toLowerCase()),
       );
       setFilteredMembers(filter);
     } else {
       setFilteredMembers([]);
     }
-  }, [memberSearch, members]);
+  }, [debouncedMembers, members]);
 
-  const handleAddMember = (member: Members) => {
+  const handleAddMember=(member: Members) => {
     setSelectedMembers([...selectedMembers, member]);
     setFilteredMembers([]);
     setMemberSearch("");
   };
 
-  const handleRemoveMember = (userName: string) => {
+  const handleRemoveMember=(userName: string) => {
     setSelectedMembers(
-      selectedMembers.filter(member => member.userName !== userName),
+      selectedMembers.filter(member => member.userName!==userName),
     );
   };
 
-  const handleAddLogo = (e: string) => {
+  const handleAddLogo=(e: string) => {
     setProjectLogo(e);
     console.log(projectLogo);
   };
 
-  const handleAddProject = async (e: React.FormEvent) => {
+  const handleAddProject=async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      const response=await axios.post(
         "http://localhost:4000/api/project/new",
         {
           projectName,
@@ -110,20 +127,21 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
           },
         },
       );
-      if (response.data?.value) {
+      if(response.data?.value) {
         console.log(response.data.value);
         alert("Project added");
         handleClose();
       }
-    } catch (error) {
+    } catch(error) {
       console.error("Error during posting new project:", error);
       alert("An error occurred. Please try again.");
     }
   };
 
   return (
-    <div className={`new-project-pop ${open ? "new-project-pop--open" : ""}`}>
-      <form className="new-project-pop__form" onSubmit={handleAddProject}>
+    <div className={`new-project-pop ${open? "new-project-pop--open":""}`}>
+      <form className="new-project-pop__form" onSubmit={handleAddProject}
+        ref={popupRef}>
         <div className="new-project-pop__title">New Project</div>
         <div className="new-project-pop__content">
           <div className="new-project-pop__text">
@@ -160,7 +178,7 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
               value={memberSearch}
               onChange={e => setMemberSearch(e.target.value)}
             />
-            {filteredMembers.length > 0 && (
+            {filteredMembers.length>0&&(
               <div className="new-project-pop__user-list">
                 {filteredMembers.map((member: Members) => (
                   <div
@@ -170,7 +188,7 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
                       type="checkbox"
                       checked={selectedMembers.some(
                         (selectedMember: Members) =>
-                          selectedMember.userName === member.userName,
+                          selectedMember.userName===member.userName,
                       )}
                       onChange={() => handleAddMember(member)}
                     />
@@ -184,7 +202,7 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
           </div>
           <div className="new-project-pop__selected-members">
             <div className="new-project-pop__text">Selected Members:</div>
-            {selectedMembers.length > 0 && (
+            {selectedMembers.length>0&&(
               <div className="new-project-pop__selected-list">
                 {selectedMembers.map((member: Members) => (
                   <div
@@ -223,4 +241,4 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({ handleClose, open }) => {
   );
 };
 
-export { NewProjectPop };
+export {NewProjectPop};
