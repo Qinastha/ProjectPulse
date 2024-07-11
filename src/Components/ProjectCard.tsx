@@ -1,10 +1,11 @@
-import { IProject, IMember } from "../core/interfaces/IProject";
+import {IProject, IMember} from "../core/interfaces/IProject";
 
 interface ProjectCardProps {
   project: IProject;
+  handleDelete: (_id: string) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete}) => {
   return (
     <div key={project.projectName} className="projects-container__card">
       <img
@@ -36,14 +37,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {new Date(project.completedAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-status">
-          Status: {project.isCompleted ? "Completed" : "In Progress"}
+          Status: {project.isCompleted? "Completed":"In Progress"}
         </p>
         <p className="projects-container__card-creator">
-          Creator: {project.creator}
+          Creator: {project.creator.firstName}
         </p>
         <p className="projects-container__card-members-title">Members:</p>
         <ul className="projects-container__card-members-list">
-          {project.members && project.members.length > 0 ? (
+          {project.members&&project.members.length>0? (
             project.members.map((member: IMember) => (
               <li
                 key={member.userName}
@@ -52,15 +53,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 {member.firstName} {member.lastName}
               </li>
             ))
-          ) : (
+          ):(
             <li className="projects-container__card-members-item">
               No members
             </li>
           )}
         </ul>
       </div>
+      <div className="projects-container__card-buttons">
+        <button className="projects-container__card-button">Edit</button>
+        <button className="projects-container__card-button"
+          onClick={() => handleDelete(project._id)}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
 
-export default ProjectCard
+export default ProjectCard;

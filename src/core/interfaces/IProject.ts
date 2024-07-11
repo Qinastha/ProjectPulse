@@ -5,10 +5,11 @@ export interface IMember {
 }
 
 export interface IProject {
+  _id: string;
   projectName: string;
   projectDescription: string;
   projectAvatar: string;
-  creator: null;
+  creator: IMember;
   members: IMember[];
   tasks: null[];
   createdAt: Date;

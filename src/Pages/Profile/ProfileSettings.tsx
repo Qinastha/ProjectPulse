@@ -25,8 +25,7 @@ export const ProfileSettings: React.FC = () => {
   const timezones = useAppSelector(getTimezone);
   const [errors, setErrors] = useState<any>({});
 
-  const [formData, setFormData] = useState<FormData>({
-    avatar: profile?.avatar || "",
+  const [formData, setFormData] = useState <Omit<FormData, "avatar">>({
     phoneNumber: "",
     gender: "",
     address: {
@@ -43,7 +42,6 @@ export const ProfileSettings: React.FC = () => {
   const initializeFormData = () => {
     if (profile) {
       setFormData({
-        avatar: avatar || "",
         phoneNumber: profile.phoneNumber || "",
         gender: profile.gender || "",
         address: {
@@ -68,7 +66,7 @@ export const ProfileSettings: React.FC = () => {
       dispatch(fetchLanguages());
       dispatch(fetchTimezones());
     }
-  }, [navigate, profile]);
+  }, [navigate, dispatch, profile, avatar]);
 
   const validateFormData = () => {
     let formIsValid = true;
@@ -135,7 +133,7 @@ export const ProfileSettings: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (formData: any) => {
+  const handleSubmit = async () => {
     if (!validateFormData()) {
       return;
     }
@@ -143,7 +141,7 @@ export const ProfileSettings: React.FC = () => {
       const response = await axios.put(
         "http://localhost:4000/api/profile/update",
         {
-          avatar: formData.avatar,
+          avatar,
           phoneNumber: formData.phoneNumber,
           gender: formData.gender,
           address: {
@@ -203,7 +201,7 @@ export const ProfileSettings: React.FC = () => {
   return (
     <div className="profileContainer">
       <h2> Please provide an information about yourself</h2>
-      <form className="profileForm">
+      <form className="profileForm" >
         <div>
           <label>Avatar</label>
           <DragAvatar />
@@ -330,7 +328,7 @@ export const ProfileSettings: React.FC = () => {
         </div>
         <button
           type="button"
-          onClick={() => handleSubmit(formData)}
+          onClick={() => handleSubmit()}
           className="submitButton">
           {" "}
           Save Changes{" "}

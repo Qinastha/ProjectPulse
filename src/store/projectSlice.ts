@@ -26,10 +26,28 @@ export const fetchAllProjects=createAsyncThunk(
             });
             if(response.data) {
                 console.log(response.data);
-                return response.data as IProject[];
+                return response.data.value as IProject[];
             }
         } catch(error) {
             console.error('Error fetching projects:', error);
+            throw error;
+        }
+    },
+);
+
+export const projectDelete=createAsyncThunk(
+    'project/deleteProject',
+    async (_id: string, thunkAPI) => {
+        try {
+            const response=await axios.delete(`http://localhost:4000/api/project/delete/${_id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+                return _id;
+        } catch(error) {
+            console.error('Error deleting project:', error);
             throw error;
         }
     },
@@ -55,8 +73,7 @@ export const project=createSlice({
         });
         builder.addCase(fetchAllProjects.fulfilled, (state, action: PayloadAction<IProject[]|undefined>) => {
             if(action.payload) {
-                state.projects=action.payload;
-                state.status='resolved';
+                return {...state, projects: action.payload, status: "resolved"};
             } else {
                 state.status='rejected';
             }
@@ -64,7 +81,10 @@ export const project=createSlice({
         builder.addCase(fetchAllProjects.rejected, (state) => {
             state.status='rejected';
         });
-    }
+        builder.addCase(projectDelete.fulfilled, (state, action: PayloadAction<string>) => {
+            state.projects = state.projects.filter((project) => project._id !== action.payload);
+          });
+      },
 });
 
 export const {setProjectInitial}=project.actions;

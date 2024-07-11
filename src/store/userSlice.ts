@@ -64,8 +64,7 @@ export const user=createSlice({
     updateProfile: create.reducer(
       (state, action: PayloadAction<Partial<IProfile>>) => {
         return {...state, ...action.payload};
-      },
-    ),
+      }),
     setUserInitial: create.reducer((state, action: PayloadAction<boolean>) => {
       return {...state, isInitial: action.payload};
     }),

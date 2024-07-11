@@ -1,6 +1,5 @@
 import {reqUser, getUser, getUserInitial, setUserInitial} from "./store/userSlice";
 import store from "./store";
-import {fetchAllProjects, getProjects, getProjectInitial, setProjectInitial} from "./store/projectSlice";
 
 const {dispatch, getState}=store;
 
@@ -16,16 +15,4 @@ export const userLoader=async () => {
 
   console.log(getUser(state));
   return user;
-};
-
-export const projectLoader=async () => {
-  const state=getState();
-  const projects=getProjects(state);
-  const isInitial=getProjectInitial(state);
-  if(isInitial==true) {
-    await dispatch(fetchAllProjects());
-    dispatch(setProjectInitial(false));
-  }
-  console.log(getProjects(state));
-  return projects;
 };

@@ -3,7 +3,8 @@ import {useState, useEffect, useRef} from "react";
 import "./NewProjectPop.scss";
 import {IUser} from "../store/userSlice";
 import {DragAvatar} from "./DragAvatar";
-import {useDebounce} from "../hooks";
+import {useAppDispatch, useDebounce} from "../hooks";
+import {fetchAllProjects} from "../store/projectSlice";
 
 interface NewProjectPopProps {
   handleClose: () => void;
@@ -19,33 +20,18 @@ type Members=Partial<IUser>&{
   avatar?: string;
 };
 
-const memberFilterCheck=[
-  {
-    firstName: "John",
-    lastName: "Doe",
-    userName: "john_doe",
-    email: "john.doe@example.com",
-  },
-  {
-    firstName: "Jane",
-    lastName: "Smith",
-    userName: "jane_smith",
-    email: "jane.smith@example.com",
-  },
-];
-
-
 const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
   const [projectName, setProjectName]=useState("");
   const [projectDescription, setProjectDescription]=useState("");
-  const [projectLogo, setProjectLogo]=useState("");
+  const [projectAvatar, setProjectAvatar]=useState("");
   const [memberSearch, setMemberSearch]=useState("");
   const debouncedMembers = useDebounce(memberSearch, 1000)
   const token=localStorage.getItem("token");
-  const [members, setMembers]=useState<Members[]>(memberFilterCheck);
+  const [members, setMembers]=useState<Members[]>([]);
   const [filteredMembers, setFilteredMembers]=useState<Members[]>([]);
   const [selectedMembers, setSelectedMembers]=useState<Members[]>([]);
   const popupRef=useRef<HTMLFormElement>(null);
+  const dispatch = useAppDispatch()
 
   const handleClickOutside=(event: MouseEvent) => {
     if(popupRef.current&&!popupRef.current.contains(event.target as Node)) {
@@ -106,19 +92,17 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
   };
 
   const handleAddLogo=(e: string) => {
-    setProjectLogo(e);
-    console.log(projectLogo);
+    setProjectAvatar(e);
   };
 
-  const handleAddProject=async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAddProject=async () => {
     try {
       const response=await axios.post(
         "http://localhost:4000/api/project/new",
         {
           projectName,
           projectDescription,
-          projectLogo,
+          projectAvatar,
           members: selectedMembers,
         },
         {
@@ -132,6 +116,7 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
         console.log(response.data.value);
         alert("Project added");
         handleClose();
+        dispatch(fetchAllProjects());
       }
     } catch(error) {
       console.error("Error during posting new project:", error);
@@ -141,7 +126,7 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
 
   return (
     <div className={`new-project-pop ${open? "new-project-pop--open":""}`}>
-      <form className="new-project-pop__form" onSubmit={handleAddProject}
+      <form className="new-project-pop__form"
         ref={popupRef}>
         <div className="new-project-pop__title">New Project</div>
         <div className="new-project-pop__content">
@@ -232,7 +217,8 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
             Cancel
           </button>
           <button
-            type="submit"
+            type="button"
+            onClick={handleAddProject}
             className="new-project-pop__button new-project-pop__button--submit">
             Submit
           </button>

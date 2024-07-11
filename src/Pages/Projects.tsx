@@ -1,22 +1,33 @@
-import { lazy, Suspense } from "react";
-import {IProject, IMember} from "../core/interfaces/IProject";
-import {useAppSelector} from "../hooks";
-import {getProjects} from "../store/projectSlice";
+import {lazy, Suspense, useEffect, useState} from "react";
+import {IProject} from "../core/interfaces/IProject";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {getProjects, projectDelete, fetchAllProjects} from "../store/projectSlice";
 import "./Projects.scss";
 import {FallbackLoader} from "../Components/FallbackLoader";
 
-const ProjectCard = lazy(() => import('../Components/ProjectCard'));
+const ProjectCard=lazy(() => import('../Components/ProjectCard'));
 
 export const Projects: React.FC=() => {
-  const fetchedProjects = useAppSelector(getProjects);
+  const dispatch=useAppDispatch();
+  const initialProjects=useAppSelector(getProjects);
+
+  useEffect(() => {
+    dispatch(fetchAllProjects());
+  }, [dispatch]);
+
+  const handleDelete=(_id: string) => {
+    dispatch(projectDelete(_id));
+    console.log(_id)
+  };
 
   return (
     <Suspense fallback={<FallbackLoader />}>
-    <div className="projects-container">
-      {fetchedProjects.map((project: IProject) => (
-        <ProjectCard key={project.projectName} project={project} />
-      ))}
-    </div>
+      <div className="projects-container">
+        {initialProjects.map((project: IProject) => (
+          <ProjectCard key={project._id} project={project}
+            handleDelete={handleDelete} />
+        ))}
+      </div>
     </Suspense>
   );
 };

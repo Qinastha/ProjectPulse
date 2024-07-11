@@ -6,14 +6,16 @@ import { Google } from "@mui/icons-material";
 import { GitHub } from "@mui/icons-material";
 import { Apple } from "@mui/icons-material";
 import { useAppSelector } from "../../hooks";
+import {getProfile} from "../../store/userSlice";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const profile = useAppSelector(getProfile)
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") && profile) {
       navigate("/");
     }
   }, []);

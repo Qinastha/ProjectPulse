@@ -1,5 +1,5 @@
 export interface FormData {
-  avatar: File | string;
+  avatar?: File | string;
   phoneNumber: string;
   gender: string;
   address: {

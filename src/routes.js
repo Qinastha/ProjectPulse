@@ -18,7 +18,7 @@ import { PrivateRoute } from "./Components/PrivateRout";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { ProfileCreate } from "./Pages/Profile/ProfileCreate";
 import { ProfileSettings } from "./Pages/Profile/ProfileSettings";
-import { userLoader, projectLoader } from "./loaders";
+import { userLoader } from "./loaders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,10 +32,7 @@ const router = createBrowserRouter(
           </PrivateRoute>
         }>
         <Route index element={ <Dashboard /> } />
-        <Route 
-        path="projects" 
-        loader={ projectLoader } 
-        element={ <Projects /> } />
+        <Route path="projects" element={ <Projects /> } />
         <Route path="tasks" element={ <Tasks /> } />
         <Route path="logs" element={ <TimeLog /> } />
         <Route path="resources" element={ <ResourceMgnt /> } />

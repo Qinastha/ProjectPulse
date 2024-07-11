@@ -12,18 +12,15 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
   open,
 }) => {
   const dispatch = useAppDispatch();
-  const avatar = useAppSelector(getAvatar);
-
-  const [preview, setPreview] = useState<string | null>(null);
-  const [projectLogo, setProjectLogo] = useState<string | null>(null);
+  const profileAvatar = useAppSelector(getAvatar);
+  const [projectAvatar, setProjectAvatar] = useState<string | null>(null);
+  const [userAvatar, setUserAvatar] = useState<string | null>(null);
 
   useEffect(() => {
-    if (avatar && !open) {
-      setPreview(avatar);
-    } else if (projectLogo && open) {
-      setPreview(projectLogo);
+    if (profileAvatar && !open) {
+      setUserAvatar(profileAvatar);
     }
-  }, [avatar, projectLogo, open]);
+  }, [profileAvatar])
 
   const handleFileRead = (file: File) => {
     const reader = new FileReader();
@@ -32,10 +29,10 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
         console.log("FileReader result:", reader.result);
         if (!open) {
           dispatch(setAvatar(reader.result as string));
-          setPreview(reader.result as string);
+          setUserAvatar(reader.result as string);
         } else {
           handleAddLogo?.(reader.result as string);
-          setProjectLogo(reader.result as string);
+          setProjectAvatar(reader.result as string);
         }
       }
     };
@@ -45,6 +42,7 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
+      e.stopPropagation();
       const file = e.dataTransfer.files[0];
       console.log("Dropped file:", file);
       if (file) {
@@ -57,6 +55,7 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
+      e.stopPropagation();
       const file = e.target.files?.[0];
       console.log("Selected file:", file);
       if (file) {
@@ -68,6 +67,7 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
   };
 
   const handleClick = () => {
@@ -80,16 +80,16 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onClick={handleClick}>
-      {(!preview || (open && !projectLogo)) && (
+      {(!userAvatar || (open && !projectAvatar)) && (
         <p>
           {open
             ? "Drag and drop a project logo here, or click to select one"
             : "Drag and drop an avatar here, or click to select one"}
         </p>
       )}
-      {(preview && (open ? projectLogo : preview)) && (
+      {(userAvatar && (open ? projectAvatar : userAvatar)) && (
         <img
-          src={open ? projectLogo ?? preview ?? undefined : preview ?? undefined}
+          src={open ? projectAvatar ?? undefined : userAvatar ?? undefined}
           alt={open ? "Project Logo Preview" : "Avatar Preview"}
         />
       )}
