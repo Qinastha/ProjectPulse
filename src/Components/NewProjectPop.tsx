@@ -1,73 +1,66 @@
 import axios from "axios";
 import {useState, useEffect, useRef} from "react";
 import "./NewProjectPop.scss";
-import {IUser} from "../store/userSlice";
 import {DragAvatar} from "./DragAvatar";
-import {useAppDispatch, useDebounce} from "../hooks";
-import {fetchAllProjects} from "../store/projectSlice";
+import {useAppDispatch, useAppSelector, useDebounce} from "../hooks";
+import {fetchAllMembers, fetchAllProjects, getAllMembers, getNewProjectOpen, getUpdateProjectOpen, setNewProjectOpen, setUpdateProjectOpen} from "../store/projectSlice";
+import {IMember} from "../core/interfaces/IProject";
 
-interface NewProjectPopProps {
-  handleClose: () => void;
-  open: boolean;
-}
+const NewProjectPop: React.FC=() => {
+  const token=localStorage.getItem("token");
+  const dispatch=useAppDispatch();
 
-type Members=Partial<IUser>&{
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  position?: string;
-  avatar?: string;
-};
-
-const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
   const [projectName, setProjectName]=useState("");
   const [projectDescription, setProjectDescription]=useState("");
   const [projectAvatar, setProjectAvatar]=useState("");
   const [memberSearch, setMemberSearch]=useState("");
-  const debouncedMembers = useDebounce(memberSearch, 1000)
-  const token=localStorage.getItem("token");
-  const [members, setMembers]=useState<Members[]>([]);
-  const [filteredMembers, setFilteredMembers]=useState<Members[]>([]);
-  const [selectedMembers, setSelectedMembers]=useState<Members[]>([]);
+
+  const allMembers=useAppSelector(getAllMembers);
+
+  const [members, setMembers]=useState<IMember[]>([]);
+  const debouncedMembers=useDebounce(memberSearch, 1000);
+  const [filteredMembers, setFilteredMembers]=useState<IMember[]>([]);
+  const [selectedMembers, setSelectedMembers]=useState<IMember[]>([]);
+
   const popupRef=useRef<HTMLFormElement>(null);
-  const dispatch = useAppDispatch()
+
+  const newProjectOpen=useAppSelector(getNewProjectOpen);
+  const updateProjectOpen=useAppSelector(getUpdateProjectOpen);
 
   const handleClickOutside=(event: MouseEvent) => {
     if(popupRef.current&&!popupRef.current.contains(event.target as Node)) {
-      handleClose();
+      dispatch(setNewProjectOpen(false));
+      dispatch(setUpdateProjectOpen(false));
     }
   };
 
-  if(open) {
-    document.addEventListener('mousedown', handleClickOutside);
-  } else {
-    document.removeEventListener('mousedown', handleClickOutside);
-  }
+  const formReset=() => {
+    setProjectName("");
+    setProjectDescription("");
+    setSelectedMembers([]);
+    setMemberSearch("");
+  };
 
   useEffect(() => {
-    const fetchAllUsers=async () => {
-      try {
-        const response=await axios.get("http://localhost:4000/api/user/all", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        console.log(response);
-        setMembers(response.data.value);
-      } catch(error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-    fetchAllUsers();
-  }, []);
+    if((newProjectOpen===true)||(updateProjectOpen===true)) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+      formReset();
+    }
+  }, [newProjectOpen, updateProjectOpen]);
 
+  useEffect(() => {
+    if(!allMembers) {
+      dispatch(fetchAllMembers());
+    } else
+      setMembers(allMembers);
+  }, [allMembers, dispatch]);
 
   useEffect(() => {
     if(debouncedMembers.trim()!=="") {
       const filter=members.filter(
-        (member: Members) =>
+        (member: IMember) =>
           member.firstName.toLowerCase().includes(memberSearch.toLowerCase())||
           member.lastName.toLowerCase().includes(memberSearch.toLowerCase())||
           member.userName.toLowerCase().includes(memberSearch.toLowerCase())||
@@ -79,7 +72,7 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
     }
   }, [debouncedMembers, members]);
 
-  const handleAddMember=(member: Members) => {
+  const handleAddMember=(member: IMember) => {
     setSelectedMembers([...selectedMembers, member]);
     setFilteredMembers([]);
     setMemberSearch("");
@@ -95,28 +88,59 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
     setProjectAvatar(e);
   };
 
-  const handleAddProject=async () => {
+  const handleClose=() => {
+    dispatch(setNewProjectOpen(false));
+    dispatch(setUpdateProjectOpen(false));
+  };
+
+  const handleProjectSubmit=async () => {
     try {
-      const response=await axios.post(
-        "http://localhost:4000/api/project/new",
-        {
-          projectName,
-          projectDescription,
-          projectAvatar,
-          members: selectedMembers,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+      if(newProjectOpen===true) {
+        const response=await axios.post(
+          "http://localhost:4000/api/project/new",
+          {
+            projectName,
+            projectDescription,
+            projectAvatar,
+            members: selectedMembers,
           },
-        },
-      );
-      if(response.data?.value) {
-        console.log(response.data.value);
-        alert("Project added");
-        handleClose();
-        dispatch(fetchAllProjects());
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        if(response.data?.value) {
+          console.log(response.data.value);
+          alert("Project added");
+          handleClose();
+          dispatch(fetchAllProjects());
+        }
+      } else if(updateProjectOpen) {
+        const response=await axios.put(
+          `http://localhost:4000/api/project/update/${_id}`,
+          {
+            projectName,
+            projectDescription,
+            projectAvatar,
+            members: selectedMembers,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        if(response.data?.value) {
+          console.log(response.data.value);
+          alert("Project updated");
+          handleClose();
+          dispatch(fetchAllProjects());
+        } else {
+          alert("Failed to update project");
+        }
       }
     } catch(error) {
       console.error("Error during posting new project:", error);
@@ -125,7 +149,7 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
   };
 
   return (
-    <div className={`new-project-pop ${open? "new-project-pop--open":""}`}>
+    <div className={`new-project-pop ${newProjectOpen||updateProjectOpen? "new-project-pop--open":""}`}>
       <form className="new-project-pop__form"
         ref={popupRef}>
         <div className="new-project-pop__title">New Project</div>
@@ -153,7 +177,7 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
             onChange={e => setProjectDescription(e.target.value)}
           />
           <div>
-            <DragAvatar open={open} handleAddLogo={handleAddLogo} />
+            <DragAvatar handleAddLogo={handleAddLogo} />
           </div>
           <div className="new-project-pop__user-add">
             <input
@@ -166,14 +190,14 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
             />
             {filteredMembers.length>0&&(
               <div className="new-project-pop__user-list">
-                {filteredMembers.map((member: Members) => (
+                {filteredMembers.map((member: IMember) => (
                   <div
                     key={member.userName}
                     className="new-project-pop__user-item">
                     <input
                       type="checkbox"
                       checked={selectedMembers.some(
-                        (selectedMember: Members) =>
+                        (selectedMember: IMember) =>
                           selectedMember.userName===member.userName,
                       )}
                       onChange={() => handleAddMember(member)}
@@ -190,7 +214,7 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
             <div className="new-project-pop__text">Selected Members:</div>
             {selectedMembers.length>0&&(
               <div className="new-project-pop__selected-list">
-                {selectedMembers.map((member: Members) => (
+                {selectedMembers.map((member: IMember) => (
                   <div
                     key={member.userName}
                     className="new-project-pop__selected-member ">
@@ -218,9 +242,9 @@ const NewProjectPop: React.FC<NewProjectPopProps>=({handleClose, open}) => {
           </button>
           <button
             type="button"
-            onClick={handleAddProject}
+            onClick={handleProjectSubmit}
             className="new-project-pop__button new-project-pop__button--submit">
-            Submit
+            {newProjectOpen? "Add Project":"Update Project"}
           </button>
         </div>
       </form>

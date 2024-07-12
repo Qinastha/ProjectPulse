@@ -2,6 +2,9 @@ export interface IMember {
   firstName: string;
   lastName: string;
   userName: string;
+  email: string;
+  positio?: string;
+  avatar?: string;
 }
 
 export interface IProject {

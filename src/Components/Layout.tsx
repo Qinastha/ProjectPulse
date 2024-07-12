@@ -1,35 +1,34 @@
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import "./Layout.scss";
-import { useState } from "react";
-import { NewProjectPop } from "./NewProjectPop";
+import {useState} from "react";
+import {NewProjectPop} from "./NewProjectPop";
 import pinkBlossom from "../assets/pinkBlossom.png";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {getNewProjectOpen, setNewProjectOpen} from "../store/projectSlice";
 
-export const Layout: React.FC = () => {
-  const { pathname } = useLocation();
-  const [isExpand, setIsExpand] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+export const Layout: React.FC=() => {
+  const {pathname}=useLocation();
+  const [isExpand, setIsExpand]=useState(true);
+  const [isOpen, setIsOpen]=useState(false);
+  const navigate=useNavigate();
+  const dispatch=useAppDispatch();
+  const open=useAppSelector(getNewProjectOpen);
 
-  const toggleNav = (): void => {
+  const toggleNav=(): void => {
     setIsExpand(!isExpand);
   };
 
-  const handleClickOpen = (): void => {
-    setOpen(true);
+  const handleOpen=(): void => {
+    dispatch(setNewProjectOpen(true));
   };
 
-  const handleClose = (): void => {
-    setOpen(false);
-  };
-
-  const handleLogout = (): void => {
+  const handleLogout=(): void => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
-  const getPageTitle = (pathname: string): string => {
-    switch (pathname) {
+  const getPageTitle=(pathname: string): string => {
+    switch(pathname) {
       case "/":
         return "Dashboard";
       case "/projects":
@@ -55,7 +54,7 @@ export const Layout: React.FC = () => {
 
   return (
     <div className="container">
-      <header className={`navbar ${isExpand ? "" : "notExpanded"}`}>
+      <header className={`navbar ${isExpand? "":"notExpanded"}`}>
         <div className="navButtons">
           <button className="collapseButton" type="button" onClick={toggleNav}>
             &#8656;
@@ -63,13 +62,13 @@ export const Layout: React.FC = () => {
           <button
             className="newProjectButton"
             type="button"
-            onClick={handleClickOpen}>
+            onClick={handleOpen}>
             Create New Project
           </button>
         </div>
 
         <div>
-          <NewProjectPop handleClose={handleClose} open={open} />
+          <NewProjectPop />
         </div>
 
         <NavLink to="/"> Dashboard </NavLink>
@@ -94,7 +93,7 @@ export const Layout: React.FC = () => {
                   alt="Settings"
                   onClick={(): void => setIsOpen(!isOpen)}
                 />
-                {isOpen && (
+                {isOpen&&(
                   <div className="dropdown-menu">
                     <NavLink to="/settings/app"> Global Settings</NavLink>
                     <NavLink to="/settings/profile"> Profile Settings</NavLink>

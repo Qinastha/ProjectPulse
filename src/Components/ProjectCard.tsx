@@ -1,11 +1,13 @@
 import {IProject, IMember} from "../core/interfaces/IProject";
+import {NewProjectPop} from "./NewProjectPop";
 
 interface ProjectCardProps {
   project: IProject;
   handleDelete: (_id: string) => void;
+  handleUpdateProjectOpen: (_id: string) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete}) => {
+const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpdateProjectOpen}) => {
   return (
     <div key={project.projectName} className="projects-container__card">
       <img
@@ -61,12 +63,15 @@ const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete}) => {
         </ul>
       </div>
       <div className="projects-container__card-buttons">
-        <button className="projects-container__card-button">Edit</button>
-        <button className="projects-container__card-button"
+        <button className="projects-container__edit-button"
+          onClick={() => handleUpdateProjectOpen(project._id)}
+        >Edit</button>
+        <button className="projects-container__delete-button"
           onClick={() => handleDelete(project._id)}>
           Delete
         </button>
       </div>
+      <NewProjectPop/>
     </div>
   );
 };

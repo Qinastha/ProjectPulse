@@ -1,33 +1,36 @@
-import { useCallback, useState, useEffect } from "react";
-import { setAvatar, getAvatar } from "../store/userSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import {useCallback, useState, useEffect} from "react";
+import {setAvatar, getAvatar} from "../store/userSlice";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {getNewProjectOpen} from "../store/projectSlice";
 
 interface DragAvatarProps {
-  open?: boolean;
   handleAddLogo?: (e: string) => void;
 }
 
-export const DragAvatar: React.FC<DragAvatarProps> = ({
+export const DragAvatar: React.FC<DragAvatarProps>=({
   handleAddLogo,
-  open,
 }) => {
-  const dispatch = useAppDispatch();
-  const profileAvatar = useAppSelector(getAvatar);
-  const [projectAvatar, setProjectAvatar] = useState<string | null>(null);
-  const [userAvatar, setUserAvatar] = useState<string | null>(null);
+  const dispatch=useAppDispatch();
+  const newProjectOpen=useAppSelector(getNewProjectOpen);
+  const profileAvatar=useAppSelector(getAvatar);
+  const [projectAvatar, setProjectAvatar]=useState<string|null>(null);
+  const [userAvatar, setUserAvatar]=useState<string|null>(null);
 
   useEffect(() => {
-    if (profileAvatar && !open) {
+    if(profileAvatar&&(newProjectOpen===false)) {
       setUserAvatar(profileAvatar);
     }
-  }, [profileAvatar])
+    if((newProjectOpen===false)&&projectAvatar) {
+      setProjectAvatar(null);
+    }
+  }, [profileAvatar, newProjectOpen, projectAvatar]);
 
-  const handleFileRead = (file: File) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      if (reader.result) {
+  const handleFileRead=(file: File) => {
+    const reader=new FileReader();
+    reader.onloadend=() => {
+      if(reader.result) {
         console.log("FileReader result:", reader.result);
-        if (!open) {
+        if(newProjectOpen==false) {
           dispatch(setAvatar(reader.result as string));
           setUserAvatar(reader.result as string);
         } else {
@@ -39,38 +42,38 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
     reader.readAsDataURL(file);
   };
 
-  const handleDrop = useCallback(
+  const handleDrop=useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      const file = e.dataTransfer.files[0];
+      const file=e.dataTransfer.files[0];
       console.log("Dropped file:", file);
-      if (file) {
+      if(file) {
         handleFileRead(file);
       }
     },
     [handleFileRead],
   );
 
-  const handleChange = useCallback(
+  const handleChange=useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       e.stopPropagation();
-      const file = e.target.files?.[0];
+      const file=e.target.files?.[0];
       console.log("Selected file:", file);
-      if (file) {
+      if(file) {
         handleFileRead(file);
       }
     },
     [handleFileRead],
   );
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver=(e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
-  const handleClick = () => {
+  const handleClick=() => {
     document.getElementById("fileInput")?.click();
   };
 
@@ -80,17 +83,17 @@ export const DragAvatar: React.FC<DragAvatarProps> = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onClick={handleClick}>
-      {(!userAvatar || (open && !projectAvatar)) && (
+      {(!userAvatar||((newProjectOpen===true)&&!projectAvatar))&&(
         <p>
-          {open
+          {newProjectOpen==true
             ? "Drag and drop a project logo here, or click to select one"
-            : "Drag and drop an avatar here, or click to select one"}
+            :"Drag and drop an avatar here, or click to select one"}
         </p>
       )}
-      {(userAvatar && (open ? projectAvatar : userAvatar)) && (
+      {(userAvatar&&((newProjectOpen===true)? projectAvatar:userAvatar))&&(
         <img
-          src={open ? projectAvatar ?? undefined : userAvatar ?? undefined}
-          alt={open ? "Project Logo Preview" : "Avatar Preview"}
+          src={(newProjectOpen===true)? projectAvatar??undefined:userAvatar??undefined}
+          alt={(newProjectOpen===true)? "Project Logo Preview":"Avatar Preview"}
         />
       )}
       <input id="fileInput" type="file" onChange={handleChange} />
