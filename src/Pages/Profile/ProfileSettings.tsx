@@ -162,7 +162,7 @@ export const ProfileSettings: React.FC = () => {
         },
       );
       console.log(response.data);
-      if (response.data) {
+      if (response.data.value) {
         dispatch(updateProfile(response.data.value));
         alert("Profile updated successfully");
       } else {

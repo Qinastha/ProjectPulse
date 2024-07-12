@@ -1,41 +1,49 @@
 import {useCallback, useState, useEffect} from "react";
 import {setAvatar, getAvatar} from "../store/userSlice";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import {getNewProjectOpen} from "../store/projectSlice";
+import {getIsNewProject, getIsUpdateProject, getProjectOpen} from "../store/projectSlice";
 
 interface DragAvatarProps {
   handleAddLogo?: (e: string) => void;
+  projectAvatar?: string;
 }
 
 export const DragAvatar: React.FC<DragAvatarProps>=({
   handleAddLogo,
+  projectAvatar,
 }) => {
   const dispatch=useAppDispatch();
-  const newProjectOpen=useAppSelector(getNewProjectOpen);
+  const projectOpen=useAppSelector(getProjectOpen);
+  const isNewProject=useAppSelector(getIsNewProject);
+  const isUpdateProject=useAppSelector(getIsUpdateProject);
   const profileAvatar=useAppSelector(getAvatar);
-  const [projectAvatar, setProjectAvatar]=useState<string|null>(null);
+  const [projectAvatarPreview, setProjectAvatarPreview]=useState<string|null>(null);
   const [userAvatar, setUserAvatar]=useState<string|null>(null);
 
   useEffect(() => {
-    if(profileAvatar&&(newProjectOpen===false)) {
+    if(profileAvatar&&!projectOpen) {
       setUserAvatar(profileAvatar);
     }
-    if((newProjectOpen===false)&&projectAvatar) {
-      setProjectAvatar(null);
+    if(isUpdateProject && projectAvatar) {
+      setProjectAvatarPreview(projectAvatar);
     }
-  }, [profileAvatar, newProjectOpen, projectAvatar]);
+    if(!projectOpen&&projectAvatarPreview) {
+      setProjectAvatarPreview(null);
+    }
+  }, [projectOpen, isUpdateProject, isNewProject, profileAvatar, projectAvatar]);
 
   const handleFileRead=(file: File) => {
     const reader=new FileReader();
     reader.onloadend=() => {
       if(reader.result) {
         console.log("FileReader result:", reader.result);
-        if(newProjectOpen==false) {
+        if(!projectOpen) {
           dispatch(setAvatar(reader.result as string));
           setUserAvatar(reader.result as string);
-        } else {
+        }
+        if(isNewProject||isUpdateProject) {
           handleAddLogo?.(reader.result as string);
-          setProjectAvatar(reader.result as string);
+          setProjectAvatarPreview(reader.result as string);
         }
       }
     };
@@ -83,17 +91,17 @@ export const DragAvatar: React.FC<DragAvatarProps>=({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onClick={handleClick}>
-      {(!userAvatar||((newProjectOpen===true)&&!projectAvatar))&&(
+      {(!userAvatar||(projectOpen&&!projectAvatarPreview))&&(
         <p>
-          {newProjectOpen==true
+          {projectOpen
             ? "Drag and drop a project logo here, or click to select one"
             :"Drag and drop an avatar here, or click to select one"}
         </p>
       )}
-      {(userAvatar&&((newProjectOpen===true)? projectAvatar:userAvatar))&&(
+      {(userAvatar&&(projectOpen? projectAvatarPreview:userAvatar))&&(
         <img
-          src={(newProjectOpen===true)? projectAvatar??undefined:userAvatar??undefined}
-          alt={(newProjectOpen===true)? "Project Logo Preview":"Avatar Preview"}
+          src={projectOpen? projectAvatar??undefined:userAvatar??undefined}
+          alt={projectOpen? "Project Logo Preview":"Avatar Preview"}
         />
       )}
       <input id="fileInput" type="file" onChange={handleChange} />

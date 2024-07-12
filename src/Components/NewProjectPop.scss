@@ -67,7 +67,7 @@ $sakura-active-border-color: #ff9eb0;
   }
 
   &__text {
-    color: #555;
+    color: $text-muted;
     margin-bottom: 10px;
   }
 
@@ -95,10 +95,6 @@ $sakura-active-border-color: #ff9eb0;
     flex-direction: column;
     margin-bottom: 15px;
     position: relative;
-
-    .new-project-pop__input {
-      margin-bottom: 0;
-    }
   }
 
   &__user-list {

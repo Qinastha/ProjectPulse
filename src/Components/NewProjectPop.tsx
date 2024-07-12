@@ -3,7 +3,18 @@ import {useState, useEffect, useRef} from "react";
 import "./NewProjectPop.scss";
 import {DragAvatar} from "./DragAvatar";
 import {useAppDispatch, useAppSelector, useDebounce} from "../hooks";
-import {fetchAllMembers, fetchAllProjects, getAllMembers, getNewProjectOpen, getUpdateProjectOpen, setNewProjectOpen, setUpdateProjectOpen} from "../store/projectSlice";
+import {
+  fetchAllProjects,
+  getAllMembers,
+  getProjectOpen,
+  getIsUpdateProject,
+  setProjectOpen,
+  setIsUpdateProject,
+  getCurrentProject,
+  fetchProjectById,
+  getIsNewProject,
+  setIsNewProject
+} from "../store/projectSlice";
 import {IMember} from "../core/interfaces/IProject";
 
 const NewProjectPop: React.FC=() => {
@@ -13,26 +24,20 @@ const NewProjectPop: React.FC=() => {
   const [projectName, setProjectName]=useState("");
   const [projectDescription, setProjectDescription]=useState("");
   const [projectAvatar, setProjectAvatar]=useState("");
-  const [memberSearch, setMemberSearch]=useState("");
 
   const allMembers=useAppSelector(getAllMembers);
+  const currentProject=useAppSelector(getCurrentProject);
 
-  const [members, setMembers]=useState<IMember[]>([]);
+  const [memberSearch, setMemberSearch]=useState("");
   const debouncedMembers=useDebounce(memberSearch, 1000);
   const [filteredMembers, setFilteredMembers]=useState<IMember[]>([]);
   const [selectedMembers, setSelectedMembers]=useState<IMember[]>([]);
 
   const popupRef=useRef<HTMLFormElement>(null);
 
-  const newProjectOpen=useAppSelector(getNewProjectOpen);
-  const updateProjectOpen=useAppSelector(getUpdateProjectOpen);
-
-  const handleClickOutside=(event: MouseEvent) => {
-    if(popupRef.current&&!popupRef.current.contains(event.target as Node)) {
-      dispatch(setNewProjectOpen(false));
-      dispatch(setUpdateProjectOpen(false));
-    }
-  };
+  const projectOpen=useAppSelector(getProjectOpen);
+  const isNewProject=useAppSelector(getIsNewProject);
+  const isUpdateProject=useAppSelector(getIsUpdateProject);
 
   const formReset=() => {
     setProjectName("");
@@ -41,36 +46,58 @@ const NewProjectPop: React.FC=() => {
     setMemberSearch("");
   };
 
-  useEffect(() => {
-    if((newProjectOpen===true)||(updateProjectOpen===true)) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-      formReset();
-    }
-  }, [newProjectOpen, updateProjectOpen]);
+  // useEffect(() => {
+  //   const handleClickOutside=(event: MouseEvent) => {
+  //     event.stopPropagation()
+  //     if(
+  //       popupRef.current&&
+  //       !popupRef.current.contains(event.target as Node)
+  //     ) {
+  //       handleClose()
+  //       formReset();
+  //     }
+  //   };
+
+  //   if(projectOpen&&(isNewProject||isUpdateProject)) {
+  //     document.addEventListener("mousedown", handleClickOutside);
+  //   } else {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //     formReset();
+  //   }
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [projectOpen, popupRef, dispatch]);
+
 
   useEffect(() => {
-    if(!allMembers) {
-      dispatch(fetchAllMembers());
-    } else
-      setMembers(allMembers);
-  }, [allMembers, dispatch]);
+    if(currentProject?._id&&isUpdateProject) {
+      if(!currentProject||projectName) {
+        dispatch(fetchProjectById(currentProject._id));
+      }
+      setProjectName(currentProject.projectName||"");
+      setProjectDescription(currentProject.projectDescription||"");
+      setProjectAvatar(currentProject.projectAvatar||"");
+      setSelectedMembers(currentProject.members||[]);
+      console.log(currentProject._id);
+    }
+  }, [currentProject]);
 
   useEffect(() => {
     if(debouncedMembers.trim()!=="") {
-      const filter=members.filter(
+      const filter=allMembers.filter(
         (member: IMember) =>
           member.firstName.toLowerCase().includes(memberSearch.toLowerCase())||
           member.lastName.toLowerCase().includes(memberSearch.toLowerCase())||
           member.userName.toLowerCase().includes(memberSearch.toLowerCase())||
-          member.email.toLowerCase().includes(memberSearch.toLowerCase()),
+          member.email.toLowerCase().includes(memberSearch.toLowerCase())
       );
       setFilteredMembers(filter);
     } else {
       setFilteredMembers([]);
     }
-  }, [debouncedMembers, members]);
+  }, [debouncedMembers, allMembers, memberSearch]);
 
   const handleAddMember=(member: IMember) => {
     setSelectedMembers([...selectedMembers, member]);
@@ -80,7 +107,7 @@ const NewProjectPop: React.FC=() => {
 
   const handleRemoveMember=(userName: string) => {
     setSelectedMembers(
-      selectedMembers.filter(member => member.userName!==userName),
+      selectedMembers.filter((member) => member.userName!==userName)
     );
   };
 
@@ -89,52 +116,52 @@ const NewProjectPop: React.FC=() => {
   };
 
   const handleClose=() => {
-    dispatch(setNewProjectOpen(false));
-    dispatch(setUpdateProjectOpen(false));
+    dispatch(setProjectOpen(null));
+    dispatch(setIsNewProject(null));
+    dispatch(setIsUpdateProject(null));
+    formReset();
   };
 
-  const handleProjectSubmit=async () => {
+  const handleProjectSubmit=async (_id?: string) => {
     try {
-      if(newProjectOpen===true) {
+      if(isNewProject) {
         const response=await axios.post(
           "http://localhost:4000/api/project/new",
           {
             projectName,
             projectDescription,
             projectAvatar,
-            members: selectedMembers,
+            members: selectedMembers
           },
           {
             headers: {
               Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          },
+              "Content-Type": "application/json"
+            }
+          }
         );
         if(response.data?.value) {
-          console.log(response.data.value);
           alert("Project added");
           handleClose();
           dispatch(fetchAllProjects());
         }
-      } else if(updateProjectOpen) {
+      } else if(isUpdateProject&&_id) {
         const response=await axios.put(
           `http://localhost:4000/api/project/update/${_id}`,
           {
             projectName,
             projectDescription,
             projectAvatar,
-            members: selectedMembers,
+            members: selectedMembers
           },
           {
             headers: {
               Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          },
+              "Content-Type": "application/json"
+            }
+          }
         );
         if(response.data?.value) {
-          console.log(response.data.value);
           alert("Project updated");
           handleClose();
           dispatch(fetchAllProjects());
@@ -149,9 +176,8 @@ const NewProjectPop: React.FC=() => {
   };
 
   return (
-    <div className={`new-project-pop ${newProjectOpen||updateProjectOpen? "new-project-pop--open":""}`}>
-      <form className="new-project-pop__form"
-        ref={popupRef}>
+    <div className={`new-project-pop ${projectOpen? "new-project-pop--open":""}`}>
+      <form className="new-project-pop__form" ref={popupRef}>
         <div className="new-project-pop__title">New Project</div>
         <div className="new-project-pop__content">
           <div className="new-project-pop__text">
@@ -165,7 +191,7 @@ const NewProjectPop: React.FC=() => {
             placeholder="Project Name"
             type="text"
             value={projectName}
-            onChange={e => setProjectName(e.target.value)}
+            onChange={(e) => setProjectName(e.target.value)}
           />
           <input
             required
@@ -174,10 +200,10 @@ const NewProjectPop: React.FC=() => {
             placeholder="Project Description"
             type="text"
             value={projectDescription}
-            onChange={e => setProjectDescription(e.target.value)}
+            onChange={(e) => setProjectDescription(e.target.value)}
           />
           <div>
-            <DragAvatar handleAddLogo={handleAddLogo} />
+            <DragAvatar handleAddLogo={handleAddLogo} projectAvatar={projectAvatar} />
           </div>
           <div className="new-project-pop__user-add">
             <input
@@ -186,19 +212,17 @@ const NewProjectPop: React.FC=() => {
               placeholder="Project Member"
               type="text"
               value={memberSearch}
-              onChange={e => setMemberSearch(e.target.value)}
+              onChange={(e) => setMemberSearch(e.target.value)}
             />
             {filteredMembers.length>0&&(
               <div className="new-project-pop__user-list">
                 {filteredMembers.map((member: IMember) => (
-                  <div
-                    key={member.userName}
-                    className="new-project-pop__user-item">
+                  <div key={member.userName} className="new-project-pop__user-item">
                     <input
                       type="checkbox"
                       checked={selectedMembers.some(
                         (selectedMember: IMember) =>
-                          selectedMember.userName===member.userName,
+                          selectedMember.userName===member.userName
                       )}
                       onChange={() => handleAddMember(member)}
                     />
@@ -215,16 +239,15 @@ const NewProjectPop: React.FC=() => {
             {selectedMembers.length>0&&(
               <div className="new-project-pop__selected-list">
                 {selectedMembers.map((member: IMember) => (
-                  <div
-                    key={member.userName}
-                    className="new-project-pop__selected-member ">
+                  <div key={member.userName} className="new-project-pop__selected-member">
                     <span>
                       {member.firstName} {member.lastName}
                     </span>
                     <button
                       type="button"
                       className="new-project-pop__delete-button"
-                      onClick={() => handleRemoveMember(member.userName)}>
+                      onClick={() => handleRemoveMember(member.userName)}
+                    >
                       X
                     </button>
                   </div>
@@ -237,14 +260,15 @@ const NewProjectPop: React.FC=() => {
           <button
             type="button"
             className="new-project-pop__button"
+
             onClick={handleClose}>
             Cancel
           </button>
           <button
             type="button"
-            onClick={handleProjectSubmit}
+            onClick={() => handleProjectSubmit(currentProject?._id)}
             className="new-project-pop__button new-project-pop__button--submit">
-            {newProjectOpen? "Add Project":"Update Project"}
+            {isNewProject? "Add Project":"Update Project"}
           </button>
         </div>
       </form>
@@ -252,4 +276,4 @@ const NewProjectPop: React.FC=() => {
   );
 };
 
-export {NewProjectPop};
+export default NewProjectPop;

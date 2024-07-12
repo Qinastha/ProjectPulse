@@ -21,3 +21,10 @@ export interface IProject {
   completedAt: Date;
   isCompleted: boolean;
 }
+
+export interface CurrentProject extends IProject {
+  _id: string;
+  projectName: string;
+  projectDescription: string;
+  projectAvatar: string;
+}

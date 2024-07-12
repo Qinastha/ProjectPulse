@@ -1,10 +1,10 @@
 import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import "./Layout.scss";
 import {useState} from "react";
-import {NewProjectPop} from "./NewProjectPop";
+import NewProjectPop from "./NewProjectPop";
 import pinkBlossom from "../assets/pinkBlossom.png";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import {getNewProjectOpen, setNewProjectOpen} from "../store/projectSlice";
+import {setProjectOpen, setIsNewProject} from "../store/projectSlice";
 
 export const Layout: React.FC=() => {
   const {pathname}=useLocation();
@@ -12,14 +12,15 @@ export const Layout: React.FC=() => {
   const [isOpen, setIsOpen]=useState(false);
   const navigate=useNavigate();
   const dispatch=useAppDispatch();
-  const open=useAppSelector(getNewProjectOpen);
+
 
   const toggleNav=(): void => {
     setIsExpand(!isExpand);
   };
 
   const handleOpen=(): void => {
-    dispatch(setNewProjectOpen(true));
+    dispatch(setProjectOpen(true));
+    dispatch(setIsNewProject(true));
   };
 
   const handleLogout=(): void => {

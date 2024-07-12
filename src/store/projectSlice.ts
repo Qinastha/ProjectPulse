@@ -1,20 +1,24 @@
-import {IProject, IMember} from './../core/interfaces/IProject';
+import {IProject, IMember, CurrentProject} from './../core/interfaces/IProject';
 import {createAsyncThunk, createSlice, PayloadAction, ReducerCreators} from "@reduxjs/toolkit";
 import axios from "axios";
 
 export interface IProjectState {
     projects: IProject[];
     members: IMember[];
-    isNewProjectOpen: boolean|null;
-    isUpdateProjectOpen: boolean|null;
+    currentProject: CurrentProject|null;
+    projectOpen: boolean|null;
+    isNewProject: boolean|null;
+    isUpdateProject: boolean|null;
     status: "idle"|"loading"|"resolved"|"rejected";
 }
 
 const initialState: IProjectState={
     projects: [],
     members: [],
-    isNewProjectOpen: null,
-    isUpdateProjectOpen: null,
+    currentProject: null,
+    projectOpen: null,
+    isNewProject: null,
+    isUpdateProject: null,
     status: 'idle',
 };
 
@@ -50,7 +54,7 @@ export const fetchProjectById=createAsyncThunk(
                 },
             });
             console.log(response);
-            return response.data.value as IProject;
+            return response.data.value as CurrentProject;
         } catch(error) {
             console.error('Error fetching project:', error);
             throw error;
@@ -61,22 +65,27 @@ export const fetchProjectById=createAsyncThunk(
 export const fetchAllMembers=createAsyncThunk(
     "users/fetchAllUsers",
     async (_, thunkAPI) => {
-        const response=await axios.get("http://localhost:4000/api/user/all", {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            },
-        });
-        console.log(response);
-        return response.data.value as IMember[];
-    },
-);
+        try {
+            const response=await axios.get("http://localhost:4000/api/user/all", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log(response.data);
+            return response.data.value as IMember[];
+        }
+        catch(error) {
+            console.error('Error fetching members:', error);
+            throw error;
+        }
+    });
 
 export const projectDelete=createAsyncThunk(
     'project/deleteProject',
     async (_id: string, thunkAPI) => {
         try {
-            const response=await axios.delete(`http://localhost:4000/api/project/delete/${_id}`, {
+            await axios.delete(`http://localhost:4000/api/project/delete/${_id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                     "Content-Type": "application/json",
@@ -94,24 +103,35 @@ export const project=createSlice({
     name: 'project',
     initialState,
     reducers: (create: ReducerCreators<IProjectState>) => ({
-        setNewProjectOpen: create.reducer((state, action: PayloadAction<boolean>) => {
-            return {...state, isNewProjectOpen: action.payload};
+        setProjectOpen: create.reducer((state, action: PayloadAction<boolean|null>) => {
+            return {...state, projectOpen: action.payload};
         }),
-        setUpdateProjectOpen: create.reducer((state, action: PayloadAction<boolean>) => {
-            return {...state, isUpdateProjectOpen: action.payload};
+        setIsNewProject: create.reducer((state, action: PayloadAction<boolean|null>) => {
+            return {...state, isNewProject: action.payload};
         }),
-        updateProjectData: create.reducer((state, action: PayloadAction<IProject>) => {
-            return {...state, projects: state.projects.map((project) => project._id===action.payload._id? action.payload:project)};
-        })
+        setIsUpdateProject: create.reducer((state, action: PayloadAction<boolean|null>) => {
+            return {...state, isUpdateProject: action.payload};
+        }),
+        setProjectAvatar: create.reducer((state, action: PayloadAction<string>) => {
+            return {...state, projectAvatar: action.payload};
+        }),
+        setCurrentProject: (state, action: PayloadAction<string>) => {
+            const project=state.projects.find(project => project._id===action.payload);
+            if(project) {
+                state.currentProject=project as CurrentProject;
+            }
+        },
     }),
     selectors: {
         getProjectState: (state) => state,
         getProjects: (state) => state.projects,
-        getNewProjectOpen: (state) => state.isNewProjectOpen,
-        getUpdateProjectOpen: (state) => state.isUpdateProjectOpen,
-        getProjectData: (state, id: string) => state.projects.find((project) => project._id===id),
+        getProjectOpen: (state) => state.projectOpen,
+        getIsNewProject: (state) => state.isNewProject,
+        getIsUpdateProject: (state) => state.isUpdateProject,
+        //getprojectavatar???
         getProjectStatus: (state) => state.status,
         getAllMembers: (state) => state.members,
+        getCurrentProject: (state) => state.currentProject,
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllProjects.pending, (state) => {
@@ -127,27 +147,30 @@ export const project=createSlice({
         builder.addCase(fetchAllProjects.rejected, (state) => {
             state.status='rejected';
         });
+
         builder.addCase(projectDelete.fulfilled, (state, action: PayloadAction<string>) => {
             state.projects=state.projects.filter((project) => project._id!==action.payload);
         });
+
         builder.addCase(fetchProjectById.pending, state => {
             state.status="loading";
         });
         builder.addCase(
             fetchProjectById.fulfilled,
-            (state, action: PayloadAction<IProject>) => {
-                return {...state, projects: [action.payload], status: "resolved"};
+            (state, action: PayloadAction<CurrentProject>) => {
+                return {...state, currentProject: action.payload, status: "resolved"};
             });
         builder.addCase(fetchProjectById.rejected, state => {
             state.status="rejected";
         });
+
         builder.addCase(fetchAllMembers.pending, state => {
             state.status="loading";
         });
         builder.addCase(
             fetchAllMembers.fulfilled,
             (state, action: PayloadAction<IMember[]>) => {
-                return {...state, users: action.payload, status: "resolved"};
+                return {...state, members: action.payload, status: "resolved"};
             });
         builder.addCase(fetchAllMembers.rejected, state => {
             state.status="rejected";
@@ -155,8 +178,8 @@ export const project=createSlice({
     },
 });
 
-export const {setNewProjectOpen, setUpdateProjectOpen, updateProjectData}=project.actions;
+export const {setProjectOpen, setIsUpdateProject, setCurrentProject, setIsNewProject}=project.actions;
 
-export const {getProjectState, getNewProjectOpen, getUpdateProjectOpen, getProjectData, getProjectStatus, getProjects, getAllMembers}=project.selectors;
+export const {getProjectState, getProjectOpen, getIsUpdateProject, getProjectStatus, getProjects, getAllMembers, getCurrentProject, getIsNewProject}=project.selectors;
 
 export default project.reducer;
