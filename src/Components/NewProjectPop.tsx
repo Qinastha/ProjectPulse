@@ -1,8 +1,8 @@
 import axios from "axios";
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect } from "react";
 import "./NewProjectPop.scss";
-import {DragAvatar} from "./DragAvatar";
-import {useAppDispatch, useAppSelector, useDebounce} from "../hooks";
+import { DragAvatar } from "./DragAvatar";
+import { useAppDispatch, useAppSelector, useDebounce } from "../hooks";
 import {
   fetchAllProjects,
   getAllMembers,
@@ -13,119 +13,99 @@ import {
   getCurrentProject,
   fetchProjectById,
   getIsNewProject,
-  setIsNewProject
+  setIsNewProject,
+  setCurrentProject
 } from "../store/projectSlice";
-import {IMember} from "../core/interfaces/IProject";
+import { IMember, IProject } from "../core/interfaces/IProject";
 
-const NewProjectPop: React.FC=() => {
-  const token=localStorage.getItem("token");
-  const dispatch=useAppDispatch();
+interface NewProjectPopProps {
+  project?: IProject
+}
 
-  const [projectName, setProjectName]=useState("");
-  const [projectDescription, setProjectDescription]=useState("");
-  const [projectAvatar, setProjectAvatar]=useState("");
+const NewProjectPop: React.FC<NewProjectPopProps> = ({project}) => {
+  const token = localStorage.getItem("token");
+  const dispatch = useAppDispatch();
 
-  const allMembers=useAppSelector(getAllMembers);
-  const currentProject=useAppSelector(getCurrentProject);
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectAvatar, setProjectAvatar] = useState("");
 
-  const [memberSearch, setMemberSearch]=useState("");
-  const debouncedMembers=useDebounce(memberSearch, 1000);
-  const [filteredMembers, setFilteredMembers]=useState<IMember[]>([]);
-  const [selectedMembers, setSelectedMembers]=useState<IMember[]>([]);
+  const allMembers = useAppSelector(getAllMembers);
+  const currentProject = useAppSelector(getCurrentProject);
 
-  const popupRef=useRef<HTMLFormElement>(null);
+  const [memberSearch, setMemberSearch] = useState("");
+  const debouncedMembers = useDebounce(memberSearch, 500);
+  const [filteredMembers, setFilteredMembers] = useState<IMember[]>([]);
+  const [selectedMembers, setSelectedMembers] = useState<IMember[]>([]);
 
-  const projectOpen=useAppSelector(getProjectOpen);
-  const isNewProject=useAppSelector(getIsNewProject);
-  const isUpdateProject=useAppSelector(getIsUpdateProject);
+  const projectOpen = useAppSelector(getProjectOpen);
+  const isNewProject = useAppSelector(getIsNewProject);
+  const isUpdateProject = useAppSelector(getIsUpdateProject);
 
-  const formReset=() => {
+  const formReset = () => {
     setProjectName("");
     setProjectDescription("");
     setSelectedMembers([]);
     setMemberSearch("");
   };
 
-  // useEffect(() => {
-  //   const handleClickOutside=(event: MouseEvent) => {
-  //     event.stopPropagation()
-  //     if(
-  //       popupRef.current&&
-  //       !popupRef.current.contains(event.target as Node)
-  //     ) {
-  //       handleClose()
-  //       formReset();
-  //     }
-  //   };
-
-  //   if(projectOpen&&(isNewProject||isUpdateProject)) {
-  //     document.addEventListener("mousedown", handleClickOutside);
-  //   } else {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //     formReset();
-  //   }
-
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, [projectOpen, popupRef, dispatch]);
-
-
   useEffect(() => {
-    if(currentProject?._id&&isUpdateProject) {
-      if(!currentProject||projectName) {
+    if (currentProject?._id && isUpdateProject) {
+      if (!isNewProject) {
         dispatch(fetchProjectById(currentProject._id));
       }
-      setProjectName(currentProject.projectName||"");
-      setProjectDescription(currentProject.projectDescription||"");
-      setProjectAvatar(currentProject.projectAvatar||"");
-      setSelectedMembers(currentProject.members||[]);
-      console.log(currentProject._id);
+      setProjectName(currentProject.projectName || "");
+      setProjectDescription(currentProject.projectDescription || "");
+      setProjectAvatar(currentProject.projectAvatar || "");
+      setSelectedMembers(currentProject.members || []);
     }
-  }, [currentProject]);
+  }, [currentProject?._id, currentProject?.projectName, currentProject?.projectDescription, currentProject?.projectAvatar, currentProject?.members]);
 
   useEffect(() => {
-    if(debouncedMembers.trim()!=="") {
-      const filter=allMembers.filter(
-        (member: IMember) =>
-          member.firstName.toLowerCase().includes(memberSearch.toLowerCase())||
-          member.lastName.toLowerCase().includes(memberSearch.toLowerCase())||
-          member.userName.toLowerCase().includes(memberSearch.toLowerCase())||
-          member.email.toLowerCase().includes(memberSearch.toLowerCase())
-      );
+    if (debouncedMembers.trim() !== "") {
+      const filter = allMembers.filter((member: IMember) => {
+        return (
+          (member.firstName.toLowerCase().includes(debouncedMembers.toLowerCase()) ||
+            member.lastName.toLowerCase().includes(debouncedMembers.toLowerCase()) ||
+            member.userName.toLowerCase().includes(debouncedMembers.toLowerCase()) ||
+            member.email.toLowerCase().includes(debouncedMembers.toLowerCase())) &&
+          !selectedMembers.some((selectedMember) => selectedMember.userName === member.userName)
+        );
+      });
       setFilteredMembers(filter);
     } else {
       setFilteredMembers([]);
     }
-  }, [debouncedMembers, allMembers, memberSearch]);
+  }, [debouncedMembers, allMembers, selectedMembers]);
 
-  const handleAddMember=(member: IMember) => {
+  const handleAddMember = (member: IMember) => {
     setSelectedMembers([...selectedMembers, member]);
     setFilteredMembers([]);
     setMemberSearch("");
   };
 
-  const handleRemoveMember=(userName: string) => {
+  const handleRemoveMember = (userName: string) => {
     setSelectedMembers(
-      selectedMembers.filter((member) => member.userName!==userName)
+      selectedMembers.filter((member) => member.userName !== userName)
     );
   };
 
-  const handleAddLogo=(e: string) => {
+  const handleAddLogo = (e: string) => {
     setProjectAvatar(e);
   };
 
-  const handleClose=() => {
+  const handleClose = () => {
     dispatch(setProjectOpen(null));
     dispatch(setIsNewProject(null));
     dispatch(setIsUpdateProject(null));
+    dispatch(setCurrentProject(null));
     formReset();
   };
 
-  const handleProjectSubmit=async (_id?: string) => {
+  const handleProjectSubmit = async (_id?: string) => {
     try {
-      if(isNewProject) {
-        const response=await axios.post(
+      if (isNewProject) {
+        const response = await axios.post(
           "http://localhost:4000/api/project/new",
           {
             projectName,
@@ -140,13 +120,13 @@ const NewProjectPop: React.FC=() => {
             }
           }
         );
-        if(response.data?.value) {
+        if (response.data?.value) {
           alert("Project added");
           handleClose();
           dispatch(fetchAllProjects());
         }
-      } else if(isUpdateProject&&_id) {
-        const response=await axios.put(
+      } else if (isUpdateProject && _id) {
+        const response = await axios.put(
           `http://localhost:4000/api/project/update/${_id}`,
           {
             projectName,
@@ -161,7 +141,7 @@ const NewProjectPop: React.FC=() => {
             }
           }
         );
-        if(response.data?.value) {
+        if (response.data?.value) {
           alert("Project updated");
           handleClose();
           dispatch(fetchAllProjects());
@@ -169,15 +149,15 @@ const NewProjectPop: React.FC=() => {
           alert("Failed to update project");
         }
       }
-    } catch(error) {
+    } catch (error) {
       console.error("Error during posting new project:", error);
       alert("An error occurred. Please try again.");
     }
   };
 
   return (
-    <div className={`new-project-pop ${projectOpen? "new-project-pop--open":""}`}>
-      <form className="new-project-pop__form" ref={popupRef}>
+    <div className={`new-project-pop ${projectOpen && (isNewProject||isUpdateProject)? "new-project-pop--open" : ""}`}>
+      <form className="new-project-pop__form" autoComplete="off">
         <div className="new-project-pop__title">New Project</div>
         <div className="new-project-pop__content">
           <div className="new-project-pop__text">
@@ -192,6 +172,7 @@ const NewProjectPop: React.FC=() => {
             type="text"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
+            autoComplete="off"
           />
           <input
             required
@@ -201,6 +182,7 @@ const NewProjectPop: React.FC=() => {
             type="text"
             value={projectDescription}
             onChange={(e) => setProjectDescription(e.target.value)}
+            autoComplete="off"
           />
           <div>
             <DragAvatar handleAddLogo={handleAddLogo} projectAvatar={projectAvatar} />
@@ -213,22 +195,20 @@ const NewProjectPop: React.FC=() => {
               type="text"
               value={memberSearch}
               onChange={(e) => setMemberSearch(e.target.value)}
+              autoComplete="off"
             />
-            {filteredMembers.length>0&&(
+            {filteredMembers.length > 0 && (
               <div className="new-project-pop__user-list">
                 {filteredMembers.map((member: IMember) => (
                   <div key={member.userName} className="new-project-pop__user-item">
-                    <input
-                      type="checkbox"
-                      checked={selectedMembers.some(
-                        (selectedMember: IMember) =>
-                          selectedMember.userName===member.userName
-                      )}
-                      onChange={() => handleAddMember(member)}
-                    />
-                    <span>
-                      {member.firstName} {member.lastName}
-                    </span>
+                    <div
+                      className="new-project-pop__select-button"
+                      onClick={() => handleAddMember(member)}
+                    >
+                      <span>
+                        {member.firstName} {member.lastName}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -236,7 +216,7 @@ const NewProjectPop: React.FC=() => {
           </div>
           <div className="new-project-pop__selected-members">
             <div className="new-project-pop__text">Selected Members:</div>
-            {selectedMembers.length>0&&(
+            {selectedMembers.length > 0 && (
               <div className="new-project-pop__selected-list">
                 {selectedMembers.map((member: IMember) => (
                   <div key={member.userName} className="new-project-pop__selected-member">
@@ -248,7 +228,7 @@ const NewProjectPop: React.FC=() => {
                       className="new-project-pop__delete-button"
                       onClick={() => handleRemoveMember(member.userName)}
                     >
-                      X
+                      &#x232B;
                     </button>
                   </div>
                 ))}
@@ -260,20 +240,22 @@ const NewProjectPop: React.FC=() => {
           <button
             type="button"
             className="new-project-pop__button"
-
-            onClick={handleClose}>
+            onClick={handleClose}
+          >
             Cancel
           </button>
           <button
             type="button"
             onClick={() => handleProjectSubmit(currentProject?._id)}
-            className="new-project-pop__button new-project-pop__button--submit">
-            {isNewProject? "Add Project":"Update Project"}
+            className="new-project-pop__button new-project-pop__button--submit"
+          >
+            {isNewProject ? "Add Project" : "Update Project"}
           </button>
         </div>
       </form>
     </div>
   );
+
 };
 
 export default NewProjectPop;

@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {IProject} from "../core/interfaces/IProject";
 import {useAppDispatch, useAppSelector} from "../hooks";
 import {getProjects, projectDelete, fetchAllProjects, setIsUpdateProject, setCurrentProject, setProjectOpen, getProjectStatus} from "../store/projectSlice";
-import "./Projects.scss";
+import "../Components/ProjectCard.scss";
 import {FallbackLoader} from "../Components/FallbackLoader";
 import ProjectCard from "../Components/ProjectCard";
 
@@ -14,7 +14,7 @@ export const Projects: React.FC=() => {
 
   useEffect(() => {
     dispatch(fetchAllProjects());
-  }, [dispatch]);
+  }, [fetchAllProjects]);
 
   const handleDelete=(_id: string) => {
     dispatch(projectDelete(_id));

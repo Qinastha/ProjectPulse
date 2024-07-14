@@ -17,19 +17,26 @@ export const DragAvatar: React.FC<DragAvatarProps>=({
   const isNewProject=useAppSelector(getIsNewProject);
   const isUpdateProject=useAppSelector(getIsUpdateProject);
   const profileAvatar=useAppSelector(getAvatar);
-  const [projectAvatarPreview, setProjectAvatarPreview]=useState<string|null>(null);
+  const [projectAvatarPreview, setProjectAvatarPreview]=useState<string>("");
   const [userAvatar, setUserAvatar]=useState<string|null>(null);
 
   useEffect(() => {
     if(profileAvatar&&!projectOpen) {
       setUserAvatar(profileAvatar);
     }
-    if(isUpdateProject && projectAvatar) {
+
+    if(projectOpen&&isNewProject) {
+      setProjectAvatarPreview("");
+    }
+
+    if(isUpdateProject&&projectAvatar) {
       setProjectAvatarPreview(projectAvatar);
     }
-    if(!projectOpen&&projectAvatarPreview) {
-      setProjectAvatarPreview(null);
+
+    if(!projectOpen&&(isNewProject||isUpdateProject)) {
+      setProjectAvatarPreview("");
     }
+    
   }, [projectOpen, isUpdateProject, isNewProject, profileAvatar, projectAvatar]);
 
   const handleFileRead=(file: File) => {
@@ -44,6 +51,7 @@ export const DragAvatar: React.FC<DragAvatarProps>=({
         if(isNewProject||isUpdateProject) {
           handleAddLogo?.(reader.result as string);
           setProjectAvatarPreview(reader.result as string);
+          console.log(projectAvatarPreview)
         }
       }
     };
@@ -100,7 +108,7 @@ export const DragAvatar: React.FC<DragAvatarProps>=({
       )}
       {(userAvatar&&(projectOpen? projectAvatarPreview:userAvatar))&&(
         <img
-          src={projectOpen? projectAvatar??undefined:userAvatar??undefined}
+          src={projectOpen? (projectAvatarPreview??undefined):(userAvatar??undefined)}
           alt={projectOpen? "Project Logo Preview":"Avatar Preview"}
         />
       )}

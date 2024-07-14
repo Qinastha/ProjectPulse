@@ -4,7 +4,7 @@ import {useState} from "react";
 import NewProjectPop from "./NewProjectPop";
 import pinkBlossom from "../assets/pinkBlossom.png";
 import {useAppDispatch, useAppSelector} from "../hooks";
-import {setProjectOpen, setIsNewProject} from "../store/projectSlice";
+import {setProjectOpen, setIsNewProject, setIsUpdateProject} from "../store/projectSlice";
 
 export const Layout: React.FC=() => {
   const {pathname}=useLocation();

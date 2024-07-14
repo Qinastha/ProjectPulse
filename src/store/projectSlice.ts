@@ -10,6 +10,7 @@ export interface IProjectState {
     isNewProject: boolean|null;
     isUpdateProject: boolean|null;
     status: "idle"|"loading"|"resolved"|"rejected";
+    isInitial: boolean;
 }
 
 const initialState: IProjectState={
@@ -20,6 +21,7 @@ const initialState: IProjectState={
     isNewProject: null,
     isUpdateProject: null,
     status: 'idle',
+    isInitial: true,
 };
 
 export const fetchAllProjects=createAsyncThunk(
@@ -103,35 +105,41 @@ export const project=createSlice({
     name: 'project',
     initialState,
     reducers: (create: ReducerCreators<IProjectState>) => ({
+        setIsInitialProject: create.reducer((state, action: PayloadAction<boolean>) => {
+            return {...state, isInitial: action.payload};
+        }),
         setProjectOpen: create.reducer((state, action: PayloadAction<boolean|null>) => {
-            return {...state, projectOpen: action.payload};
+            state.projectOpen=action.payload;
         }),
         setIsNewProject: create.reducer((state, action: PayloadAction<boolean|null>) => {
-            return {...state, isNewProject: action.payload};
+            state.isNewProject=action.payload;
         }),
         setIsUpdateProject: create.reducer((state, action: PayloadAction<boolean|null>) => {
-            return {...state, isUpdateProject: action.payload};
+            state.isUpdateProject=action.payload;
         }),
-        setProjectAvatar: create.reducer((state, action: PayloadAction<string>) => {
-            return {...state, projectAvatar: action.payload};
-        }),
-        setCurrentProject: (state, action: PayloadAction<string>) => {
+        setCurrentProject: create.reducer((state, action: PayloadAction<string|null>) => {
             const project=state.projects.find(project => project._id===action.payload);
             if(project) {
                 state.currentProject=project as CurrentProject;
             }
-        },
+        }),
+        setCurrentProjectAvatar: create.reducer((state, action: PayloadAction<string>) => {
+            if(state.currentProject) {
+                state.currentProject.projectAvatar=action.payload;
+            }
+        }),
     }),
     selectors: {
         getProjectState: (state) => state,
         getProjects: (state) => state.projects,
+        getIsInitialProject: (state) => state.isInitial,
         getProjectOpen: (state) => state.projectOpen,
         getIsNewProject: (state) => state.isNewProject,
         getIsUpdateProject: (state) => state.isUpdateProject,
-        //getprojectavatar???
         getProjectStatus: (state) => state.status,
         getAllMembers: (state) => state.members,
         getCurrentProject: (state) => state.currentProject,
+        getCurrentProjectAvatar: (state) => state.currentProject?.projectAvatar,
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllProjects.pending, (state) => {
@@ -178,8 +186,8 @@ export const project=createSlice({
     },
 });
 
-export const {setProjectOpen, setIsUpdateProject, setCurrentProject, setIsNewProject}=project.actions;
+export const {setProjectOpen, setIsUpdateProject, setCurrentProject, setIsNewProject, setIsInitialProject, setCurrentProjectAvatar}=project.actions;
 
-export const {getProjectState, getProjectOpen, getIsUpdateProject, getProjectStatus, getProjects, getAllMembers, getCurrentProject, getIsNewProject}=project.selectors;
+export const {getProjectState, getProjectOpen, getIsUpdateProject, getProjectStatus, getProjects, getAllMembers, getCurrentProject, getIsNewProject, getIsInitialProject, getCurrentProjectAvatar }=project.selectors;
 
 export default project.reducer;

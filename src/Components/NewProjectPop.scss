@@ -4,7 +4,7 @@ $text-color: #333;
 $text-muted: #666;
 $border-color: #ccc;
 $background-color: #fefefe;
-$overlay-color: rgba(0, 0, 0, 0.5);
+$overlay-color: rgba(0, 0, 0, 0.2);
 $box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 $font-family: "Noto Sans JP", sans-serif;
 $sakura-border-color: #ffb6c1;
@@ -23,6 +23,11 @@ $sakura-active-border-color: #ff9eb0;
   }
 }
 
+@mixin box-shadow($shadow){
+  box-shadow: $shadow;
+  transition: box-shadow 0.3s ease;
+}
+
 .new-project-pop {
   display: none;
   position: fixed;
@@ -30,13 +35,13 @@ $sakura-active-border-color: #ff9eb0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: $overlay-color;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 
   &--open {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.2); 
   }
 
   &__form {
@@ -44,7 +49,7 @@ $sakura-active-border-color: #ff9eb0;
     background-color: $background-color;
     font-family: $font-family;
     border-radius: 10px;
-    box-shadow: $box-shadow;
+    @include box-shadow($box-shadow);
     width: 400px;
     max-width: 100%;
     @include sakura-border;
@@ -91,78 +96,94 @@ $sakura-active-border-color: #ff9eb0;
   }
 
   &__user-add {
+    position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
-    position: relative;
-  }
+    margin-bottom: 10px;
 
-  &__user-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: $background-color;
-    border: 1px solid $border-color;
-    border-radius: 5px;
-    box-shadow: $box-shadow;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1;
+    &__input {
+      margin-bottom: 0;
+    }
 
-    &__user-item {
-      padding: 10px;
-      border-bottom: 1px solid $border-color;
+    .new-project-pop__user-list {
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      width: 50%;
+      background-color: $background-color;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+      @include box-shadow($box-shadow);
+      z-index: 101;
 
-      &:last-child {
-        border-bottom: none;
-      }
+      .new-project-pop__user-item {
+        padding: 10px;
+        border-bottom: 1px solid $border-color;
 
-      &:hover {
-        background-color: $secondary-color;
+        .new-project-pop__user-item:last-child {
+          border-bottom: none;
+        }
+
+        .new-project-pop__select-button {
+          padding: 8px 12px;
+          border: 1px solid $border-color;
+          border-radius: 5px;
+          color: $text-color;
+          cursor: pointer;
+
+          &:hover {
+            outline: none;
+            @include sakura-border;
+          }
+
+          span {
+            margin-right: 10px;
+          }
+        }
       }
     }
   }
 
-  &__selected-members {
+  .new-project-pop__selected-members {
     margin-top: 15px;
 
     &__text {
       margin-bottom: 10px;
       color: $text-color;
     }
-  }
 
-  &__selected-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  &__selected-member {
-    display: flex;
-    align-items: center;
-    background-color: $secondary-color;
-    padding: 8px;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-
-    span {
-      margin-right: 10px;
+    .new-project-pop__selected-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .new-project-pop__delete-button {
-      background-color: transparent;
-      border: none;
-      color: $primary-color;
-      cursor: pointer;
-      font-family: $font-family;
-      font-size: 18px;
-      font-weight: bold;
+    .new-project-pop__selected-member {
+      display: flex;
+      align-items: center;
+      background-color: $secondary-color;
+      padding: 8px;
+      border-radius: 5px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      transition: display 1s ease-in-out;
 
-      &:hover {
-        color: darken($primary-color, 10%);
+      span {
+        margin-right: 10px;
+      }
+
+      .new-project-pop__delete-button {
+        background-color: transparent;
+        border: none;
+        color: $primary-color;
+        cursor: pointer;
+        font-family: $font-family;
+        font-size: 18px;
+        font-weight: bold;
+
+        &:hover {
+          color: darken($primary-color, 10%);
+        }
       }
     }
   }

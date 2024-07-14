@@ -18,14 +18,14 @@ import { PrivateRoute } from "./Components/PrivateRout";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { ProfileCreate } from "./Pages/Profile/ProfileCreate";
 import { ProfileSettings } from "./Pages/Profile/ProfileSettings";
-import { userLoader } from "./loaders";
+import { userDataloader } from "./loaders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route
         path="/"
-        loader={ userLoader }
+        loader={ userDataloader }
         element={
           <PrivateRoute>
             <Layout />

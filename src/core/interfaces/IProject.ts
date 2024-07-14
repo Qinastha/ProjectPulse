@@ -3,7 +3,7 @@ export interface IMember {
   lastName: string;
   userName: string;
   email: string;
-  positio?: string;
+  position?: string;
   avatar?: string;
 }
 
@@ -27,4 +27,5 @@ export interface CurrentProject extends IProject {
   projectName: string;
   projectDescription: string;
   projectAvatar: string;
+  members:IMember[];
 }
