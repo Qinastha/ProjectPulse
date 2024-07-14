@@ -21,23 +21,16 @@ export const DragAvatar: React.FC<DragAvatarProps>=({
   const [userAvatar, setUserAvatar]=useState<string|null>(null);
 
   useEffect(() => {
-    if(profileAvatar&&!projectOpen) {
-      setUserAvatar(profileAvatar);
-    }
-
-    if(projectOpen&&isNewProject) {
+    if (projectOpen && isNewProject) {
       setProjectAvatarPreview("");
-    }
-
-    if(isUpdateProject&&projectAvatar) {
+    } else if (isUpdateProject && projectAvatar) {
       setProjectAvatarPreview(projectAvatar);
-    }
-
-    if(!projectOpen&&(isNewProject||isUpdateProject)) {
+    } else if (!projectOpen && (isNewProject || isUpdateProject)) {
       setProjectAvatarPreview("");
+    } else {
+      setUserAvatar(profileAvatar || null);
     }
-    
-  }, [projectOpen, isUpdateProject, isNewProject, profileAvatar, projectAvatar]);
+  }, [projectOpen, isNewProject, isUpdateProject, projectAvatar, profileAvatar]);
 
   const handleFileRead=(file: File) => {
     const reader=new FileReader();

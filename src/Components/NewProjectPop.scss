@@ -23,25 +23,36 @@ $sakura-active-border-color: #ff9eb0;
   }
 }
 
-@mixin box-shadow($shadow){
+@mixin box-shadow($shadow) {
   box-shadow: $shadow;
   transition: box-shadow 0.3s ease;
 }
 
-.new-project-pop {
+.new-project-pop__overlay {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
+  background-color: $overlay-color;
+  z-index: 999;
+
+  &--open {
+    display: block;
+  }
+}
+
+.new-project-pop {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1000;
 
   &--open {
     display: flex;
-    background-color: rgba(0, 0, 0, 0.2); 
   }
 
   &__form {
@@ -79,8 +90,7 @@ $sakura-active-border-color: #ff9eb0;
   &__input {
     margin-bottom: 15px;
     padding: 10px;
-    border: none;
-    border: 0.5px solid $text-color;
+    border: 0.5px solid $text-color; // Adjust border thickness
     border-radius: 5px;
     font-family: $font-family;
     transition: border-color 0.3s ease;
@@ -120,7 +130,7 @@ $sakura-active-border-color: #ff9eb0;
         padding: 10px;
         border-bottom: 1px solid $border-color;
 
-        .new-project-pop__user-item:last-child {
+        &:last-child {
           border-bottom: none;
         }
 
@@ -132,7 +142,6 @@ $sakura-active-border-color: #ff9eb0;
           cursor: pointer;
 
           &:hover {
-            outline: none;
             @include sakura-border;
           }
 
@@ -166,7 +175,6 @@ $sakura-active-border-color: #ff9eb0;
       border-radius: 5px;
       margin-right: 10px;
       margin-bottom: 10px;
-      transition: display 1s ease-in-out;
 
       span {
         margin-right: 10px;

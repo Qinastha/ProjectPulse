@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpd
         </button>
       </div>
       <div>
-      <NewProjectPop project={project}/>
+      <NewProjectPop />
       </div>
     </div>
   );

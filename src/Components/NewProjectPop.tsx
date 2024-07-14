@@ -16,13 +16,9 @@ import {
   setIsNewProject,
   setCurrentProject
 } from "../store/projectSlice";
-import { IMember, IProject } from "../core/interfaces/IProject";
+import { IMember } from "../core/interfaces/IProject";
 
-interface NewProjectPopProps {
-  project?: IProject
-}
-
-const NewProjectPop: React.FC<NewProjectPopProps> = ({project}) => {
+const NewProjectPop: React.FC = () => {
   const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
 
@@ -51,15 +47,17 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({project}) => {
 
   useEffect(() => {
     if (currentProject?._id && isUpdateProject) {
-      if (!isNewProject) {
+      if (isUpdateProject) {
         dispatch(fetchProjectById(currentProject._id));
       }
       setProjectName(currentProject.projectName || "");
       setProjectDescription(currentProject.projectDescription || "");
       setProjectAvatar(currentProject.projectAvatar || "");
       setSelectedMembers(currentProject.members || []);
+    } else {
+      formReset()
     }
-  }, [currentProject?._id, currentProject?.projectName, currentProject?.projectDescription, currentProject?.projectAvatar, currentProject?.members]);
+  }, [currentProject?._id, isUpdateProject]);
 
   useEffect(() => {
     if (debouncedMembers.trim() !== "") {
@@ -100,6 +98,16 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({project}) => {
     dispatch(setIsUpdateProject(null));
     dispatch(setCurrentProject(null));
     formReset();
+  };
+
+  const handleOverlayClick = () => {
+    if (projectOpen && (isNewProject || isUpdateProject)) {
+      handleClose();
+    }
+  };
+
+  const handleContentClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation(); 
   };
 
   const handleProjectSubmit = async (_id?: string) => {
@@ -156,7 +164,8 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({project}) => {
   };
 
   return (
-    <div className={`new-project-pop ${projectOpen && (isNewProject||isUpdateProject)? "new-project-pop--open" : ""}`}>
+    <div className={`new-project-pop__overlay ${projectOpen && (isNewProject || isUpdateProject) ? 'new-project-pop__overlay--open' : ''}`} onClick={handleOverlayClick}>
+    <div className={`new-project-pop ${projectOpen && (isNewProject||isUpdateProject)? "new-project-pop--open" : ""}`} onClick={handleContentClick}>
       <form className="new-project-pop__form" autoComplete="off">
         <div className="new-project-pop__title">New Project</div>
         <div className="new-project-pop__content">
@@ -254,8 +263,8 @@ const NewProjectPop: React.FC<NewProjectPopProps> = ({project}) => {
         </div>
       </form>
     </div>
+    </div>
   );
-
 };
 
 export default NewProjectPop;
