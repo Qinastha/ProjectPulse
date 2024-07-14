@@ -1,29 +1,28 @@
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks";
-import { getProfile } from "../store/projectsSlice";
-import { useEffect } from "react";
+import { getProfile } from "../store/userSlice";
+import { ReactElement, useEffect } from "react";
 
 interface PrivateRouteProps {
-  children: any;
+  children: ReactElement;
 }
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const navigate = useNavigate();
-  let isAuthenticated = localStorage.getItem("token");
+  const isAuthenticated = localStorage.getItem("token");
   const profile = useAppSelector(getProfile);
 
-    useEffect(() => {
-        if(!isAuthenticated) {
-            navigate("/login");
-        }
-        if(isAuthenticated&&!profile) {
-            navigate("/profile/create");
-        }
-        else {
-            navigate("/");
-        }
-
-    }, [isAuthenticated, profile]);
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+    if (isAuthenticated && !profile) {
+      navigate("/profile/create");
+    }
+    // if (isAuthenticated && profile) {
+    //   navigate("/");
+    // }
+  }, [isAuthenticated, profile]);
 
   return isAuthenticated && profile ? children : null;
 };

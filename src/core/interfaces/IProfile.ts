@@ -1,7 +1,7 @@
 import { UserAddress } from "./userAdress";
 
 export interface IProfile {
-  avatar: string;
+  avatar: string | null;
   phoneNumber: string;
   gender: string;
   address: UserAddress;

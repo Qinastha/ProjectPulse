@@ -1,35 +1,35 @@
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./Layout.css";
-import { useState } from "react";
-import { NewProjectPop } from "./NewProjectPop";
-import PinkBlossom from "../assets/PinkBlossom.png";
+import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
+import "./Layout.scss";
+import {useState} from "react";
+import NewProjectPop from "./NewProjectPop";
+import pinkBlossom from "../assets/pinkBlossom.png";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {setProjectOpen, setIsNewProject, setIsUpdateProject} from "../store/projectSlice";
 
-export const Layout: React.FC = () => {
-  const { pathname } = useLocation();
-  const [isExpand, setIsExpand] = useState(true);
-  const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+export const Layout: React.FC=() => {
+  const {pathname}=useLocation();
+  const [isExpand, setIsExpand]=useState(true);
+  const [isOpen, setIsOpen]=useState(false);
+  const navigate=useNavigate();
+  const dispatch=useAppDispatch();
 
-  const toggleNav = (): void => {
+
+  const toggleNav=(): void => {
     setIsExpand(!isExpand);
   };
 
-  const handleClickOpen = (): void => {
-    setOpen(true);
+  const handleOpen=(): void => {
+    dispatch(setProjectOpen(true));
+    dispatch(setIsNewProject(true));
   };
 
-  const handleClose = (): void => {
-    setOpen(false);
-  };
-
-  const handleLogout = (): void => {
+  const handleLogout=(): void => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
-  const getPageTitle = (pathname: string): string => {
-    switch (pathname) {
+  const getPageTitle=(pathname: string): string => {
+    switch(pathname) {
       case "/":
         return "Dashboard";
       case "/projects":
@@ -47,26 +47,29 @@ export const Layout: React.FC = () => {
       case "/settings/app":
         return "Global Settings";
       case "/settings/profile":
-        return "User Settings";
+        return "Profile Settings";
       default:
         return "Unknown";
     }
   };
+
   return (
     <div className="container">
-      <header className={`navbar ${isExpand ? "" : "notExpanded"}`}>
+      <header className={`navbar ${isExpand? "":"notExpanded"}`}>
         <div className="navButtons">
           <button className="collapseButton" type="button" onClick={toggleNav}>
             &#8656;
           </button>
-          <button type="button" onClick={handleClickOpen}>
-            {" "}
+          <button
+            className="newProjectButton"
+            type="button"
+            onClick={handleOpen}>
             Create New Project
           </button>
         </div>
 
         <div>
-          <NewProjectPop handleClose={handleClose} open={open} />
+          <NewProjectPop />
         </div>
 
         <NavLink to="/"> Dashboard </NavLink>
@@ -87,18 +90,20 @@ export const Layout: React.FC = () => {
               <div className="dropdown-container">
                 <img
                   className="settingIcon"
-                  src={PinkBlossom}
-                  alt="Setiings"
+                  src={pinkBlossom}
+                  alt="Settings"
                   onClick={(): void => setIsOpen(!isOpen)}
                 />
-                {isOpen && (
+                {isOpen&&(
                   <div className="dropdown-menu">
                     <NavLink to="/settings/app"> Global Settings</NavLink>
-                    <NavLink to="/settings/profile"> Global Settings</NavLink>
+                    <NavLink to="/settings/profile"> Profile Settings</NavLink>
                   </div>
                 )}
               </div>
-              <button onClick={handleLogout}>LogOut</button>
+              <button className="logoutButton" onClick={handleLogout}>
+                LogOut
+              </button>
             </div>
           </div>
         </div>

@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./Auth.scss";
+import { Google } from "@mui/icons-material";
+import { GitHub } from "@mui/icons-material";
+import { Apple } from "@mui/icons-material";
+import { useAppSelector } from "../../hooks";
+import {getProfile} from "../../store/userSlice";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const profile = useAppSelector(getProfile)
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") && profile) {
       navigate("/");
     }
   }, []);
@@ -25,8 +31,8 @@ const Login: React.FC = () => {
         },
       );
 
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
+      if (response?.data?.value) {
+        localStorage.setItem("token", response.data.value);
         alert("Login successful");
         navigate("/");
       } else {
@@ -41,12 +47,22 @@ const Login: React.FC = () => {
   return (
     <div className="loginContainer">
       <form onSubmit={handleLogin}>
-        <h2>Login</h2>
+        <h1>Login</h1>
+        <p>
+          Or if you dont have an account then you can{" "}
+          <span
+            className="registerLink"
+            onClick={(): void => navigate("/register")}>
+            move to registration page
+          </span>
+        </p>
         <div>
           <label>Email:</label>
           <input
             type="email"
+            name="email"
             value={email}
+            placeholder="Please enter your email address"
             onChange={e => setEmail(e.target.value)}
             required
           />
@@ -55,18 +71,31 @@ const Login: React.FC = () => {
           <label>Password:</label>
           <input
             type="password"
+            name="password"
             value={password}
+            placeholder="Please enter your password"
             onChange={e => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Login</button>
-        <button
-          className="goRegistration"
-          onClick={(): void => navigate("/register")}>
-          Move to registration page
+        <button className="loginButton" type="submit">
+          Login
         </button>
       </form>
+      <div className="authSocialButtons">
+        <span className="orText">or</span>
+        <div className="socialIcons">
+          <a href="#">
+            <Google style={{ fontSize: 40 }} />
+          </a>
+          <a href="#">
+            <GitHub style={{ fontSize: 40 }} />
+          </a>
+          <a href="#">
+            <Apple style={{ fontSize: 40 }} />
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

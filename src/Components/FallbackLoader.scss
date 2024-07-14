@@ -1,0 +1,35 @@
+$primary-color: #ffb6c1;
+$secondary-color: #ffe4e1;
+$text-color: #333;
+$background-color: #fefefe;
+$font-family: "Noto Sans JP", sans-serif;
+$box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+.fallback-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $background-color;
+  font-family: $font-family;
+  color: $text-color;
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top-color: $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+    @include box-shadow($box-shadow);
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
