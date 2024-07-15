@@ -12,8 +12,10 @@ import {
   getLanguage,
   getTimezone,
 } from "../../store/dataSlice";
-import { DragAvatar } from "../../Components/DragAvatar";
+import { DragAvatar } from "../../Components/DragAvatar/DragAvatar";
 import { FormData } from "../../core/interfaces/formData";
+import {PulseForm} from "../../Components/PulseForm/PulseForm";
+import {REQUIRED_INPUTS} from "../../core/constants/profileInputs.constant";
 
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +27,8 @@ export const ProfileSettings: React.FC = () => {
   const timezones = useAppSelector(getTimezone);
   const [errors, setErrors] = useState<any>({});
 
-  const [formData, setFormData] = useState <Omit<FormData, "avatar">>({
+  const [formData, setFormData] = useState <FormData>({
+    avatar:"",
     phoneNumber: "",
     gender: "",
     address: {
@@ -39,9 +42,24 @@ export const ProfileSettings: React.FC = () => {
     timeZone: "",
   });
 
+  const requiredInputs = REQUIRED_INPUTS;
+  const inputValues = [
+    avatar,
+    formData.phoneNumber,
+    formData.gender,
+    formData.address.street,
+    formData.address.street2,
+    formData.address.city,
+    formData.address.country,
+    formData.address.zipCode,
+    formData.language,
+    formData.timeZone,
+  ]
+
   const initializeFormData = () => {
     if (profile) {
       setFormData({
+        avatar: profile.avatar || "",
         phoneNumber: profile.phoneNumber || "",
         gender: profile.gender || "",
         address: {
@@ -66,7 +84,7 @@ export const ProfileSettings: React.FC = () => {
       dispatch(fetchLanguages());
       dispatch(fetchTimezones());
     }
-  }, [navigate, dispatch, profile, avatar]);
+  }, [navigate, dispatch, profile]);
 
   const validateFormData = () => {
     let formIsValid = true;
@@ -133,6 +151,33 @@ export const ProfileSettings: React.FC = () => {
     }));
   };
 
+  const handleFile = (file:File) => {
+    console.log(file)
+    if (!file) {
+      return;
+    }
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onloadend = async () => {
+    //   const response = await axios.post(
+    //     "http://localhost:4000/api/profile/uploadAvatar",
+    //     { avatar: reader.result },
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //         "Content-Type": "application/json",
+    //       },
+    //     },
+    //   );
+    //   if (response.data.value) {
+    //     dispatch(updateProfile(response.data.value));
+    //     setFormData({...formData, avatar: response.data.value.avatar });
+    //   } else {
+    //     alert("Failed to update avatar");
+    //   }
+    // };
+  }
+
   const handleSubmit = async () => {
     if (!validateFormData()) {
       return;
@@ -141,7 +186,7 @@ export const ProfileSettings: React.FC = () => {
       const response = await axios.put(
         "http://localhost:4000/api/profile/update",
         {
-          avatar,
+          avatar: formData.avatar,
           phoneNumber: formData.phoneNumber,
           gender: formData.gender,
           address: {
@@ -200,7 +245,16 @@ export const ProfileSettings: React.FC = () => {
 
   return (
     <div className="profileContainer">
-      <h2> Please provide an information about yourself</h2>
+      <PulseForm 
+      requiredInputs={requiredInputs}
+      inputValues={inputValues}
+      formTitle={ "Please provide an information about yourself"}
+      errors={errors}
+      onChange={updateFormData}
+      handleFile={handleFile}
+
+       />
+      {/* <h2> Please provide an information about yourself</h2>
       <form className="profileForm" >
         <div>
           <label>Avatar</label>
@@ -333,7 +387,7 @@ export const ProfileSettings: React.FC = () => {
           {" "}
           Save Changes{" "}
         </button>
-      </form>
+      </form> */}
       <button type="button" onClick={handleDelete} className="deleteUserButton">
         {" "}
         Delete User{" "}

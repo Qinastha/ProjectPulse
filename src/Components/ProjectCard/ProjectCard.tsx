@@ -1,5 +1,5 @@
-import {IProject, IMember} from "../core/interfaces/IProject";
-import NewProjectPop from '../Components/NewProjectPop';
+import {IProject, IMember} from "../../core/interfaces/IProject";
+import PopUp from "../PopUp/PopUp";
 
 interface ProjectCardProps {
   project: IProject;
@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpd
         </button>
       </div>
       <div>
-      <NewProjectPop />
+        <PopUp />
       </div>
     </div>
   );

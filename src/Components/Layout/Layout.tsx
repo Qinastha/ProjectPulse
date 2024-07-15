@@ -1,10 +1,11 @@
 import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import "./Layout.scss";
 import {useState} from "react";
-import NewProjectPop from "./NewProjectPop";
-import pinkBlossom from "../assets/pinkBlossom.png";
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {setProjectOpen, setIsNewProject, setIsUpdateProject} from "../store/projectSlice";
+import pinkBlossom from "../../assets/pinkBlossom.png"
+import {useAppDispatch} from "../../hooks";
+import {setProjectOpen, setIsNewProject} from "../../store/projectSlice";
+import PopUp from "../PopUp/PopUp";
+
 
 export const Layout: React.FC=() => {
   const {pathname}=useLocation();
@@ -69,7 +70,7 @@ export const Layout: React.FC=() => {
         </div>
 
         <div>
-          <NewProjectPop />
+          <PopUp />
         </div>
 
         <NavLink to="/"> Dashboard </NavLink>

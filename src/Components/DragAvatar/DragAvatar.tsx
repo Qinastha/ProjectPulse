@@ -1,16 +1,18 @@
 import {useCallback, useState, useEffect} from "react";
-import {setAvatar, getAvatar} from "../store/userSlice";
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {getIsNewProject, getIsUpdateProject, getProjectOpen} from "../store/projectSlice";
+import {setAvatar, getAvatar} from "../../store/userSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getIsNewProject, getIsUpdateProject, getProjectOpen} from "../../store/projectSlice";
 
 interface DragAvatarProps {
-  handleAddLogo?: (e: string) => void;
   projectAvatar?: string;
+  handleAddLogo?: (e: string) => void;
+  handleFile?: (e: string) => void;
 }
 
 export const DragAvatar: React.FC<DragAvatarProps>=({
   handleAddLogo,
   projectAvatar,
+  handleFile,
 }) => {
   const dispatch=useAppDispatch();
   const projectOpen=useAppSelector(getProjectOpen);
@@ -38,8 +40,9 @@ export const DragAvatar: React.FC<DragAvatarProps>=({
       if(reader.result) {
         console.log("FileReader result:", reader.result);
         if(!projectOpen) {
-          dispatch(setAvatar(reader.result as string));
+          // dispatch(setAvatar(reader.result as string));
           setUserAvatar(reader.result as string);
+          handleFile?.(reader.result as string);
         }
         if(isNewProject||isUpdateProject) {
           handleAddLogo?.(reader.result as string);

@@ -12,7 +12,7 @@ import {
   getLanguage,
   getTimezone,
 } from "../../store/dataSlice";
-import { DragAvatar } from "../../Components/DragAvatar";
+import { DragAvatar } from "../../Components/DragAvatar/DragAvatar";
 import { FormData } from "../../core/interfaces/formData";
 
 export const ProfileCreate: React.FC = () => {

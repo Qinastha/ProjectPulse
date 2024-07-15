@@ -3,7 +3,6 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import { Layout } from "./Components/Layout";
 import { Dashboard } from "./Pages/Dashboard";
 import { Projects } from "./Pages/Projects";
 import { Tasks } from "./Pages/Tasks";
@@ -14,11 +13,11 @@ import { ProjectTemplate } from "./Pages/ProjectTemplate";
 import { AppSetings } from "./Pages/AppSetings";
 import { Login } from "./Pages/Auth/Login";
 import { Register } from "./Pages/Auth/Register";
-import { PrivateRoute } from "./Components/PrivateRout";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { ProfileCreate } from "./Pages/Profile/ProfileCreate";
 import { ProfileSettings } from "./Pages/Profile/ProfileSettings";
 import { userDataloader } from "./loaders";
+import { Layout, PrivateRoute } from "./Components";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

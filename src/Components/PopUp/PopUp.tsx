@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "./NewProjectPop.scss";
-import { DragAvatar } from "./DragAvatar";
-import { useAppDispatch, useAppSelector, useDebounce } from "../hooks";
+import "./PopUp.scss";
+import { DragAvatar } from "../DragAvatar/DragAvatar";
+import { useAppDispatch, useAppSelector, useDebounce } from "../../hooks";
 import {
   fetchAllProjects,
   getAllMembers,
@@ -15,10 +15,10 @@ import {
   getIsNewProject,
   setIsNewProject,
   setCurrentProject
-} from "../store/projectSlice";
-import { IMember } from "../core/interfaces/IProject";
+} from "../../store/projectSlice";
+import { IMember } from "../../core/interfaces/IProject";
 
-const NewProjectPop: React.FC = () => {
+const PopUp: React.FC = () => {
   const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
 
@@ -267,4 +267,4 @@ const NewProjectPop: React.FC = () => {
   );
 };
 
-export default NewProjectPop;
+export default PopUp;
