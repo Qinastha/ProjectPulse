@@ -123,11 +123,6 @@ export const project=createSlice({
                 state.currentProject=project as CurrentProject;
             }
         }),
-        setCurrentProjectAvatar: create.reducer((state, action: PayloadAction<string>) => {
-            if(state.currentProject) {
-                state.currentProject.projectAvatar=action.payload;
-            }
-        }),
     }),
     selectors: {
         getProjectState: (state) => state,
@@ -139,7 +134,6 @@ export const project=createSlice({
         getProjectStatus: (state) => state.status,
         getAllMembers: (state) => state.members,
         getCurrentProject: (state) => state.currentProject,
-        getCurrentProjectAvatar: (state) => state.currentProject?.projectAvatar,
     },
     extraReducers: (builder) => {
         builder.addCase(fetchAllProjects.pending, (state) => {
@@ -186,8 +180,8 @@ export const project=createSlice({
     },
 });
 
-export const {setProjectOpen, setIsUpdateProject, setCurrentProject, setIsNewProject, setIsInitialProject, setCurrentProjectAvatar}=project.actions;
+export const {setProjectOpen, setIsUpdateProject, setCurrentProject, setIsNewProject, setIsInitialProject}=project.actions;
 
-export const {getProjectState, getProjectOpen, getIsUpdateProject, getProjectStatus, getProjects, getAllMembers, getCurrentProject, getIsNewProject, getIsInitialProject, getCurrentProjectAvatar }=project.selectors;
+export const {getProjectState, getProjectOpen, getIsUpdateProject, getProjectStatus, getProjects, getAllMembers, getCurrentProject, getIsNewProject, getIsInitialProject }=project.selectors;
 
 export default project.reducer;
