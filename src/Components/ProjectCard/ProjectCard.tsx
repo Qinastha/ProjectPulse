@@ -1,4 +1,4 @@
-import {IProject, IMember} from "../../core/interfaces/IProject";
+import { IProject, IMember } from "../../core/interfaces/IProject";
 import PopUp from "../PopUp/PopUp";
 
 interface ProjectCardProps {
@@ -7,7 +7,11 @@ interface ProjectCardProps {
   handleUpdateProjectOpen: (_id: string) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpdateProjectOpen}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  handleDelete,
+  handleUpdateProjectOpen,
+}) => {
   return (
     <div key={project._id} className="projects-container__card">
       <img
@@ -22,9 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpd
         <p className="projects-container__card-description">
           {project.projectDescription}
         </p>
-        <p className="projects-container__card-tasks">
-          Tasks: {project.tasks}
-        </p>
+        <p className="projects-container__card-tasks">Tasks: {project.tasks}</p>
         <p className="projects-container__card-date">
           Created At: {new Date(project.createdAt).toLocaleDateString()}
         </p>
@@ -35,27 +37,25 @@ const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpd
           Started At: {new Date(project.startedAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-date">
-          Completed At:{" "}
-          {new Date(project.completedAt).toLocaleDateString()}
+          Completed At: {new Date(project.completedAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-status">
-          Status: {project.isCompleted? "Completed":"In Progress"}
+          Status: {project.isCompleted ? "Completed" : "In Progress"}
         </p>
         <p className="projects-container__card-creator">
           Creator: {project.creator.firstName}
         </p>
         <p className="projects-container__card-members-title">Members:</p>
         <ul className="projects-container__card-members-list">
-          {project.members&&project.members.length>0? (
+          {project.members && project.members.length > 0 ? (
             project.members.map((member: IMember) => (
               <li
                 key={member.userName}
-                className="projects-container__card-members-item"
-              >
+                className="projects-container__card-members-item">
                 {member.firstName} {member.lastName}
               </li>
             ))
-          ):(
+          ) : (
             <li className="projects-container__card-members-item">
               No members
             </li>
@@ -63,10 +63,13 @@ const ProjectCard: React.FC<ProjectCardProps>=({project, handleDelete, handleUpd
         </ul>
       </div>
       <div className="projects-container__card-buttons">
-        <button className="projects-container__edit-button"
-          onClick={() => handleUpdateProjectOpen(project._id)}
-        >Edit</button>
-        <button className="projects-container__delete-button"
+        <button
+          className="projects-container__edit-button"
+          onClick={() => handleUpdateProjectOpen(project._id)}>
+          Edit
+        </button>
+        <button
+          className="projects-container__delete-button"
           onClick={() => handleDelete(project._id)}>
           Delete
         </button>

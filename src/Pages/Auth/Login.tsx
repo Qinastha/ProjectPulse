@@ -6,13 +6,25 @@ import { Google } from "@mui/icons-material";
 import { GitHub } from "@mui/icons-material";
 import { Apple } from "@mui/icons-material";
 import { useAppSelector } from "../../hooks";
-import {getProfile} from "../../store/userSlice";
+import { getProfile } from "../../store/userSlice";
+import { PulseForm } from "../../Components/PulseForm/PulseForm";
+import { LOGIN_REQUIRED_INPUTS } from "../../core/constants/loginInputs.constants";
+import { RegisterFormData } from "../../core/interfaces/registerFormData";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const profile = useAppSelector(getProfile)
+  const profile = useAppSelector(getProfile);
+  const [errors, setErrors] = useState<any>({});
+
+  const [loginFormData, setLoginFormData] = useState<Partial<RegisterFormData>>(
+    {
+      email: "",
+      password: "",
+    },
+  );
+
+  const requiredInputs = LOGIN_REQUIRED_INPUTS;
+  const inputValues = [loginFormData.email, loginFormData.password];
 
   useEffect(() => {
     if (localStorage.getItem("token") && profile) {
@@ -20,14 +32,41 @@ const Login: React.FC = () => {
     }
   }, []);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateForm = () => {
+    let formIsValid = true;
+    const newErrors: any = {};
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(loginFormData.email!)) {
+      newErrors.email = "Invalid email address.";
+      formIsValid = false;
+    }
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,16}$/;
+    if (!passwordRegex.test(loginFormData.password!)) {
+      newErrors.password =
+        "Password must contain at least one capital letter and one number, and be at least 8 characters long.";
+      formIsValid = false;
+    }
+    setErrors(newErrors);
+    return formIsValid;
+  };
+
+  const updateLoginFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginFormData({ ...loginFormData, [name]: value });
+  };
+
+  const handleLogin = async () => {
+    if (!validateForm()) {
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:4000/api/auth/login",
         {
-          email,
-          password,
+          email: loginFormData.email,
+          password: loginFormData.password,
         },
       );
 
@@ -46,42 +85,30 @@ const Login: React.FC = () => {
 
   return (
     <div className="loginContainer">
-      <form onSubmit={handleLogin}>
-        <h1>Login</h1>
-        <p>
-          Or if you dont have an account then you can{" "}
-          <span
-            className="registerLink"
-            onClick={(): void => navigate("/register")}>
-            move to registration page
-          </span>
-        </p>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Please enter your email address"
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Please enter your password"
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button className="loginButton" type="submit">
-          Login
-        </button>
-      </form>
+      <PulseForm
+        requiredInputs={requiredInputs}
+        inputValues={inputValues}
+        formTitle={"Login to your account"}
+        errors={errors}
+        onChange={e => updateLoginFormData(e)}
+      />
+
+      <p>
+        If you already have an account then{" "}
+        <span
+          className="registerLink"
+          onClick={(): void => navigate("/register")}>
+          move to registration page
+        </span>
+      </p>
+
+      <button
+        className="loginButton"
+        type="button"
+        onClick={() => handleLogin()}>
+        Login
+      </button>
+
       <div className="authSocialButtons">
         <span className="orText">or</span>
         <div className="socialIcons">

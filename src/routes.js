@@ -24,26 +24,26 @@ const router = createBrowserRouter(
     <Route>
       <Route
         path="/"
-        loader={ userDataloader }
+        loader={userDataloader}
         element={
           <PrivateRoute>
             <Layout />
           </PrivateRoute>
         }>
-        <Route index element={ <Dashboard /> } />
-        <Route path="projects" element={ <Projects /> } />
-        <Route path="tasks" element={ <Tasks /> } />
-        <Route path="logs" element={ <TimeLog /> } />
-        <Route path="resources" element={ <ResourceMgnt /> } />
-        <Route path="users" element={ <Users /> } />
-        <Route path="templates" element={ <ProjectTemplate /> } />
-        <Route path="settings/app" element={ <AppSetings /> } />
-        <Route path="settings/profile" element={ <ProfileSettings /> } />
+        <Route index element={<Dashboard />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path="tasks" element={<Tasks />} />
+        <Route path="logs" element={<TimeLog />} />
+        <Route path="resources" element={<ResourceMgnt />} />
+        <Route path="users" element={<Users />} />
+        <Route path="templates" element={<ProjectTemplate />} />
+        <Route path="settings/app" element={<AppSetings />} />
+        <Route path="settings/profile" element={<ProfileSettings />} />
       </Route>
-      <Route path="login" element={ <Login /> } />
-      <Route path="register" element={ <Register /> } />
-      <Route path="profile/create" element={ <ProfileCreate /> } />
-      <Route path="*" element={ <PageNotFound /> } />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="profile/create" element={<ProfileCreate />} />
+      <Route path="*" element={<PageNotFound />} />
     </Route>,
   ),
 );

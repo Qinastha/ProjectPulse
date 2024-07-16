@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 import { ReactElement, useEffect } from "react";
-import {useAppSelector} from "../../hooks";
-import {getProfile} from "../../store/userSlice";
+import { useAppSelector } from "../../hooks";
+import { getProfile } from "../../store/userSlice";
 
 interface PrivateRouteProps {
   children: ReactElement;
