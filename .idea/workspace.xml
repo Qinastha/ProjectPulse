@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/FallBackLoader/FallbackLoader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/FallBackLoader/FallbackLoader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectCard/ProjectCard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Projects.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectCard/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectCard/ProjectCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/PulseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/PulseForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/PulseFormInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/PulseFormInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ProfileCreate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ProfileCreate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ProfileSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ProfileSettings.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/constants/profileInputs.constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/profileInputs.constant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/interfaces/formData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/profileFormData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/projectSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/projectSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/userSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/userSlice.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Qinastha&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AntoxaAlex/ProjectPulse.git&quot;,
+    &quot;accountId&quot;: &quot;384a766d-acda-48b0-bda4-e818ed36e420&quot;
+  }
+}</component>
+  <component name="JsBowerSettings">
+    <bower-package value="" />
+    <bower.json value="" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2jK4duERybRGW0IFWuTWbQbBoQ4" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-customForm&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;/Users/qinastha/Downloads/Projects/projectpulsejp/node_modules/eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/qinastha/Downloads/Projects/projectpulsejp/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Pages" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="" />
+      <created>1721122533919</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721122533919</updated>
+      <workItem from="1721122535807" duration="1139000" />
+      <workItem from="1721123723636" duration="942000" />
+      <workItem from="1721125220638" duration="3751000" />
+      <workItem from="1721131086186" duration="297000" />
+      <workItem from="1721131398644" duration="426000" />
+      <workItem from="1721131843375" duration="653000" />
+      <workItem from="1721132514825" duration="2606000" />
+      <workItem from="1721136110822" duration="6579000" />
+      <workItem from="1721159891406" duration="275000" />
+      <workItem from="1721202807394" duration="3003000" />
+      <workItem from="1721205916102" duration="698000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Implemented custom form" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+</project>

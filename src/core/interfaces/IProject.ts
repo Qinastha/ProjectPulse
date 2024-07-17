@@ -27,5 +27,5 @@ export interface CurrentProject extends IProject {
   projectName: string;
   projectDescription: string;
   projectAvatar: string;
-  members:IMember[];
+  members: IMember[];
 }

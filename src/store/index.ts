@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./userSlice";
-import project from './projectSlice';
+import project from "./projectSlice";
 import data from "./dataSlice";
 
 const store = configureStore({

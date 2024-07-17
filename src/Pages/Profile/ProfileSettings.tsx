@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { updateProfile, getProfile, getAvatar } from "../../store/userSlice";
+import { getProfile, updateProfile } from "../../store/userSlice";
 import axios from "axios";
 import "./Profile.scss";
 import { useNavigate } from "react-router-dom";
@@ -8,27 +8,18 @@ import {
   fetchCountries,
   fetchLanguages,
   fetchTimezones,
-  getCountry,
-  getLanguage,
-  getTimezone,
 } from "../../store/dataSlice";
-import { DragAvatar } from "../../Components/DragAvatar/DragAvatar";
-import { FormData } from "../../core/interfaces/formData";
-import {PulseForm} from "../../Components/PulseForm/PulseForm";
-import {REQUIRED_INPUTS} from "../../core/constants/profileInputs.constant";
+import { PulseForm } from "../../Components";
+import { PROFILE_REQUIRED_INPUTS, ProfileFormData } from "../../core";
 
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const profile = useAppSelector(getProfile);
-  const avatar = useAppSelector(getAvatar);
-  const countries = useAppSelector(getCountry);
-  const languages = useAppSelector(getLanguage);
-  const timezones = useAppSelector(getTimezone);
   const [errors, setErrors] = useState<any>({});
 
-  const [formData, setFormData] = useState <FormData>({
-    avatar:"",
+  const [formData, setFormData] = useState<ProfileFormData>({
+    avatar: "",
     phoneNumber: "",
     gender: "",
     address: {
@@ -42,9 +33,9 @@ export const ProfileSettings: React.FC = () => {
     timeZone: "",
   });
 
-  const requiredInputs = REQUIRED_INPUTS;
+  const requiredInputs = PROFILE_REQUIRED_INPUTS;
   const inputValues = [
-    avatar,
+    formData.avatar,
     formData.phoneNumber,
     formData.gender,
     formData.address.street,
@@ -54,7 +45,7 @@ export const ProfileSettings: React.FC = () => {
     formData.address.zipCode,
     formData.language,
     formData.timeZone,
-  ]
+  ];
 
   const initializeFormData = () => {
     if (profile) {
@@ -151,37 +142,34 @@ export const ProfileSettings: React.FC = () => {
     }));
   };
 
-  const handleFile = (file:File) => {
-    console.log(file)
+  const handleFile = async (file: string) => {
+    console.log(file);
     if (!file) {
       return;
     }
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onloadend = async () => {
-    //   const response = await axios.post(
-    //     "http://localhost:4000/api/profile/uploadAvatar",
-    //     { avatar: reader.result },
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //         "Content-Type": "application/json",
-    //       },
-    //     },
-    //   );
-    //   if (response.data.value) {
-    //     dispatch(updateProfile(response.data.value));
-    //     setFormData({...formData, avatar: response.data.value.avatar });
-    //   } else {
-    //     alert("Failed to update avatar");
-    //   }
-    // };
-  }
+    const response = await axios.post(
+      "http://localhost:4000/api/profile/uploadAvatar",
+      { avatar: file },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data) {
+      dispatch(updateProfile(response.data.value));
+      setFormData({ ...formData, avatar: response.data.value });
+    } else {
+      alert("Failed to update avatar");
+    }
+  };
 
   const handleSubmit = async () => {
     if (!validateFormData()) {
       return;
     }
+    console.log(formData);
     try {
       const response = await axios.put(
         "http://localhost:4000/api/profile/update",
@@ -245,149 +233,22 @@ export const ProfileSettings: React.FC = () => {
 
   return (
     <div className="profileContainer">
-      <PulseForm 
-      requiredInputs={requiredInputs}
-      inputValues={inputValues}
-      formTitle={ "Please provide an information about yourself"}
-      errors={errors}
-      onChange={updateFormData}
-      handleFile={handleFile}
+      <PulseForm
+        requiredInputs={requiredInputs}
+        inputValues={inputValues}
+        formTitle={"Please provide an information about yourself"}
+        errors={errors}
+        onChange={e => updateFormData(e)}
+        handleFile={e => handleFile(e)}
+      />
+      <button
+        type="button"
+        onClick={() => handleSubmit()}
+        className="submitButton">
+        {" "}
+        Save Changes{" "}
+      </button>
 
-       />
-      {/* <h2> Please provide an information about yourself</h2>
-      <form className="profileForm" >
-        <div>
-          <label>Avatar</label>
-          <DragAvatar />
-        </div>
-        <div>
-          <label>Phone Number</label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            className={errors.phoneNumber ? "errorInput" : ""}
-            value={formData.phoneNumber}
-            onChange={e => updateFormData(e)}
-          />
-          {errors.phoneNumber && (
-            <span className="errorText">{errors.phoneNumber}</span>
-          )}
-        </div>
-
-        <div>
-          <label>Gender</label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={e => updateFormData(e)}>
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Non-binary</option>
-          </select>
-        </div>
-        <div>
-          <label>Street</label>
-          <input
-            type="text"
-            name="street"
-            className={errors.street ? "errorInput" : ""}
-            value={formData.address.street}
-            onChange={e => updateFormData(e)}
-          />
-          {errors.street && <span className="errorText">{errors.street}</span>}
-        </div>
-        <div>
-          <label>Street2</label>
-          <input
-            type="text"
-            name="street2"
-            className={errors.street2 ? "errorInput" : ""}
-            value={formData.address.street2}
-            onChange={e => updateFormData(e)}
-          />
-          {errors.street2 && (
-            <span className="errorText">{errors.street2}</span>
-          )}
-        </div>
-        <div>
-          <label>City</label>
-          <input
-            type="text"
-            name="city"
-            className={errors.city ? "errorInput" : ""}
-            value={formData.address.city}
-            onChange={e => updateFormData(e)}
-          />
-          {errors.city && <span className="errorText">{errors.city}</span>}
-        </div>
-        <div>
-          <label>Country</label>
-          <select
-            name="country"
-            value={formData.address.country}
-            onChange={e => updateFormData(e)}>
-            <option value="">Select your country</option>
-            {countries.map(country => (
-              <option key={country.code} value={country.name}>
-                {country.flag}
-                {country.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Zip code</label>
-          <input
-            type="text"
-            name="zipCode"
-            className={errors.zipCode ? "errorInput" : ""}
-            value={formData.address.zipCode}
-            onChange={e => updateFormData(e)}
-          />
-          {errors.zipCode && (
-            <span className="errorText">{errors.zipCode}</span>
-          )}
-        </div>
-        <div>
-          <label>Preffered Language</label>
-          <select
-            name="language"
-            value={formData.language}
-            onChange={e => updateFormData(e)}>
-            <option value="">Select your language</option>
-            {languages.map(language => (
-              <option key={language.code} value={language.name}>
-                {language.flag}
-                {language.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Choose your timezone</label>
-          <select
-            name="timeZone"
-            value={formData.timeZone}
-            onChange={e => updateFormData(e)}
-            required>
-            <option value="">Select your timezone</option>
-            {timezones.map(timezone => (
-              <option key={timezone.name} value={timezone.gmt}>
-                {timezone.zone}
-                {timezone.gmt}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button
-          type="button"
-          onClick={() => handleSubmit()}
-          className="submitButton">
-          {" "}
-          Save Changes{" "}
-        </button>
-      </form> */}
       <button type="button" onClick={handleDelete} className="deleteUserButton">
         {" "}
         Delete User{" "}

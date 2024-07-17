@@ -1,36 +1,36 @@
-import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Layout.scss";
-import {useState} from "react";
-import pinkBlossom from "../../assets/pinkBlossom.png"
-import {useAppDispatch} from "../../hooks";
-import {setProjectOpen, setIsNewProject} from "../../store/projectSlice";
+import React, { useState } from "react";
+import pinkBlossom from "../../assets/pinkBlossom.png";
+import { useAppDispatch } from "../../hooks";
+import { setIsNewProject, setProjectOpen } from "../../store/projectSlice";
 import PopUp from "../PopUp/PopUp";
+import { setUserInitial } from "../../store/userSlice";
 
+export const Layout: React.FC = () => {
+  const { pathname } = useLocation();
+  const [isExpand, setIsExpand] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-export const Layout: React.FC=() => {
-  const {pathname}=useLocation();
-  const [isExpand, setIsExpand]=useState(true);
-  const [isOpen, setIsOpen]=useState(false);
-  const navigate=useNavigate();
-  const dispatch=useAppDispatch();
-
-
-  const toggleNav=(): void => {
+  const toggleNav = (): void => {
     setIsExpand(!isExpand);
   };
 
-  const handleOpen=(): void => {
+  const handleOpen = (): void => {
     dispatch(setProjectOpen(true));
     dispatch(setIsNewProject(true));
   };
 
-  const handleLogout=(): void => {
+  const handleLogout = (): void => {
     localStorage.removeItem("token");
     navigate("/login");
+    dispatch(setUserInitial(true));
   };
 
-  const getPageTitle=(pathname: string): string => {
-    switch(pathname) {
+  const getPageTitle = (pathname: string): string => {
+    switch (pathname) {
       case "/":
         return "Dashboard";
       case "/projects":
@@ -56,7 +56,7 @@ export const Layout: React.FC=() => {
 
   return (
     <div className="container">
-      <header className={`navbar ${isExpand? "":"notExpanded"}`}>
+      <header className={`navbar ${isExpand ? "" : "notExpanded"}`}>
         <div className="navButtons">
           <button className="collapseButton" type="button" onClick={toggleNav}>
             &#8656;
@@ -95,7 +95,7 @@ export const Layout: React.FC=() => {
                   alt="Settings"
                   onClick={(): void => setIsOpen(!isOpen)}
                 />
-                {isOpen&&(
+                {isOpen && (
                   <div className="dropdown-menu">
                     <NavLink to="/settings/app"> Global Settings</NavLink>
                     <NavLink to="/settings/profile"> Profile Settings</NavLink>
