@@ -5,31 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/FallBackLoader/FallbackLoader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/FallBackLoader/FallbackLoader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ProjectCard/ProjectCard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Projects.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ProjectCard/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectCard/ProjectCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/PulseForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/PulseForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/PulseFormInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/PulseFormInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ProfileCreate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ProfileCreate.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ProfileSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ProfileSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Projects.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/constants/profileInputs.constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/profileInputs.constant.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/interfaces/formData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/profileFormData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/loaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/projectSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/projectSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/constants/popUpInputs.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/popUpInputs.constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/userSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/userSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +54,7 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -137,6 +121,7 @@
       <workItem from="1721159891406" duration="275000" />
       <workItem from="1721202807394" duration="3003000" />
       <workItem from="1721205916102" duration="698000" />
+      <workItem from="1721217420289" duration="5423000" />
     </task>
     <servers />
   </component>

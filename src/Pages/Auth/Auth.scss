@@ -69,13 +69,16 @@ $font-family: "Noto Sans JP", sans-serif;
 
   input,
   select {
-    width: 100%;
-    padding: 10px 0;
+    width: 95%;
+    padding: 10px 10px;
     margin-bottom: 0.3rem;
     border: 1px solid $border-color;
     border-radius: 5px;
     font-size: 12px;
     background-color: $secondary-color;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 
     &::placeholder {
       color: #aaa;
