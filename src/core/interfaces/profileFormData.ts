@@ -1,4 +1,4 @@
-export interface FormData {
+export interface ProfileFormData {
   avatar?: File | string;
   phoneNumber: string;
   gender: string;

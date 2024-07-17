@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 
 interface DragFileProps {
   projectAvatar?: string;

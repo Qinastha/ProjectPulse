@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
-import { Google } from "@mui/icons-material";
-import { GitHub } from "@mui/icons-material";
-import { Apple } from "@mui/icons-material";
-import { RegisterFormData } from "../../core/interfaces/registerFormData";
-import { REGISTER_REQUIRED_INPUTS } from "../../core/constants/registerInputs.constants";
-import { PulseForm } from "../../Components/PulseForm/PulseForm";
+import { Apple, GitHub, Google } from "@mui/icons-material";
+import { PulseForm } from "../../Components";
+import { REGISTER_REQUIRED_INPUTS, RegisterFormData } from "../../core";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -102,7 +99,10 @@ const Register: React.FC = () => {
 
   const updateRegisterFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setRegisterFormData({ ...registerFormData, [name]: value });
+    setRegisterFormData((prevState: RegisterFormData) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleRegister = async () => {

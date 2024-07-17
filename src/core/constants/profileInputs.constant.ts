@@ -1,6 +1,6 @@
 import { RequiredInput } from "../interfaces/requireInput";
 
-export const REQUIRED_INPUTS: RequiredInput[] = [
+export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
   {
     type: "file",
     name: "avatar",

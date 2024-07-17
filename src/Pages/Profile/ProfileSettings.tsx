@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { updateProfile, getProfile } from "../../store/userSlice";
+import { getProfile, updateProfile } from "../../store/userSlice";
 import axios from "axios";
 import "./Profile.scss";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +9,8 @@ import {
   fetchLanguages,
   fetchTimezones,
 } from "../../store/dataSlice";
-import { FormData } from "../../core/interfaces/formData";
-import { PulseForm } from "../../Components/PulseForm/PulseForm";
-import { REQUIRED_INPUTS } from "../../core/constants/profileInputs.constant";
+import { PulseForm } from "../../Components";
+import { PROFILE_REQUIRED_INPUTS, ProfileFormData } from "../../core";
 
 export const ProfileSettings: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +18,7 @@ export const ProfileSettings: React.FC = () => {
   const profile = useAppSelector(getProfile);
   const [errors, setErrors] = useState<any>({});
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<ProfileFormData>({
     avatar: "",
     phoneNumber: "",
     gender: "",
@@ -34,7 +33,7 @@ export const ProfileSettings: React.FC = () => {
     timeZone: "",
   });
 
-  const requiredInputs = REQUIRED_INPUTS;
+  const requiredInputs = PROFILE_REQUIRED_INPUTS;
   const inputValues = [
     formData.avatar,
     formData.phoneNumber,

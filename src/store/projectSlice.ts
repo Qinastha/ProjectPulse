@@ -1,15 +1,11 @@
 import {
-  IProject,
-  IMember,
-  CurrentProject,
-} from "./../core/interfaces/IProject";
-import {
   createAsyncThunk,
   createSlice,
   PayloadAction,
   ReducerCreators,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { CurrentProject, IMember, IProject } from "../core";
 
 export interface IProjectState {
   projects: IProject[];

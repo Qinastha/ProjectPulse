@@ -1,13 +1,12 @@
 import { IProfile } from "../core/interfaces/IProfile";
 import {
-  PayloadAction,
-  ReducerCreators,
   createAsyncThunk,
   createSlice,
+  PayloadAction,
+  ReducerCreators,
 } from "@reduxjs/toolkit";
-import { UserRole } from "../core/types/userRole.type";
-import { UserPosition } from "../core/types/userPosition";
 import axios from "axios";
+import { UserPosition, UserRole } from "../core";
 
 export interface IUser {
   email: string;

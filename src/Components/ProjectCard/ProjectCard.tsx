@@ -1,5 +1,6 @@
-import { IProject, IMember } from "../../core/interfaces/IProject";
 import PopUp from "../PopUp/PopUp";
+import React from "react";
+import { IMember, IProject } from "../../core";
 
 interface ProjectCardProps {
   project: IProject;
@@ -7,7 +8,7 @@ interface ProjectCardProps {
   handleUpdateProjectOpen: (_id: string) => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
+export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   handleDelete,
   handleUpdateProjectOpen,
@@ -80,5 +81,3 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     </div>
   );
 };
-
-export default ProjectCard;

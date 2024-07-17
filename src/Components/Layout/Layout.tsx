@@ -1,10 +1,11 @@
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Layout.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 import pinkBlossom from "../../assets/pinkBlossom.png";
 import { useAppDispatch } from "../../hooks";
-import { setProjectOpen, setIsNewProject } from "../../store/projectSlice";
+import { setIsNewProject, setProjectOpen } from "../../store/projectSlice";
 import PopUp from "../PopUp/PopUp";
+import { setUserInitial } from "../../store/userSlice";
 
 export const Layout: React.FC = () => {
   const { pathname } = useLocation();
@@ -25,6 +26,7 @@ export const Layout: React.FC = () => {
   const handleLogout = (): void => {
     localStorage.removeItem("token");
     navigate("/login");
+    dispatch(setUserInitial(true));
   };
 
   const getPageTitle = (pathname: string): string => {

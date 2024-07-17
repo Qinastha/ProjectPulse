@@ -1,5 +1,6 @@
 import { PulseFormInput } from "./PulseFormInput";
-import { RequiredInput } from "../../core/interfaces/requireInput";
+import React from "react";
+import { RequiredInput } from "../../core";
 
 interface PulseFormProps {
   requiredInputs: RequiredInput[];

@@ -1,5 +1,6 @@
-import { RequiredInput } from "../../core/interfaces/requireInput";
 import { DragFile } from "../DragAvatar/DragAvatar";
+import React from "react";
+import { RequiredInput } from "../../core";
 
 interface PulsefFormInput {
   inputData: RequiredInput;

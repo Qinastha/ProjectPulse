@@ -1,29 +1,26 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./PopUp.scss";
 import { useAppDispatch, useAppSelector, useDebounce } from "../../hooks";
 import {
   fetchAllProjects,
-  getAllMembers,
-  getProjectOpen,
-  getIsUpdateProject,
-  setProjectOpen,
-  setIsUpdateProject,
-  getCurrentProject,
   fetchProjectById,
+  getAllMembers,
+  getCurrentProject,
   getIsNewProject,
-  setIsNewProject,
+  getIsUpdateProject,
+  getProjectOpen,
   setCurrentProject,
+  setIsNewProject,
+  setIsUpdateProject,
+  setProjectOpen,
 } from "../../store/projectSlice";
-import { IMember } from "../../core/interfaces/IProject";
+import { updateProfile } from "../../store/userSlice";
+import { IMember, POPUP_REQUIRED_INPUTS, PopUpFormData } from "../../core";
 
 const PopUp: React.FC = () => {
   const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
-
-  const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
-  const [projectAvatar, setProjectAvatar] = useState("");
 
   const allMembers = useAppSelector(getAllMembers);
   const currentProject = useAppSelector(getCurrentProject);
@@ -31,28 +28,47 @@ const PopUp: React.FC = () => {
   const [memberSearch, setMemberSearch] = useState("");
   const debouncedMembers = useDebounce(memberSearch, 500);
   const [filteredMembers, setFilteredMembers] = useState<IMember[]>([]);
-  const [selectedMembers, setSelectedMembers] = useState<IMember[]>([]);
 
   const projectOpen = useAppSelector(getProjectOpen);
   const isNewProject = useAppSelector(getIsNewProject);
   const isUpdateProject = useAppSelector(getIsUpdateProject);
 
+  const [popUpFormData, setPopUpFormData] = useState<PopUpFormData>({
+    projectName: "",
+    projectDescription: "",
+    projectAvatar: null,
+    selectedMembers: [],
+  });
+
   const formReset = () => {
-    setProjectName("");
-    setProjectDescription("");
-    setSelectedMembers([]);
+    setPopUpFormData({
+      projectName: "",
+      projectDescription: "",
+      projectAvatar: null,
+      selectedMembers: [],
+    });
     setMemberSearch("");
   };
+
+  const requiredInputs = POPUP_REQUIRED_INPUTS;
+  const inputValue = [
+    popUpFormData.projectName,
+    popUpFormData.projectDescription,
+    popUpFormData.projectAvatar,
+    popUpFormData.selectedMembers.map((member: IMember) => member.userName),
+  ];
 
   useEffect(() => {
     if (currentProject?._id && isUpdateProject) {
       if (isUpdateProject) {
         dispatch(fetchProjectById(currentProject._id));
       }
-      setProjectName(currentProject.projectName || "");
-      setProjectDescription(currentProject.projectDescription || "");
-      setProjectAvatar(currentProject.projectAvatar || "");
-      setSelectedMembers(currentProject.members || []);
+      setPopUpFormData({
+        projectName: currentProject.projectName || "",
+        projectDescription: currentProject.projectDescription || "",
+        projectAvatar: currentProject.projectAvatar || "",
+        selectedMembers: currentProject.members || [],
+      });
     } else {
       formReset();
     }
@@ -74,7 +90,7 @@ const PopUp: React.FC = () => {
             member.email
               .toLowerCase()
               .includes(debouncedMembers.toLowerCase())) &&
-          !selectedMembers.some(
+          !popUpFormData.selectedMembers.some(
             selectedMember => selectedMember.userName === member.userName,
           )
         );
@@ -83,22 +99,60 @@ const PopUp: React.FC = () => {
     } else {
       setFilteredMembers([]);
     }
-  }, [debouncedMembers, allMembers, selectedMembers]);
+  }, [debouncedMembers, allMembers, popUpFormData.selectedMembers]);
+
+  const handleUpdateProject = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
+    setPopUpFormData((prevState: PopUpFormData) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleAddMember = (member: IMember) => {
-    setSelectedMembers([...selectedMembers, member]);
+    setPopUpFormData((prevState: PopUpFormData) => ({
+      ...prevState,
+      selectedMembers: [...prevState.selectedMembers, member],
+    }));
     setFilteredMembers([]);
     setMemberSearch("");
   };
 
   const handleRemoveMember = (userName: string) => {
-    setSelectedMembers(
-      selectedMembers.filter(member => member.userName !== userName),
-    );
+    setPopUpFormData((prevState: PopUpFormData) => ({
+      ...prevState,
+      selectedMembers: prevState.selectedMembers.filter(
+        member => member.userName !== userName,
+      ),
+    }));
   };
 
-  const handleAddLogo = (e: string) => {
-    setProjectAvatar(e);
+  const handleFile = async (file: string) => {
+    console.log(file);
+    if (!file) {
+      return;
+    }
+    const response = await axios.post(
+      "http://localhost:4000/api/project/***",
+      { avatar: file },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data) {
+      dispatch(updateProfile(response.data.value));
+      setPopUpFormData({
+        ...popUpFormData,
+        projectAvatar: response.data.value,
+      });
+    } else {
+      alert("Failed to update avatar");
+    }
   };
 
   const handleClose = () => {
@@ -127,10 +181,10 @@ const PopUp: React.FC = () => {
         const response = await axios.post(
           "http://localhost:4000/api/project/new",
           {
-            projectName,
-            projectDescription,
-            projectAvatar,
-            members: selectedMembers,
+            projectName: popUpFormData.projectName,
+            projectDescription: popUpFormData.projectDescription,
+            projectAvatar: popUpFormData.projectAvatar,
+            members: popUpFormData.selectedMembers,
           },
           {
             headers: {
@@ -148,10 +202,10 @@ const PopUp: React.FC = () => {
         const response = await axios.put(
           `http://localhost:4000/api/project/update/${_id}`,
           {
-            projectName,
-            projectDescription,
-            projectAvatar,
-            members: selectedMembers,
+            projectName: popUpFormData.projectName,
+            projectDescription: popUpFormData.projectDescription,
+            projectAvatar: popUpFormData.projectAvatar,
+            members: popUpFormData.selectedMembers,
           },
           {
             headers: {
@@ -194,8 +248,8 @@ const PopUp: React.FC = () => {
               name="projectName"
               placeholder="Project Name"
               type="text"
-              value={projectName}
-              onChange={e => setProjectName(e.target.value)}
+              value={popUpFormData.projectName}
+              onChange={e => handleUpdateProject(e)}
               autoComplete="off"
             />
             <input
@@ -204,8 +258,8 @@ const PopUp: React.FC = () => {
               name="projectDescription"
               placeholder="Project Description"
               type="text"
-              value={projectDescription}
-              onChange={e => setProjectDescription(e.target.value)}
+              value={popUpFormData.projectDescription}
+              onChange={e => handleUpdateProject(e)}
               autoComplete="off"
             />
             {/* <div>
@@ -241,9 +295,9 @@ const PopUp: React.FC = () => {
             </div>
             <div className="new-project-pop__selected-members">
               <div className="new-project-pop__text">Selected Members:</div>
-              {selectedMembers.length > 0 && (
+              {popUpFormData.selectedMembers.length > 0 && (
                 <div className="new-project-pop__selected-list">
-                  {selectedMembers.map((member: IMember) => (
+                  {popUpFormData.selectedMembers.map((member: IMember) => (
                     <div
                       key={member.userName}
                       className="new-project-pop__selected-member">

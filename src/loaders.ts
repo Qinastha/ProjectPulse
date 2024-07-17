@@ -1,7 +1,7 @@
 import {
-  reqUser,
   getUser,
   getUserInitial,
+  reqUser,
   setUserInitial,
 } from "./store/userSlice";
 import store from "./store";
@@ -41,7 +41,7 @@ const membersLoader = async () => {
   return allMembers;
 };
 
-export const userDataloader = async () => {
+export const userDataLoader = async () => {
   const [user, members] = await Promise.all([userLoader(), membersLoader()]);
   return { user, members };
 };

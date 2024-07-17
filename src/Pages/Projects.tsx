@@ -1,18 +1,17 @@
-import { useEffect } from "react";
-import { IProject } from "../core/interfaces/IProject";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
-  getProjects,
-  projectDelete,
   fetchAllProjects,
-  setIsUpdateProject,
-  setCurrentProject,
-  setProjectOpen,
+  getProjects,
   getProjectStatus,
+  projectDelete,
+  setCurrentProject,
+  setIsUpdateProject,
+  setProjectOpen,
 } from "../store/projectSlice";
-import "../Components/ProjectCard/ProjectCard.scss";
-import { FallbackLoader } from "../Components/FallBackLoader/FallbackLoader";
-import ProjectCard from "../Components/ProjectCard/ProjectCard";
+import "./Projects.scss";
+import { FallbackLoader, ProjectCard } from "../Components";
+import { IProject } from "../core";
 
 export const Projects: React.FC = () => {
   const dispatch = useAppDispatch();

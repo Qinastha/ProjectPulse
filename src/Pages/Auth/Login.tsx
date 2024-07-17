@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
-import { Google } from "@mui/icons-material";
-import { GitHub } from "@mui/icons-material";
-import { Apple } from "@mui/icons-material";
+import { Apple, GitHub, Google } from "@mui/icons-material";
 import { useAppSelector } from "../../hooks";
 import { getProfile } from "../../store/userSlice";
-import { PulseForm } from "../../Components/PulseForm/PulseForm";
-import { LOGIN_REQUIRED_INPUTS } from "../../core/constants/loginInputs.constants";
-import { RegisterFormData } from "../../core/interfaces/registerFormData";
+import { PulseForm } from "../../Components";
+import { LOGIN_REQUIRED_INPUTS, RegisterFormData } from "../../core";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -54,7 +51,10 @@ const Login: React.FC = () => {
 
   const updateLoginFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginFormData({ ...loginFormData, [name]: value });
+    setLoginFormData((prevState: Partial<RegisterFormData>) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleLogin = async () => {

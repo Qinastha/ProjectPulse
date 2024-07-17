@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useAppSelector } from "../../hooks";
 import { getProfile } from "../../store/userSlice";
 
@@ -10,7 +10,7 @@ interface PrivateRouteProps {
 
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const navigate = useNavigate();
-  const isAuthenticated = localStorage.getItem("token");
+  const isAuthenticated = !!localStorage.getItem("token");
   const profile = useAppSelector(getProfile);
 
   useEffect(() => {
