@@ -80,17 +80,19 @@ $sakura-active-border-color: #ff9eb0;
   &__content {
     display: flex;
     flex-direction: column;
-  }
 
-  &__text {
-    color: $text-muted;
-    margin-bottom: 10px;
+    .new-project-pop__content-field {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   &__input {
     margin-bottom: 15px;
     padding: 10px;
-    border: 0.5px solid $text-color; // Adjust border thickness
+    border: 0.5px solid $text-color;
     border-radius: 5px;
     font-family: $font-family;
     transition: border-color 0.3s ease;

@@ -5,4 +5,4 @@ export * from "./ProjectCard/ProjectCard";
 export * from "./PopUp/PopUp";
 export * from "./PrivateRout/PrivateRoute";
 export * from "./PulseForm/PulseForm";
-export * from "./PulseForm/PulseFormInput";
+export * from "./PulseForm/PulseFormItem";
