@@ -1,8 +1,8 @@
-import { IMember } from "./IProject";
+import {IMember} from "./IProject";
 
 export interface PopUpFormData {
-  projectName: string;
-  projectDescription: string;
-  projectAvatar: string | null;
-  selectedMembers: IMember[];
+    projectName: string;
+    projectDescription: string;
+    projectAvatar: string | null;
+    members: IMember[];
 }
