@@ -2,10 +2,11 @@ import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
 import "./Layout.scss";
 import React, {useState} from "react";
 import pinkBlossom from "../../assets/pinkBlossom.png";
-import {useAppDispatch} from "../../hooks";
 import {setIsNewProject} from "../../store/projectSlice";
 import PopUp from "../PopUp/PopUp";
 import {setProfileNull, setUserInitial} from "../../store/userSlice";
+import {useAppDispatch} from "../../hooks";
+
 
 export const Layout: React.FC = () => {
     const {pathname} = useLocation();

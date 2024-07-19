@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import "./PopUp.scss";
-import {useAppDispatch, useAppSelector} from "../../hooks";
 import {
     fetchAllProjects,
     fetchProjectById,
@@ -14,6 +13,7 @@ import {
 import {updateProfile} from "../../store/userSlice";
 import {POPUP_REQUIRED_INPUTS, PopUpFormData, postData, putData} from "../../core";
 import {PulseForm} from "../PulseForm/PulseForm";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
 const PopUp: React.FC = () => {
     const dispatch = useAppDispatch();

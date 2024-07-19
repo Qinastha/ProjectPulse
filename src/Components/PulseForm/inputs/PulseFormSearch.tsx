@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {IMember} from "../../../core";
+import {IMember, useDebounce} from "../../../core";
 import {PulseFormInput, PulseFormInputProps} from "./PulseFormInput";
-import {useAppSelector, useDebounce} from "../../../hooks";
 import {getAllMembers} from "../../../store/projectSlice";
+import {useAppSelector} from "../../../hooks";
 
 interface PulseFormSearchProps extends PulseFormInputProps {
 }

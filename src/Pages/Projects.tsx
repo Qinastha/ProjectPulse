@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../hooks";
 import {
-  fetchAllProjects,
-  getProjects,
-  getProjectStatus,
-  projectDelete,
-  setCurrentProject,
-  setIsUpdateProject,
+    fetchAllProjects,
+    getProjects,
+    getProjectStatus,
+    projectDelete,
+    setCurrentProject,
+    setIsUpdateProject,
 } from "../store/projectSlice";
 import "./Projects.scss";
 import {FallbackLoader, ProjectCard} from "../Components";
 import {IProject} from "../core";
+import {useAppDispatch, useAppSelector} from "../hooks";
 
 export const Projects: React.FC = () => {
     const dispatch = useAppDispatch();

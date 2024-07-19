@@ -6,7 +6,7 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
         name: "avatar",
         className: "form-control",
         required: true,
-        label: "Profile.tsx Picture",
+        label: "Profile Picture",
     },
     {
         type: "text",

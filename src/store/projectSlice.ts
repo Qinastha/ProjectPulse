@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction, ReducerCreators,} from "@reduxjs/toolkit";
-import axios from "axios";
-import {CurrentProject, IMember, IProject} from "../core";
+import {CurrentProject, deleteData, getData, IMember, IProject} from "../core";
 
 export interface IProjectState {
     projects: IProject[];
@@ -24,20 +23,11 @@ const initialState: IProjectState = {
 
 export const fetchAllProjects = createAsyncThunk(
     "project/fetchAllProjects",
-    async (_, thunkAPI) => {
+    async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:4000/api/project/all",
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        "Content-Type": "application/json",
-                    },
-                },
-            );
-            if (response.data) {
-                console.log(response.data);
-                return response.data.value as IProject[];
+            const response = await getData("project/all")
+            if (response?.value) {
+                return response.value as IProject[];
             }
         } catch (error) {
             console.error("Error fetching projects:", error);
@@ -48,19 +38,10 @@ export const fetchAllProjects = createAsyncThunk(
 
 export const fetchProjectById = createAsyncThunk(
     "project/fetchProjectById",
-    async (_id: string, thunkAPI) => {
+    async (_id: string) => {
         try {
-            const response = await axios.get(
-                `http://localhost:4000/api/project/${_id}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        "Content-Type": "application/json",
-                    },
-                },
-            );
-            console.log(response);
-            return response.data.value as CurrentProject;
+            const response = await getData(`project/${_id}`)
+            return response.value as CurrentProject;
         } catch (error) {
             console.error("Error fetching project:", error);
             throw error;
@@ -70,16 +51,10 @@ export const fetchProjectById = createAsyncThunk(
 
 export const fetchAllMembers = createAsyncThunk(
     "users/fetchAllUsers",
-    async (_, thunkAPI) => {
+    async () => {
         try {
-            const response = await axios.get("http://localhost:4000/api/user/all", {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    "Content-Type": "application/json",
-                },
-            });
-            console.log(response.data);
-            return response.data.value as IMember[];
+            const response = await getData("user/all")
+            return response.value as IMember[];
         } catch (error) {
             console.error("Error fetching members:", error);
             throw error;
@@ -89,14 +64,9 @@ export const fetchAllMembers = createAsyncThunk(
 
 export const projectDelete = createAsyncThunk(
     "project/deleteProject",
-    async (_id: string, thunkAPI) => {
+    async (_id: string) => {
         try {
-            await axios.delete(`http://localhost:4000/api/project/delete/${_id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    "Content-Type": "application/json",
-                },
-            });
+            await deleteData(`project/delete/${_id}`);
             return _id;
         } catch (error) {
             console.error("Error deleting project:", error);
