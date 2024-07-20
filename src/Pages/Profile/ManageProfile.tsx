@@ -1,7 +1,7 @@
 import React from "react";
 import { getProfile } from "../../store/userSlice";
 import { PulseForm } from "../../Components";
-import "./Profile.scss";
+import "./ManageProfile.scss";
 import { useAppSelector } from "../../hooks";
 import { useProfileForm } from "../../core";
 

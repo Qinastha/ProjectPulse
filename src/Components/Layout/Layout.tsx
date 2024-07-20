@@ -1,7 +1,6 @@
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "./Layout.scss";
 import React, { useState } from "react";
-import pinkBlossom from "../../assets/pinkBlossom.png";
 import PopUp from "../PopUp/PopUp";
 import { setStateNull, setUserInitial } from "../../store/userSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -10,9 +9,11 @@ import {
   setPopUpMode,
   togglePopUp,
 } from "../../store/popUpSlice";
+import { setCurrentProjectNull } from "../../store/projectSlice";
+import { Navbar } from "../../core/components/Navbar/Navbar";
+import { FixedHeader } from "../../core/components/fixedHeader/FixedHeader";
 
 export const Layout: React.FC = () => {
-  const { pathname } = useLocation();
   const [isNavbarExpand, setIsNavbarExpand] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const popUpState = useAppSelector(getPopUpState);
@@ -25,7 +26,7 @@ export const Layout: React.FC = () => {
     setIsNavbarExpand(!isNavbarExpand);
   };
 
-  const handleOpen = (): void => {
+  const handlePopUpOpen = (): void => {
     dispatch(togglePopUp(true));
     dispatch(setPopUpMode("create"));
   };
@@ -37,75 +38,35 @@ export const Layout: React.FC = () => {
     dispatch(setStateNull());
   };
 
-  const getPageTitle = (pathname: string): string => {
-    switch (pathname) {
-      case "/":
-        return "Dashboard";
-      case "/projects":
-        return "Projects";
-      case "/tasks":
-        return "Tasks";
-      case "/settings/profile":
-        return "Profile Settings";
-      default:
-        return "Unknown";
-    }
-  };
-
   return (
     <div className="layoutContainer">
       <header className={`navbar ${isNavbarExpand ? "" : "notExpanded"}`}>
-        <div className="navButtons">
-          <button className="collapseButton" type="button" onClick={toggleNav}>
-            &#8656;
-          </button>
-          <button
-            className="newProjectButton"
-            type="button"
-            onClick={handleOpen}>
-            Create New Project
-          </button>
+        <Navbar handlePopUpOpen={handlePopUpOpen} toggleNav={toggleNav} />
+      </header>
+
+      <main>
+        <div
+          className="coreContent"
+          onMouseLeave={(): void => setIsMenuOpen(false)}>
+          <FixedHeader
+            isMenuOpen={isMenuOpen}
+            handleLogout={handleLogout}
+            setIsMenuOpen={e => setIsMenuOpen(e)}
+          />
         </div>
 
         {isPopUpOpen && (
           <div>
             <PopUp
               mode={popUpMode}
-              handleClosePopUp={() => dispatch(togglePopUp(false))}
+              handleClosePopUp={() => {
+                dispatch(togglePopUp(false));
+                dispatch(setCurrentProjectNull());
+              }}
             />
           </div>
         )}
 
-        <NavLink to="/"> Dashboard </NavLink>
-        <NavLink to="/projects"> Projects </NavLink>
-        <NavLink to="/tasks"> Tasks </NavLink>
-      </header>
-
-      <main>
-        <div className="coreContent">
-          <div className="heading">
-            <h1>{getPageTitle(pathname)}</h1>
-            <div className="headingRightPart">
-              <input type="text" placeholder="Search for anything..." />
-              <div className="dropdown-container">
-                <img
-                  className="settingIcon"
-                  src={pinkBlossom}
-                  alt="Settings"
-                  onClick={(): void => setIsMenuOpen(!isMenuOpen)}
-                />
-                {isMenuOpen && (
-                  <div className="dropdown-menu">
-                    <NavLink to="/settings/profile"> Profile Settings</NavLink>
-                  </div>
-                )}
-              </div>
-              <button className="logoutButton" onClick={handleLogout}>
-                LogOut
-              </button>
-            </div>
-          </div>
-        </div>
         <div className="outlet">
           <Outlet />
         </div>

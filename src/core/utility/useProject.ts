@@ -1,10 +1,9 @@
 import { POPUP_REQUIRED_INPUTS } from "../constants/popUpInputs.constants";
-import { fetchAllProjects, setCurrentProject } from "../../store/projectSlice";
+import { fetchAllProjects } from "../../store/projectSlice";
 import { postData, putData } from "../requests/httpRequests";
 import { useAppDispatch } from "../../hooks";
 import { PopUpFormData } from "../interfaces/popUpFormData";
 import React, { useState } from "react";
-import { togglePopUp } from "../../store/popUpSlice";
 
 export const useProjectForm = (
   initialFormData: PopUpFormData,
@@ -51,8 +50,6 @@ export const useProjectForm = (
   };
 
   const handleClose = () => {
-    dispatch(setCurrentProject(null));
-    dispatch(togglePopUp(false));
     setPopUpFormData({
       ...popUpFormData,
       projectName: "",

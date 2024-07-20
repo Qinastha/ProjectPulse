@@ -105,7 +105,13 @@ export const useProfileForm = (
     if (!file) return;
     const response = await postData("core/uploadImage", { avatar: file });
     if (response?.value) {
+      console.log(response);
       setFormData({ ...formData, avatar: response.value });
+      // dispatch(setAlert({
+      //     message: response.alert.message,
+      //     alertType: response.alert.alertType,
+      //     showUser: response.alert.showUser
+      // }));
     } else {
       alert("Failed to update avatar");
     }

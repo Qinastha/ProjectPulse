@@ -1,0 +1,11 @@
+.pulse-form {
+  display: flex;
+  flex-direction: column;
+
+  .pulse-form-fields {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

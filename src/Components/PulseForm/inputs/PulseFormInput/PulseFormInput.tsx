@@ -1,5 +1,6 @@
 import React from "react";
-import { RequiredInput } from "../../../core";
+import { RequiredInput } from "../../../../core";
+import "./PulseFormInput.scss";
 
 export interface PulseFormInputProps {
   inputData: RequiredInput;
@@ -13,12 +14,12 @@ export const PulseFormInput: React.FC<PulseFormInputProps> = ({
   inputValue,
   onChange,
 }) => {
-  const { type, name, required, autoComplete, className, min, max } = inputData;
+  const { type, name, required, autoComplete, min, max } = inputData;
   return (
     <input
       type={type}
       name={name}
-      className={className}
+      className="pulse-form-input"
       required={required}
       value={inputValue}
       onChange={e => onChange(e)}

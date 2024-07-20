@@ -5,6 +5,7 @@ import { ManageProject } from "../Project/ManageProject";
 export interface PopUpProps {
   mode: "create" | "update";
   handleClosePopUp: () => void;
+  handleClose?: () => void;
 }
 
 const PopUp: React.FC<PopUpProps> = ({ mode, handleClosePopUp }) => {
@@ -15,7 +16,7 @@ const PopUp: React.FC<PopUpProps> = ({ mode, handleClosePopUp }) => {
   };
 
   return (
-    <div className="popUp__overlay" onClick={handleClosePopUp}>
+    <div className="popUp__overlay" onClick={() => handleClosePopUp()}>
       <div className="popUp__content" onClick={handleContentClick}>
         <ManageProject mode={mode} handleClosePopUp={handleClosePopUp} />
       </div>

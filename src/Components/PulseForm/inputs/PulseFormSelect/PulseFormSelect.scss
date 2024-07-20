@@ -1,0 +1,21 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.project-pulse-select {
+  @include base-input-styles;
+  @include custom-arrow;
+
+  & option {
+    padding: 10px;
+    background-color: $background-color;
+    color: $text-color;
+
+    &:hover {
+      background-color: lighten($background-color, 5%);
+    }
+
+    &:checked {
+      background-color: darken($background-color, 5%);
+    }
+  }
+}

@@ -1,9 +1,10 @@
-import { DragFile } from "../DragAvatar/DragAvatar";
+import "./PulseFormItem.scss";
 import React from "react";
-import { RequiredInput } from "../../core";
-import { PulseFormInput } from "./inputs/PulseFormInput";
-import { PulseFormSelect } from "./inputs/PulseFormSelect";
-import { PulseFormSearch } from "./inputs/PulseFormSearch";
+import { RequiredInput } from "../../../core";
+import { DragFile } from "../../DragAvatar/DragAvatar";
+import { PulseFormInput } from "../inputs/PulseFormInput/PulseFormInput";
+import { PulseFormSelect } from "../inputs/PulseFormSelect/PulseFormSelect";
+import { PulseFormSearch } from "../inputs/ProjectPulseFormSearch/PulseFormSearch";
 
 interface PulseFormItemProp {
   inputData: RequiredInput;

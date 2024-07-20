@@ -1,0 +1,22 @@
+@import "../../assets/styles/variables";
+
+.dragAvatar {
+  border: 2px dotted $primary-color;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  img {
+    max-width: 50%;
+    height: auto;
+  }
+
+  input {
+    display: none;
+
+    &:hover {
+      background-color: lighten($primary-color, 5%);
+    }
+  }
+}

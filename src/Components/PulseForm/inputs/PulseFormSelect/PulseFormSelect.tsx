@@ -1,5 +1,6 @@
 import React from "react";
-import { RequiredInput } from "../../../core";
+import { RequiredInput } from "../../../../core";
+import "./PulseFormSelect.scss";
 
 interface PulseFormSelectProps {
   inputData: RequiredInput;
@@ -14,7 +15,11 @@ export const PulseFormSelect: React.FC<PulseFormSelectProps> = ({
 }) => {
   const { name, required, options } = inputData;
   return (
-    <select name={name} onChange={onChange} required={required}>
+    <select
+      name={name}
+      onChange={onChange}
+      required={required}
+      className="project-pulse-select">
       <option value="">Select one</option>
       {options?.map((option: any, index: number) => (
         <option

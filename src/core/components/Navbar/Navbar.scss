@@ -1,0 +1,36 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.navButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.collapseButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: $text-color;
+  margin-bottom: 20px;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.newProjectButton {
+  padding: 10px;
+  background-color: $primary-color;
+  border: none;
+  @include border-radius(5px);
+  color: $pulse-white;
+  cursor: pointer;
+  @include transition(all, 0.3s);
+
+  &:hover {
+    background-color: lighten($primary-color, 5%);
+    transform: scale(1.05);
+  }
+}

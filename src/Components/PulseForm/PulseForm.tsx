@@ -1,14 +1,13 @@
-import { PulseFormItem } from "./PulseFormItem";
+import { PulseFormItem } from "./PulseFormItem/PulseFormItem";
 import React from "react";
 import { RequiredInput } from "../../core";
+import "./PulseForm.scss";
 
 interface PulseFormProps {
   requiredInputs: RequiredInput[];
   inputValues: any[];
   formTitle: string;
   errors?: string[];
-  formClassName?: string;
-  inputClassName?: string;
   onChange: (e: any) => void;
   handleFile?: (e: string) => void;
 }
@@ -18,13 +17,11 @@ export const PulseForm: React.FC<PulseFormProps> = ({
   inputValues,
   formTitle,
   errors,
-  formClassName,
-  inputClassName,
   onChange,
   handleFile,
 }) => {
   return (
-    <div className={formClassName}>
+    <div className="pulse-form">
       <h2>{formTitle}</h2>
       <form>
         {requiredInputs.map((inputData: any, index: number) => (
@@ -33,7 +30,7 @@ export const PulseForm: React.FC<PulseFormProps> = ({
             inputData={inputData}
             inputValue={inputValues[index]}
             errors={errors}
-            className={inputClassName}
+            className="pulse-form-fields"
             onChange={e => onChange(e)}
             handleFile={e => handleFile!(e)}
           />

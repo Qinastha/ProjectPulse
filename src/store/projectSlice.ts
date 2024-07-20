@@ -16,8 +16,6 @@ export interface IProjectState {
   projects: IProject[];
   members: IMember[];
   currentProject: CurrentProject | null;
-  isNewProject: boolean | null;
-  isUpdateProject: boolean | null;
   status: "idle" | "loading" | "resolved" | "rejected";
   isInitial: boolean;
 }
@@ -26,8 +24,6 @@ const initialState: IProjectState = {
   projects: [],
   members: [],
   currentProject: null,
-  isNewProject: null,
-  isUpdateProject: null,
   status: "idle",
   isInitial: true,
 };
@@ -95,16 +91,6 @@ export const project = createSlice({
         return { ...state, isInitial: action.payload };
       },
     ),
-    setIsNewProject: create.reducer(
-      (state, action: PayloadAction<boolean | null>) => {
-        state.isNewProject = action.payload;
-      },
-    ),
-    setIsUpdateProject: create.reducer(
-      (state, action: PayloadAction<boolean | null>) => {
-        state.isUpdateProject = action.payload;
-      },
-    ),
     setCurrentProject: create.reducer(
       (state, action: PayloadAction<string | null>) => {
         const project = state.projects.find(
@@ -115,13 +101,14 @@ export const project = createSlice({
         }
       },
     ),
+    setCurrentProjectNull: create.reducer(state => {
+      state.currentProject = null;
+    }),
   }),
   selectors: {
     getProjectState: state => state,
     getProjects: state => state.projects,
     getIsInitialProject: state => state.isInitial,
-    getIsNewProject: state => state.isNewProject,
-    getIsUpdateProject: state => state.isUpdateProject,
     getProjectStatus: state => state.status,
     getAllMembers: state => state.members,
     getCurrentProject: state => state.currentProject,
@@ -181,21 +168,15 @@ export const project = createSlice({
   },
 });
 
-export const {
-  setIsUpdateProject,
-  setCurrentProject,
-  setIsNewProject,
-  setIsInitialProject,
-} = project.actions;
+export const { setCurrentProject, setIsInitialProject, setCurrentProjectNull } =
+  project.actions;
 
 export const {
   getProjectState,
-  getIsUpdateProject,
   getProjectStatus,
   getProjects,
   getAllMembers,
   getCurrentProject,
-  getIsNewProject,
   getIsInitialProject,
 } = project.selectors;
 

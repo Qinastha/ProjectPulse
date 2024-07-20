@@ -1,0 +1,94 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+@media (max-width: 768px) {
+  .profileContainer {
+    max-width: 90%;
+  }
+}
+
+.profileContainer {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 10px 20px;
+  background-color: $background-color;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  font-family: $font-family;
+
+  form div::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: $pulse-white;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+    color: $text-color;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 10rem;
+      height: 2px;
+      background-color: $primary-color;
+      margin: 10px auto 0;
+    }
+  }
+
+  .submitButton {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: $primary-color;
+    color: $pulse-white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0.5rem 0;
+
+    &:hover {
+      background-color: lighten($primary-color, 5%);
+    }
+
+    &::after {
+      content: " ⛩️";
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+
+  .deleteUserButton {
+    background-color: $delete-color;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    @include box-shadow($box-shadow);
+    margin-top: 15px;
+
+    &:hover {
+      background-color: $delete-color-hover;
+    }
+
+    &:active {
+      background-color: $delete-color-active;
+    }
+
+    &:focus {
+      outline: none;
+      @include box-shadow($delete-color-focus);
+    }
+  }
+}

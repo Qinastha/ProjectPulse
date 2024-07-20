@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import "./DragAvatar.scss";
 
 interface DragFileProps {
   projectAvatar?: string;

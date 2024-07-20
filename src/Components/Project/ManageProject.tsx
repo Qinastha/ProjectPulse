@@ -17,7 +17,7 @@ export const ManageProject: React.FC<PopUpProps> = ({
     if (currentProject && mode === "update") {
       dispatch(fetchProjectById(currentProject._id));
     }
-  }, [currentProject, dispatch, mode]);
+  }, [dispatch, mode]);
 
   const initialFormData = {
     projectName: currentProject?.projectName || "",
@@ -46,8 +46,6 @@ export const ManageProject: React.FC<PopUpProps> = ({
             ? "Add information for new project"
             : "Update project info"
         }
-        formClassName={"project-pop__content"}
-        inputClassName={"project-pop__content-field"}
         onChange={e => handleUpdateProject(e)}
         handleFile={handleFile}
       />
@@ -55,7 +53,7 @@ export const ManageProject: React.FC<PopUpProps> = ({
         <button
           type="button"
           className="project-pop__button"
-          onClick={handleClose}>
+          onClick={() => handleClosePopUp()}>
           {" "}
           Cancel
         </button>
