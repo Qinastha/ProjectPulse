@@ -1,25 +1,25 @@
-import axios, {AxiosRequestHeaders} from 'axios';
+import axios, { AxiosRequestHeaders } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:4000/api/",
-    timeout: 100000,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+  baseURL: "http://localhost:4000/api/",
+  timeout: 100000,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 axiosInstance.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('token') || '';
+  config => {
+    const token = localStorage.getItem("token") || "";
 
-        config.headers = {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
-        } as AxiosRequestHeaders;
+    config.headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    } as AxiosRequestHeaders;
 
-        return config;
-    },
-    (error) => Promise.reject(error),
+    return config;
+  },
+  error => Promise.reject(error),
 );
 
-export default axiosInstance
+export default axiosInstance;

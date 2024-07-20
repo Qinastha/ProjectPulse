@@ -1,13 +1,15 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import user from "./userSlice";
 import project from "./projectSlice";
+import popUp from "./popUpSlice";
 
 const store = configureStore({
-    reducer: {
-        user,
-        project,
-    },
-    middleware: getDefaultMiddleware => getDefaultMiddleware(),
+  reducer: {
+    user,
+    project,
+    popUp,
+  },
+  middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });
 export default store;
 

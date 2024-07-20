@@ -1,2 +1,2 @@
-export * from "./useDebounce"
-export * from "./useProfile"
+export * from "./useDebounce";
+export * from "./useProfile";
