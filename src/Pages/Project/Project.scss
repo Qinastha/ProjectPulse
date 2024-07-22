@@ -1,0 +1,39 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+.taskContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  align-items: start;
+
+  @include responsive-container;
+}
+
+.taskContainer--add_button {
+  @include base-button;
+  background-color: $primary-color;
+  color: $pulse-white;
+  justify-self: end;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.taskContainer--list {
+  @include card;
+  @include sakura-border;
+  @include hover-effect;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $secondary-light-color;
+  color: $text-color;
+
+  &:hover {
+    border-color: $sakura-active-border-color;
+  }
+}

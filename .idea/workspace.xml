@@ -6,17 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ManageProject.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ManageProject.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ManageProject.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ManageProject.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ProjectCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Projects/Projects.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Projects/Projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/mixins.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/fixedHeader/FixedHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/fixedHeader/FixedHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/fixedHeader/fixedHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/fixedHeader/fixedHeader.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/interceptors/authInterceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interceptors/authInterceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/requests/httpRequests.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/requests/httpRequests.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useAlert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useAlert.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProfile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useProject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/interfaces/IProject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/IProject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/popUpSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/popUpSlice.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/projectSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/projectSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/userSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/userSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +56,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Components/Project/ManageProject.tsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JsBowerSettings">
@@ -79,7 +87,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature-alerts&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-ProjectPage&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
@@ -91,8 +99,9 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AtomSettingsConfigurable&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/qinastha/Downloads/Projects/projectpulsejp/node_modules/typescript/lib&quot;,
+    &quot;ts.rename.search.for.dynamic.occurrences&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -150,7 +159,15 @@
       <workItem from="1721481579650" duration="779000" />
       <workItem from="1721482388440" duration="18661000" />
       <workItem from="1721520401478" duration="3050000" />
-      <workItem from="1721556617697" duration="10088000" />
+      <workItem from="1721556617697" duration="14896000" />
+      <workItem from="1721575850137" duration="25000" />
+      <workItem from="1721575890872" duration="1478000" />
+      <workItem from="1721577523736" duration="5503000" />
+      <workItem from="1721586780433" duration="267000" />
+      <workItem from="1721604262925" duration="7443000" />
+      <workItem from="1721627579749" duration="21512000" />
+      <workItem from="1721662466335" duration="364000" />
+      <workItem from="1721673786556" duration="3620000" />
     </task>
     <servers />
   </component>

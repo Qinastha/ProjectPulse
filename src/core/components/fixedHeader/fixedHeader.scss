@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 30px;
+    gap: 7rem;
 
     input,
     select {
@@ -52,17 +52,20 @@
 
     .dropdown-menu {
       position: absolute;
-      top: 40px;
+      top: 2.2rem;
       right: 0;
       width: 10rem;
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
       background-color: $pulse-white;
       @include box-shadow($box-shadow);
       @include border-radius(5px);
       z-index: 1;
 
       a {
+        @include flex-center;
+        gap: 5px;
         text-decoration: none;
         color: $text-color;
         padding: 10px 15px;

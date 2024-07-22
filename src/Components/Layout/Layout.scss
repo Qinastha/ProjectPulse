@@ -4,42 +4,68 @@
 .layoutContainer {
   display: grid;
   grid-template-columns: auto 1fr;
-  height: 100vh;
+  max-height: 100%;
+  min-height: 100vh;
   font-family: $font-family;
   background-size: cover;
   color: $text-color;
-
   @include responsive-container;
+}
+
+@keyframes expandWidth {
+  from {
+    width: 120px;
+  }
+  to {
+    width: 200px;
+  }
+}
+
+@keyframes collapseWidth {
+  from {
+    width: 200px;
+  }
+  to {
+    width: 120px;
+  }
 }
 
 .navbar {
   @include gradient-bg($secondary-color, $primary-color);
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   border-right: 1px solid $border-color;
-  @include transition(all, 0.3s);
+  @include transition(all, 1s);
 
   &.notExpanded {
-    width: 60px;
+    width: 120px;
     font-size: 0;
-    @include transition(width, 0.3s);
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: collapseWidth 1.5s forwards;
+
+    img {
+      width: 2.5rem;
+      height: 3rem;
+      object-fit: cover;
+      padding-left: 0.5rem;
+      transition: all 1s ease-in-out;
+    }
+
+    span {
+      font-size: 1rem;
+      color: $text-color;
+    }
+
+    a {
+      justify-content: center;
+    }
   }
-}
 
-.navbar a {
-  text-decoration: none;
-  color: $text-color;
-  padding: 10px 15px;
-  border-bottom: 0.5px solid black;
-  @include border-radius(5px);
-  @include transition(background-color, 0.3s);
-
-  &:hover,
-  &.active {
-    background-color: $primary-color;
-    color: #fff;
+  &.expanded {
+    animation: expandWidth 1.5s forwards;
   }
 }
 
@@ -54,7 +80,7 @@ main {
   @include border-radius(10px);
   padding: 30px;
   @include box-shadow($box-shadow);
-  @include transition(all, 0.3s);
+  @include transition(all, 1s);
 
   &:hover {
     @include box-shadow($primary-box-shadow);

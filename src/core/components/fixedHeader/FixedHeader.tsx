@@ -2,6 +2,7 @@ import pinkBlossom from "../../../assets/pinkBlossom.png";
 import { NavLink, useLocation } from "react-router-dom";
 import React from "react";
 import "./fixedHeader.scss";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 interface FixedHeaderProps {
   isMenuOpen: boolean;
@@ -45,7 +46,11 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
           />
           {isMenuOpen && (
             <div className="dropdown-menu">
-              <NavLink to="/settings/profile"> Profile Settings</NavLink>
+              <NavLink to="/settings/profile">
+                {" "}
+                Profile Settings
+                <SettingsOutlinedIcon style={{ fontSize: 16 }} />
+              </NavLink>
             </div>
           )}
         </div>

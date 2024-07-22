@@ -28,9 +28,10 @@
 @mixin card {
   background: $background-color;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow;
   overflow: hidden;
   padding: 20px;
+  font-size: 1.1rem;
   border: 1px solid $border-color;
   display: flex;
   flex-direction: column;
@@ -100,4 +101,44 @@
     url('data:image/svg+xml;utf8,<svg fill="%23{$text-color}" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
     no-repeat right 10px center;
   padding-right: 30px;
+}
+
+@mixin pop-form-button {
+  @include base-button;
+  margin-left: 10px;
+
+  &--submit {
+    color: $pulse-white;
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  &--cancel {
+    background-color: $secondary-light-color;
+    color: $text-muted;
+
+    &:hover {
+      background-color: darken($secondary-light-color, 10%);
+    }
+  }
+}
+
+@mixin pop-form-div {
+  padding: 20px;
+  background-color: $background-color;
+  font-family: $font-family;
+  color: $text-color;
+  @include border-radius(10px);
+  @include box-shadow($box-shadow);
+  width: 450px;
+  max-width: 90%;
+  max-height: 90%;
+  @include sakura-border;
+
+  &:hover {
+    @include box-shadow($box-shadow);
+  }
 }

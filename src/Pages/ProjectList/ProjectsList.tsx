@@ -6,14 +6,16 @@ import {
   projectDelete,
   setCurrentProject,
 } from "../../store/projectSlice";
-import "./Projects.scss";
+import "./ProjectsList.scss";
 import { FallbackLoader, ProjectCard } from "../../Components";
 import { IProject } from "../../core";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
+import { useNavigate } from "react-router-dom";
 
-export const Projects: React.FC = () => {
+export const ProjectsList: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const initialProjects = useAppSelector(getProjects);
   const isLoading = useAppSelector(getProjectStatus);
 
@@ -33,6 +35,10 @@ export const Projects: React.FC = () => {
     console.log(_id);
   };
 
+  const handleShowProject = (_id: string) => {
+    navigate(`${_id}`);
+  };
+
   return (
     <>
       {isLoading && initialProjects.length === 0 ? (
@@ -45,6 +51,7 @@ export const Projects: React.FC = () => {
               project={project}
               handleDelete={handleDelete}
               handleUpdateProjectOpen={handleUpdateProjectOpen}
+              handleShowProject={handleShowProject}
             />
           ))}
         </div>

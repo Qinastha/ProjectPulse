@@ -20,7 +20,7 @@ export const Layout: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { isPopUpOpen, popUpMode } = popUpState;
+  const { isPopUpOpen } = popUpState;
 
   const toggleNav = (): void => {
     setIsNavbarExpand(!isNavbarExpand);
@@ -40,7 +40,8 @@ export const Layout: React.FC = () => {
 
   return (
     <div className="layoutContainer">
-      <header className={`navbar ${isNavbarExpand ? "" : "notExpanded"}`}>
+      <header
+        className={`navbar ${isNavbarExpand ? "expanded" : "notExpanded"}`}>
         <Navbar handlePopUpOpen={handlePopUpOpen} toggleNav={toggleNav} />
       </header>
 
@@ -58,11 +59,11 @@ export const Layout: React.FC = () => {
         {isPopUpOpen && (
           <div>
             <PopUp
-              mode={popUpMode}
               handleClosePopUp={() => {
                 dispatch(togglePopUp(false));
                 dispatch(setCurrentProjectNull());
               }}
+              isPopUpOpen={isPopUpOpen}
             />
           </div>
         )}

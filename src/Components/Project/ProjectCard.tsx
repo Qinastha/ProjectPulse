@@ -5,12 +5,14 @@ interface ProjectCardProps {
   project: IProject;
   handleDelete: (_id: string) => void;
   handleUpdateProjectOpen: (_id: string) => void;
+  handleShowProject: (_id: string) => void;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   handleDelete,
   handleUpdateProjectOpen,
+  handleShowProject,
 }) => {
   return (
     <div key={project._id} className="projects-container__card">
@@ -26,7 +28,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="projects-container__card-description">
           {project.projectDescription}
         </p>
-        <p className="projects-container__card-tasks">Tasks: {project.tasks}</p>
         <p className="projects-container__card-date">
           Created At: {new Date(project.createdAt).toLocaleDateString()}
         </p>
@@ -72,6 +73,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           className="projects-container__delete-button"
           onClick={() => handleDelete(project._id)}>
           Delete
+        </button>
+      </div>
+      <div className="projects-container__extra-button">
+        <button
+          className={"projects-container__show-button"}
+          onClick={() => handleShowProject(project._id)}>
+          Show Project
         </button>
       </div>
     </div>

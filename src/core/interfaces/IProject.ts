@@ -7,6 +7,13 @@ export interface IMember {
   avatar?: string;
 }
 
+export interface ITasks {
+  taskName: string;
+  taskDescription: string;
+  taskPriority: string;
+  taskStatus: string;
+}
+
 export interface IProject {
   _id: string;
   projectName: string;
@@ -14,12 +21,18 @@ export interface IProject {
   projectAvatar: string;
   creator: IMember;
   members: IMember[];
-  tasks: null[];
+  tasks: ITasks[];
   createdAt: Date;
   updatedAt: Date;
   startedAt: Date;
   completedAt: Date;
   isCompleted: boolean;
+  lists: CurrentProjectList[];
+}
+
+export interface CurrentProjectList {
+  id: string;
+  listName: string;
 }
 
 export interface CurrentProject extends IProject {
@@ -28,4 +41,5 @@ export interface CurrentProject extends IProject {
   projectDescription: string;
   projectAvatar: string;
   members: IMember[];
+  lists: CurrentProjectList[];
 }

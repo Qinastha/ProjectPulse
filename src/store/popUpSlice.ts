@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface PopUpState {
   isPopUpOpen: boolean;
-  popUpMode: "create" | "update";
+  mode: "create" | "update" | "addList" | "addTask";
 }
 
 const initialState: PopUpState = {
   isPopUpOpen: false,
-  popUpMode: "create",
+  mode: "create",
 };
 
 const popUp = createSlice({
@@ -17,17 +17,21 @@ const popUp = createSlice({
     togglePopUp: (state, action) => {
       state.isPopUpOpen = action.payload;
     },
-    setPopUpMode: (state, action) => {
-      state.popUpMode = action.payload;
+    setPopUpMode: (
+      state,
+      action: PayloadAction<"create" | "update" | "addTask" | "addList">,
+    ) => {
+      state.mode = action.payload;
     },
   },
   selectors: {
     getPopUpState: state => state,
+    getProjectPopMode: state => state.mode,
   },
 });
 
 export const { togglePopUp, setPopUpMode } = popUp.actions;
 
-export const { getPopUpState } = popUp.selectors;
+export const { getPopUpState, getProjectPopMode } = popUp.selectors;
 
 export default popUp.reducer;

@@ -6,7 +6,11 @@ import React, { useEffect } from "react";
 import { PulseForm } from "../PulseForm/PulseForm";
 import { PopUpProps } from "../PopUp/PopUp";
 
-export const ManageProject: React.FC<PopUpProps> = ({
+interface ManageProjectProps extends PopUpProps {
+  mode: "create" | "update";
+}
+
+export const ManageProject: React.FC<ManageProjectProps> = ({
   mode,
   handleClosePopUp,
 }) => {
@@ -52,7 +56,8 @@ export const ManageProject: React.FC<PopUpProps> = ({
       <div className="project-pop__actions">
         <button
           type="button"
-          className="project-pop__button"
+          className="project-pop__button
+                    project-pop__button--cancel"
           onClick={() => handleClosePopUp()}>
           {" "}
           Cancel
@@ -63,7 +68,7 @@ export const ManageProject: React.FC<PopUpProps> = ({
             handleProjectSubmit(currentProject?._id);
             handleClosePopUp();
           }}
-          className="nproject-pop__button project-pop__button--submit">
+          className="project-pop__button project-pop__button--submit">
           {mode === "create" ? "Add Project" : "Update Project"}{" "}
         </button>
       </div>
