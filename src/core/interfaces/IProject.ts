@@ -1,3 +1,8 @@
+import { IUser } from "../../store/userSlice";
+import { UserPosition } from "../types/userPosition";
+import { TaskStatus } from "../types/taskStatus";
+import { ITaskChecklistItem } from "./ITaskChecklistStatus";
+
 export interface IMember {
   firstName: string;
   lastName: string;
@@ -8,10 +13,19 @@ export interface IMember {
 }
 
 export interface ITasks {
-  taskName: string;
-  taskDescription: string;
-  taskPriority: string;
-  taskStatus: string;
+  taskDepartment: UserPosition;
+  taskStatus: TaskStatus;
+  creator: IUser;
+  members: IMember[];
+  title: string;
+  description: string;
+  checklist: ITaskChecklistItem[];
+  comments: [];
+  createdAt: Date;
+  updatedAt: Date;
+  startedAt: Date;
+  completedAt: Date;
+  deadLine: Date;
 }
 
 export interface IProject {
@@ -21,18 +35,20 @@ export interface IProject {
   projectAvatar: string;
   creator: IMember;
   members: IMember[];
-  tasks: ITasks[];
   createdAt: Date;
   updatedAt: Date;
   startedAt: Date;
   completedAt: Date;
   isCompleted: boolean;
-  lists: CurrentProjectList[];
+  taskLists: ITaskList[];
 }
 
-export interface CurrentProjectList {
-  id: string;
-  listName: string;
+export interface ITaskList {
+  _id: string;
+  taskListName: string;
+  taskLists: ITasks[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface CurrentProject extends IProject {
@@ -41,5 +57,7 @@ export interface CurrentProject extends IProject {
   projectDescription: string;
   projectAvatar: string;
   members: IMember[];
-  lists: CurrentProjectList[];
+  taskLists: ITaskList[];
+  currentTaskListId: string | null;
+  currentTaskId: string | null;
 }

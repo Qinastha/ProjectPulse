@@ -1,62 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { PulseForm } from "../PulseForm/PulseForm";
 import { PopUpProps } from "../PopUp/PopUp";
-import { ITasks } from "../../core";
-import { TASK_REQUIRED_INPUTS } from "../../core/constants/taskInputs.constants";
-import { useAppDispatch } from "../../hooks";
 import "./ManageTask.scss";
+import { useTaskForm } from "../../core/utility/useTask";
+import { TaskFormData } from "../../core/interfaces/taskFormData";
 
-export const ManageTask: React.FC<PopUpProps> = ({ handleClosePopUp }) => {
-  const [taskFormData, setTaskFormData] = useState<ITasks>({
-    taskName: "",
-    taskDescription: "",
-    taskPriority: "",
-    taskStatus: "",
-  });
+interface ManageTaskProps extends PopUpProps {
+  mode: "addTask" | "editTask";
+}
 
-  const dispatch = useAppDispatch();
-
-  const requiredInputs = TASK_REQUIRED_INPUTS;
-  const inputValues = [
-    taskFormData.taskName,
-    taskFormData.taskDescription,
-    taskFormData.taskPriority,
-    taskFormData.taskStatus,
-  ];
-
-  const handleTaskChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    if (e?.target) {
-      const { name, value } = e.target;
-      setTaskFormData(prevState => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+export const ManageTask: React.FC<ManageTaskProps> = ({
+  handleClosePopUp,
+  mode,
+}) => {
+  const initialFormData: TaskFormData = {
+    title: "",
+    description: "",
+    members: [],
+    checkList: [
+      {
+        text: "",
+        isCompleted: false,
+      },
+    ],
+    deadLine: new Date(),
+    taskDepartment: "developer",
+    taskStatus: "to do",
   };
 
-  // const handleAddTask = (taskFormData: ITasks) => {
-  //     dispatch(setCurrentProjectTasks(taskFormData))
-  // }
-
-  // const handleTaskSubmit = async () => {
-  //     try {
-  //         const response = await postData(url, popUpFormData)
-  //         if (response?.value) {
-  //             console.log(response)
-  //         }
-  //     } catch (error) {
-  //         console.error("Error during posting new project:", error)
-  //     }
-  // }
+  const {
+    taskFormData,
+    requiredInputs,
+    inputValues,
+    handleTaskChange,
+    handleTaskSubmit,
+  } = useTaskForm(initialFormData, mode);
 
   return (
     <div className={"task-pop-form"}>
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}
-        formTitle={"New Task List"}
+        formTitle={mode === "addTask" ? "New Task List" : "Edit Task"}
         onChange={e => handleTaskChange(e)}
       />
       <div className="task-pop-form__actions">
@@ -70,9 +55,8 @@ export const ManageTask: React.FC<PopUpProps> = ({ handleClosePopUp }) => {
         <button
           type="button"
           onClick={() => {
-            // handleTaskSubmit();
-            // handleAddTask(taskFormData);
             handleClosePopUp();
+            handleTaskSubmit();
           }}
           className="task-pop-form__button task-pop-form__button--submit">
           Add Task List

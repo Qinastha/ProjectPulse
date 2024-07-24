@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import "./Layout.scss";
 import React, { useState } from "react";
 import PopUp from "../PopUp/PopUp";
@@ -9,18 +9,19 @@ import {
   setPopUpMode,
   togglePopUp,
 } from "../../store/popUpSlice";
-import { setCurrentProjectNull } from "../../store/projectSlice";
 import { Navbar } from "../../core/components/Navbar/Navbar";
 import { FixedHeader } from "../../core/components/fixedHeader/FixedHeader";
+import { getCurrentProject } from "../../store/projectSlice";
 
 export const Layout: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [isNavbarExpand, setIsNavbarExpand] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const popUpState = useAppSelector(getPopUpState);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
+  const { id } = useParams<{ id: string }>();
   const { isPopUpOpen } = popUpState;
+  const currentProject = useAppSelector(getCurrentProject);
 
   const toggleNav = (): void => {
     setIsNavbarExpand(!isNavbarExpand);
@@ -51,6 +52,8 @@ export const Layout: React.FC = () => {
           onMouseLeave={(): void => setIsMenuOpen(false)}>
           <FixedHeader
             isMenuOpen={isMenuOpen}
+            id={id}
+            currentProject={currentProject}
             handleLogout={handleLogout}
             setIsMenuOpen={e => setIsMenuOpen(e)}
           />
@@ -61,7 +64,6 @@ export const Layout: React.FC = () => {
             <PopUp
               handleClosePopUp={() => {
                 dispatch(togglePopUp(false));
-                dispatch(setCurrentProjectNull());
               }}
               isPopUpOpen={isPopUpOpen}
             />

@@ -37,26 +37,27 @@
   flex-direction: column;
   gap: 20px;
   border-right: 1px solid $border-color;
-  @include transition(all, 1s);
+  @include transition(all, 0.4s);
 
   &.notExpanded {
     width: 120px;
     font-size: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    animation: collapseWidth 1.5s forwards;
+    animation: collapseWidth 0.7s forwards;
 
     img {
       width: 2.5rem;
       height: 3rem;
       object-fit: cover;
       padding-left: 0.5rem;
-      transition: all 1s ease-in-out;
+      transition: all 0.4s ease;
     }
 
     span {
-      font-size: 1rem;
+      font-size: 0.8rem;
       color: $text-color;
+      transition: all 0.4s ease;
     }
 
     a {
@@ -65,7 +66,7 @@
   }
 
   &.expanded {
-    animation: expandWidth 1.5s forwards;
+    animation: expandWidth 0.7s forwards;
   }
 }
 
@@ -80,7 +81,7 @@ main {
   @include border-radius(10px);
   padding: 30px;
   @include box-shadow($box-shadow);
-  @include transition(all, 1s);
+  @include transition(all, 0.4s);
 
   &:hover {
     @include box-shadow($primary-box-shadow);

@@ -1,13 +1,11 @@
 import {
   createAsyncThunk,
-  createSelector,
   createSlice,
   PayloadAction,
   ReducerCreators,
 } from "@reduxjs/toolkit";
 import {
   CurrentProject,
-  CurrentProjectList,
   deleteData,
   getData,
   IMember,
@@ -84,6 +82,19 @@ export const projectDelete = createAsyncThunk(
   },
 );
 
+export const deleteProjectTaskList = createAsyncThunk(
+  "project/deleteProjectTaskList",
+  async (_id: string) => {
+    try {
+      await deleteData(`project/${_id}/taskList/${_id}`);
+      return _id;
+    } catch (error) {
+      console.error("Error deleting task list:", error);
+      throw error;
+    }
+  },
+);
+
 export const project = createSlice({
   name: "project",
   initialState,
@@ -103,23 +114,19 @@ export const project = createSlice({
         }
       },
     ),
+    setProject: create.reducer(
+      (state, action: PayloadAction<CurrentProject>) => {
+        state.currentProject = action.payload as CurrentProject;
+      },
+    ),
     setCurrentProjectNull: create.reducer(state => {
       state.currentProject = null;
     }),
-    setCurrentProjectList: create.reducer(
-      (state, action: PayloadAction<string>) => {
+    setCurrentTaskListId: create.reducer(
+      (state, action: PayloadAction<string | null>) => {
         if (state.currentProject) {
-          const newList: CurrentProjectList = {
-            id: new Date().toISOString(),
-            listName: action.payload,
-          };
-          console.log(newList);
-          state.currentProject.lists = [
-            ...(state.currentProject.lists || []),
-            newList,
-          ];
+          state.currentProject.currentTaskListId = action.payload;
         }
-        console.log(state.currentProject!.lists);
       },
     ),
   }),
@@ -130,13 +137,7 @@ export const project = createSlice({
     getProjectStatus: state => state.status,
     getAllMembers: state => state.members,
     getCurrentProject: state => state.currentProject,
-    getCurrentProjectListById: createSelector(
-      [
-        (state: IProjectState, projectId: string) =>
-          state.projects.find(project => project._id === projectId),
-      ],
-      currentProject => (currentProject ? currentProject.lists : []),
-    ),
+    getCurrentTaskListId: state => state.currentProject?.currentTaskListId,
   },
   extraReducers: builder => {
     builder.addCase(fetchAllProjects.pending, state => {
@@ -155,15 +156,6 @@ export const project = createSlice({
     builder.addCase(fetchAllProjects.rejected, state => {
       state.status = "rejected";
     });
-
-    builder.addCase(
-      projectDelete.fulfilled,
-      (state, action: PayloadAction<string>) => {
-        state.projects = state.projects.filter(
-          project => project._id !== action.payload,
-        );
-      },
-    );
 
     builder.addCase(fetchProjectById.pending, state => {
       state.status = "loading";
@@ -190,14 +182,34 @@ export const project = createSlice({
     builder.addCase(fetchAllMembers.rejected, state => {
       state.status = "rejected";
     });
+
+    builder.addCase(
+      projectDelete.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.projects = state.projects.filter(
+          project => project._id !== action.payload,
+        );
+      },
+    );
+
+    builder.addCase(
+      deleteProjectTaskList.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.currentProject!.taskLists =
+          state.currentProject!.taskLists.filter(
+            taskList => taskList._id !== action.payload,
+          );
+      },
+    );
   },
 });
 
 export const {
   setCurrentProject,
+  setProject,
   setIsInitialProject,
   setCurrentProjectNull,
-  setCurrentProjectList,
+  setCurrentTaskListId,
 } = project.actions;
 
 export const {
@@ -207,7 +219,7 @@ export const {
   getAllMembers,
   getCurrentProject,
   getIsInitialProject,
-  getCurrentProjectListById,
+  getCurrentTaskListId,
 } = project.selectors;
 
 export default project.reducer;

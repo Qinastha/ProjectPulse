@@ -1,7 +1,10 @@
 import "./ManageProject.scss";
 import { useProjectForm } from "../../core/utility/useProject";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { fetchProjectById, getCurrentProject } from "../../store/projectSlice";
+import {
+  getCurrentProject,
+  setCurrentProjectNull,
+} from "../../store/projectSlice";
 import React, { useEffect } from "react";
 import { PulseForm } from "../PulseForm/PulseForm";
 import { PopUpProps } from "../PopUp/PopUp";
@@ -18,9 +21,9 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
   const currentProject = useAppSelector(getCurrentProject);
 
   useEffect(() => {
-    if (currentProject && mode === "update") {
-      dispatch(fetchProjectById(currentProject._id));
-    }
+    return () => {
+      dispatch(setCurrentProjectNull());
+    };
   }, [dispatch, mode]);
 
   const initialFormData = {

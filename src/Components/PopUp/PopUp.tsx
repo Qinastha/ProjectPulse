@@ -8,8 +8,8 @@ import { ManageList } from "../ProjectTask/ManageList";
 
 export interface PopUpProps {
   handleClosePopUp: () => void;
-  handleClose?: () => void;
   isPopUpOpen?: boolean;
+  mode?: "create" | "update" | "addList" | "editList" | "addTask" | "editTask";
 }
 
 const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
@@ -22,18 +22,18 @@ const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
   };
 
   return (
-    <div className="popUp__overlay" onClick={() => handleClosePopUp()}>
+    <div className="popUp__overlay" onClick={() => handleClosePopUp!()}>
       <div className="popUp__content" onClick={handleContentClick}>
         {isPopUpOpen && (mode === "create" || mode === "update") && (
           <ManageProject mode={mode} handleClosePopUp={handleClosePopUp} />
         )}
 
-        {isPopUpOpen && mode === "addList" && (
-          <ManageList handleClosePopUp={handleClosePopUp} />
+        {isPopUpOpen && (mode === "addList" || mode === "editList") && (
+          <ManageList mode={mode} handleClosePopUp={handleClosePopUp} />
         )}
 
-        {isPopUpOpen && mode === "addTask" && (
-          <ManageTask handleClosePopUp={handleClosePopUp} />
+        {isPopUpOpen && (mode === "addTask" || mode === "editTask") && (
+          <ManageTask mode={mode} handleClosePopUp={handleClosePopUp} />
         )}
       </div>
     </div>

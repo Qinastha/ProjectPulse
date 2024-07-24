@@ -37,6 +37,7 @@ export const ProjectsList: React.FC = () => {
 
   const handleShowProject = (_id: string) => {
     navigate(`${_id}`);
+    dispatch(setCurrentProject(_id));
   };
 
   return (

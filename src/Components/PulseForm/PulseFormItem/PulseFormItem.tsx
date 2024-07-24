@@ -5,6 +5,7 @@ import { DragFile } from "../../DragAvatar/DragAvatar";
 import { PulseFormInput } from "../inputs/PulseFormInput/PulseFormInput";
 import { PulseFormSelect } from "../inputs/PulseFormSelect/PulseFormSelect";
 import { PulseFormSearch } from "../inputs/ProjectPulseFormSearch/PulseFormSearch";
+import { PulseFormChecklist } from "../inputs/PulseFormChecklist/PulseFormChecklist";
 
 interface PulseFormItemProp {
   inputData: RequiredInput;
@@ -40,6 +41,12 @@ export const PulseFormItem: React.FC<PulseFormItemProp> = ({
         />
       ) : name === "members" ? (
         <PulseFormSearch
+          inputData={inputData}
+          inputValue={inputValue}
+          onChange={e => onChange(e)}
+        />
+      ) : name === "checkList" ? (
+        <PulseFormChecklist
           inputData={inputData}
           inputValue={inputValue}
           onChange={e => onChange(e)}
