@@ -1,0 +1,72 @@
+import { RequiredInput } from "../interfaces/requireInput";
+
+export const TASK_REQUIRED_INPUTS: RequiredInput[] = [
+  {
+    type: "text",
+    name: "title",
+    label: "Task Title",
+    required: true,
+    className: "form-control",
+    autoComplete: "off",
+  },
+  {
+    type: "text",
+    name: "description",
+    label: "Task Description",
+    required: true,
+    className: "form-control",
+    autoComplete: "off",
+  },
+  {
+    type: "text",
+    name: "members",
+    label: "Select Members",
+    required: true,
+    className: "project-pop__input",
+    autoComplete: "off",
+  },
+  {
+    type: "text",
+    name: "checkList",
+    label: "Checklist",
+    required: true,
+    className: "form-control",
+    autoComplete: "off",
+  },
+  {
+    type: "date",
+    name: "deadLine",
+    label: "Deadline",
+    required: true,
+    className: "form-control",
+    autoComplete: "off",
+  },
+  {
+    type: "select",
+    name: "taskDepartment",
+    label: "Task Department",
+    required: true,
+    className: "form-control",
+    options: [
+      { name: "Project manager", value: "project manager" },
+      { name: "Developer", value: "developer" },
+      { name: "Designer", value: "designer" },
+      { name: "Tester", value: "tester" },
+    ],
+  },
+  {
+    type: "select",
+    name: "taskStatus",
+    label: "Task Status",
+    required: true,
+    className: "form-control",
+    options: [
+      { name: "To Do", value: "to do" },
+      { name: "In Progress", value: "in progress" },
+      { name: "On review", value: "on review" },
+      { name: "On testing", value: "on testing" },
+      { name: "Done", value: "done" },
+      { name: "Canceled", value: "canceled" },
+    ],
+  },
+];

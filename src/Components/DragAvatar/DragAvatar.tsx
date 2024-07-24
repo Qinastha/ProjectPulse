@@ -1,8 +1,7 @@
 import React, { useCallback } from "react";
+import "./DragAvatar.scss";
 
 interface DragFileProps {
-  projectAvatar?: string;
-  handleAddLogo?: (e: string) => void;
   handleFile: (e: string) => void;
   data: any;
 }
@@ -62,7 +61,7 @@ export const DragFile: React.FC<DragFileProps> = ({ handleFile, data }) => {
       onDragOver={handleDragOver}
       onClick={handleClick}>
       {!data ? (
-        <p> Please upload your picture </p>
+        <p className="placeholder"> Please upload your picture </p>
       ) : (
         <img src={data} alt={"Avatar Preview"} />
       )}

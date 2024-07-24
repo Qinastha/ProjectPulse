@@ -1,0 +1,97 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+.listContainer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  background-color: $background-color;
+  font-family: $font-family;
+  color: $text-color;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.taskContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.taskContainer--item {
+  @include card;
+  padding: 0;
+  @include sakura-border;
+  background-color: $secondary-light-color;
+  color: $text-color;
+  height: 100px;
+  //height: fit-content;
+
+  &:hover {
+    border-color: $sakura-active-border-color;
+  }
+
+  .listHeader {
+    background-color: $sakura-border-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1.2rem;
+
+    span {
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+
+    .list--actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: 10px;
+
+      .editList--button {
+        background-color: transparent;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        padding: 0.8rem;
+        box-sizing: content-box;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+
+      .deleteList--button {
+        background-color: transparent;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        padding: 0.8rem;
+        box-sizing: content-box;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+}
+
+.taskContainer--add_button {
+  @include base-button;
+  background-color: $primary-color;
+  color: $pulse-white;
+  align-self: start;
+  height: fit-content;
+  margin-left: 1rem;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}

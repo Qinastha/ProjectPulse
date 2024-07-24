@@ -24,7 +24,6 @@ const userLoader = async () => {
     dispatch(setUserInitial(false));
   }
 
-  console.log(getUser(state));
   return user;
 };
 
@@ -37,7 +36,6 @@ const membersLoader = async () => {
     await dispatch(fetchAllMembers());
     dispatch(setIsInitialProject(false));
   }
-  console.log(getAllMembers(state));
   return allMembers;
 };
 

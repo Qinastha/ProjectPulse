@@ -1,0 +1,71 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.navTabs {
+  @include flex-center;
+  gap: 20px;
+  flex-direction: column;
+
+  .navProfile {
+    @include flex-center;
+    margin-bottom: 1.5rem;
+  }
+
+  .collapseButton {
+    margin: 0 auto;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: $text-muted;
+    @include transition(color, 1s);
+
+    &:hover {
+      color: $hover-color;
+    }
+  }
+
+  .newProjectButton {
+    padding: 10px;
+    background-color: $primary-color;
+    border: none;
+    font-size: 1rem;
+    @include border-radius(5px);
+    color: $pulse-white;
+    cursor: pointer;
+    margin: 0 auto;
+    @include transition(all, 0.3s);
+
+    &:hover {
+      background-color: lighten($primary-color, 5%);
+      transform: scale(1.05);
+    }
+  }
+
+  .navLinks {
+    @include flex-center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .navLinks a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: $text-color;
+    padding: 10px 15px;
+    width: 80%;
+    border-bottom: 0.5px solid black;
+    @include border-radius(5px);
+    @include transition(background-color, 0.3s);
+
+    &:hover,
+    &.active {
+      background-color: $primary-color;
+      color: $pulse-white;
+    }
+  }
+}

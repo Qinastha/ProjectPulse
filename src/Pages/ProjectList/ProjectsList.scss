@@ -1,0 +1,128 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 70px 40px;
+  padding: 20px;
+  margin: 0 auto;
+
+  &__card {
+    @include card;
+    min-height: 0;
+
+    &-avatar {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-bottom: 1px solid $border-color;
+    }
+
+    &-details {
+      padding: 15px;
+      flex: 1;
+    }
+
+    &-title {
+      margin: 0 0 10px;
+      color: $primary-color;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    &-description,
+    &-tasks,
+    &-date,
+    &-status,
+    &-creator {
+      margin: 5px 0;
+      color: $text-color;
+    }
+
+    &-members-title {
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    &-members-list {
+      list-style: none;
+      padding: 0;
+
+      &-item {
+        background: lighten($primary-color, 40%);
+        border-radius: 4px;
+        padding: 5px;
+        margin: 3px 0;
+      }
+    }
+
+    &-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.7rem;
+
+      .projects-container__edit-button,
+      .projects-container__delete-button {
+        @include flex-center;
+        color: $pulse-white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        @include border-radius(7px);
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+        }
+      }
+
+      .projects-container__edit-button {
+        background-color: $primary-color;
+
+        &:hover {
+          background-color: $hover-color;
+        }
+      }
+
+      .projects-container__delete-button {
+        background-color: $delete-color;
+
+        &:hover {
+          background-color: darken($delete-color, 10%);
+        }
+      }
+    }
+
+    .projects-container__extra-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+
+      .projects-container__show-button {
+        font-size: 0.8rem;
+        background-color: $secondary-light-color;
+        padding: 1rem 3rem;
+        @include box-shadow($box-shadow);
+        @include border-radius(10px);
+        @include sakura-border;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken($secondary-light-color, 10%);
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba($secondary-light-color, 0.3);
+        }
+      }
+    }
+  }
+}

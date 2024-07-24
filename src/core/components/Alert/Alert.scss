@@ -1,0 +1,55 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 45%;
+  transform: translateX(-50%);
+  padding: 1.5rem 2rem;
+  @include border-radius(8px);
+  font-size: 1rem;
+  z-index: 1000;
+  max-width: 400px;
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+  opacity: 0;
+  @include box-shadow($box-shadow);
+  @include transition(opacity 1s ease-out, transform 1s ease-out);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-show {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeIn 2.5s forwards;
+}
+
+.alert-hide {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeIn 5s reverse;
+}
+
+.alert-success {
+  background-color: $success-bg-color;
+  color: $success-text-color;
+  border: 1px solid $success-border-color;
+}
+
+.alert-error {
+  background-color: $error-bg-color;
+  color: $error-text-color;
+  border: 1px solid $error-border-color;
+}

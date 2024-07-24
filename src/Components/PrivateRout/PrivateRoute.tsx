@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 import React, { ReactElement, useEffect } from "react";
-import { useAppSelector } from "../../hooks";
 import { getProfile } from "../../store/userSlice";
+import { useAppSelector } from "../../hooks";
 
 interface PrivateRouteProps {
   children: ReactElement;
@@ -19,6 +19,8 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
     }
     if (isAuthenticated && !profile) {
       navigate("/profile/create");
+    } else {
+      navigate("/");
     }
   }, [isAuthenticated, profile]);
 

@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import user from "./userSlice";
 import project from "./projectSlice";
-import data from "./dataSlice";
+import popUp from "./popUpSlice";
+import alert from "./alertSlice";
 
 const store = configureStore({
   reducer: {
     user,
     project,
-    data,
+    popUp,
+    alert,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });

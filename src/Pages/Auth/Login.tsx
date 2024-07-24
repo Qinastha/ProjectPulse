@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
 import { Apple, GitHub, Google } from "@mui/icons-material";
-import { useAppSelector } from "../../hooks";
 import { getProfile } from "../../store/userSlice";
 import { PulseForm } from "../../Components";
-import { LOGIN_REQUIRED_INPUTS, RegisterFormData } from "../../core";
+import { LOGIN_REQUIRED_INPUTS, postData, RegisterFormData } from "../../core";
+import { useAppSelector } from "../../hooks";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -62,24 +61,15 @@ const Login: React.FC = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
-        {
-          email: loginFormData.email,
-          password: loginFormData.password,
-        },
-      );
-
-      if (response?.data?.value) {
-        localStorage.setItem("token", response.data.value);
-        alert("Login successful");
+      const response = await postData("/auth/login", loginFormData);
+      if (response?.value) {
+        localStorage.setItem("token", response.value);
         navigate("/");
       } else {
         navigate("/*");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert("An error occurred. Please try again.");
     }
   };
 

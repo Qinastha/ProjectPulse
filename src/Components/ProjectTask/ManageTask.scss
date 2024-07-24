@@ -1,0 +1,17 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/mixins";
+
+.task-pop-form {
+  @include pop-form-div;
+}
+
+.task-pop-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 20px;
+
+  .task-pop-form__button {
+    @include pop-form-button;
+  }
+}

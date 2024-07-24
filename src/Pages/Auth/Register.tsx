@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
 import { Apple, GitHub, Google } from "@mui/icons-material";
 import { PulseForm } from "../../Components";
-import { REGISTER_REQUIRED_INPUTS, RegisterFormData } from "../../core";
+import {
+  postData,
+  REGISTER_REQUIRED_INPUTS,
+  RegisterFormData,
+} from "../../core";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -110,30 +113,18 @@ const Register: React.FC = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/register",
-        {
-          email: registerFormData.email,
-          password: registerFormData.password,
-          firstName: registerFormData.firstName,
-          lastName: registerFormData.lastName,
-          userName: registerFormData.userName,
-          dateOfBirth: registerFormData.dateOfBirth,
-          position: registerFormData.position,
-          role: "user",
-        },
-      );
-      console.log(response);
-      if (response.data?.value) {
-        localStorage.setItem("token", response.data.value);
-        alert("Registration successful");
+      const response = await postData("/auth/register", {
+        ...registerFormData,
+        role: "user",
+      });
+      if (response.value) {
+        localStorage.setItem("token", response.value);
         navigate("/");
       } else {
-        alert("Registration failed");
+        console.log(response);
       }
     } catch (error) {
       console.error("Error during registration:", error);
-      alert("An error occurred. Please try again.");
     }
   };
 
@@ -180,112 +171,3 @@ const Register: React.FC = () => {
 };
 
 export { Register };
-
-//   <h1>Register a new User</h1>
-
-//   <form onSubmit={handleRegister} autoComplete="off" noValidate>
-//     <div>
-//       <label>Email:</label>
-//       <input
-//         type="email"
-//         name="email"
-//         className={errors.email ? "errorInput" : ""}
-//         value={email}
-//         onChange={e => setEmail(e.target.value)}
-//         required
-//       />
-//       {errors.email && <span className="errorText">{errors.email}</span>}
-//     </div>
-//     <div>
-//       <label>Password:</label>
-//       <input
-//         type="password"
-//         name="password"
-//         className={errors.password ? "errorInput" : ""}
-//         value={password}
-//         onChange={e => setPassword(e.target.value)}
-//         required
-//       />
-//       {errors.password && (
-//         <span className="errorText">{errors.password}</span>
-//       )}
-//     </div>
-//     <div>
-//       <label>First Name:</label>
-//       <input
-//         type="text"
-//         name="firstName"
-//         className={errors.firstName ? "errorInput" : ""}
-//         value={firstName}
-//         onChange={e => setFirstName(e.target.value)}
-//         required
-//       />
-//       {errors.firstName && (
-//         <span className="errorText">{errors.firstName}</span>
-//       )}
-//     </div>
-//     <div>
-//       <label>Last Name:</label>
-//       <input
-//         type="text"
-//         name="lastName"
-//         className={errors.lastName ? "errorInput" : ""}
-//         value={lastName}
-//         onChange={e => setLastName(e.target.value)}
-//         required
-//       />
-//       {errors.lastName && (
-//         <span className="errorText">{errors.lastName}</span>
-//       )}
-//     </div>
-//     <div>
-//       <label>Username:</label>
-//       <input
-//         type="text"
-//         name="userName"
-//         className={errors.userName ? "errorInput" : ""}
-//         value={userName}
-//         onChange={e => setUserName(e.target.value)}
-//         required
-//       />
-//       {errors.userName && (
-//         <span className="errorText">{errors.userName}</span>
-//       )}
-//     </div>
-//     <div>
-//       <label>Date of Birth:</label>
-//       <input
-//         type="date"
-//         name="dateOfBirth"
-//         className={errors.dateOfBirth ? "errorInput" : ""}
-//         onChange={e => setDateOfBirth(e.target.value)}
-//         required
-//       />
-//       {errors.dateOfBirth && (
-//         <span className="errorText">{errors.dateOfBirth}</span>
-//       )}
-//     </div>
-//     <div>
-//       <label>Position:</label>
-//       <select
-//         name="position"
-//         value={position}
-//         onChange={e =>
-//           setPosition(
-//             e.target.value as
-//               | "project manager"
-//               | "developer"
-//               | "designer"
-//               | "tester",
-//           )
-//         }
-//         required>
-//         <option value="">Select</option>
-//         <option value="project manager">Project Manager</option>
-//         <option value="developer">Developer</option>
-//         <option value="designer">Designer</option>
-//         <option value="tester">Tester</option>
-//       </select>
-//     </div>
-
-// </div>

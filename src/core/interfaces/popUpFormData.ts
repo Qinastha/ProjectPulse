@@ -4,5 +4,5 @@ export interface PopUpFormData {
   projectName: string;
   projectDescription: string;
   projectAvatar: string | null;
-  selectedMembers: IMember[];
+  members: IMember[];
 }

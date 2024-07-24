@@ -1,118 +1,79 @@
-import {NavLink, Outlet, useLocation, useNavigate} from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import "./Layout.scss";
-import React, {useState} from "react";
-import pinkBlossom from "../../assets/pinkBlossom.png";
-import {useAppDispatch} from "../../hooks";
-import {setIsNewProject, setProjectOpen} from "../../store/projectSlice";
+import React, { useState } from "react";
 import PopUp from "../PopUp/PopUp";
-import {setProfileNull, setUserInitial} from "../../store/userSlice";
+import { setStateNull, setUserInitial } from "../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import {
+  getPopUpState,
+  setPopUpMode,
+  togglePopUp,
+} from "../../store/popUpSlice";
+import { Navbar } from "../../core/components/Navbar/Navbar";
+import { FixedHeader } from "../../core/components/fixedHeader/FixedHeader";
+import { getCurrentProject } from "../../store/projectSlice";
 
 export const Layout: React.FC = () => {
-    const {pathname} = useLocation();
-    const [isExpand, setIsExpand] = useState(true);
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [isNavbarExpand, setIsNavbarExpand] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const popUpState = useAppSelector(getPopUpState);
+  const { id } = useParams<{ id: string }>();
+  const { isPopUpOpen } = popUpState;
+  const currentProject = useAppSelector(getCurrentProject);
 
-    const toggleNav = (): void => {
-        setIsExpand(!isExpand);
-    };
+  const toggleNav = (): void => {
+    setIsNavbarExpand(!isNavbarExpand);
+  };
 
-    const handleOpen = (): void => {
-        dispatch(setProjectOpen(true));
-        dispatch(setIsNewProject(true));
-    };
+  const handlePopUpOpen = (): void => {
+    dispatch(togglePopUp(true));
+    dispatch(setPopUpMode("create"));
+  };
 
-    const handleLogout = (): void => {
-        localStorage.removeItem("token");
-        navigate("/login");
-        dispatch(setUserInitial(true));
-        dispatch(setProfileNull())
-    };
+  const handleLogout = (): void => {
+    localStorage.removeItem("token");
+    navigate("/login");
+    dispatch(setUserInitial(true));
+    dispatch(setStateNull());
+  };
 
-    const getPageTitle = (pathname: string): string => {
-        switch (pathname) {
-            case "/":
-                return "Dashboard";
-            case "/projects":
-                return "Projects";
-            case "/tasks":
-                return "Tasks";
-            case "/logs":
-                return "Time Log";
-            case "/resources":
-                return "Resource Mgnt";
-            case "/users":
-                return "User";
-            case "/templates":
-                return "Project Template";
-            case "/settings/app":
-                return "Global Settings";
-            case "/settings/profile":
-                return "Profile Settings";
-            default:
-                return "Unknown";
-        }
-    };
+  return (
+    <div className="layoutContainer">
+      <header
+        className={`navbar ${isNavbarExpand ? "expanded" : "notExpanded"}`}>
+        <Navbar handlePopUpOpen={handlePopUpOpen} toggleNav={toggleNav} />
+      </header>
 
-    return (
-        <div className="container">
-            <header className={`navbar ${isExpand ? "" : "notExpanded"}`}>
-                <div className="navButtons">
-                    <button className="collapseButton" type="button" onClick={toggleNav}>
-                        &#8656;
-                    </button>
-                    <button
-                        className="newProjectButton"
-                        type="button"
-                        onClick={handleOpen}>
-                        Create New Project
-                    </button>
-                </div>
-
-                <div>
-                    <PopUp/>
-                </div>
-
-                <NavLink to="/"> Dashboard </NavLink>
-                <NavLink to="/projects"> Projects </NavLink>
-                <NavLink to="/tasks"> Tasks </NavLink>
-                <NavLink to="/logs"> Time Log </NavLink>
-                <NavLink to="/resources"> Resource Mgnt </NavLink>
-                <NavLink to="/users"> User </NavLink>
-                <NavLink to="/templates"> Project Template </NavLink>
-            </header>
-
-            <main>
-                <div className="coreContent">
-                    <div className="heading">
-                        <h1>{getPageTitle(pathname)}</h1>
-                        <div className="headingRightPart">
-                            <input type="text" placeholder="Search for anything..."/>
-                            <div className="dropdown-container">
-                                <img
-                                    className="settingIcon"
-                                    src={pinkBlossom}
-                                    alt="Settings"
-                                    onClick={(): void => setIsOpen(!isOpen)}
-                                />
-                                {isOpen && (
-                                    <div className="dropdown-menu">
-                                        <NavLink to="/settings/app"> Global Settings</NavLink>
-                                        <NavLink to="/settings/profile"> Profile Settings</NavLink>
-                                    </div>
-                                )}
-                            </div>
-                            <button className="logoutButton" onClick={handleLogout}>
-                                LogOut
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="outlet">
-                    <Outlet/>
-                </div>
-            </main>
+      <main>
+        <div
+          className="coreContent"
+          onMouseLeave={(): void => setIsMenuOpen(false)}>
+          <FixedHeader
+            isMenuOpen={isMenuOpen}
+            id={id}
+            currentProject={currentProject}
+            handleLogout={handleLogout}
+            setIsMenuOpen={e => setIsMenuOpen(e)}
+          />
         </div>
-    );
+
+        {isPopUpOpen && (
+          <div>
+            <PopUp
+              handleClosePopUp={() => {
+                dispatch(togglePopUp(false));
+              }}
+              isPopUpOpen={isPopUpOpen}
+            />
+          </div>
+        )}
+
+        <div className="outlet">
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
 };
