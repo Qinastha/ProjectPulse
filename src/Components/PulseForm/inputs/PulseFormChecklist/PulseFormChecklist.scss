@@ -1,0 +1,64 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.checklistInput {
+  @include card;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100px;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: $background-color;
+    border-radius: 5px;
+    border: 1px solid $border-color;
+    @include box-shadow($box-shadow);
+
+    input {
+      @include base-input-styles;
+      flex-grow: 1;
+      margin: 0;
+    }
+
+    .deleteChecklist--button {
+      background: $delete-color;
+      border: none;
+      color: $pulse-white;
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      @include hover-effect;
+      @include transition(background-color, 0.3s);
+
+      &:hover {
+        background-color: $delete-color-hover;
+      }
+
+      &:active {
+        background-color: $delete-color-active;
+      }
+    }
+  }
+
+  .addChecklistItem--button {
+    @include base-button;
+    background-color: $primary-color;
+    color: $pulse-white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}

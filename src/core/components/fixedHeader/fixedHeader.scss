@@ -63,7 +63,8 @@
       @include border-radius(5px);
       z-index: 1;
 
-      a {
+      a,
+      button {
         @include flex-center;
         gap: 5px;
         text-decoration: none;

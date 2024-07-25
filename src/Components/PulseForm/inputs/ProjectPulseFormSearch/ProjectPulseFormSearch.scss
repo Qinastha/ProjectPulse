@@ -2,12 +2,13 @@
 @import "../../../../assets/styles/mixins";
 
 .project-pop__search-container {
-  height: 250px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   background-color: $background-color;
   font-family: $font-family;
   margin-top: 20px;
+  overflow-y: auto;
 
   .project-pop__user-add {
     position: relative;
@@ -24,7 +25,7 @@
       top: calc(100% + 5px);
       left: 0;
       width: 50%;
-      max-height: 170px;
+      max-height: 175px;
       overflow-y: auto;
       background-color: $background-color;
       border: 1px solid $border-color;
@@ -61,7 +62,7 @@
 
   .project-pop__selected-members {
     margin-top: 15px;
-    height: 175px;
+    height: 80px;
 
     &__text {
       margin-bottom: 10px;

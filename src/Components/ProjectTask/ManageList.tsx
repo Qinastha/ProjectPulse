@@ -96,9 +96,7 @@ export const ManageList: React.FC<ManageListProps> = ({
 
         <button
           type="button"
-          onClick={() => {
-            handleListSubmit();
-          }}
+          onClick={handleListSubmit}
           className="list-pop-form__button list-pop-form__button--submit">
           {mode === "addList" ? "Add List" : "Edit List"}
         </button>

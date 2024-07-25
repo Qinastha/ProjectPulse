@@ -13,6 +13,7 @@ export interface IMember {
 }
 
 export interface ITasks {
+  _id: string;
   taskDepartment: UserPosition;
   taskStatus: TaskStatus;
   creator: IUser;
@@ -41,23 +42,18 @@ export interface IProject {
   completedAt: Date;
   isCompleted: boolean;
   taskLists: ITaskList[];
+  tasks: ITasks[];
 }
 
 export interface ITaskList {
   _id: string;
   taskListName: string;
-  taskLists: ITasks[];
+  tasks: ITasks[];
   createdAt: Date;
   updatedAt: Date;
 }
 
 export interface CurrentProject extends IProject {
-  _id: string;
-  projectName: string;
-  projectDescription: string;
-  projectAvatar: string;
-  members: IMember[];
-  taskLists: ITaskList[];
-  currentTaskListId: string | null;
   currentTaskId: string | null;
+  currentTaskListId: string | null;
 }

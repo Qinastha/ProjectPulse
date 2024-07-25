@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { TASK_REQUIRED_INPUTS } from "../constants/taskInputs.constants";
 import { TaskFormData } from "../interfaces/taskFormData";
 import { postData, putData } from "../requests/httpRequests";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import {
-  getCurrentProject,
-  getCurrentTaskListId,
-  setProject,
-} from "../../store/projectSlice";
+import { useAppDispatch } from "../../hooks";
+import { setProject } from "../../store/projectSlice";
 
 export const useTaskForm = (
   initialFormData: TaskFormData,
   mode: "addTask" | "editTask",
+  _id: string | null,
+  currentTaskListId: string | null,
+  currentTaskId: string | null,
 ) => {
   const dispatch = useAppDispatch();
-  const taskListId = useAppSelector(getCurrentTaskListId);
-  const { _id: projectId } = useAppSelector(getCurrentProject)!;
+
+  console.log("id of current LIST");
+  console.log(currentTaskListId);
 
   const [taskFormData, setTaskFormData] =
     useState<TaskFormData>(initialFormData);
@@ -46,10 +46,12 @@ export const useTaskForm = (
   const handleTaskSubmit = async () => {
     try {
       const method = mode === "addTask" ? postData : putData;
+      console.log("currentTaskList ID ====");
+      console.log(currentTaskListId);
       const url =
         mode === "addTask"
-          ? `project/${projectId}/taskList/${taskListId}/task/new`
-          : `task/`;
+          ? `project/${_id}/taskList/${currentTaskListId}/task/new`
+          : `project/${_id}/taskList/${currentTaskListId}/task/${currentTaskId}`;
       const response = await method(url, taskFormData);
       if (response?.value) {
         console.log(response);

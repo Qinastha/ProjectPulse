@@ -6,33 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DragAvatar/DragAvatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/PopUp/PopUp.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PopUp/PopUp.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Project/ManageProject.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ManageProject.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ManageList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ManageList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ManageTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ManageTask.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/PulseFormItem/PulseFormItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/PulseFormItem/PulseFormItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/PulseForm.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/PulseForm.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/inputs/ProjectPulseFormSearch/ProjectPulseFormSearch.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/inputs/ProjectPulseFormSearch/ProjectPulseFormSearch.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/inputs/ProjectPulseFormSearch/PulseFormSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/inputs/ProjectPulseFormSearch/PulseFormSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/inputs/PulseFormChecklist/PulseFormChecklist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/inputs/PulseFormChecklist/PulseFormChecklist.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Project/Project.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Project/Project.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Project/Project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Project/Project.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/styles/mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/components/MiniProfile/MiniProfile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/MiniProfile/MiniProfile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/components/fixedHeader/FixedHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/fixedHeader/FixedHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/components/fixedHeader/fixedHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/fixedHeader/fixedHeader.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/constants/taskInputs.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/taskInputs.constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/interfaces/IProject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/IProject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/interfaces/taskFormData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/taskFormData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useProject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/loaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/popUpSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/popUpSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/utility/useTask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useTask.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/projectSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/projectSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,6 +172,9 @@
       <workItem from="1721765112173" duration="71000" />
       <workItem from="1721803813236" duration="31773000" />
       <workItem from="1721849435685" duration="107000" />
+      <workItem from="1721855585820" duration="195000" />
+      <workItem from="1721856955226" duration="1544000" />
+      <workItem from="1721890449195" duration="27958000" />
     </task>
     <servers />
   </component>

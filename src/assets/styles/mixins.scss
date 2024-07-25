@@ -127,17 +127,42 @@
 
 @mixin pop-form-div {
   padding: 20px;
-  background-color: $background-color;
-  font-family: $font-family;
-  color: $text-color;
-  @include border-radius(10px);
-  @include box-shadow($box-shadow);
   width: 450px;
   max-width: 90%;
   max-height: 90%;
-  @include sakura-border;
 
   &:hover {
     @include box-shadow($box-shadow);
+  }
+}
+
+@mixin delimiter {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, $primary-color, $secondary-light-color);
+  border: none;
+  margin: 1rem 0;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: $background-color;
+    border-radius: 50%;
+    border: 2px solid $primary-color;
+  }
+
+  &::before {
+    left: -30px;
+  }
+
+  &::after {
+    right: -30px;
   }
 }
