@@ -95,6 +95,27 @@ export const deleteProjectTaskList = createAsyncThunk(
   },
 );
 
+export const deleteProjectTask = createAsyncThunk(
+  "project/deleteProjectTask",
+  async ({
+    _id,
+    listId,
+    taskId,
+  }: {
+    _id: string;
+    listId: string;
+    taskId: string;
+  }) => {
+    try {
+      await deleteData(`project/${_id}/taskList/${listId}/task/${taskId}`);
+      return { listId, taskId };
+    } catch (error) {
+      console.error("Error deleting task list:", error);
+      throw error;
+    }
+  },
+);
+
 export const project = createSlice({
   name: "project",
   initialState,
@@ -129,9 +150,15 @@ export const project = createSlice({
         }
       },
     ),
+    setCurrentTaskId: create.reducer(
+      (state, action: PayloadAction<string | null>) => {
+        if (state.currentProject) {
+          state.currentProject.currentTaskId = action.payload;
+        }
+      },
+    ),
   }),
   selectors: {
-    getProjectState: state => state,
     getProjects: state => state.projects,
     getIsInitialProject: state => state.isInitial,
     getProjectStatus: state => state.status,
@@ -196,9 +223,30 @@ export const project = createSlice({
       deleteProjectTaskList.fulfilled,
       (state, action: PayloadAction<string>) => {
         state.currentProject!.taskLists =
-          state.currentProject!.taskLists.filter(
+          state.currentProject!.taskLists!.filter(
             taskList => taskList._id !== action.payload,
           );
+      },
+    );
+
+    builder.addCase(
+      deleteProjectTask.fulfilled,
+      (
+        state,
+        action: PayloadAction<{
+          listId: string;
+          taskId: string;
+        }>,
+      ) => {
+        const { listId, taskId } = action.payload;
+        const currentTaskList = state.currentProject!.taskLists!.find(
+          list => list._id === listId,
+        );
+        if (currentTaskList) {
+          currentTaskList.tasks = currentTaskList!.tasks!.filter(
+            task => task._id !== taskId,
+          );
+        }
       },
     );
   },
@@ -210,10 +258,10 @@ export const {
   setIsInitialProject,
   setCurrentProjectNull,
   setCurrentTaskListId,
+  setCurrentTaskId,
 } = project.actions;
 
 export const {
-  getProjectState,
   getProjectStatus,
   getProjects,
   getAllMembers,

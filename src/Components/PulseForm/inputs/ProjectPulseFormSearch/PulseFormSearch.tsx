@@ -72,8 +72,8 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
         />
         {filteredMembers.length > 0 && (
           <div className="project-pop__user-list">
-            {filteredMembers.map((member: IMember) => (
-              <div key={member.userName} className="project-pop__user-item">
+            {filteredMembers.map((member: IMember, index: number) => (
+              <div key={index} className="project-pop__user-item">
                 <div
                   className="project-pop__select-button"
                   onClick={() => handleAddMember(member)}>
@@ -90,10 +90,8 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
         <div className="project-pop__text">Selected Members:</div>
         {inputValue?.length > 0 && (
           <div className="project-pop__selected-list">
-            {inputValue.map((member: IMember) => (
-              <div
-                key={member.userName}
-                className="project-pop__selected-member">
+            {inputValue.map((member: IMember, index: number) => (
+              <div key={index} className="project-pop__selected-member">
                 <span>
                   {member.firstName} {member.lastName}
                 </span>

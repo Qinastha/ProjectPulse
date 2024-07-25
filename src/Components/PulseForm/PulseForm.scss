@@ -1,6 +1,9 @@
 .pulse-form {
   display: flex;
   flex-direction: column;
+  height: fit-content;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .pulse-form-fields {
     margin-bottom: 15px;

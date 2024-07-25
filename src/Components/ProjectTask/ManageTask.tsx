@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PulseForm } from "../PulseForm/PulseForm";
 import { PopUpProps } from "../PopUp/PopUp";
 import "./ManageTask.scss";
 import { useTaskForm } from "../../core/utility/useTask";
 import { TaskFormData } from "../../core/interfaces/taskFormData";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import {
+  getCurrentProject,
+  setCurrentTaskId,
+  setCurrentTaskListId,
+} from "../../store/projectSlice";
+import { ITaskList, ITasks } from "../../core";
 
 interface ManageTaskProps extends PopUpProps {
   mode: "addTask" | "editTask";
@@ -13,20 +20,37 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
   handleClosePopUp,
   mode,
 }) => {
+  const dispatch = useAppDispatch();
+  const { _id, currentTaskListId, currentTaskId, taskLists } =
+    useAppSelector(getCurrentProject)!;
+
+  const task = taskLists
+    .find((list: ITaskList) => list._id === currentTaskListId)!
+    .tasks.find((task: ITasks) => task._id === currentTaskId)!;
+  console.log("task ==========");
+  console.log(task);
+
   const initialFormData: TaskFormData = {
-    title: "",
-    description: "",
-    members: [],
-    checkList: [
+    title: task?.title || "",
+    description: task?.description || "",
+    members: task?.members || [],
+    checkList: task?.checklist || [
       {
         text: "",
         isCompleted: false,
       },
     ],
-    deadLine: new Date(),
-    taskDepartment: "developer",
-    taskStatus: "to do",
+    deadLine: task?.deadLine || new Date(),
+    taskDepartment: task?.taskDepartment || "developer",
+    taskStatus: task?.taskStatus || "to do",
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(setCurrentTaskListId(null));
+      dispatch(setCurrentTaskId(null));
+    };
+  }, [dispatch, mode]);
 
   const {
     taskFormData,
@@ -34,7 +58,13 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
     inputValues,
     handleTaskChange,
     handleTaskSubmit,
-  } = useTaskForm(initialFormData, mode);
+  } = useTaskForm(
+    initialFormData,
+    mode,
+    _id,
+    currentTaskId,
+    currentTaskListId,
+  )!;
 
   return (
     <div className={"task-pop-form"}>

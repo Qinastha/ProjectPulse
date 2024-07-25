@@ -58,7 +58,7 @@ export const TASK_REQUIRED_INPUTS: RequiredInput[] = [
     type: "select",
     name: "taskStatus",
     label: "Task Status",
-    required: true,
+    required: false,
     className: "form-control",
     options: [
       { name: "To Do", value: "to do" },

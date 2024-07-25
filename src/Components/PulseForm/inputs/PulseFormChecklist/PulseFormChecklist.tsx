@@ -1,5 +1,6 @@
 import { RequiredInput } from "../../../../core";
 import React from "react";
+import "./PulseFormChecklist.scss";
 
 interface PulseFormSChecklistProps {
   inputData: RequiredInput;
@@ -52,7 +53,7 @@ export const PulseFormChecklist: React.FC<PulseFormSChecklistProps> = ({
               onChange={e => onChangeChecklist(e, index)}
             />
             <button
-              className="deleteCheclist--button"
+              className="deleteChecklist--button"
               onClick={e => deleteChecklistItem(e, index)}>
               &#x232B;
             </button>
