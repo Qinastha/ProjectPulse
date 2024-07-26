@@ -1,16 +1,12 @@
 import {
+  fetchAllUsers,
+  getAllUsers,
   getUser,
   getUserInitial,
   reqUser,
   setUserInitial,
 } from "./store/userSlice";
 import store from "./store";
-import {
-  fetchAllMembers,
-  getAllMembers,
-  getIsInitialProject,
-  setIsInitialProject,
-} from "./store/projectSlice";
 
 const { dispatch, getState } = store;
 
@@ -29,13 +25,10 @@ const userLoader = async () => {
 
 const membersLoader = async () => {
   const state = getState();
-  const allMembers = getAllMembers(state);
-  const isInitial = getIsInitialProject(state);
+  const allMembers = getAllUsers(state);
 
-  if (isInitial) {
-    await dispatch(fetchAllMembers());
-    dispatch(setIsInitialProject(false));
-  }
+  await dispatch(fetchAllUsers());
+
   return allMembers;
 };
 

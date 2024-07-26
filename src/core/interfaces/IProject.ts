@@ -1,23 +1,14 @@
-import { IUser } from "../../store/userSlice";
 import { UserPosition } from "../types/userPosition";
 import { TaskStatus } from "../types/taskStatus";
 import { ITaskChecklistItem } from "./ITaskChecklistStatus";
-
-export interface IMember {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  position?: string;
-  avatar?: string;
-}
+import { IUser } from "./IUser";
 
 export interface ITasks {
   _id: string;
   taskDepartment: UserPosition;
   taskStatus: TaskStatus;
   creator: IUser;
-  members: IMember[];
+  members: IUser[];
   title: string;
   description: string;
   checklist: ITaskChecklistItem[];
@@ -34,15 +25,14 @@ export interface IProject {
   projectName: string;
   projectDescription: string;
   projectAvatar: string;
-  creator: IMember;
-  members: IMember[];
+  creator: IUser;
+  members: IUser[];
   createdAt: Date;
   updatedAt: Date;
   startedAt: Date;
   completedAt: Date;
   isCompleted: boolean;
   taskLists: ITaskList[];
-  tasks: ITasks[];
 }
 
 export interface ITaskList {
@@ -51,9 +41,4 @@ export interface ITaskList {
   tasks: ITasks[];
   createdAt: Date;
   updatedAt: Date;
-}
-
-export interface CurrentProject extends IProject {
-  currentTaskId: string | null;
-  currentTaskListId: string | null;
 }

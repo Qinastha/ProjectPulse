@@ -128,8 +128,9 @@
 @mixin pop-form-div {
   padding: 20px;
   width: 450px;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 90vh;
+  max-height: 90vh;
+  @include box-shadow($box-shadow);
 
   &:hover {
     @include box-shadow($box-shadow);

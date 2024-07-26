@@ -6,6 +6,7 @@ import { PopUpProps } from "../PopUp/PopUp";
 import "./ManageList.scss";
 import {
   getCurrentProject,
+  getCurrentTaskListId,
   setCurrentTaskListId,
   setProject,
 } from "../../store/projectSlice";
@@ -19,8 +20,8 @@ export const ManageList: React.FC<ManageListProps> = ({
   mode,
 }) => {
   const dispatch = useAppDispatch();
-  const { taskLists, currentTaskListId, _id } =
-    useAppSelector(getCurrentProject)!;
+  const { taskLists, _id } = useAppSelector(getCurrentProject)!;
+  const currentTaskListId = useAppSelector(getCurrentTaskListId)!;
 
   const [taskListName, setTaskListName] = useState<string>("");
 

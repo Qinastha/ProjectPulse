@@ -3,12 +3,12 @@ import { NavLink, useLocation } from "react-router-dom";
 import React from "react";
 import "./fixedHeader.scss";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import { CurrentProject } from "../../interfaces/IProject";
+import { IProject } from "../../interfaces/IProject";
 
 interface FixedHeaderProps {
   isMenuOpen: boolean;
   id?: string;
-  currentProject: CurrentProject | null;
+  currentProject: IProject | null;
   handleLogout: () => void;
   setIsMenuOpen: (isOpen: boolean) => void;
 }

@@ -13,18 +13,19 @@
 }
 
 .popUp__content {
-  display: flex;
+  display: block;
+  position: fixed;
   z-index: 1000;
   max-height: 90vh;
   max-width: fit-content;
   overflow-y: auto;
   top: 50%;
   left: 50%;
-  transform: translate(75%, 8%);
+  transform: translate(-50%, -50%);
   background-color: $background-color;
   font-family: $font-family;
   color: $text-color;
   @include border-radius(10px);
-  @include box-shadow($box-shadow);
+
   @include sakura-border;
 }

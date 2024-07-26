@@ -16,10 +16,10 @@ import { ProjectTaskList } from "../../Components/ProjectTask/ProjectTaskList";
 
 export const Project: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>()!;
   const project = useAppSelector(getCurrentProject)!;
 
-  console.log("Current project ID");
+  console.log("Current project!");
   console.log(project);
 
   const openAddList = () => {
@@ -44,8 +44,6 @@ export const Project: React.FC = () => {
     dispatch(setPopUpMode("addTask"));
     dispatch(togglePopUp(true));
     dispatch(setCurrentTaskListId(listId));
-    console.log("add list ID");
-    console.log(listId);
   };
 
   const openEditTask = (listId: string, taskId: string) => {
@@ -75,22 +73,20 @@ export const Project: React.FC = () => {
   }, [dispatch, id]);
 
   return (
-    <>
-      <div className="listContainer">
-        <div className="taskContainer">
-          <ProjectTaskList
-            project={project}
-            deleteList={deleteList}
-            openEditList={openEditList}
-            openAddTask={openAddTask}
-            openEditTask={openEditTask}
-            deleteTask={deleteTask}
-          />
-        </div>
-        <button className="taskContainer--add_button" onClick={openAddList}>
-          Add another list
-        </button>
+    <div className="listContainer">
+      <div className="taskContainer">
+        <ProjectTaskList
+          project={project}
+          deleteList={deleteList}
+          openEditList={openEditList}
+          openAddTask={openAddTask}
+          openEditTask={openEditTask}
+          deleteTask={deleteTask}
+        />
       </div>
-    </>
+      <button className="taskContainer--add_button" onClick={openAddList}>
+        Add another list
+      </button>
+    </div>
   );
 };

@@ -7,6 +7,8 @@ import { TaskFormData } from "../../core/interfaces/taskFormData";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import {
   getCurrentProject,
+  getCurrentTaskId,
+  getCurrentTaskListId,
   setCurrentTaskId,
   setCurrentTaskListId,
 } from "../../store/projectSlice";
@@ -21,8 +23,9 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
   mode,
 }) => {
   const dispatch = useAppDispatch();
-  const { _id, currentTaskListId, currentTaskId, taskLists } =
-    useAppSelector(getCurrentProject)!;
+  const { _id, taskLists } = useAppSelector(getCurrentProject)!;
+  const currentTaskListId = useAppSelector(getCurrentTaskListId)!;
+  const currentTaskId = useAppSelector(getCurrentTaskId)!;
 
   const task = taskLists
     .find((list: ITaskList) => list._id === currentTaskListId)!

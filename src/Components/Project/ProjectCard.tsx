@@ -1,5 +1,6 @@
 import React from "react";
-import { IMember, IProject } from "../../core";
+import { IProject } from "../../core";
+import { IUser } from "../../core/interfaces/IUser";
 
 interface ProjectCardProps {
   project: IProject;
@@ -49,7 +50,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="projects-container__card-members-title">Members:</p>
         <ul className="projects-container__card-members-list">
           {project.members && project.members.length > 0 ? (
-            project.members.map((member: IMember) => (
+            project.members.map((member: IUser) => (
               <li
                 key={member.userName}
                 className="projects-container__card-members-item">
