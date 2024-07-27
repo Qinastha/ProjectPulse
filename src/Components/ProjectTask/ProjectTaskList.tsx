@@ -10,6 +10,7 @@ interface ProjectTaskListProps {
   openEditList: (_id: string) => void;
   openAddTask: (listId: string) => void;
   openEditTask: (listId: string, taskId: string) => void;
+  openPreviewTask: (listId: string, taskId: string) => void;
   deleteTask: (projectId: string, listId: string, taskId: string) => void;
 }
 
@@ -19,6 +20,7 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
   openEditList,
   openAddTask,
   openEditTask,
+  openPreviewTask,
   deleteTask,
 }) => {
   const status = useAppSelector(getProjectStatus);
@@ -28,9 +30,9 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
         <FallbackLoader />
       ) : (
         <>
-          {project.taskLists.length! > 0 && (
+          {project.taskLists.length! > 0 ? (
             <>
-              {project.taskLists! ? (
+              {project.taskLists! &&
                 project.taskLists!.map((list: ITaskList, index: number) => (
                   <div key={index} className="taskContainer--item">
                     <div className="listHeader">
@@ -54,9 +56,13 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
                           <div
                             key={index}
                             className="taskContainer__task--item">
-                            <span onClick={() => console.log("show project")}>
+                            <div
+                              className="taskContainer__task-text"
+                              onClick={() =>
+                                openPreviewTask(list._id, task._id)
+                              }>
                               {task.title}
-                            </span>
+                            </div>
                             <div className="task--actions">
                               <button
                                 className="editTask--button"
@@ -88,11 +94,10 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
                       </div>
                     </div>
                   </div>
-                ))
-              ) : (
-                <p>No lists available. Please add a new one</p>
-              )}
+                ))}
             </>
+          ) : (
+            <p>No task lists available.</p>
           )}
         </>
       )}

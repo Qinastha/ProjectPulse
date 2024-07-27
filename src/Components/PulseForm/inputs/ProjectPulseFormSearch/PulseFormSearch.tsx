@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDebounce } from "../../../../core";
+import { IUser, useDebounce } from "../../../../core";
 import {
   PulseFormInput,
   PulseFormInputProps,
 } from "../PulseFormInput/PulseFormInput";
 import { useAppSelector } from "../../../../hooks";
 import "./ProjectPulseFormSearch.scss";
-import { IUser } from "../../../../core/interfaces/IUser";
 import { getAllUsers } from "../../../../store/userSlice";
 
 interface PulseFormSearchProps extends PulseFormInputProps {}

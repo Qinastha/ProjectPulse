@@ -1,15 +1,15 @@
-import { postData, putData, RequiredInput } from "../../core";
+import { postData, putData, RequiredInput } from "../../../core";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { PulseForm } from "../PulseForm/PulseForm";
-import { PopUpProps } from "../PopUp/PopUp";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { PulseForm } from "../../PulseForm/PulseForm";
+import { PopUpProps } from "../../PopUp/PopUp";
 import "./ManageList.scss";
 import {
   getCurrentProject,
   getCurrentTaskListId,
   setCurrentTaskListId,
   setProject,
-} from "../../store/projectSlice";
+} from "../../../store/projectSlice";
 
 interface ManageListProps extends PopUpProps {
   mode: "addList" | "editList";

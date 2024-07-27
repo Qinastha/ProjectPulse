@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
-import { PulseForm } from "../PulseForm/PulseForm";
-import { PopUpProps } from "../PopUp/PopUp";
+import { PulseForm } from "../../PulseForm/PulseForm";
+import { PopUpProps } from "../../PopUp/PopUp";
 import "./ManageTask.scss";
-import { useTaskForm } from "../../core/utility/useTask";
-import { TaskFormData } from "../../core/interfaces/taskFormData";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
   getCurrentProject,
   getCurrentTaskId,
   getCurrentTaskListId,
   setCurrentTaskId,
   setCurrentTaskListId,
-} from "../../store/projectSlice";
-import { ITaskList, ITasks } from "../../core";
+} from "../../../store/projectSlice";
+import { ITaskList, ITasks, TaskFormData, useTaskForm } from "../../../core";
 
 interface ManageTaskProps extends PopUpProps {
   mode: "addTask" | "editTask";
@@ -30,14 +28,12 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
   const task = taskLists
     .find((list: ITaskList) => list._id === currentTaskListId)!
     .tasks.find((task: ITasks) => task._id === currentTaskId)!;
-  console.log("task ==========");
-  console.log(task);
 
   const initialFormData: TaskFormData = {
     title: task?.title || "",
     description: task?.description || "",
     members: task?.members || [],
-    checkList: task?.checklist || [
+    checkList: task?.checkList || [
       {
         text: "",
         isCompleted: false,
@@ -55,6 +51,8 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
     };
   }, [dispatch, mode]);
 
+  const isNewTask = mode !== "addTask";
+
   const {
     taskFormData,
     requiredInputs,
@@ -65,8 +63,8 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
     initialFormData,
     mode,
     _id,
-    currentTaskId,
     currentTaskListId,
+    currentTaskId,
   )!;
 
   return (
@@ -74,8 +72,9 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}
-        formTitle={mode === "addTask" ? "New Task List" : "Edit Task"}
+        formTitle={mode === "addTask" ? `New Task` : `Edit ${task.title}`}
         onChange={e => handleTaskChange(e)}
+        isNewTask={isNewTask}
       />
       <div className="task-pop-form__actions">
         <button
@@ -92,7 +91,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
             handleTaskSubmit();
           }}
           className="task-pop-form__button task-pop-form__button--submit">
-          Add Task List
+          {mode === "addTask" ? "Add Task" : "Save Changes"}
         </button>
       </div>
     </div>

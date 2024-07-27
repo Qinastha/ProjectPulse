@@ -108,9 +108,16 @@
     border: 1px solid $sakura-border-color;
     @include border-radius(10px);
 
-    span {
+    .taskContainer__task-text {
       flex-grow: 1;
-      margin-right: 10px;
+      margin: 0 1.5rem;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        transform: translateX(4%) translateY(4%);
+        transition: all 0.3s ease-in-out;
+      }
     }
 
     .task--actions {

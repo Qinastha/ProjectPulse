@@ -6,21 +6,17 @@ import { useParams } from "react-router-dom";
 import {
   deleteProjectTask,
   deleteProjectTaskList,
-  fetchProjectById,
   getCurrentProject,
   setCurrentProjectNull,
   setCurrentTaskId,
   setCurrentTaskListId,
 } from "../../store/projectSlice";
-import { ProjectTaskList } from "../../Components/ProjectTask/ProjectTaskList";
+import { ProjectTaskList } from "../../Components";
 
 export const Project: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>()!;
   const project = useAppSelector(getCurrentProject)!;
-
-  console.log("Current project!");
-  console.log(project);
 
   const openAddList = () => {
     dispatch(setPopUpMode("addList"));
@@ -53,6 +49,13 @@ export const Project: React.FC = () => {
     dispatch(setCurrentTaskId(taskId));
   };
 
+  const openPreviewTask = (listId: string, taskId: string) => {
+    dispatch(togglePopUp(true));
+    dispatch(setPopUpMode("previewTask"));
+    dispatch(setCurrentTaskListId(listId));
+    dispatch(setCurrentTaskId(taskId));
+  };
+
   const deleteTask = (_id: string, listId: string, taskId: string) => {
     if (taskId) {
       dispatch(deleteProjectTask({ _id, listId, taskId }));
@@ -60,12 +63,9 @@ export const Project: React.FC = () => {
   };
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchProjectById(id));
-    }
-  }, [dispatch, id]);
-
-  useEffect(() => {
+    // if (id) {
+    //     dispatch(fetchProjectById(id));
+    // }
     return () => {
       dispatch(setCurrentProjectNull());
       dispatch(setCurrentTaskListId(null));
@@ -81,6 +81,7 @@ export const Project: React.FC = () => {
           openEditList={openEditList}
           openAddTask={openAddTask}
           openEditTask={openEditTask}
+          openPreviewTask={openPreviewTask}
           deleteTask={deleteTask}
         />
       </div>

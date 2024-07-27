@@ -7,6 +7,7 @@ import {
   setUserInitial,
 } from "./store/userSlice";
 import store from "./store";
+import { fetchProjectById, getCurrentProject } from "./store/projectSlice";
 
 const { dispatch, getState } = store;
 
@@ -35,4 +36,19 @@ const membersLoader = async () => {
 export const userDataLoader = async () => {
   const [user, members] = await Promise.all([userLoader(), membersLoader()]);
   return { user, members };
+};
+
+export const projectLoader = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+
+  if (id) {
+    await dispatch(fetchProjectById(id));
+  }
+
+  const state = getState();
+  const project = getCurrentProject(state)!;
+  console.log("project loaded");
+  console.log(project);
+
+  return project;
 };

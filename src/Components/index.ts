@@ -6,3 +6,7 @@ export * from "./PopUp/PopUp";
 export * from "./PrivateRout/PrivateRoute";
 export * from "./PulseForm/PulseForm";
 export * from "./PulseForm/PulseFormItem/PulseFormItem";
+export * from "./ProjectTask/ManageTask/ManageTask";
+export * from "./ProjectTask/ManageList/ManageList";
+export * from "./ProjectTask/ProjectTaskList";
+export * from "./ProjectTask/ProjectTaskPreview/ProjectTaskPreview";

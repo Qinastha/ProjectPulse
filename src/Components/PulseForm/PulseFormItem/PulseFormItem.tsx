@@ -11,7 +11,9 @@ interface PulseFormItemProp {
   inputData: RequiredInput;
   inputValue: any;
   errors: any;
+  isNewTask?: boolean;
   className?: string;
+  readOnly?: boolean;
   onChange: (e: any) => void;
   handleFile?: (e: string) => void;
 }
@@ -20,14 +22,16 @@ export const PulseFormItem: React.FC<PulseFormItemProp> = ({
   inputData,
   inputValue,
   errors,
+  isNewTask = false,
   className,
   onChange,
   handleFile,
+  readOnly,
 }) => {
   const { type, name, label } = inputData;
   return (
     <div className={className}>
-      <label>{label}</label>
+      {!readOnly ? <label>{label}</label> : ""}
       {type === "select" ? (
         <PulseFormSelect
           inputData={inputData}
@@ -50,6 +54,7 @@ export const PulseFormItem: React.FC<PulseFormItemProp> = ({
           inputData={inputData}
           inputValue={inputValue}
           onChange={e => onChange(e)}
+          isNewTask={isNewTask}
         />
       ) : (
         <PulseFormInput

@@ -16,7 +16,7 @@
   display: block;
   position: fixed;
   z-index: 1000;
-  max-height: 90vh;
+  max-height: calc(90vh + 5%);
   max-width: fit-content;
   overflow-y: auto;
   top: 50%;

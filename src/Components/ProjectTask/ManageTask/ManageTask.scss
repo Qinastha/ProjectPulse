@@ -1,5 +1,5 @@
-@import "../../assets/styles/variables";
-@import "../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
 
 .task-pop-form {
   @include pop-form-div;

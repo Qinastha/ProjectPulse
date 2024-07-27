@@ -1,5 +1,5 @@
 import pinkBlossom from "../../../assets/pinkBlossom.png";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React from "react";
 import "./fixedHeader.scss";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -9,6 +9,7 @@ interface FixedHeaderProps {
   isMenuOpen: boolean;
   id?: string;
   currentProject: IProject | null;
+  pathname: string;
   handleLogout: () => void;
   setIsMenuOpen: (isOpen: boolean) => void;
 }
@@ -19,9 +20,8 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
   currentProject,
   handleLogout,
   setIsMenuOpen,
+  pathname,
 }) => {
-  const { pathname } = useLocation();
-
   const getPageTitle = (pathname: string): string => {
     switch (pathname) {
       case "/":

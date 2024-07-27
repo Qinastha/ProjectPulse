@@ -1,13 +1,13 @@
 import "./ManageProject.scss";
-import { useProjectForm } from "../../core/utility/useProject";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
   getCurrentProject,
   setCurrentProjectNull,
-} from "../../store/projectSlice";
+} from "../../../store/projectSlice";
 import React, { useEffect } from "react";
-import { PulseForm } from "../PulseForm/PulseForm";
-import { PopUpProps } from "../PopUp/PopUp";
+import { PulseForm } from "../../PulseForm/PulseForm";
+import { PopUpProps } from "../../PopUp/PopUp";
+import { useProjectForm } from "../../../core";
 
 interface ManageProjectProps extends PopUpProps {
   mode: "create" | "update";

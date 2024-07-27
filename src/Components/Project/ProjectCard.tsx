@@ -1,6 +1,5 @@
 import React from "react";
-import { IProject } from "../../core";
-import { IUser } from "../../core/interfaces/IUser";
+import { IProject, IUser } from "../../core";
 
 interface ProjectCardProps {
   project: IProject;

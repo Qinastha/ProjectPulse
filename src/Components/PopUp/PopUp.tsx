@@ -1,15 +1,23 @@
 import React from "react";
 import "./PopUp.scss";
-import { ManageProject } from "../Project/ManageProject";
+import { ManageProject } from "../Project/ManageProject/ManageProject";
 import { useAppSelector } from "../../hooks";
 import { getProjectPopMode } from "../../store/popUpSlice";
-import { ManageTask } from "../ProjectTask/ManageTask";
-import { ManageList } from "../ProjectTask/ManageList";
+import { ManageTask } from "../ProjectTask/ManageTask/ManageTask";
+import { ManageList } from "../ProjectTask/ManageList/ManageList";
+import { ProjectTaskPreview } from "../ProjectTask/ProjectTaskPreview/ProjectTaskPreview";
 
 export interface PopUpProps {
   handleClosePopUp: () => void;
   isPopUpOpen?: boolean;
-  mode?: "create" | "update" | "addList" | "editList" | "addTask" | "editTask";
+  mode?:
+    | "create"
+    | "update"
+    | "addList"
+    | "editList"
+    | "addTask"
+    | "editTask"
+    | "previewTask";
 }
 
 const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
@@ -34,6 +42,10 @@ const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
 
         {isPopUpOpen && (mode === "addTask" || mode === "editTask") && (
           <ManageTask mode={mode} handleClosePopUp={handleClosePopUp} />
+        )}
+
+        {isPopUpOpen && mode === "previewTask" && (
+          <ProjectTaskPreview handleClosePopUp={handleClosePopUp} />
         )}
       </div>
     </div>

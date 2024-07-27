@@ -4,8 +4,7 @@ import {
   PayloadAction,
   ReducerCreators,
 } from "@reduxjs/toolkit";
-import { getData, IProfile } from "../core";
-import { IUser } from "../core/interfaces/IUser";
+import { getData, IProfile, IUser } from "../core";
 
 export interface IUserState {
   user: IUser;

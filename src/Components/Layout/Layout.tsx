@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./Layout.scss";
 import React, { useState } from "react";
 import PopUp from "../PopUp/PopUp";
@@ -16,6 +16,7 @@ import { getCurrentProject } from "../../store/projectSlice";
 export const Layout: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   const [isNavbarExpand, setIsNavbarExpand] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const popUpState = useAppSelector(getPopUpState);
@@ -43,7 +44,12 @@ export const Layout: React.FC = () => {
     <div className="layoutContainer">
       <header
         className={`navbar ${isNavbarExpand ? "expanded" : "notExpanded"}`}>
-        <Navbar handlePopUpOpen={handlePopUpOpen} toggleNav={toggleNav} />
+        <Navbar
+          pathname={pathname}
+          id={id}
+          handlePopUpOpen={handlePopUpOpen}
+          toggleNav={toggleNav}
+        />
       </header>
 
       <main>
@@ -54,6 +60,7 @@ export const Layout: React.FC = () => {
             isMenuOpen={isMenuOpen}
             id={id}
             currentProject={currentProject}
+            pathname={pathname}
             handleLogout={handleLogout}
             setIsMenuOpen={e => setIsMenuOpen(e)}
           />

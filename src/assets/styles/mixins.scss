@@ -88,10 +88,6 @@
   &::placeholder {
     color: $text-muted;
   }
-
-  &:hover {
-    @include hover-effect;
-  }
 }
 
 @mixin custom-arrow {
