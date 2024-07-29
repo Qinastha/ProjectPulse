@@ -6,6 +6,7 @@ import { getProjectPopMode } from "../../store/popUpSlice";
 import { ManageTask } from "../ProjectTask/ManageTask/ManageTask";
 import { ManageList } from "../ProjectTask/ManageList/ManageList";
 import { ProjectTaskPreview } from "../ProjectTask/ProjectTaskPreview/ProjectTaskPreview";
+import { WidgetPreview } from "../Widget/WidgetPreview";
 
 export interface PopUpProps {
   handleClosePopUp: () => void;
@@ -17,7 +18,8 @@ export interface PopUpProps {
     | "editList"
     | "addTask"
     | "editTask"
-    | "previewTask";
+    | "previewTask"
+    | "showWidget";
 }
 
 const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
@@ -46,6 +48,10 @@ const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
 
         {isPopUpOpen && mode === "previewTask" && (
           <ProjectTaskPreview handleClosePopUp={handleClosePopUp} />
+        )}
+
+        {isPopUpOpen && mode === "showWidget" && (
+          <WidgetPreview mode={mode} handleClosePopUp={handleClosePopUp} />
         )}
       </div>
     </div>

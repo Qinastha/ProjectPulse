@@ -1,5 +1,7 @@
 import React from "react";
 import { ITaskChecklistItem, IUser, TaskFormData } from "../../../core";
+import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
+import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutlined";
 
 interface TaskPreviewProps {
   taskData: TaskFormData;
@@ -22,22 +24,33 @@ export const TaskPreview: React.FC<TaskPreviewProps> = ({
         </div>
         <div className="previewTask__field">
           <strong>Members:</strong>
-          <ul className="previewTask__field">
+          <ul className="previewTask__list">
             {taskData.members?.map((member: IUser, index) => (
               <li key={index}>
-                {member.firstName} {member.lastName}
+                <div className="previewTask__list--text">
+                  {member.firstName} {member.lastName}
+                </div>
               </li>
             ))}
           </ul>
         </div>
         <div className="previewTask__field">
           <strong>Check List:</strong>
-          <ul className="previewTask__field">
-            {taskData.checkList?.map((item: ITaskChecklistItem, index) => (
-              <li key={index}>
-                {item.text} {item.isCompleted}
-              </li>
-            ))}
+          <ul className="previewTask__list">
+            {taskData.checkList?.map(
+              (item: ITaskChecklistItem, index: number) => (
+                <li key={index} className="checklist-item">
+                  <div className="previewTask__list--text">
+                    {item.text}{" "}
+                    {item.isCompleted ? (
+                      <DoneOutlineOutlinedIcon />
+                    ) : (
+                      <HourglassBottomOutlinedIcon />
+                    )}
+                  </div>
+                </li>
+              ),
+            )}
           </ul>
         </div>
         <div className="previewTask__field">

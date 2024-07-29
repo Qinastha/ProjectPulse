@@ -3,6 +3,7 @@ import user from "./userSlice";
 import project from "./projectSlice";
 import popUp from "./popUpSlice";
 import alert from "./alertSlice";
+import widget from "./widgetSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     project,
     popUp,
     alert,
+    widget,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });

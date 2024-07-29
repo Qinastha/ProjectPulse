@@ -72,7 +72,9 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}
-        formTitle={mode === "addTask" ? `New Task` : `Edit ${task.title}`}
+        formTitle={
+          mode === "addTask" ? `New Task` : `Edit task "${task.title}"`
+        }
         onChange={e => handleTaskChange(e)}
         isNewTask={isNewTask}
       />

@@ -44,7 +44,7 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
     <div className="heading">
       <h1>{getPageTitle(pathname)}</h1>
       <div className="headingRightPart">
-        <input type="text" placeholder="Search for anything..." />
+        <input type="text" placeholder="Search for a ..." />
         <div className="dropdown-container">
           <img
             className="settingIcon"

@@ -9,7 +9,8 @@ interface PopUpState {
     | "editList"
     | "addTask"
     | "editTask"
-    | "previewTask";
+    | "previewTask"
+    | "showWidget";
 }
 
 const initialState: PopUpState = {
@@ -34,6 +35,7 @@ const popUp = createSlice({
         | "addTask"
         | "editTask"
         | "previewTask"
+        | "showWidget"
       >,
     ) => {
       state.mode = action.payload;

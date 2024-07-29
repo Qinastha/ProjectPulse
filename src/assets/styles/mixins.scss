@@ -125,7 +125,7 @@
   padding: 20px;
   width: 450px;
   max-width: 90vh;
-  max-height: 90vh;
+  max-height: calc(90vh + 5%);
   @include box-shadow($box-shadow);
 
   &:hover {
