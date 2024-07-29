@@ -6,9 +6,11 @@ import { getProfile } from "../../store/userSlice";
 import { PulseForm } from "../../Components";
 import { LOGIN_REQUIRED_INPUTS, postData, RegisterFormData } from "../../core";
 import { useAppSelector } from "../../hooks";
+import { useTheme } from "../../core/contexts/ThemeContext";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme()!;
   const profile = useAppSelector(getProfile);
   const [errors, setErrors] = useState<any>({});
 
@@ -74,7 +76,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="loginContainer">
+    <div className={`loginContainer ${theme}`}>
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

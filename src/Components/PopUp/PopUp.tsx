@@ -6,7 +6,8 @@ import { getProjectPopMode } from "../../store/popUpSlice";
 import { ManageTask } from "../ProjectTask/ManageTask/ManageTask";
 import { ManageList } from "../ProjectTask/ManageList/ManageList";
 import { ProjectTaskPreview } from "../ProjectTask/ProjectTaskPreview/ProjectTaskPreview";
-import { WidgetPreview } from "../Widget/WidgetPreview";
+import { WidgetPreview } from "../Widget/WidgetPreview/WidgetPreview";
+import { useTheme } from "../../core/contexts/ThemeContext";
 
 export interface PopUpProps {
   handleClosePopUp: () => void;
@@ -24,6 +25,7 @@ export interface PopUpProps {
 
 const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
   const mode = useAppSelector(getProjectPopMode);
+  const { theme } = useTheme()!;
 
   const handleContentClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -33,7 +35,7 @@ const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
 
   return (
     <div className="popUp__overlay" onClick={() => handleClosePopUp!()}>
-      <div className="popUp__content" onClick={handleContentClick}>
+      <div className={`popUp__content ${theme}`} onClick={handleContentClick}>
         {isPopUpOpen && (mode === "create" || mode === "update") && (
           <ManageProject mode={mode} handleClosePopUp={handleClosePopUp} />
         )}

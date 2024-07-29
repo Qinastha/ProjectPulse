@@ -68,7 +68,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
   )!;
 
   return (
-    <div className={"task-pop-form"}>
+    <div className="task-pop-form">
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

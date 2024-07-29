@@ -44,7 +44,7 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
   } = useProjectForm(initialFormData, mode);
 
   return (
-    <div className={"project-pop__form"}>
+    <div className="project-pop__form">
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

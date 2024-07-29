@@ -12,6 +12,7 @@ import {
 import { Navbar } from "../../core/components/Navbar/Navbar";
 import { FixedHeader } from "../../core/components/fixedHeader/FixedHeader";
 import { getCurrentProject } from "../../store/projectSlice";
+import { useTheme } from "../../core/contexts/ThemeContext";
 
 export const Layout: React.FC = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export const Layout: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { isPopUpOpen } = popUpState;
   const currentProject = useAppSelector(getCurrentProject);
+  const { theme, setTheme } = useTheme()!;
 
   const toggleNav = (): void => {
     setIsNavbarExpand(!isNavbarExpand);
@@ -40,6 +42,10 @@ export const Layout: React.FC = () => {
     dispatch(setStateNull());
   };
 
+  const toggleTheme = (): void => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
     <div className="layoutContainer">
       <header
@@ -52,9 +58,9 @@ export const Layout: React.FC = () => {
         />
       </header>
 
-      <main>
+      <main className={theme}>
         <div
-          className="coreContent"
+          className={`fixedHeaderContent ${theme}`}
           onMouseLeave={(): void => setIsMenuOpen(false)}>
           <FixedHeader
             isMenuOpen={isMenuOpen}
@@ -63,6 +69,8 @@ export const Layout: React.FC = () => {
             pathname={pathname}
             handleLogout={handleLogout}
             setIsMenuOpen={e => setIsMenuOpen(e)}
+            toggleTheme={toggleTheme}
+            theme={theme}
           />
         </div>
 

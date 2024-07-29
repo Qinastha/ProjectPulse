@@ -8,9 +8,11 @@ import {
   REGISTER_REQUIRED_INPUTS,
   RegisterFormData,
 } from "../../core";
+import { useTheme } from "../../core/contexts/ThemeContext";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme()!;
   const [errors, setErrors] = useState<any>({});
 
   const [registerFormData, setRegisterFormData] = useState<RegisterFormData>({
@@ -129,7 +131,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="registerContainer">
+    <div className={`registerContainer ${theme}`}>
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

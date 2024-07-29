@@ -1,8 +1,8 @@
-import { Widget } from "./Widget";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getCurrentWidget, setCurrentWidget } from "../../store/widgetSlice";
+import { Widget } from "../Widget";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { getCurrentWidget, setCurrentWidget } from "../../../store/widgetSlice";
 import React, { useEffect } from "react";
-import { PopUpProps } from "../PopUp/PopUp";
+import { PopUpProps } from "../../PopUp/PopUp";
 import "./WidgetPreview.scss";
 
 export interface WidgetPreviewProps extends PopUpProps {

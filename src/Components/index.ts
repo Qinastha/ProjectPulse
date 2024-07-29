@@ -10,3 +10,5 @@ export * from "./ProjectTask/ManageTask/ManageTask";
 export * from "./ProjectTask/ManageList/ManageList";
 export * from "./ProjectTask/ProjectTaskList";
 export * from "./ProjectTask/ProjectTaskPreview/ProjectTaskPreview";
+export * from "./Widget/Widget";
+export * from "./Widget/WidgetPreview/WidgetPreview";

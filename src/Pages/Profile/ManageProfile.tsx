@@ -4,11 +4,13 @@ import { PulseForm } from "../../Components";
 import "./ManageProfile.scss";
 import { useAppSelector } from "../../hooks";
 import { useProfileForm } from "../../core";
+import { useTheme } from "../../core/contexts/ThemeContext";
 
 export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
   mode,
 }) => {
   const profile = useAppSelector(getProfile);
+  const { theme } = useTheme()!;
 
   const initialFormData = {
     avatar: profile?.avatar || "",
@@ -37,7 +39,7 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
   } = useProfileForm(initialFormData, mode);
 
   return (
-    <div className="profileContainer">
+    <div className={`profileContainer ${theme}`}>
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

@@ -7,6 +7,7 @@ import {
 import { useAppSelector } from "../../../../hooks";
 import "./ProjectPulseFormSearch.scss";
 import { getAllUsers } from "../../../../store/userSlice";
+import { useTheme } from "../../../../core/contexts/ThemeContext";
 
 interface PulseFormSearchProps extends PulseFormInputProps {}
 
@@ -15,6 +16,7 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
   inputValue = [],
   onChange,
 }) => {
+  const { theme } = useTheme()!;
   const allMembers = useAppSelector(getAllUsers);
   const [memberSearch, setMemberSearch] = useState("");
   const [filteredMembers, setFilteredMembers] = useState<IUser[]>([]);
@@ -86,7 +88,7 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
           </div>
         )}
       </div>
-      <div className="project-pop__selected-members">
+      <div className={`project-pop__selected-members ${theme}`}>
         <div className="project-pop__text">Selected Members:</div>
         {inputValue?.length > 0 && (
           <div className="project-pop__selected-list">

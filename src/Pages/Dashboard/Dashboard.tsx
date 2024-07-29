@@ -1,9 +1,9 @@
 import React from "react";
 import { getAllWidgets, setCurrentWidget } from "../../store/widgetSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { Widget } from "../../Components/Widget/Widget";
 import "./Dashboard.scss";
 import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
+import { Widget } from "../../Components";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();

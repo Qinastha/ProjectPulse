@@ -11,11 +11,13 @@ import {
 import { ITaskList, ITasks, TaskFormData } from "../../../core";
 import "./ProjectTaskPreview.scss";
 import { TaskPreview } from "./TaskPreview";
+import { useTheme } from "../../../core/contexts/ThemeContext";
 
 export const ProjectTaskPreview: React.FC<PopUpProps> = ({
   handleClosePopUp,
 }) => {
   const dispatch = useAppDispatch();
+  const { theme } = useTheme()!;
   const { _id, taskLists } = useAppSelector(getCurrentProject)!;
   const currentTaskListId = useAppSelector(getCurrentTaskListId)!;
   const currentTaskId = useAppSelector(getCurrentTaskId)!;

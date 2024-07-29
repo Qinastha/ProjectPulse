@@ -36,13 +36,15 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
                 project.taskLists!.map((list: ITaskList, index: number) => (
                   <div key={index} className="taskContainer--item">
                     <div className="listHeader">
-                      <span>{list.taskListName} </span>
-                      <div className="list--actions">
+                      <div className="listHeader--text">
+                        {list.taskListName}
                         <button
                           className="editList--button"
                           onClick={() => openEditList(list._id)}>
                           &#x270E;
                         </button>
+                      </div>
+                      <div className="list--actions">
                         <button
                           className="deleteList--button"
                           onClick={() => deleteList(list._id)}>

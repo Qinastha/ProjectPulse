@@ -14,7 +14,6 @@
     border: 1px solid $sakura-active-border-color;
     border-radius: 8px;
     overflow: hidden;
-    background-color: $pulse-white;
     @include box-shadow($box-shadow);
     max-width: 50vh;
     max-height: 45vh;
@@ -24,7 +23,6 @@
       margin: 0;
       padding: 20px;
       text-align: center;
-      color: $text-color;
     }
   }
 }

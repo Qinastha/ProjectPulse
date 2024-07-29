@@ -6,7 +6,6 @@
 
   &__header {
     font-family: $font-family-serif;
-    color: $pulse-white;
     text-align: center;
     margin-bottom: 20px;
     @include border-radius(5px);
@@ -18,7 +17,6 @@
     padding: 20px;
     border-radius: 8px;
     border: 1px solid $border-color;
-    background: $background-color;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -26,7 +24,6 @@
     .previewTask__field {
       font-family: $font-family;
       font-size: 1rem;
-      color: $text-color;
 
       strong {
         color: $primary-color;
@@ -34,7 +31,6 @@
 
       span {
         margin-left: 5px;
-        color: $text-muted;
       }
     }
 
