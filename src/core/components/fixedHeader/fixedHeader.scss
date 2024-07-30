@@ -9,7 +9,6 @@
 
   h1 {
     font-size: 24px;
-    color: $text-color;
     border-bottom: 2px solid $primary-color;
     padding-bottom: 10px;
     margin: 0;
@@ -21,18 +20,42 @@
     justify-content: flex-end;
     gap: 7rem;
 
-    input,
-    select {
+    .theme-switcher {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
       padding: 10px;
-      font-size: 16px;
-      border: 1px solid $primary-color;
-      @include border-radius(10px);
-      @include transition(all, 0.3s);
-    }
+      transition:
+        all 0.3s ease,
+        transform 0.3s ease;
 
-    input:focus {
-      outline: none;
-      border-color: darken($primary-color, 10%);
+      &:hover {
+        background-color: $box-shadow;
+        transform: scale(1.05);
+      }
+
+      .theme-switcher__dark {
+        color: $text-muted;
+        margin: auto;
+        @include flex-center;
+      }
+
+      .theme-switcher__light {
+        color: $pulse-white;
+        margin: auto;
+        @include flex-center;
+      }
+
+      .icon {
+        font-size: 24px;
+        margin-right: 8px;
+        transition: color 0.3s ease;
+      }
+
+      span {
+        font-size: 16px;
+        transition: color 0.3s ease;
+      }
     }
 
     .settingIcon {

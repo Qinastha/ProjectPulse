@@ -1,9 +1,9 @@
 import { POPUP_REQUIRED_INPUTS } from "../constants/popUpInputs.constants";
 import { fetchAllProjects } from "../../store/projectSlice";
 import { useAppDispatch } from "../../hooks";
-import { PopUpFormData } from "../interfaces/popUpFormData";
 import React, { useState } from "react";
 import { postData, putData } from "../requests/httpRequests";
+import { PopUpFormData } from "../interfaces/popUpFormData";
 
 export const useProjectForm = (
   initialFormData: PopUpFormData,

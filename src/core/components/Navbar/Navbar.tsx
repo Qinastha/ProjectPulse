@@ -7,11 +7,15 @@ import ChecklistOutlinedIcon from "@mui/icons-material/ChecklistOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 
 interface NavbarProps {
+  pathname: string;
+  id?: string;
   handlePopUpOpen: () => void;
   toggleNav: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
+  pathname,
+  id,
   handlePopUpOpen,
   toggleNav,
 }) => {
@@ -23,14 +27,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           &#8656;
         </button>
       </div>
-      <div className="navButtons">
-        <button
-          className="newProjectButton"
-          type="button"
-          onClick={handlePopUpOpen}>
-          Create New Project
-        </button>
-      </div>
+      {pathname !== `/projects/${id}` && (
+        <div className="navButtons">
+          <button
+            className="newProjectButton"
+            type="button"
+            onClick={handlePopUpOpen}>
+            Create New Project
+          </button>
+        </div>
+      )}
       <div className="navLinks nav-item">
         <NavLink to="/">
           {" "}

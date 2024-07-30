@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./Layout.scss";
 import React, { useState } from "react";
 import PopUp from "../PopUp/PopUp";
@@ -12,16 +12,19 @@ import {
 import { Navbar } from "../../core/components/Navbar/Navbar";
 import { FixedHeader } from "../../core/components/fixedHeader/FixedHeader";
 import { getCurrentProject } from "../../store/projectSlice";
+import { useTheme } from "../../core/contexts/ThemeContext";
 
 export const Layout: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   const [isNavbarExpand, setIsNavbarExpand] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const popUpState = useAppSelector(getPopUpState);
   const { id } = useParams<{ id: string }>();
   const { isPopUpOpen } = popUpState;
   const currentProject = useAppSelector(getCurrentProject);
+  const { theme, setTheme } = useTheme()!;
 
   const toggleNav = (): void => {
     setIsNavbarExpand(!isNavbarExpand);
@@ -39,23 +42,35 @@ export const Layout: React.FC = () => {
     dispatch(setStateNull());
   };
 
+  const toggleTheme = (): void => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
     <div className="layoutContainer">
       <header
         className={`navbar ${isNavbarExpand ? "expanded" : "notExpanded"}`}>
-        <Navbar handlePopUpOpen={handlePopUpOpen} toggleNav={toggleNav} />
+        <Navbar
+          pathname={pathname}
+          id={id}
+          handlePopUpOpen={handlePopUpOpen}
+          toggleNav={toggleNav}
+        />
       </header>
 
-      <main>
+      <main className={theme}>
         <div
-          className="coreContent"
+          className={`fixedHeaderContent ${theme}`}
           onMouseLeave={(): void => setIsMenuOpen(false)}>
           <FixedHeader
             isMenuOpen={isMenuOpen}
             id={id}
             currentProject={currentProject}
+            pathname={pathname}
             handleLogout={handleLogout}
             setIsMenuOpen={e => setIsMenuOpen(e)}
+            toggleTheme={toggleTheme}
+            theme={theme}
           />
         </div>
 

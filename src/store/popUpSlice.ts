@@ -2,7 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface PopUpState {
   isPopUpOpen: boolean;
-  mode: "create" | "update" | "addList" | "editList" | "addTask" | "editTask";
+  mode:
+    | "create"
+    | "update"
+    | "addList"
+    | "editList"
+    | "addTask"
+    | "editTask"
+    | "previewTask"
+    | "showWidget";
 }
 
 const initialState: PopUpState = {
@@ -20,7 +28,14 @@ const popUp = createSlice({
     setPopUpMode: (
       state,
       action: PayloadAction<
-        "create" | "update" | "addList" | "editList" | "addTask" | "editTask"
+        | "create"
+        | "update"
+        | "addList"
+        | "editList"
+        | "addTask"
+        | "editTask"
+        | "previewTask"
+        | "showWidget"
       >,
     ) => {
       state.mode = action.payload;

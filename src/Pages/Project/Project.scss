@@ -4,9 +4,7 @@
 .listContainer {
   display: grid;
   grid-template-columns: 1fr auto;
-  background-color: $background-color;
   font-family: $font-family;
-  color: $text-color;
   box-sizing: border-box;
   height: fit-content;
   max-height: 100vh;
@@ -49,31 +47,30 @@
     font-size: 1.2rem;
     margin-bottom: 10px;
 
-    span {
+    .listHeader--text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: bold;
       margin-left: 0.5rem;
-    }
-
-    .list--actions {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      gap: 10px;
 
       .editList--button {
         background-color: transparent;
-        border-radius: 10px;
+        @include border-radius(5px);
         outline: none;
         border: none;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
-        padding: 0.8rem;
-        box-sizing: content-box;
 
         &:hover {
-          background-color: darken($primary-color, 10%);
+          background-color: lighten($primary-color, 2%);
         }
       }
+    }
+
+    .list--actions {
+      display: flex;
+      justify-content: flex-end;
 
       .deleteList--button {
         background-color: transparent;
@@ -108,9 +105,16 @@
     border: 1px solid $sakura-border-color;
     @include border-radius(10px);
 
-    span {
+    .taskContainer__task-text {
       flex-grow: 1;
-      margin-right: 10px;
+      margin: 0 1.5rem;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        transform: translateX(4%) translateY(4%);
+        transition: all 0.3s ease-in-out;
+      }
     }
 
     .task--actions {

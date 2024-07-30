@@ -1,0 +1,31 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.widgetPreview__container {
+  @include pop-form-div;
+  width: 90vh;
+  height: 80vh;
+
+  h2 {
+    font-size: 3rem;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  &--actions {
+    display: flex;
+    justify-content: flex-end;
+
+    &--button {
+      @include base-button;
+      background-color: $primary-color;
+      color: $pulse-white;
+      margin-right: 10px;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}

@@ -14,9 +14,6 @@ export const useTaskForm = (
 ) => {
   const dispatch = useAppDispatch();
 
-  console.log("id of current LIST");
-  console.log(currentTaskListId);
-
   const [taskFormData, setTaskFormData] =
     useState<TaskFormData>(initialFormData);
 
@@ -54,7 +51,7 @@ export const useTaskForm = (
           : `project/${_id}/taskList/${currentTaskListId}/task/${currentTaskId}`;
       const response = await method(url, taskFormData);
       if (response?.value) {
-        console.log(response);
+        console.log(response.value);
         dispatch(setProject(response.value));
       }
     } catch (error) {

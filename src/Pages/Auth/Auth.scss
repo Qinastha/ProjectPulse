@@ -13,7 +13,6 @@
   max-width: 500px;
   margin: 50px auto;
   padding: 20px;
-  background-color: $background-color;
   border-radius: 10px;
   @include box-shadow($box-shadow);
   font-family: $font-family;
@@ -21,11 +20,18 @@
   overflow-x: hidden;
   overscroll-behavior-x: auto;
 
+  &.light {
+    @include lightTheme;
+  }
+
+  &.dark {
+    @include darkTheme;
+  }
+
   h1 {
     font-size: 20px;
     margin-bottom: 0.5rem;
     text-align: center;
-    color: $text-color;
     position: relative;
     padding-bottom: 10px;
 
@@ -41,7 +47,6 @@
 
   p {
     text-align: center;
-    color: $text-muted;
     font-size: 14px;
     margin-bottom: 20px;
   }
@@ -139,7 +144,6 @@
   position: relative;
   padding: 0 10px;
   font-size: 16px;
-  color: $text-color;
 
   &::before,
   &::after {

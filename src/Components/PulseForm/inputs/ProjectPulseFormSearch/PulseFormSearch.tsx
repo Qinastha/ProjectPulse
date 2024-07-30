@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { IMember, useDebounce } from "../../../../core";
+import { IUser, useDebounce } from "../../../../core";
 import {
   PulseFormInput,
   PulseFormInputProps,
 } from "../PulseFormInput/PulseFormInput";
-import { getAllMembers } from "../../../../store/projectSlice";
 import { useAppSelector } from "../../../../hooks";
 import "./ProjectPulseFormSearch.scss";
+import { getAllUsers } from "../../../../store/userSlice";
+import { useTheme } from "../../../../core/contexts/ThemeContext";
 
 interface PulseFormSearchProps extends PulseFormInputProps {}
 
@@ -15,14 +16,15 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
   inputValue = [],
   onChange,
 }) => {
-  const allMembers = useAppSelector(getAllMembers);
+  const { theme } = useTheme()!;
+  const allMembers = useAppSelector(getAllUsers);
   const [memberSearch, setMemberSearch] = useState("");
-  const [filteredMembers, setFilteredMembers] = useState<IMember[]>([]);
+  const [filteredMembers, setFilteredMembers] = useState<IUser[]>([]);
   const debouncedMembers = useDebounce(memberSearch, 700);
 
   useEffect(() => {
     if (debouncedMembers.trim() !== "") {
-      const filter = allMembers.filter((member: IMember) => {
+      const filter = allMembers.filter((member: IUser) => {
         return (
           (member.firstName
             .toLowerCase()
@@ -48,7 +50,7 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
     }
   }, [debouncedMembers, allMembers, inputValue]);
 
-  const handleAddMember = (member: IMember) => {
+  const handleAddMember = (member: IUser) => {
     inputValue = [...inputValue, member];
     onChange({ target: { value: inputValue, name: "members" } });
     setFilteredMembers([]);
@@ -57,7 +59,7 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
 
   const handleRemoveMember = (userName: string) => {
     inputValue = inputValue.filter(
-      (member: IMember) => member.userName !== userName,
+      (member: IUser) => member.userName !== userName,
     );
     onChange({ target: { value: inputValue, name: "members" } });
   };
@@ -72,7 +74,7 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
         />
         {filteredMembers.length > 0 && (
           <div className="project-pop__user-list">
-            {filteredMembers.map((member: IMember, index: number) => (
+            {filteredMembers.map((member: IUser, index: number) => (
               <div key={index} className="project-pop__user-item">
                 <div
                   className="project-pop__select-button"
@@ -86,11 +88,11 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
           </div>
         )}
       </div>
-      <div className="project-pop__selected-members">
+      <div className={`project-pop__selected-members ${theme}`}>
         <div className="project-pop__text">Selected Members:</div>
         {inputValue?.length > 0 && (
           <div className="project-pop__selected-list">
-            {inputValue.map((member: IMember, index: number) => (
+            {inputValue.map((member: IUser, index: number) => (
               <div key={index} className="project-pop__selected-member">
                 <span>
                   {member.firstName} {member.lastName}

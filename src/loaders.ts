@@ -1,16 +1,14 @@
 import {
+  fetchAllUsers,
+  getAllUsers,
   getUser,
   getUserInitial,
   reqUser,
   setUserInitial,
 } from "./store/userSlice";
 import store from "./store";
-import {
-  fetchAllMembers,
-  getAllMembers,
-  getIsInitialProject,
-  setIsInitialProject,
-} from "./store/projectSlice";
+import { fetchProjectById, getCurrentProject } from "./store/projectSlice";
+import { fetchAllWidgets, getAllWidgets } from "./store/widgetSlice";
 
 const { dispatch, getState } = store;
 
@@ -29,17 +27,41 @@ const userLoader = async () => {
 
 const membersLoader = async () => {
   const state = getState();
-  const allMembers = getAllMembers(state);
-  const isInitial = getIsInitialProject(state);
+  const allMembers = getAllUsers(state);
 
-  if (isInitial) {
-    await dispatch(fetchAllMembers());
-    dispatch(setIsInitialProject(false));
-  }
+  await dispatch(fetchAllUsers());
+
   return allMembers;
 };
 
 export const userDataLoader = async () => {
   const [user, members] = await Promise.all([userLoader(), membersLoader()]);
   return { user, members };
+};
+
+export const projectLoader = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+
+  if (id) {
+    await dispatch(fetchProjectById(id));
+  }
+
+  const state = getState();
+  const project = getCurrentProject(state)!;
+  console.log("project loaded");
+  console.log(project);
+
+  return project;
+};
+
+export const widgetLoader = async () => {
+  await dispatch(fetchAllWidgets());
+
+  const state = getState();
+  const allWidgets = getAllWidgets(state);
+
+  console.log("all widgets loaded");
+  console.log(allWidgets);
+
+  return allWidgets;
 };

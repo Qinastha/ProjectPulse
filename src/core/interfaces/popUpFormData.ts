@@ -1,8 +1,8 @@
-import { IMember } from "./IProject";
+import { IUser } from "./IUser";
 
 export interface PopUpFormData {
   projectName: string;
   projectDescription: string;
   projectAvatar: string | null;
-  members: IMember[];
+  members: IUser[];
 }

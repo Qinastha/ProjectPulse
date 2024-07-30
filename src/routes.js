@@ -3,7 +3,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import { Dashboard } from "./Pages/Dashboard";
+import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { ProjectsList } from "./Pages/ProjectList/ProjectsList";
 import { Tasks } from "./Pages/Tasks";
 import { Login } from "./Pages/Auth/Login";
@@ -11,7 +11,7 @@ import { Register } from "./Pages/Auth/Register";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { Layout, PrivateRoute } from "./Components";
 import React from "react";
-import { userDataLoader } from "./loaders";
+import { projectLoader, userDataLoader, widgetLoader } from "./loaders";
 import { ManageProfile } from "./Pages/Profile/ManageProfile";
 import { Project } from "./Pages/Project/Project";
 
@@ -26,9 +26,13 @@ const router = createBrowserRouter(
             <Layout />
           </PrivateRoute>
         }>
-        <Route index element={<Dashboard />} />
+        <Route index loader={widgetLoader} element={<Dashboard />} />
         <Route path="projects" element={<ProjectsList />} />
-        <Route path="projects/:id" element={<Project />} />
+        <Route
+          path="projects/:id"
+          loader={projectLoader}
+          element={<Project />}
+        />
         <Route path="tasks" element={<Tasks />} />
         <Route
           path="settings/profile"

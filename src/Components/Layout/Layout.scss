@@ -8,7 +8,6 @@
   min-height: 100vh;
   font-family: $font-family;
   background-size: cover;
-  color: $text-color;
   @include responsive-container;
 }
 
@@ -72,16 +71,31 @@
 
 main {
   padding: 20px;
-  background-color: $background-color;
   overflow-y: auto;
+
+  &.dark {
+    @include darkTheme;
+  }
+
+  &.light {
+    @include lightTheme;
+  }
 }
 
-.coreContent {
-  background-color: $pulse-white;
+.fixedHeaderContent {
   @include border-radius(10px);
   padding: 30px;
-  @include box-shadow($box-shadow);
   @include transition(all, 0.4s);
+
+  &.dark {
+    @include darkTheme;
+    @include box-shadow($box-shadow-light);
+  }
+
+  &.light {
+    @include lightTheme;
+    @include box-shadow($box-shadow);
+  }
 
   &:hover {
     @include box-shadow($primary-box-shadow);
@@ -90,4 +104,5 @@ main {
 
 .outlet {
   margin: 2rem;
+  box-sizing: border-box;
 }
