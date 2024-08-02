@@ -3,7 +3,7 @@
 
 .widgetPreview__container {
   @include pop-form-div;
-  width: 90vh;
+  width: 100vh;
   height: 80vh;
 
   h2 {
@@ -11,21 +11,57 @@
     margin: 0;
     padding: 20px;
     text-align: center;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 35vh;
+      max-width: 60%;
+      height: 2px;
+      background-color: $primary-color;
+      margin: 10px auto 0;
+    }
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
   }
 
   &--actions {
     display: flex;
     justify-content: flex-end;
+    margin-right: 4rem;
 
     &--button {
       @include base-button;
       background-color: $primary-color;
       color: $pulse-white;
-      margin-right: 10px;
 
       &:hover {
         background-color: darken($primary-color, 10%);
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .widgetPreview__container {
+    width: 90%;
+    height: 80%;
+
+    &--actions {
+      margin-right: 2rem;
+    }
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1rem;
   }
 }

@@ -7,7 +7,7 @@ interface WidgetChartProps {
   mode?: string;
 }
 
-export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
+const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -16,16 +16,20 @@ export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
 
       let chartOptions: echarts.EChartsOption;
 
+      const dataEntries = Object.entries(widget.data).map(([name, value]) => ({
+        name,
+        value,
+      }));
+
       const fontSize = mode === "showWidget" ? "1rem" : "0.6rem";
 
-      if (widget.type === "area") {
+      if (widget.name === "All projects") {
         chartOptions = {
           tooltip: {},
           xAxis: {
             type: "category",
-            data: widget.data.map((item: any) => item.name),
+            data: dataEntries.map((item: any) => item.name),
             boundaryGap: true,
-            max: widget.data.length - 1,
             axisLabel: { fontSize },
           },
           yAxis: {
@@ -35,17 +39,16 @@ export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
           color: "#ffb6c1",
           series: [
             {
-              name: widget.name,
               type: "line",
               areaStyle: {},
-              data: widget.data.map((item: any) => item.value),
+              data: dataEntries.map((item: any) => item.value),
               label: { fontSize },
             },
           ],
         };
-      } else if (widget.type === "polar") {
+      } else if (widget.name === "All users") {
         const maxValue = Math.max(
-          ...widget.data.map((item: any) => item.value),
+          ...dataEntries.map((item: any) => item.value),
         );
         chartOptions = {
           polar: {
@@ -59,7 +62,7 @@ export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
           },
           radiusAxis: {
             type: "category",
-            data: widget.data.map((item: any) => item.name),
+            data: dataEntries.map((item: any) => item.name),
             max: widget.data.length,
             splitNumber: 10,
             axisLabel: {
@@ -70,7 +73,7 @@ export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
           series: [
             {
               type: "bar",
-              data: widget.data.map((item: any) => item.value),
+              data: dataEntries.map((item: any) => item.value),
               coordinateSystem: "polar",
               itemStyle: {
                 color: "#ffb6c1",
@@ -84,11 +87,39 @@ export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
             },
           ],
         };
+      } else if (widget.name === "Members Performance") {
+        chartOptions = {
+          tooltip: {},
+          xAxis: {
+            type: "category",
+            data: widget.data
+              .map((item: any) => Object.keys(item.data))
+              .filter(
+                (item: any, index: number, arr: any[]) =>
+                  arr.indexOf(item) == index,
+              ),
+            boundaryGap: true,
+            axisLabel: { fontSize },
+          },
+          yAxis: {
+            type: "value",
+            axisLabel: { fontSize },
+          },
+          series: widget.data.map((item: any) => {
+            return {
+              name: widget.name,
+              type: "line",
+              data: Object.values(item.data),
+              label: { fontSize },
+            };
+          }),
+        };
       } else {
         chartOptions = {};
       }
 
       chartInstance.setOption(chartOptions);
+      console.log(chartInstance.getOption());
 
       return () => {
         chartInstance.dispose();
@@ -97,14 +128,17 @@ export const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
   }, [widget]);
 
   const containerStyles = {
-    height: mode === "showWidget" ? "65vh" : "30vh",
+    height: mode === "showWidget" ? "60vh" : "30vh",
     width: mode === "showWidget" ? "100%" : "auto",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    overflow: "hidden",
   };
 
   return (
     <div ref={chartRef} className="widget-chart" style={containerStyles}></div>
   );
 };
+
+export default Widget;

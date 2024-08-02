@@ -10,6 +10,16 @@ export const getData = async (url: string) => {
   }
 };
 
+export const getManyData = async (urls: string[]) => {
+  try {
+    const responses = await Promise.all(urls.map(getData));
+    return responses;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
 export const postData = async (url: string, data: any) => {
   try {
     const response = await axiosInstance.post(url, data);

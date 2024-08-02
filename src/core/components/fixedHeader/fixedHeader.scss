@@ -3,22 +3,25 @@
 
 .heading {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
 
   h1 {
-    font-size: 24px;
-    border-bottom: 2px solid $primary-color;
-    padding-bottom: 10px;
+    font-size: 2rem;
     margin: 0;
+    flex-grow: 1;
+    @include gradientText(8s, 45deg);
   }
 
   .headingRightPart {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-end;
-    gap: 7rem;
+    width: auto;
+    flex-grow: 2;
 
     .theme-switcher {
       background-color: transparent;
@@ -53,8 +56,9 @@
       }
 
       span {
-        font-size: 16px;
+        font-size: 1rem;
         transition: color 0.3s ease;
+        word-break: auto-phrase;
       }
     }
 
@@ -114,6 +118,38 @@
 
       &:hover {
         background-color: lighten($primary-color, 5%);
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+
+    h1 {
+      margin: 0 auto;
+    }
+
+    .headingRightPart {
+      margin-top: 1rem;
+      gap: 1rem;
+      flex-direction: row;
+      align-items: center;
+
+      .theme-switcher {
+        transition: all 0.5s ease-in-out;
+
+        span {
+          font-size: 0.8rem;
+        }
+      }
+
+      .settingIcon {
+        width: 30px;
+        height: 30px;
       }
     }
   }

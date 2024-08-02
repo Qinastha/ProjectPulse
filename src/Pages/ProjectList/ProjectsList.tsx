@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import {
   fetchAllProjects,
   getProjects,
-  getProjectStatus,
   projectDelete,
   setCurrentProject,
 } from "../../store/projectSlice";
 import "./ProjectsList.scss";
-import { FallbackLoader, ProjectCard } from "../../Components";
+import { ProjectCard } from "../../Components";
 import { IProject } from "../../core";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
@@ -17,7 +16,6 @@ export const ProjectsList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const initialProjects = useAppSelector(getProjects);
-  const isLoading = useAppSelector(getProjectStatus);
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -42,9 +40,7 @@ export const ProjectsList: React.FC = () => {
 
   return (
     <>
-      {isLoading && initialProjects.length === 0 ? (
-        <FallbackLoader />
-      ) : (
+      {initialProjects && (
         <div className="projects-container">
           {initialProjects.map((project: IProject) => (
             <ProjectCard

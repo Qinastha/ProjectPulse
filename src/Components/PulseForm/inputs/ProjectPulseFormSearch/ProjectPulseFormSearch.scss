@@ -82,9 +82,11 @@
 
     .project-pop__selected-list {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 25px;
+      max-width: 40vh;
     }
 
     .project-pop__selected-member {

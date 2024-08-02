@@ -25,6 +25,7 @@ export const Layout: React.FC = () => {
   const { isPopUpOpen } = popUpState;
   const currentProject = useAppSelector(getCurrentProject);
   const { theme, setTheme } = useTheme()!;
+  const viewportWidth = window.innerWidth;
 
   const toggleNav = (): void => {
     setIsNavbarExpand(!isNavbarExpand);
@@ -49,10 +50,11 @@ export const Layout: React.FC = () => {
   return (
     <div className="layoutContainer">
       <header
-        className={`navbar ${isNavbarExpand ? "expanded" : "notExpanded"}`}>
+        className={`navbar ${viewportWidth > 768} ? "" : ${isNavbarExpand ? "expanded" : "notExpanded"}`}>
         <Navbar
           pathname={pathname}
           id={id}
+          viewportWidth={viewportWidth}
           handlePopUpOpen={handlePopUpOpen}
           toggleNav={toggleNav}
         />

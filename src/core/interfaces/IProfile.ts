@@ -7,4 +7,5 @@ export interface IProfile {
   address: UserAddress;
   language: string;
   timeZone: string;
+  widgets?: string[];
 }

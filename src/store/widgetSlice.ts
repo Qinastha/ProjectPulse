@@ -5,7 +5,7 @@ import {
   PayloadAction,
   ReducerCreators,
 } from "@reduxjs/toolkit";
-import axios from "axios";
+import { getManyData } from "../core";
 
 interface IWidgetState {
   allWidgets: IWidget[];
@@ -16,11 +16,8 @@ interface IWidgetState {
 const initialState: IWidgetState = {
   allWidgets: [],
   widget: {
-    _id: "",
     name: "",
     description: "",
-    type: "",
-    icon: "",
     data: null,
   },
   status: "idle",
@@ -28,10 +25,14 @@ const initialState: IWidgetState = {
 
 export const fetchAllWidgets = createAsyncThunk(
   "widget/fetchAllWidgets",
-  async () => {
+  async (fetchData: any) => {
+    const { widgetRoutes, projectId } = fetchData;
+    console.log(fetchData);
     try {
-      const response = await axios.get("/widgetsTest.json");
-      return response.data as IWidget[];
+      const urls = widgetRoutes.map((uri: string) => `analytics/${uri}`);
+      urls[2] += `/${projectId}`;
+      const responses = await getManyData(urls);
+      return responses.map(response => response.value as IWidget);
     } catch (error) {
       console.error("Error fetching widgets:", error);
       throw error;
@@ -49,7 +50,7 @@ const widget = createSlice({
     setCurrentWidget: create.reducer(
       (state, action: PayloadAction<string | null>) => {
         const widget = state.allWidgets.find(
-          widget => widget._id === action.payload,
+          widget => widget.name === action.payload,
         );
         if (widget) {
           state.widget = widget as IWidget;
