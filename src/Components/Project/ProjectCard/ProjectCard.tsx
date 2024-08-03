@@ -1,5 +1,7 @@
 import React from "react";
-import { IProject, IUser } from "../../core";
+import { IProject, IUser } from "../../../core";
+import { useTheme } from "../../../core/contexts/ThemeContext";
+import "./ProjectCard.scss";
 
 interface ProjectCardProps {
   project: IProject;
@@ -14,8 +16,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   handleUpdateProjectOpen,
   handleShowProject,
 }) => {
+  const { theme } = useTheme()!;
   return (
-    <div key={project._id} className="projects-container__card">
+    <div key={project._id} className={`projects-container__card ${theme}`}>
       <img
         src={project.projectAvatar}
         alt={project.projectName}
@@ -25,26 +28,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <h2 className="projects-container__card-title">
           {project.projectName}
         </h2>
-        <p className="projects-container__card-description">
+        <h5 className="projects-container__card-description">
           {project.projectDescription}
+        </h5>
+        <p className="projects-container__card-date">
+          <span className="label">Created At:</span>{" "}
+          {new Date(project.createdAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-date">
-          Created At: {new Date(project.createdAt).toLocaleDateString()}
-        </p>
-        <p className="projects-container__card-date">
-          Updated At: {new Date(project.updatedAt).toLocaleDateString()}
-        </p>
-        <p className="projects-container__card-date">
-          Started At: {new Date(project.startedAt).toLocaleDateString()}
-        </p>
-        <p className="projects-container__card-date">
-          Completed At: {new Date(project.completedAt).toLocaleDateString()}
+          <span className="label">Completed At:</span>{" "}
+          {new Date(project.completedAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-status">
-          Status: {project.isCompleted ? "Completed" : "In Progress"}
+          <span className="label">Status:</span>{" "}
+          {project.isCompleted ? "Completed" : "In Progress"}
         </p>
         <p className="projects-container__card-creator">
-          Creator: {project.creator.firstName}
+          <span className="label">Creator:</span> {project.creator.firstName}
         </p>
         <p className="projects-container__card-members-title">Members:</p>
         <ul className="projects-container__card-members-list">
@@ -77,7 +77,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
       <div className="projects-container__extra-button">
         <button
-          className={"projects-container__show-button"}
+          className="projects-container__show-button"
           onClick={() => handleShowProject(project._id)}>
           Show Project
         </button>
