@@ -21,7 +21,7 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
         value,
       }));
 
-      const fontSize = mode === "showWidget" ? "1rem" : "0.6rem";
+      const fontSize = mode === "showWidget" ? "0.9rem" : "0.6rem";
 
       if (widget.name === "All projects") {
         chartOptions = {
@@ -128,7 +128,7 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
   }, [widget]);
 
   const containerStyles = {
-    height: mode === "showWidget" ? "60vh" : "30vh",
+    height: mode === "showWidget" ? "70%" : "30vh",
     width: mode === "showWidget" ? "100%" : "auto",
     display: "flex",
     justifyContent: "center",

@@ -34,7 +34,7 @@
     flex-direction: column;
     gap: 20px;
     border-right: 1px solid $border-color;
-    @include transition(all, 0.5s);
+    @include transition(all, 0.2s);
     grid-column: 1;
 
     &.expanded {
@@ -44,7 +44,6 @@
     &.notExpanded {
       font-size: 0;
       overflow-y: auto;
-      overflow-x: hidden;
       animation: collapseWidth 0.5s forwards;
 
       img {
@@ -69,9 +68,7 @@
       button {
         font-size: 0.8rem;
         background-color: transparent;
-        transition: all 0.5s ease;
         color: $text-color;
-        max-width: 100%;
       }
     }
   }

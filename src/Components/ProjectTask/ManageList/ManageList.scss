@@ -15,3 +15,9 @@
     @include pop-form-button;
   }
 }
+
+@media (max-width: 768px) {
+  .list-pop-form {
+    max-width: 20vh;
+  }
+}

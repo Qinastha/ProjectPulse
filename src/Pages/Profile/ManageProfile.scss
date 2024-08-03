@@ -3,24 +3,31 @@
 
 @media (max-width: 768px) {
   .profileContainer {
-    max-width: 90%;
+    width: 35vh;
+  }
+}
+
+@media (min-width: 1000px) {
+  .updateProfileContainer,
+  .newProfileContainer {
+    width: 60vh;
   }
 }
 
 .profileContainer {
-  max-width: 500px;
   margin: 3rem auto;
   padding: 10px 20px;
   border-radius: 10px;
-  box-shadow: $box-shadow;
   font-family: $font-family;
 
   &.dark {
     @include darkTheme;
+    @include box-shadow($box-shadow-light);
   }
 
   &.light {
     @include lightTheme;
+    @include box-shadow($box-shadow);
   }
 
   form div::after {

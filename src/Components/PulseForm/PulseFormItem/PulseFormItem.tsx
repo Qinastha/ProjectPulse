@@ -6,6 +6,7 @@ import { PulseFormInput } from "../inputs/PulseFormInput/PulseFormInput";
 import { PulseFormSelect } from "../inputs/PulseFormSelect/PulseFormSelect";
 import { PulseFormSearch } from "../inputs/ProjectPulseFormSearch/PulseFormSearch";
 import { PulseFormChecklist } from "../inputs/PulseFormChecklist/PulseFormChecklist";
+import { PulseFormDateInput } from "../inputs/PulseFormDateInput/PulseFormDateInput";
 
 interface PulseFormItemProp {
   inputData: RequiredInput;
@@ -55,6 +56,12 @@ export const PulseFormItem: React.FC<PulseFormItemProp> = ({
           inputValue={inputValue}
           onChange={e => onChange(e)}
           isNewTask={isNewTask}
+        />
+      ) : type === "date" ? (
+        <PulseFormDateInput
+          inputData={inputData}
+          inputValue={inputValue}
+          onChange={e => onChange(e)}
         />
       ) : (
         <PulseFormInput

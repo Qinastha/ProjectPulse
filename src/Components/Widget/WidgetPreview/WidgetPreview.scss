@@ -5,6 +5,7 @@
   @include pop-form-div;
   width: 100vh;
   height: 80vh;
+  padding: 5px;
 
   h2 {
     font-size: 3rem;
@@ -49,19 +50,24 @@
 
 @media (max-width: 768px) {
   .widgetPreview__container {
-    width: 90%;
-    height: 80%;
+    max-width: 40vh;
 
     &--actions {
       margin-right: 2rem;
     }
-  }
 
-  h2 {
-    font-size: 2rem;
-  }
+    h2 {
+      font-size: 1.5rem;
+    }
 
-  h4 {
-    font-size: 1rem;
+    h4 {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .widgetPreview__container {
+    max-width: 60vh;
   }
 }

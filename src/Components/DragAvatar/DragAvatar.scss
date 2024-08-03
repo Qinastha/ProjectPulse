@@ -6,7 +6,7 @@
   padding: 1rem;
   text-align: center;
   cursor: pointer;
-  height: 20vh;
+  height: 25vh;
   width: 40vh;
   border-radius: 10px;
   margin: 0 auto;
@@ -21,14 +21,14 @@
 
   .placeholder {
     color: darken($primary-color, 20%);
-    font-size: 2rem;
+    font-size: 2.2rem;
     text-align: center;
     margin-top: 5rem;
   }
 
   img {
     width: 40vh;
-    height: 20vh;
+    height: 25vh;
     object-fit: cover;
   }
 
@@ -43,10 +43,14 @@
 
 @media (max-width: 768px) {
   .dragAvatar {
-    width: 35vh;
+    width: 30vh;
+
+    .placeholder {
+      font-size: 1.5rem;
+    }
   }
 
   .filePreview {
-    max-width: 35vh;
+    max-width: 30vh;
   }
 }

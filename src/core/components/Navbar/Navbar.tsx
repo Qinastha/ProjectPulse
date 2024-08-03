@@ -32,14 +32,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         )}
         {pathname !== `/projects/${id}` && (
-          <div className="newProjectButton__container">
-            <button
-              className="newProjectButton"
-              type="button"
-              onClick={handlePopUpOpen}>
-              Create New Project
-            </button>
-          </div>
+          <button
+            className="newProjectButton"
+            type="button"
+            onClick={handlePopUpOpen}>
+            Create New Project
+          </button>
         )}
       </div>
       <div className="navLinks nav-item">

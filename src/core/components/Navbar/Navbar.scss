@@ -36,28 +36,25 @@
     }
   }
 
-  .newProjectButton__container {
+  .newProjectButton {
     display: flex;
     justify-content: center;
     grid-column: 1 / -1;
     margin-top: 3rem;
+    padding: 1rem 1.5rem;
+    background-color: $primary-color;
+    border: none;
+    font-size: 1rem;
+    text-wrap: wrap;
+    @include border-radius(5px);
+    color: $pulse-white;
+    cursor: pointer;
+    animation: showButton 0.5s forwards;
+    transition: all 0.5s ease;
 
-    .newProjectButton {
-      padding: 1rem 1.5rem;
-      background-color: $primary-color;
-      border: none;
-      font-size: 1rem;
-      text-wrap: wrap;
-      @include border-radius(5px);
-      color: $pulse-white;
-      cursor: pointer;
-      animation: showButton 0.5s forwards;
-      transition: all 0.5s ease;
-
-      &:hover {
-        background-color: lighten($primary-color, 5%);
-        transform: scale(1.05);
-      }
+    &:hover {
+      background-color: lighten($primary-color, 5%);
+      transform: scale(1.05);
     }
   }
 
@@ -110,18 +107,15 @@
       align-items: flex-start;
     }
 
-    .newProjectButton__container {
+    .newProjectButton {
       display: flex;
       justify-content: center;
       margin-top: 1rem;
-
-      .newProjectButton {
-        background-color: transparent;
-        @include box-shadow($box-shadow);
-        padding: 10px;
-        @include border-radius(10px);
-        color: $text-color;
-      }
+      background-color: transparent;
+      @include box-shadow($box-shadow);
+      padding: 10px;
+      @include border-radius(10px);
+      color: $text-color;
     }
 
     .navLinks {

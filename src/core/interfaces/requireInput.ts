@@ -5,7 +5,7 @@ export interface RequiredInput {
   required: boolean;
   label: string;
   autoComplete?: string;
-  min?: number;
-  max?: number;
+  min?: string;
+  max?: string;
   options?: Array<{ name: string; value: string; flag?: string }>;
 }

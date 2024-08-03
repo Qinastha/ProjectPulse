@@ -36,3 +36,11 @@
     @include lightTheme;
   }
 }
+
+@media (max-width: 768px) {
+  .popUp__content {
+    max-height: calc(75vh + 5%);
+    min-width: 35vh;
+    max-width: 50vh;
+  }
+}
