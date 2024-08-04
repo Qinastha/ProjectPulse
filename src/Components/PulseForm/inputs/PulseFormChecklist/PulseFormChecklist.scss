@@ -84,3 +84,9 @@
     }
   }
 }
+
+@media (max-height: 450px) {
+  .checklistInput {
+    height: 20vh;
+  }
+}

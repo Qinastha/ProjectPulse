@@ -86,7 +86,6 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 25px;
-      max-width: 40vh;
     }
 
     .project-pop__selected-member {
@@ -115,6 +114,23 @@
           color: darken($primary-color, 10%);
         }
       }
+    }
+  }
+}
+
+@media (max-height: 450px) {
+  .project-pop__search-container {
+    height: 40vh;
+
+    .project-pop__user-add {
+      .project-pop__user-list {
+        max-height: 30vh;
+        z-index: 1100;
+      }
+    }
+
+    .project-pop__selected-members {
+      height: 30vh;
     }
   }
 }

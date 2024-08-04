@@ -9,6 +9,7 @@ interface NavbarProps {
   pathname: string;
   id?: string;
   viewportWidth: number;
+  viewportHeight: number;
   handlePopUpOpen: () => void;
   toggleNav: () => void;
 }
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   pathname,
   id,
   viewportWidth,
+  viewportHeight,
   handlePopUpOpen,
   toggleNav,
 }) => {
@@ -26,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="miniProfile__container">
           <MiniProfile />
         </div>
-        {viewportWidth > 768 && (
+        {viewportWidth > 1000 && viewportHeight > 450 && (
           <button className="collapseButton" type="button" onClick={toggleNav}>
             &#8656;
           </button>

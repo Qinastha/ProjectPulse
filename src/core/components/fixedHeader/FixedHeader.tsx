@@ -48,7 +48,7 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
   return (
     <div className="heading">
       <h1>{getPageTitle(pathname)}</h1>
-      <div className="headingRightPart">
+      <div className="headingRight">
         <button className="theme-switcher" onClick={toggleTheme}>
           {theme === "light" ? (
             <div className="theme-switcher__dark">
@@ -62,26 +62,28 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
             </div>
           )}
         </button>
-        <div className="dropdown-container">
-          <img
-            className="settingIcon"
-            src={pinkBlossom}
-            alt="Settings"
-            onMouseEnter={(): void => setIsMenuOpen(true)}
-          />
-          {isMenuOpen && (
-            <div className="dropdown-menu">
-              <NavLink to="/settings/profile">
-                {" "}
-                Profile Settings
-                <SettingsOutlinedIcon style={{ fontSize: 16 }} />
-              </NavLink>
-            </div>
-          )}
+        <div className="headingRight__menu">
+          <div className="dropdown-container">
+            <img
+              className="settingIcon"
+              src={pinkBlossom}
+              alt="Settings"
+              onMouseOver={(): void => setIsMenuOpen(true)}
+            />
+            {isMenuOpen && (
+              <div className="dropdown-menu">
+                <NavLink to="/settings/profile">
+                  {" "}
+                  Profile Settings
+                  <SettingsOutlinedIcon style={{ fontSize: 16 }} />
+                </NavLink>
+              </div>
+            )}
+          </div>
+          <button className="logoutButton" onClick={handleLogout}>
+            LogOut
+          </button>
         </div>
-        <button className="logoutButton" onClick={handleLogout}>
-          LogOut
-        </button>
       </div>
     </div>
   );
