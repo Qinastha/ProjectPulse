@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   fetchAllProjects,
   getProjects,
-  getProjectStatus,
   projectDelete,
   setCurrentProject,
 } from "../../store/projectSlice";
 import "./ProjectsList.scss";
-import { FallbackLoader, ProjectCard } from "../../Components";
+import { ProjectCard } from "../../Components";
 import { IProject } from "../../core";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
@@ -17,7 +16,8 @@ export const ProjectsList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const initialProjects = useAppSelector(getProjects);
-  const isLoading = useAppSelector(getProjectStatus);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const viewportWidth = window.innerWidth;
 
   useEffect(() => {
     dispatch(fetchAllProjects());
@@ -40,23 +40,54 @@ export const ProjectsList: React.FC = () => {
     dispatch(setCurrentProject(_id));
   };
 
+  const goToNext = () => {
+    setCurrentIndex(
+      (prevIndex: number) => (prevIndex + 1) % initialProjects.length,
+    );
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex(
+      (prevIndex: number) =>
+        (prevIndex - 1 + initialProjects.length) % initialProjects.length,
+    );
+  };
+
+  const translateX =
+    viewportWidth < 1200 ? -currentIndex * 25 : -currentIndex * 25 + 23;
+
   return (
-    <>
-      {isLoading && initialProjects.length === 0 ? (
-        <FallbackLoader />
-      ) : (
-        <div className="projects-container">
-          {initialProjects.map((project: IProject) => (
+    <div className="carousel">
+      {currentIndex > 0 && (
+        <button
+          className="carousel__button carousel__button--prev"
+          onClick={goToPrevious}>
+          &lt;
+        </button>
+      )}
+      <div
+        className="carousel__container"
+        style={{ transform: `translateX(${translateX}%)` }}>
+        {initialProjects.map((project: IProject, index: number) => (
+          <div
+            key={index}
+            className={`carousel__item ${index === currentIndex ? "carousel__item--active" : "carousel__item--blurred"}`}>
             <ProjectCard
-              key={project._id}
               project={project}
               handleDelete={handleDelete}
               handleUpdateProjectOpen={handleUpdateProjectOpen}
               handleShowProject={handleShowProject}
             />
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
+      {currentIndex < initialProjects.length - 1 && (
+        <button
+          className="carousel__button carousel__button--next"
+          onClick={goToNext}>
+          &gt;
+        </button>
       )}
-    </>
+    </div>
   );
 };

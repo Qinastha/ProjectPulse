@@ -5,7 +5,6 @@ import "./PulseFormInput.scss";
 export interface PulseFormInputProps {
   inputData: RequiredInput;
   inputValue: any;
-  className?: string;
   onChange: (e: any) => void;
 }
 
@@ -14,7 +13,7 @@ export const PulseFormInput: React.FC<PulseFormInputProps> = ({
   inputValue,
   onChange,
 }) => {
-  const { type, name, required, autoComplete, min, max } = inputData;
+  const { type, name, required, autoComplete } = inputData;
   if (type === "date") {
     inputValue = inputValue && new Date(inputValue).toISOString().split("T")[0];
   }
@@ -22,13 +21,11 @@ export const PulseFormInput: React.FC<PulseFormInputProps> = ({
     <input
       type={type}
       name={name}
-      className={`pulse-form-input`}
+      className="pulse-form-input"
       required={required}
       value={inputValue}
       onChange={e => onChange(e)}
       autoComplete={autoComplete}
-      min={min}
-      max={max}
     />
   );
 };

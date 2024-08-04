@@ -53,3 +53,11 @@
   color: $error-text-color;
   border: 1px solid $error-border-color;
 }
+
+@media (max-width: 768px) {
+  .alert {
+    left: 27%;
+    transform: translateX(50%);
+    width: 50%;
+  }
+}

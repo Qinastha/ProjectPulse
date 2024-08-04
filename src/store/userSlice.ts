@@ -78,6 +78,7 @@ export const user = createSlice({
     getUserInitial: state => state.isInitial,
     getAvatar: state => state.user.profile?.avatar,
     getAllUsers: state => state.allUsers,
+    getUserWidgets: state => state.user.profile!.widgets,
   },
   extraReducers: builder => {
     builder.addCase(reqUser.pending, state => {
@@ -104,8 +105,13 @@ export const user = createSlice({
   },
 });
 
-export const { getUser, getProfile, getUserInitial, getAllUsers } =
-  user.selectors;
+export const {
+  getUser,
+  getProfile,
+  getUserInitial,
+  getAllUsers,
+  getUserWidgets,
+} = user.selectors;
 
 export const { updateProfile, setUserInitial, setStateNull } = user.actions;
 

@@ -63,7 +63,7 @@ export const DragFile: React.FC<DragFileProps> = ({ handleFile, data }) => {
       {!data ? (
         <p className="placeholder"> Please upload your picture </p>
       ) : (
-        <img src={data} alt={"Avatar Preview"} />
+        <img className="filePreview" src={data} alt={"Avatar Preview"} />
       )}
       <input id="fileInput" type="file" onChange={handleChange} />
     </div>

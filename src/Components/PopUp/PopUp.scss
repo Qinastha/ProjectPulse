@@ -17,8 +17,10 @@
   position: fixed;
   z-index: 1000;
   max-height: calc(90vh + 5%);
-  max-width: fit-content;
+  min-width: 45vh;
+  max-width: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -32,5 +34,13 @@
 
   &.light {
     @include lightTheme;
+  }
+}
+
+@media (max-width: 768px) {
+  .popUp__content {
+    max-height: calc(75vh + 5%);
+    min-width: 35vh;
+    max-width: 50vh;
   }
 }

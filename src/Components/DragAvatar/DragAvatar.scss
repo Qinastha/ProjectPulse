@@ -6,8 +6,8 @@
   padding: 1rem;
   text-align: center;
   cursor: pointer;
-  max-width: 300px;
-  max-height: 300px;
+  height: 25vh;
+  width: 40vh;
   border-radius: 10px;
   margin: 0 auto;
   transition:
@@ -16,18 +16,19 @@
 
   &:hover {
     border-color: lighten($primary-color, 10%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px ($box-shadow);
   }
 
   .placeholder {
     color: darken($primary-color, 20%);
-    font-size: 1.2rem;
-    margin: 1rem 0;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-top: 5rem;
   }
 
   img {
-    max-width: 300px;
-    max-height: 300px;
+    width: 40vh;
+    height: 25vh;
     object-fit: cover;
   }
 
@@ -37,5 +38,19 @@
     &:hover {
       background-color: lighten($primary-color, 5%);
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .dragAvatar {
+    width: 30vh;
+
+    .placeholder {
+      font-size: 1.5rem;
+    }
+  }
+
+  .filePreview {
+    max-width: 30vh;
   }
 }

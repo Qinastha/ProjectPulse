@@ -3,15 +3,12 @@
 
 .project-pulse-select {
   @include base-input-styles;
-  @include custom-arrow;
 
   & option {
     padding: 10px;
 
-    &:not(.readonly) {
-      &:hover {
-        background-color: lighten($background-color, 5%);
-      }
+    &:hover {
+      background-color: lighten($background-color, 5%);
     }
 
     &:checked {

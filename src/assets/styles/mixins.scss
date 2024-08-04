@@ -71,6 +71,10 @@
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
+  font-size: 1rem;
+  box-sizing: border-box;
+  color: $text-color;
+  background-color: $background-color;
 
   &:focus {
     outline: none;
@@ -85,14 +89,6 @@
   &::placeholder {
     color: $text-muted;
   }
-}
-
-@mixin custom-arrow {
-  appearance: none;
-  background: $background-color
-    url('data:image/svg+xml;utf8,<svg fill="%23{$text-color}" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
-    no-repeat right 10px center;
-  padding-right: 30px;
 }
 
 @mixin pop-form-button {
@@ -120,13 +116,21 @@
 
 @mixin pop-form-div {
   padding: 20px;
-  width: 450px;
+  width: auto;
+  min-width: 45vh;
   max-width: 90vh;
   max-height: calc(90vh + 5%);
   @include box-shadow($box-shadow);
 
   &:hover {
     @include box-shadow($box-shadow);
+  }
+
+  @media (max-width: 768px) {
+    width: auto;
+    min-width: 35vh;
+    max-width: 50vh;
+    max-height: calc(75vh + 5%);
   }
 }
 
@@ -169,4 +173,33 @@
 @mixin darkTheme {
   background-color: $pulse-dark;
   color: $pulse-white;
+}
+
+@mixin gradientText($duration: 8s, $angle: 45deg) {
+  @keyframes rainbowText {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+
+  background: linear-gradient(
+    $angle,
+    #ffb6c1,
+    #f7b7a3,
+    #ffedda,
+    #c6e2b3,
+    #d2b8d2,
+    #b6a8a0,
+    #f6b2a4
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowText $duration linear infinite;
 }

@@ -39,7 +39,8 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
   } = useProfileForm(initialFormData, mode);
 
   return (
-    <div className={`profileContainer ${theme}`}>
+    <div
+      className={`profileContainer ${theme} ${mode === "create" ? "newProfileContainer" : "updateProfileContainer"}`}>
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

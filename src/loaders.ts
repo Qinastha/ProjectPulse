@@ -8,7 +8,6 @@ import {
 } from "./store/userSlice";
 import store from "./store";
 import { fetchProjectById, getCurrentProject } from "./store/projectSlice";
-import { fetchAllWidgets, getAllWidgets } from "./store/widgetSlice";
 
 const { dispatch, getState } = store;
 
@@ -52,16 +51,4 @@ export const projectLoader = async ({ params }: { params: { id: string } }) => {
   console.log(project);
 
   return project;
-};
-
-export const widgetLoader = async () => {
-  await dispatch(fetchAllWidgets());
-
-  const state = getState();
-  const allWidgets = getAllWidgets(state);
-
-  console.log("all widgets loaded");
-  console.log(allWidgets);
-
-  return allWidgets;
 };

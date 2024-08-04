@@ -40,6 +40,8 @@ export const TASK_REQUIRED_INPUTS: RequiredInput[] = [
     required: true,
     className: "form-control",
     autoComplete: "off",
+    min: "1900-01-01",
+    max: "2100-01-01",
   },
   {
     type: "select",
