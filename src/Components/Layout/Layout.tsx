@@ -9,11 +9,10 @@ import {
   setPopUpMode,
   togglePopUp,
 } from "../../store/popUpSlice";
-import { Navbar } from "../../core/components/Navbar/Navbar";
-import { FixedHeader } from "../../core/components/fixedHeader/FixedHeader";
 import { getCurrentProject } from "../../store/projectSlice";
 import { useTheme } from "../../core/contexts/ThemeContext";
 import useViewport from "../../core/utility/useViewportWidth";
+import { FixedHeader, Navbar } from "../../core";
 
 export const Layout: React.FC = () => {
   const navigate = useNavigate();

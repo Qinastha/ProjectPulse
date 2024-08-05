@@ -7,9 +7,9 @@ import {
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import "./Dashboard.scss";
 import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
-import { FallbackLoader } from "../../Components";
 import { getUserWidgets } from "../../store/userSlice";
 import { IWidget } from "../../core/interfaces/IWidget";
+import { FallbackLoader } from "../../core";
 
 const Widget = lazy(() => import("../../Components/Widget/Widget"));
 

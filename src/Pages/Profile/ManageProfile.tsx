@@ -11,6 +11,7 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
 }) => {
   const profile = useAppSelector(getProfile);
   const { theme } = useTheme()!;
+  const isInitialProfile = !profile;
 
   const initialFormData = {
     avatar: profile?.avatar || "",
@@ -40,7 +41,8 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
 
   return (
     <div
-      className={`profileContainer ${theme} ${mode === "create" ? "newProfileContainer" : "updateProfileContainer"}`}>
+      className={`profileContainer ${theme} ${isInitialProfile ? "initial" : ""} 
+            ${mode === "create" ? "newProfileContainer" : "updateProfileContainer"}`}>
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}

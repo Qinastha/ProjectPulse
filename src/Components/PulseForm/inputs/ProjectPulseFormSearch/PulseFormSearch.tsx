@@ -89,8 +89,7 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
         )}
       </div>
       <div className={`project-pop__selected-members ${theme}`}>
-        <div className="project-pop__text">Selected Members:</div>
-        {inputValue?.length > 0 && (
+        {inputValue?.length > 0 ? (
           <div className="project-pop__selected-list">
             {inputValue.map((member: IUser, index: number) => (
               <div key={index} className="project-pop__selected-member">
@@ -106,8 +105,11 @@ export const PulseFormSearch: React.FC<PulseFormSearchProps> = ({
               </div>
             ))}
           </div>
+        ) : (
+          <p>No selected members</p>
         )}
       </div>
+      <div className="delimiter"></div>
     </div>
   );
 };

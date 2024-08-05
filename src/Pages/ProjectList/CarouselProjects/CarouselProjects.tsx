@@ -52,7 +52,7 @@ export const CarouselProjects: React.FC<CarouselProps> = ({
   };
 
   const translateX =
-    viewportHeight > 450 ? -currentIndex * 20 + 3 : -currentIndex * 23 + 10;
+    viewportHeight > 450 ? -currentIndex * 20 + 2 : -currentIndex * 23 + 10;
 
   return (
     <div className="carousel">

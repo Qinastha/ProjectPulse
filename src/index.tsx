@@ -1,10 +1,12 @@
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { Provider } from "react-redux";
 import "./index.scss";
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import store from "./store";
 import { AxiosInterceptor } from "./core/interceptors/authInterceptor";
+import { LogoFallback } from "./Components";
+
+const App = lazy(() => import("./App"));
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -12,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <AxiosInterceptor>
-      <App />
+      <Suspense fallback={<LogoFallback />}>
+        <App />
+      </Suspense>
     </AxiosInterceptor>
   </Provider>,
 );

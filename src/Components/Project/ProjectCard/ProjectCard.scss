@@ -4,6 +4,7 @@
 .projects-container__card {
   @include card;
   height: 65vh;
+  width: 35vh;
   border: none;
 
   &.light {

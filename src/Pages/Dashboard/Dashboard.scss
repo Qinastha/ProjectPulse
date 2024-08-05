@@ -16,13 +16,34 @@
     overflow: hidden;
     @include box-shadow($box-shadow);
     max-width: 50vh;
-    max-height: 45vh;
+    max-height: 35vh;
 
     h2 {
       font-size: 20px;
       margin: 0;
       padding: 20px;
       text-align: center;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .dashboard {
+    .dashboard-item {
+      max-height: 45vh;
+    }
+  }
+}
+
+@media (max-height: 450px) {
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60vh, 1fr));
+    grid-template-rows: auto;
+
+    .dashboard-item {
+      max-width: 80vh;
+      max-height: 80vh;
     }
   }
 }

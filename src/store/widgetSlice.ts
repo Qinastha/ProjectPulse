@@ -27,7 +27,6 @@ export const fetchAllWidgets = createAsyncThunk(
   "widget/fetchAllWidgets",
   async (fetchData: any) => {
     const { widgetRoutes, projectId } = fetchData;
-    console.log(fetchData);
     try {
       const urls = widgetRoutes.map((uri: string) => `analytics/${uri}`);
       urls[2] += `/${projectId}`;

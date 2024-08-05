@@ -1,12 +1,14 @@
+@import "./assets/styles/variables.scss";
+
 body {
   margin: 0;
   width: 100%;
   height: auto;
-  background-image: url("../public/assets/background.jpeg");
-  background-size: cover;
+  overflow-x: hidden;
+  background-image: $background-image;
+  background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
-  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {

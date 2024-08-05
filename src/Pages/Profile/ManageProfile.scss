@@ -30,6 +30,13 @@
     @include box-shadow($box-shadow);
   }
 
+  &.initial {
+    @media (max-height: 450px) {
+      width: 120vh;
+      margin: 0 auto;
+    }
+  }
+
   form div::after {
     content: "";
     display: block;

@@ -8,6 +8,13 @@
   }
 }
 
+@media (max-height: 450px) {
+  .loginContainer,
+  .registerContainer {
+    width: 90vh;
+  }
+}
+
 .loginContainer,
 .registerContainer {
   max-width: 500px;
