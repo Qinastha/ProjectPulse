@@ -1,7 +1,6 @@
 import { RouterProvider } from "react-router-dom";
-import router from "./routes";
 import React from "react";
-
+import router from "./routes";
 import { ThemeProvider } from "./core/contexts/ThemeContext";
 import { Alert } from "./core";
 

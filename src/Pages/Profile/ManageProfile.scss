@@ -1,24 +1,27 @@
 @import "../../assets/styles/variables";
 @import "../../assets/styles/mixins";
 
-@media (max-width: 768px) {
-  .profileContainer {
-    width: 35vh;
-  }
-}
-
-@media (min-width: 1000px) {
-  .updateProfileContainer,
-  .newProfileContainer {
-    width: 60vh;
-  }
+.profilePageWrapper {
+  height: 150vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  @include backgroundImage;
 }
 
 .profileContainer {
   margin: 3rem auto;
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   border-radius: 10px;
   font-family: $font-family;
+
+  &.newProfileContainer,
+  &.updateProfileContainer {
+    width: 70vh;
+  }
 
   &.dark {
     @include darkTheme;
@@ -28,13 +31,6 @@
   &.light {
     @include lightTheme;
     @include box-shadow($box-shadow);
-  }
-
-  &.initial {
-    @media (max-height: 450px) {
-      width: 120vh;
-      margin: 0 auto;
-    }
   }
 
   form div::after {
@@ -107,6 +103,51 @@
     &:focus {
       outline: none;
       @include box-shadow($delete-color-focus);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profilePageWrapper {
+    height: 190vh;
+  }
+
+  .profileContainer {
+    &.newProfileContainer {
+      width: 36vh;
+    }
+
+    &.updateProfileContainer {
+      width: 30vh;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .profilePageWrapper {
+    height: 180vh;
+  }
+
+  .profileContainer {
+    &.newProfileContainer {
+      width: 60vh;
+    }
+
+    &.updateProfileContainer {
+      width: 40vh;
+    }
+  }
+}
+
+@media (max-height: 450px) {
+  .profilePageWrapper {
+    height: fit-content;
+    padding: 2rem 0;
+  }
+  .profileContainer {
+    &.updateProfileContainer,
+    &.newProfileContainer {
+      width: 110vh;
     }
   }
 }

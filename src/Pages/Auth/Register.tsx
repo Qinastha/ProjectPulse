@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
-import { Apple, GitHub, Google } from "@mui/icons-material";
 import { PulseForm } from "../../Components";
 import {
   postData,
@@ -131,42 +130,29 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className={`registerContainer ${theme}`}>
-      <PulseForm
-        requiredInputs={requiredInputs}
-        inputValues={inputValues}
-        formTitle={"Register"}
-        errors={errors}
-        onChange={e => updateRegisterFormData(e)}
-      />
+    <div className="authPageWrapper">
+      <div className={`registerContainer ${theme}`}>
+        <PulseForm
+          requiredInputs={requiredInputs}
+          inputValues={inputValues}
+          formTitle={"Register"}
+          errors={errors}
+          onChange={e => updateRegisterFormData(e)}
+        />
 
-      <p>
-        If you already have an account then{" "}
-        <span className="loginLink" onClick={(): void => navigate("/login")}>
-          visit this page
-        </span>
-      </p>
+        <p>
+          If you already have an account then{" "}
+          <span className="loginLink" onClick={(): void => navigate("/login")}>
+            visit this page
+          </span>
+        </p>
 
-      <button
-        className="registerButton"
-        type="button"
-        onClick={() => handleRegister()}>
-        Register
-      </button>
-
-      <div className="authSocialButtons">
-        <span className="orText">or</span>
-        <div className="socialIcons">
-          <a href="#">
-            <Google style={{ fontSize: 40 }} />
-          </a>
-          <a href="#">
-            <GitHub style={{ fontSize: 40 }} />
-          </a>
-          <a href="#">
-            <Apple style={{ fontSize: 40 }} />
-          </a>
-        </div>
+        <button
+          className="registerButton"
+          type="button"
+          onClick={() => handleRegister()}>
+          Register
+        </button>
       </div>
     </div>
   );

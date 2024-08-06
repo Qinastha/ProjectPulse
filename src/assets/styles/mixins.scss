@@ -209,3 +209,10 @@
   -webkit-text-fill-color: transparent;
   animation: rainbowText $duration linear infinite;
 }
+
+@mixin backgroundImage {
+  background-image: $background-image;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
