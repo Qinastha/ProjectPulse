@@ -76,43 +76,45 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className={`loginContainer ${theme}`}>
-      <PulseForm
-        requiredInputs={requiredInputs}
-        inputValues={inputValues}
-        formTitle={"Login to your account"}
-        errors={errors}
-        onChange={e => updateLoginFormData(e)}
-      />
+    <div className="authPageWrapper">
+      <div className={`loginContainer ${theme}`}>
+        <PulseForm
+          requiredInputs={requiredInputs}
+          inputValues={inputValues}
+          formTitle={"Login to your account"}
+          errors={errors}
+          onChange={e => updateLoginFormData(e)}
+        />
 
-      <p>
-        If you already have an account then{" "}
-        <span
-          className="registerLink"
-          onClick={(): void => navigate("/register")}>
-          move to registration page
-        </span>
-      </p>
+        <p>
+          If you already have an account then{" "}
+          <span
+            className="registerLink"
+            onClick={(): void => navigate("/register")}>
+            move to registration page
+          </span>
+        </p>
 
-      <button
-        className="loginButton"
-        type="button"
-        onClick={() => handleLogin()}>
-        Login
-      </button>
+        <button
+          className="loginButton"
+          type="button"
+          onClick={() => handleLogin()}>
+          Login
+        </button>
 
-      <div className="authSocialButtons">
-        <span className="orText">or</span>
-        <div className="socialIcons">
-          <a href="#">
-            <Google style={{ fontSize: 40 }} />
-          </a>
-          <a href="#">
-            <GitHub style={{ fontSize: 40 }} />
-          </a>
-          <a href="#">
-            <Apple style={{ fontSize: 40 }} />
-          </a>
+        <div className="authSocialButtons">
+          <span className="orText">or</span>
+          <div className="socialIcons">
+            <a href="#">
+              <Google style={{ fontSize: 40 }} />
+            </a>
+            <a href="#">
+              <GitHub style={{ fontSize: 40 }} />
+            </a>
+            <a href="#">
+              <Apple style={{ fontSize: 40 }} />
+            </a>
+          </div>
         </div>
       </div>
     </div>
