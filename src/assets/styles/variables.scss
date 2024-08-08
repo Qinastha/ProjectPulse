@@ -21,9 +21,20 @@ $success-border-color: #c3e6cb;
 $error-bg-color: #f8d7da;
 $error-text-color: #721c24;
 $error-border-color: #f5c6cb;
-$overlay-color: rgba(0, 0, 0, 0.2);
+$overlay-color: rgba(0, 0, 0, 0.4);
 $box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 $box-shadow-light: 0 2px 6px rgba(230, 230, 230, 0.8);
-$primary-box-shadow: 0 5px 10px ($primary-color, 0.3);
+$primary-box-shadow: 0 5px 10px ($primary-color, 0.4);
+$fallback-background-colour: #f1f1f1;
+$radial-gradient: radial-gradient(
+  circle,
+  #ffb6c1,
+  #f7b7a3,
+  #ffedda,
+  #c6e2b3,
+  #d2b8d2,
+  #f6b2a4
+);
 $font-family: "Noto Sans JP", sans-serif;
 $font-family-serif: "Noto Serif JP", serif;
+$background-image: url("../backgroundImage.png");

@@ -7,7 +7,9 @@
   max-height: 100%;
   min-height: 100vh;
   font-family: $font-family;
-  background-size: cover;
+  background-color: $background-color;
+  overflow-y: hidden;
+  overflow-x: hidden;
 
   @keyframes expandWidth {
     from {
@@ -144,5 +146,64 @@
     padding: 10px;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+}
+
+@media (max-height: 450px) {
+  .layoutContainer {
+    overflow-y: hidden;
+
+    .navbar {
+      overflow: hidden;
+
+      &.notExpanded {
+        animation: collapseWidth 0.5s forwards;
+      }
+
+      &.expanded {
+        animation: collapseWidth 0.5s forwards;
+        font-size: 0;
+        overflow-y: auto;
+
+        img {
+          width: 2.5rem;
+          height: 3rem;
+          object-fit: cover;
+          padding-left: 0.5rem;
+          transition: all 0.4s ease;
+        }
+
+        span {
+          font-size: 0.8rem;
+          color: $text-color;
+          transition: all 0.4s ease;
+        }
+
+        a {
+          justify-content: center;
+          gap: 0;
+        }
+
+        button {
+          font-size: 0.8rem;
+          background-color: transparent;
+          color: $text-color;
+        }
+      }
+    }
+
+    .fixedHeaderContent {
+      padding: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 680px) and (max-height: 450px) {
+  .layoutContainer {
+    .navbar {
+      &.expanded {
+        animation: none;
+      }
+    }
   }
 }

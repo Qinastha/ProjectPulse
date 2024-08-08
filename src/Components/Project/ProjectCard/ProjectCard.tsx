@@ -70,16 +70,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           Edit
         </button>
         <button
+          className="projects-container__show-button"
+          onClick={() => handleShowProject(project._id)}>
+          Show
+        </button>
+        <button
           className="projects-container__delete-button"
           onClick={() => handleDelete(project._id)}>
           Delete
-        </button>
-      </div>
-      <div className="projects-container__extra-button">
-        <button
-          className="projects-container__show-button"
-          onClick={() => handleShowProject(project._id)}>
-          Show Project
         </button>
       </div>
     </div>

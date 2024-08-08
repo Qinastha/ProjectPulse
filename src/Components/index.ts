@@ -1,5 +1,4 @@
 export * from "./DragAvatar/DragAvatar";
-export * from "./FallBackLoader/FallbackLoader";
 export * from "./Layout/Layout";
 export * from "./Project/ProjectCard/ProjectCard";
 export * from "./PopUp/PopUp";
@@ -12,3 +11,4 @@ export * from "./ProjectTask/ProjectTaskList";
 export * from "./ProjectTask/ProjectTaskPreview/ProjectTaskPreview";
 export * from "./Widget/Widget";
 export * from "./Widget/WidgetPreview/WidgetPreview";
+export * from "./LogoFallback/LogoFallback";

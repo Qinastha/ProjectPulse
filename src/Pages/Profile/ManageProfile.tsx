@@ -39,33 +39,36 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
   } = useProfileForm(initialFormData, mode);
 
   return (
-    <div
-      className={`profileContainer ${theme} ${mode === "create" ? "newProfileContainer" : "updateProfileContainer"}`}>
-      <PulseForm
-        requiredInputs={requiredInputs}
-        inputValues={inputValues}
-        formTitle={"Please provide an information about yourself"}
-        errors={errors}
-        onChange={e => updateFormData(e)}
-        handleFile={e => handleFile(e)}
-      />
-      <button
-        type="button"
-        onClick={() => handleSubmit()}
-        className="submitButton">
-        {" "}
-        Save Changes{" "}
-      </button>
-
-      {profile?.timeZone && (
+    <div className={`${mode === "create" ? "profilePageWrapper" : ""}`}>
+      <div
+        className={`profileContainer ${theme}
+            ${mode === "create" ? "newProfileContainer" : "updateProfileContainer"}`}>
+        <PulseForm
+          requiredInputs={requiredInputs}
+          inputValues={inputValues}
+          formTitle={"Please provide an information about yourself"}
+          errors={errors}
+          onChange={e => updateFormData(e)}
+          handleFile={e => handleFile(e)}
+        />
         <button
           type="button"
-          onClick={handleDelete}
-          className="deleteUserButton">
+          onClick={() => handleSubmit()}
+          className="submitButton">
           {" "}
-          Delete User{" "}
+          Save Changes{" "}
         </button>
-      )}
+
+        {profile?.timeZone && (
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="deleteUserButton">
+            {" "}
+            Delete User{" "}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { IWidget } from "../../core/interfaces/IWidget";
+import useViewport from "../../core/utility/useViewportWidth";
 
 interface WidgetChartProps {
   widget: IWidget;
@@ -9,6 +10,8 @@ interface WidgetChartProps {
 
 const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
+  const { viewportHeight, viewportWidth } = useViewport();
+  const isHorizontal = viewportHeight < 450 && viewportWidth < 1000;
 
   useEffect(() => {
     if (chartRef.current) {
@@ -21,7 +24,8 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
         value,
       }));
 
-      const fontSize = mode === "showWidget" ? "0.9rem" : "0.6rem";
+      const fontSize =
+        mode === "showWidget" ? "0.9rem" : isHorizontal ? "0.4rem" : "0.6rem";
 
       if (widget.name === "All projects") {
         chartOptions = {
@@ -119,7 +123,6 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
       }
 
       chartInstance.setOption(chartOptions);
-      console.log(chartInstance.getOption());
 
       return () => {
         chartInstance.dispose();
@@ -128,7 +131,7 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
   }, [widget]);
 
   const containerStyles = {
-    height: mode === "showWidget" ? "70%" : "30vh",
+    height: mode === "showWidget" ? "60vh" : isHorizontal ? "50vh" : "30vh",
     width: mode === "showWidget" ? "100%" : "auto",
     display: "flex",
     justifyContent: "center",

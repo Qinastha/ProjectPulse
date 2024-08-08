@@ -1,18 +1,21 @@
 @import "../../assets/styles/variables";
 @import "../../assets/styles/mixins";
 
-@media (max-width: 768px) {
-  .loginContainer,
-  .registerContainer {
-    width: 35vh;
-  }
+.authPageWrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  @include backgroundImage;
 }
 
 .loginContainer,
 .registerContainer {
-  max-width: 500px;
-  margin: 50px auto;
   padding: 20px;
+  width: 50vh;
   border-radius: 10px;
   @include box-shadow($box-shadow);
   font-family: $font-family;
@@ -163,5 +166,39 @@
   &::after {
     left: 100%;
     margin-left: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .authPageWrapper {
+    height: 100vh;
+  }
+
+  .loginContainer,
+  .registerContainer {
+    width: 35vh;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1180px) {
+  .authPageWrapper {
+    height: 130vh;
+  }
+
+  .loginContainer,
+  .registerContainer {
+    width: 60vh;
+  }
+}
+
+@media (max-height: 450px) {
+  .authPageWrapper {
+    height: fit-content;
+    padding: 2rem 0;
+  }
+
+  .loginContainer,
+  .registerContainer {
+    width: 90vh;
   }
 }

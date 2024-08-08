@@ -54,3 +54,15 @@
     max-width: 30vh;
   }
 }
+
+@media (max-height: 450px) {
+  .dragAvatar {
+    height: 40vh;
+    width: 80vh;
+
+    img {
+      width: 80vh;
+      height: 40vh;
+    }
+  }
+}

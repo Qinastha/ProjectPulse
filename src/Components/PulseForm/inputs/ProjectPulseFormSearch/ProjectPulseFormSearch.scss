@@ -7,12 +7,12 @@
   flex-direction: column;
   font-family: $font-family;
   overflow-y: auto;
+  overflow-x: hidden;
 
   .project-pop__user-add {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
 
     &__input {
       margin-bottom: 0;
@@ -59,10 +59,11 @@
   }
 
   .project-pop__selected-members {
-    margin-top: 15px;
     height: 10vh;
     overflow-y: auto;
     overflow-x: hidden;
+    position: relative;
+    margin-top: 1rem;
 
     &.dark {
       @include darkTheme;
@@ -86,7 +87,6 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 25px;
-      max-width: 40vh;
     }
 
     .project-pop__selected-member {
@@ -115,6 +115,27 @@
           color: darken($primary-color, 10%);
         }
       }
+    }
+  }
+}
+
+.delimiter {
+  @include delimiter;
+}
+
+@media (max-height: 450px) {
+  .project-pop__search-container {
+    height: 40vh;
+
+    .project-pop__user-add {
+      .project-pop__user-list {
+        max-height: 30vh;
+        z-index: 1100;
+      }
+    }
+
+    .project-pop__selected-members {
+      height: 30vh;
     }
   }
 }
