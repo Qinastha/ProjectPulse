@@ -68,9 +68,8 @@
   border: 1px solid $border-color;
   border-radius: 5px;
   font-family: $font-family;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: border-color 0.3s ease,
+  box-shadow 0.3s ease;
   font-size: 1rem;
   box-sizing: border-box;
   color: $text-color;
@@ -195,24 +194,17 @@
   }
 
   background: linear-gradient(
-    $angle,
-    #ffb6c1,
-    #f7b7a3,
-    #ffedda,
-    #c6e2b3,
-    #d2b8d2,
-    #b6a8a0,
-    #f6b2a4
+                  $angle,
+                  #ffb6c1,
+                  #f7b7a3,
+                  #ffedda,
+                  #c6e2b3,
+                  #d2b8d2,
+                  #b6a8a0,
+                  #f6b2a4
   );
   background-size: 400% 400%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: rainbowText $duration linear infinite;
-}
-
-@mixin backgroundImage {
-  background-image: $background-image;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }

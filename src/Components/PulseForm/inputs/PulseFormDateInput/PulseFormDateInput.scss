@@ -1,9 +1,6 @@
 @import "../../../../assets/styles/variables";
 @import "../../../../assets/styles/mixins";
 
-@import "../../../../assets/styles/variables";
-@import "../../../../assets/styles/mixins";
-
 .pulse-form-date {
   box-sizing: border-box;
   width: 100%;
@@ -11,9 +8,8 @@
   border: 1px solid $border-color;
   border-radius: 5px;
   font-family: $font-family;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: border-color 0.3s ease,
+  box-shadow 0.3s ease;
 
   &:focus {
     outline: none;
