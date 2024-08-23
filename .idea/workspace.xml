@@ -8,17 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/inputs/ProjectPulseFormSearch/PulseFormSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/inputs/ProjectPulseFormSearch/PulseFormSearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/PulseForm/inputs/PulseFormDateInput/PulseFormDateInput.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PulseForm/inputs/PulseFormDateInput/PulseFormDateInput.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/userSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/userSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +126,7 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/qinastha/Downloads/Projects/projectpulsejp/node_modules/typescript/lib&quot;,
     &quot;ts.rename.search.for.dynamic.occurrences&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -267,6 +258,14 @@
       <workItem from="1723884282554" duration="5025000" />
       <workItem from="1723899803204" duration="4658000" />
       <workItem from="1723906939545" duration="89000" />
+      <workItem from="1723992857571" duration="4739000" />
+      <workItem from="1724066358660" duration="42000" />
+      <workItem from="1724066416385" duration="11729000" />
+      <workItem from="1724084276790" duration="1085000" />
+      <workItem from="1724086084422" duration="668000" />
+      <workItem from="1724131671778" duration="8452000" />
+      <workItem from="1724170386465" duration="411000" />
+      <workItem from="1724221672153" duration="6071000" />
     </task>
     <servers />
   </component>

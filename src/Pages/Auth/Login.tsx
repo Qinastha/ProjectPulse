@@ -6,7 +6,8 @@ import {getProfile} from "../../store/userSlice";
 import {LOGIN_REQUIRED_INPUTS, postData, RegisterFormData} from "../../core";
 import {useAppSelector} from "../../hooks";
 import {useTheme} from "../../core/contexts/ThemeContext";
-import {PulseForm} from "../../Components";
+import {PulseForm} from "@Qinastha/pulse_library";
+
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
