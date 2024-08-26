@@ -134,6 +134,7 @@ export const project = createSlice({
     getCurrentProject: state => state.project,
     getCurrentTaskListId: state => state.currentTaskListId,
     getCurrentTaskId: state => state.currentTaskId,
+    getAllProjectsIds: state => state.allProjects.map(project => project._id),
   },
   extraReducers: builder => {
     builder.addCase(fetchAllProjects.pending, state => {
@@ -220,6 +221,7 @@ export const {
   getCurrentProject,
   getCurrentTaskListId,
   getCurrentTaskId,
+  getAllProjectsIds,
 } = project.selectors;
 
 export default project.reducer;

@@ -63,9 +63,6 @@ export const Project: React.FC = () => {
   };
 
   useEffect(() => {
-    // if (id) {
-    //     dispatch(fetchProjectById(id));
-    // }
     return () => {
       dispatch(setCurrentProjectNull());
       dispatch(setCurrentTaskListId(null));

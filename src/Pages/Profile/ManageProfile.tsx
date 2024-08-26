@@ -1,10 +1,10 @@
 import React from "react";
 import { getProfile } from "../../store/userSlice";
-import { PulseForm } from "../../Components";
 import "./ManageProfile.scss";
 import { useAppSelector } from "../../hooks";
 import { useProfileForm } from "../../core";
 import { useTheme } from "../../core/contexts/ThemeContext";
+import { PulseForm } from "@Qinastha/pulse_library";
 
 export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
   mode,

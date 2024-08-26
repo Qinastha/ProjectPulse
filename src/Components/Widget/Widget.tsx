@@ -1,7 +1,7 @@
 import * as echarts from "echarts";
 import React, { useEffect, useRef } from "react";
 import { IWidget } from "../../core/interfaces/IWidget";
-import useViewport from "../../core/utility/useViewportWidth";
+import { useViewport } from "@Qinastha/pulse_library";
 
 interface WidgetChartProps {
   widget: IWidget;

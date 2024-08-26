@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
-import { PulseForm } from "../../Components";
 import {
   postData,
   REGISTER_REQUIRED_INPUTS,
   RegisterFormData,
 } from "../../core";
 import { useTheme } from "../../core/contexts/ThemeContext";
+import { PulseForm } from "@Qinastha/pulse_library";
 
 const Register: React.FC = () => {
   const navigate = useNavigate();

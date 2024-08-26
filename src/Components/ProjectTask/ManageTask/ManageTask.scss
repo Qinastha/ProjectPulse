@@ -1,5 +1,5 @@
-@import "../../../assets/styles/variables";
-@import "../../../assets/styles/mixins";
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
 
 .task-pop-form {
   @include pop-form-div;
@@ -13,5 +13,10 @@
 
   .task-pop-form__button {
     @include pop-form-button;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 }

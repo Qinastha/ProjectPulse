@@ -1,5 +1,5 @@
-@import "../../../assets/styles/variables";
-@import "../../../assets/styles/mixins";
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
 
 .carousel {
   position: relative;
@@ -13,7 +13,7 @@
 
   &__container {
     display: flex;
-    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
     width: auto;
     justify-content: flex-start;
   }
@@ -25,9 +25,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1.0),
-    filter 0.3s ease,
-    opacity 0.3s ease;
+    transition:
+      transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+      filter 0.3s ease,
+      opacity 0.3s ease;
     box-sizing: border-box;
     z-index: 5;
     margin: 0;

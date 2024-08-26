@@ -1,7 +1,6 @@
 import { postData, putData, RequiredInput } from "../../../core";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { PulseForm } from "../../PulseForm/PulseForm";
 import { PopUpProps } from "../../PopUp/PopUp";
 import "./ManageList.scss";
 import {
@@ -10,6 +9,7 @@ import {
   setCurrentTaskListId,
   setProject,
 } from "../../../store/projectSlice";
+import { PulseForm } from "@Qinastha/pulse_library";
 
 interface ManageListProps extends PopUpProps {
   mode: "addList" | "editList";

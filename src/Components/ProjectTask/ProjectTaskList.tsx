@@ -1,8 +1,7 @@
 import React from "react";
-import { IProject, ITaskList, ITasks } from "../../core";
+import { FallbackLoader, IProject, ITaskList, ITasks } from "../../core";
 import { useAppSelector } from "../../hooks";
 import { getProjectStatus } from "../../store/projectSlice";
-import { FallbackLoader } from "../../core/components/FallBackLoader/FallbackLoader";
 
 interface ProjectTaskListProps {
   project: IProject;

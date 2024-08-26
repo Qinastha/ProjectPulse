@@ -1,5 +1,5 @@
-@import "./../../../assets/styles/variables";
-@import "./../../../assets/styles/mixins";
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
 
 .miniProfile {
   @include flex-center;
