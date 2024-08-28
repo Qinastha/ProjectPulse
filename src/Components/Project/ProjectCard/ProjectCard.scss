@@ -9,12 +9,12 @@
 
   &.light {
     @include lightTheme;
-    @include box-shadow($box-shadow);
+    box-shadow: $box-shadow, -$box-shadow;
   }
 
   &.dark {
     @include darkTheme;
-    @include box-shadow($box-shadow-light);
+    box-shadow: $box-shadow-light, -$box-shadow-light;
   }
 
   .label {
