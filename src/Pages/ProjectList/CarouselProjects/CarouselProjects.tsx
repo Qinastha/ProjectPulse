@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { ProjectCard } from "../../../Components";
 import { IProject } from "../../../core";
 import "./CarouselProjects.scss";
-import useViewport from "../../../core/utility/useViewportWidth";
+import { useViewport } from "@Qinastha/pulse_library";
 
 interface CarouselProps {
   projects: IProject[];
@@ -51,8 +51,7 @@ export const CarouselProjects: React.FC<CarouselProps> = ({
     setEndX(e.touches[0].clientX);
   };
 
-  const translateX =
-    viewportHeight > 450 ? -currentIndex * 20 + 2 : -currentIndex * 23 + 10;
+  const translateX = -currentIndex * 100;
 
   return (
     <div className="carousel">

@@ -1,5 +1,5 @@
-@import "../../assets/styles/variables";
-@import "../../assets/styles/mixins";
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
 
 .authPageWrapper {
   height: 100vh;
@@ -9,7 +9,10 @@
   align-items: center;
   overflow-y: hidden;
   overflow-x: hidden;
-  @include backgroundImage;
+  background-image: url("../../assets/backgroundImage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .loginContainer,

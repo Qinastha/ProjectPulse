@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
 import { Apple, GitHub, Google } from "@mui/icons-material";
 import { getProfile } from "../../store/userSlice";
-import { PulseForm } from "../../Components";
 import { LOGIN_REQUIRED_INPUTS, postData, RegisterFormData } from "../../core";
 import { useAppSelector } from "../../hooks";
 import { useTheme } from "../../core/contexts/ThemeContext";
+import { PulseForm } from "@Qinastha/pulse_library";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
           inputValues={inputValues}
           formTitle={"Login to your account"}
           errors={errors}
-          onChange={e => updateLoginFormData(e)}
+          onChange={(e: any) => updateLoginFormData(e)}
         />
 
         <p>

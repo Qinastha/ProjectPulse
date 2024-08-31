@@ -21,7 +21,7 @@ export const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchData = {
       widgetRoutes: userWidgets,
-      projectId: "66ae6b28669f9ac11e15edd9",
+      projectId: "66bf647703fd492812fa9458",
     };
     dispatch(fetchAllWidgets(fetchData));
   }, []);

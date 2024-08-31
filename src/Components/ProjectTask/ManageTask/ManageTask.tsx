@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { PulseForm } from "../../PulseForm/PulseForm";
 import { PopUpProps } from "../../PopUp/PopUp";
 import "./ManageTask.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
@@ -11,6 +10,7 @@ import {
   setCurrentTaskListId,
 } from "../../../store/projectSlice";
 import { ITaskList, ITasks, TaskFormData, useTaskForm } from "../../../core";
+import { PulseForm } from "@Qinastha/pulse_library";
 
 interface ManageTaskProps extends PopUpProps {
   mode: "addTask" | "editTask";
@@ -21,7 +21,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
   mode,
 }) => {
   const dispatch = useAppDispatch();
-  const { _id, taskLists } = useAppSelector(getCurrentProject)!;
+  const { _id, taskLists, members } = useAppSelector(getCurrentProject)!;
   const currentTaskListId = useAppSelector(getCurrentTaskListId)!;
   const currentTaskId = useAppSelector(getCurrentTaskId)!;
 
@@ -67,6 +67,13 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
     currentTaskId,
   )!;
 
+  const isFormValid = () => {
+    return Object.values(taskFormData).every(
+      value =>
+        value !== null && value !== undefined && value.toString().trim() !== "",
+    );
+  };
+
   return (
     <div className="task-pop-form">
       <PulseForm
@@ -75,8 +82,9 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
         formTitle={
           mode === "addTask" ? `New Task` : `Edit task "${task.title}"`
         }
-        onChange={e => handleTaskChange(e)}
         isNewTask={isNewTask}
+        allMembers={members}
+        onChange={e => handleTaskChange(e)}
       />
       <div className="task-pop-form__actions">
         <button
@@ -88,6 +96,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
         </button>
         <button
           type="button"
+          disabled={!isFormValid()}
           onClick={() => {
             handleClosePopUp();
             handleTaskSubmit();

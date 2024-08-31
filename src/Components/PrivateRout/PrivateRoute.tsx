@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-
 import React, { ReactElement, useEffect } from "react";
 import { getProfile } from "../../store/userSlice";
 import { useAppSelector } from "../../hooks";

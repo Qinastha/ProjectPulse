@@ -11,7 +11,7 @@ import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
 import { useNavigate } from "react-router-dom";
 import { CarouselProjects } from "./CarouselProjects/CarouselProjects";
 import { GridProjects } from "./GridProjects/GridProjects";
-import useViewport from "../../core/utility/useViewportWidth";
+import { useViewport } from "@Qinastha/pulse_library";
 
 export const ProjectsList: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
-@import "../../../assets/styles/variables";
-@import "../../../assets/styles/mixins";
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
 
 .projects-container__card {
   @include card;
@@ -9,12 +9,12 @@
 
   &.light {
     @include lightTheme;
-    @include box-shadow($box-shadow);
+    box-shadow: $box-shadow, -$box-shadow;
   }
 
   &.dark {
     @include darkTheme;
-    @include box-shadow($box-shadow-light);
+    box-shadow: $box-shadow-light, -$box-shadow-light;
   }
 
   .label {

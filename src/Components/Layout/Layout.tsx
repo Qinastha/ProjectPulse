@@ -11,8 +11,8 @@ import {
 } from "../../store/popUpSlice";
 import { getCurrentProject } from "../../store/projectSlice";
 import { useTheme } from "../../core/contexts/ThemeContext";
-import useViewport from "../../core/utility/useViewportWidth";
 import { FixedHeader, Navbar } from "../../core";
+import { useViewport } from "@Qinastha/pulse_library";
 
 export const Layout: React.FC = () => {
   const navigate = useNavigate();

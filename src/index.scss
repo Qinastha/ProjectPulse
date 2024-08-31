@@ -1,4 +1,5 @@
-@import "./assets/styles/variables.scss";
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
 
 body {
   margin: 0;
