@@ -4,7 +4,7 @@ import {useAppDispatch} from "../../hooks";
 import {setAlert} from "../../store/alertSlice";
 
 const axiosInstance = axios.create({
-    baseURL: "http://51.21.127.157:4000/api/",
+    baseURL: "https://51.21.127.157:4000/api/",
     timeout: 100000,
     headers: {
         "Content-Type": "application/json",
