@@ -45,7 +45,7 @@ To get started with ProjectPulse, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/taskmaster.git
+   git clone https://github.com/Qinastha/ProjectPulse.git
    ```
 2. **Navigate to the project directory**:
    ```bash
