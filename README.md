@@ -49,7 +49,7 @@ To get started with ProjectPulse, follow these steps:
    ```
 2. **Navigate to the project directory**:
    ```bash
-   cd taskmaster
+   cd projectpulse
    ```
 3. **Install the dependencies**:
    ```bash
