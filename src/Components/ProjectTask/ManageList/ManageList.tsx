@@ -53,7 +53,6 @@ export const ManageList: React.FC<ManageListProps> = ({
         mode === "addList" ? { taskListName, taskLists } : { taskListName };
       const response = await method(url, data);
       if (response?.value) {
-        console.log(response);
         dispatch(setProject(response.value));
         handleClosePopUp();
       }

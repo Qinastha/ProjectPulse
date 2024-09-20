@@ -21,14 +21,12 @@ export const ProjectsList: React.FC = () => {
 
   const handleDelete = (_id: string) => {
     dispatch(projectDelete(_id));
-    console.log(_id);
   };
 
   const handleUpdateProjectOpen = (_id: string) => {
     dispatch(togglePopUp(true));
     dispatch(setPopUpMode("update"));
     dispatch(setCurrentProject(_id));
-    console.log(_id);
   };
 
   const handleShowProject = (_id: string) => {

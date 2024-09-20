@@ -63,7 +63,6 @@ export const useProjectForm = (
       const method = mode === "create" ? postData : putData;
       const response = await method(url, popUpFormData);
       if (response?.value) {
-        console.log(response);
         handleClose();
         dispatch(fetchAllProjects());
       }

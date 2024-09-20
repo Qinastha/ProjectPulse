@@ -105,7 +105,6 @@ export const useProfileForm = (
     if (!file) return;
     const response = await postData("core/uploadImage", { avatar: file });
     if (response?.value) {
-      console.log(response);
       setFormData({ ...formData, avatar: response.value });
     }
   };
@@ -118,7 +117,6 @@ export const useProfileForm = (
       const response = await method(url, formData);
 
       if (response?.value) {
-        console.log(response);
         dispatch(updateProfile(response.value));
         navigate("/");
       }

@@ -43,15 +43,12 @@ export const useTaskForm = (
   const handleTaskSubmit = async () => {
     try {
       const method = mode === "addTask" ? postData : putData;
-      console.log("currentTaskList ID ====");
-      console.log(currentTaskListId);
       const url =
         mode === "addTask"
           ? `project/${_id}/taskList/${currentTaskListId}/task/new`
           : `project/${_id}/taskList/${currentTaskListId}/task/${currentTaskId}`;
       const response = await method(url, taskFormData);
       if (response?.value) {
-        console.log(response.value);
         dispatch(setProject(response.value));
       }
     } catch (error) {

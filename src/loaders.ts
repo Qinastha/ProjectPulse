@@ -43,7 +43,6 @@ export const membersLoader = async () => {
 
 export const userDataLoader = async () => {
   const [user, members] = await Promise.all([userLoader(), membersLoader()]);
-  console.log("users and data loaded");
   return { user, members };
 };
 
@@ -56,8 +55,6 @@ export const projectLoader = async ({ params }: { params: { id: string } }) => {
 
   const state = getState();
   const project = getCurrentProject(state);
-  console.log("project loaded");
-  console.log(project);
 
   return project;
 };
@@ -71,8 +68,6 @@ export const projectDataLoader = async () => {
 
   const state = getState();
   const projects = getProjects(state);
-
-  console.log("all projects loaded");
 
   return projects;
 };

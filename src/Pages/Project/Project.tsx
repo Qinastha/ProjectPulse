@@ -31,7 +31,6 @@ export const Project: React.FC = () => {
 
   const deleteList = (listId: string) => {
     if (listId) {
-      console.log(listId);
       dispatch(deleteProjectTaskList(listId));
     }
   };

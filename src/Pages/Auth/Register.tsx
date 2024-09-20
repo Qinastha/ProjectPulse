@@ -121,8 +121,6 @@ const Register: React.FC = () => {
       if (response.value) {
         localStorage.setItem("token", response.value);
         navigate("/");
-      } else {
-        console.log(response);
       }
     } catch (error) {
       console.error("Error during registration:", error);
