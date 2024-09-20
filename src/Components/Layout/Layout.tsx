@@ -27,7 +27,8 @@ export const Layout: React.FC = () => {
   const { theme, setTheme } = useTheme()!;
   const { viewportWidth, viewportHeight } = useViewport();
 
-  const toggleNav = (): void => {
+  const toggleNav = (e: React.MouseEvent): void => {
+    e.stopPropagation();
     setIsNavbarExpand(!isNavbarExpand);
   };
 
@@ -61,35 +62,37 @@ export const Layout: React.FC = () => {
         />
       </header>
 
-      <main className={theme}>
-        <div
-          className={`fixedHeaderContent ${theme}`}
-          onMouseLeave={(): void => setIsMenuOpen(false)}>
-          <FixedHeader
-            isMenuOpen={isMenuOpen}
-            id={id}
-            currentProject={currentProject}
-            pathname={pathname}
-            handleLogout={handleLogout}
-            setIsMenuOpen={e => setIsMenuOpen(e)}
-            toggleTheme={toggleTheme}
-            theme={theme}
-          />
-        </div>
-
-        {isPopUpOpen && (
-          <div>
-            <PopUp
-              handleClosePopUp={() => {
-                dispatch(togglePopUp(false));
-              }}
-              isPopUpOpen={isPopUpOpen}
+      <main>
+        <div className={`mainContainer ${theme}`}>
+          <div
+            className={`fixedHeaderContent ${theme}`}
+            onMouseLeave={(): void => setIsMenuOpen(false)}>
+            <FixedHeader
+              isMenuOpen={isMenuOpen}
+              id={id}
+              currentProject={currentProject}
+              pathname={pathname}
+              handleLogout={handleLogout}
+              setIsMenuOpen={e => setIsMenuOpen(e)}
+              toggleTheme={toggleTheme}
+              theme={theme}
             />
           </div>
-        )}
 
-        <div className="outlet">
-          <Outlet />
+          {isPopUpOpen && (
+            <div>
+              <PopUp
+                handleClosePopUp={() => {
+                  dispatch(togglePopUp(false));
+                }}
+                isPopUpOpen={isPopUpOpen}
+              />
+            </div>
+          )}
+
+          <div className="outlet">
+            <Outlet />
+          </div>
         </div>
       </main>
     </div>

@@ -10,7 +10,7 @@ import { Register } from "./Pages/Auth/Register";
 import { PageNotFound } from "./Pages/PageNotFound";
 import { Layout, PrivateRoute } from "./Components";
 import React from "react";
-import { projectLoader, userDataLoader } from "./loaders";
+import { projectDataLoader, projectLoader, userDataLoader } from "./loaders";
 import { ManageProfile } from "./Pages/Profile/ManageProfile";
 import { Project } from "./Pages/Project/Project";
 
@@ -26,7 +26,11 @@ const router = createBrowserRouter(
           </PrivateRoute>
         }>
         <Route index element={<Dashboard />} />
-        <Route path="projects" element={<ProjectsList />} />
+        <Route
+          path="projects"
+          loader={projectDataLoader}
+          element={<ProjectsList />}
+        />
         <Route
           path="projects/:id"
           loader={projectLoader}

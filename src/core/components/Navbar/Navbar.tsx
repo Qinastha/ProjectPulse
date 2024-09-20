@@ -11,7 +11,7 @@ interface NavbarProps {
   viewportWidth: number;
   viewportHeight: number;
   handlePopUpOpen: () => void;
-  toggleNav: () => void;
+  toggleNav: (e: React.MouseEvent) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -25,20 +25,17 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <div className="navTabs">
       <div className="navProfile">
-        <div className="miniProfile__container">
-          <MiniProfile />
-        </div>
-        {viewportWidth > 1000 && viewportHeight > 450 && (
-          <button className="collapseButton" type="button" onClick={toggleNav}>
-            &#8656;
-          </button>
-        )}
+        <MiniProfile
+          viewportHeight={viewportHeight}
+          viewportWidth={viewportWidth}
+          toggleNav={toggleNav}
+        />
         {pathname !== `/projects/${id}` && (
           <button
             className="newProjectButton"
             type="button"
             onClick={handlePopUpOpen}>
-            Create New Project
+            New Project
           </button>
         )}
       </div>

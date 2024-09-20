@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  fetchAllProjects,
   getProjects,
   projectDelete,
   setCurrentProject,
@@ -19,10 +18,6 @@ export const ProjectsList: React.FC = () => {
   const initialProjects = useAppSelector(getProjects);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { viewportWidth } = useViewport();
-
-  useEffect(() => {
-    dispatch(fetchAllProjects());
-  }, [fetchAllProjects]);
 
   const handleDelete = (_id: string) => {
     dispatch(projectDelete(_id));

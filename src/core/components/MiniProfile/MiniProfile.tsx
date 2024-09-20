@@ -3,7 +3,17 @@ import { getUser } from "../../../store/userSlice";
 import React from "react";
 import "./MiniProfile.scss";
 
-export const MiniProfile: React.FC = () => {
+interface MiniProfileProps {
+  viewportWidth: number;
+  viewportHeight: number;
+  toggleNav: (e: React.MouseEvent) => void;
+}
+
+export const MiniProfile: React.FC<MiniProfileProps> = ({
+  viewportWidth,
+  viewportHeight,
+  toggleNav,
+}) => {
   const user = useAppSelector(getUser);
 
   return (
@@ -13,7 +23,14 @@ export const MiniProfile: React.FC = () => {
         alt={user.userName}
         className="miniProfile-image"
       />
-      <span className="miniProfile-name">{`${user.firstName} ${user.lastName}`}</span>
+      <div className="miniProfile--info">
+        <span className="miniProfile-name">{`${user.firstName} ${user.lastName}`}</span>
+        {viewportWidth > 1024 && viewportHeight > 450 && (
+          <button className="collapseButton" type="button" onClick={toggleNav}>
+            &#8656;
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Auth.scss";
-import { Apple, GitHub, Google } from "@mui/icons-material";
 import { getProfile } from "../../store/userSlice";
 import { LOGIN_REQUIRED_INPUTS, postData, RegisterFormData } from "../../core";
 import { useAppSelector } from "../../hooks";
@@ -81,7 +80,7 @@ const Login: React.FC = () => {
         <PulseForm
           requiredInputs={requiredInputs}
           inputValues={inputValues}
-          formTitle={"Login to your account"}
+          formTitle={"Login"}
           errors={errors}
           onChange={(e: any) => updateLoginFormData(e)}
         />
@@ -101,21 +100,6 @@ const Login: React.FC = () => {
           onClick={() => handleLogin()}>
           Login
         </button>
-
-        <div className="authSocialButtons">
-          <span className="orText">or</span>
-          <div className="socialIcons">
-            <a href="#">
-              <Google style={{ fontSize: 40 }} />
-            </a>
-            <a href="#">
-              <GitHub style={{ fontSize: 40 }} />
-            </a>
-            <a href="#">
-              <Apple style={{ fontSize: 40 }} />
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -11,6 +11,8 @@
     @include border-radius(5px);
     @include gradient-bg($primary-color, $secondary-light-color);
     padding: 10px;
+    box-sizing: border-box;
+    color: $text-muted;
   }
 
   &__content {

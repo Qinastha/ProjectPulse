@@ -30,9 +30,9 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
   }, [dispatch, mode]);
 
   const initialFormData = {
+    projectAvatar: currentProject?.projectAvatar || null,
     projectName: currentProject?.projectName || "",
     projectDescription: currentProject?.projectDescription || "",
-    projectAvatar: currentProject?.projectAvatar || null,
     members: currentProject?.members || [],
   };
 
@@ -58,11 +58,7 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}
-        formTitle={
-          mode === "create"
-            ? "Add information for new project"
-            : "Update project info"
-        }
+        formTitle={mode === "create" ? "New Project" : "Update project"}
         allMembers={allUsers}
         currentUser={currentUser}
         onChange={e => handleUpdateProject(e)}

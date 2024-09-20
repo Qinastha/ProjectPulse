@@ -5,10 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/LogoFallback/LogoFallback.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/LogoFallback/LogoFallback.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ManageProject/ManageProject.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ManageProject/ManageProject.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ProjectCard/ProjectCard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ProjectCard/ProjectCard.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList/ProjectTaskList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskPreview/ProjectTaskPreview.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskPreview/ProjectTaskPreview.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Project/Project.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Project/Project.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/FallBackLoader/FallbackLoader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/FallBackLoader/FallbackLoader.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/FallBackLoader/FallbackLoader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/FallBackLoader/FallbackLoader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/MiniProfile/MiniProfile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/MiniProfile/MiniProfile.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/MiniProfile/MiniProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/MiniProfile/MiniProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/constants/popUpInputs.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/popUpInputs.constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/interceptors/authInterceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interceptors/authInterceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/utility/useProject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,37 +141,37 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/qinastha/Documents/GitHub/ProjectPulse",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "/Users/qinastha/Downloads/Projects/projectpulsejp/node_modules/eslint",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/qinastha/Documents/GitHub/ProjectPulse/node_modules/prettier",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.build.tools.auto.reload": "ALL",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "/Users/qinastha/Documents/GitHub/ProjectPulse/node_modules/typescript/lib",
-    "ts.rename.search.for.dynamic.occurrences": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/qinastha/Documents/GitHub/ProjectPulse&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;/Users/qinastha/Downloads/Projects/projectpulsejp/node_modules/eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/qinastha/Documents/GitHub/ProjectPulse/node_modules/prettier&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.build.tools.auto.reload&quot;: &quot;ALL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/qinastha/Documents/GitHub/ProjectPulse/node_modules/typescript/lib&quot;,
+    &quot;ts.rename.search.for.dynamic.occurrences&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/src/Components/LogoFallback" />
       <recent name="$PROJECT_DIR$/src/core/components" />
-      <recent name="$PROJECT_DIR$/src/Pages/ProjectList/GridProjects" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/src/core/utility/useDebounce.ts" />
@@ -280,7 +308,13 @@
       <workItem from="1726565930925" duration="352000" />
       <workItem from="1726566305851" duration="57000" />
       <workItem from="1726566369843" duration="577000" />
-      <workItem from="1726581203463" duration="5748000" />
+      <workItem from="1726581203463" duration="6045000" />
+      <workItem from="1726589414886" duration="1699000" />
+      <workItem from="1726664627531" duration="19537000" />
+      <workItem from="1726691946306" duration="4682000" />
+      <workItem from="1726726330238" duration="4335000" />
+      <workItem from="1726768436333" duration="5219000" />
+      <workItem from="1726814254362" duration="3626000" />
     </task>
     <servers />
   </component>

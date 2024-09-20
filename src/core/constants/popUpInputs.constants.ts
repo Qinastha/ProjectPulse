@@ -2,6 +2,13 @@ import { RequiredInput } from "../interfaces/requireInput";
 
 export const POPUP_REQUIRED_INPUTS: RequiredInput[] = [
   {
+    type: "file",
+    name: "projectAvatar",
+    className: "project-pop__input",
+    required: true,
+    label: "Project Picture",
+  },
+  {
     type: "text",
     name: "projectName",
     label: "Project name",
@@ -16,13 +23,6 @@ export const POPUP_REQUIRED_INPUTS: RequiredInput[] = [
     required: true,
     className: "project-pop__input",
     autoComplete: "off",
-  },
-  {
-    type: "file",
-    name: "projectAvatar",
-    className: "project-pop__input",
-    required: true,
-    label: "Project Picture",
   },
   {
     type: "text",

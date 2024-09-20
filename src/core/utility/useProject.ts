@@ -16,9 +16,9 @@ export const useProjectForm = (
 
   const requiredInputs = POPUP_REQUIRED_INPUTS;
   const inputValues = [
+    popUpFormData.projectAvatar,
     popUpFormData.projectName,
     popUpFormData.projectDescription,
-    popUpFormData.projectAvatar,
     popUpFormData.members,
   ];
 

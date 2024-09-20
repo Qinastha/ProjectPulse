@@ -46,7 +46,7 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
         <PulseForm
           requiredInputs={requiredInputs}
           inputValues={inputValues}
-          formTitle={"Please provide an information about yourself"}
+          formTitle={"Provide extra details"}
           errors={errors}
           onChange={e => updateFormData(e)}
           handleFile={e => handleFile(e)}

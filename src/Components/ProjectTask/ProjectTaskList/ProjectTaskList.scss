@@ -1,0 +1,224 @@
+@import "~@Qinastha/pulse_library/src/styles/variables";
+@import "~@Qinastha/pulse_library/src/styles/mixins";
+
+.taskContainer--item {
+  height: min-content;
+  transition: all 0.3s ease-in-out;
+  @include border-radius(20px);
+
+  &.light {
+    background: rgba(255, 238, 238, 0.55);
+    border-radius: 16px;
+    box-shadow: 4px 8px 20px 0 rgba($pastel-coral, 0.37);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  &.dark {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 4px 8px 20px 0 rgba($pastel-coral, 0.37);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  &:hover {
+    border-color: $sakura-active-border-color;
+  }
+
+  .listHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 1.2rem;
+    border-bottom: 2px solid $pastel-coral;
+
+    .listHeader--text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 400;
+      padding: 0.5rem;
+      box-sizing: border-box;
+
+      .editList--button {
+        background-color: transparent;
+        @include border-radius(5px);
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &.light {
+          color: $text-muted
+        }
+
+        &.dark {
+          color: $pulse-white
+        }
+
+        &:hover {
+          scale: 1.25;
+        }
+      }
+    }
+
+    .list--actions {
+      display: flex;
+      justify-content: flex-end;
+
+      .deleteList--button {
+        background-color: transparent;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        padding: 0.8rem;
+        box-sizing: content-box;
+
+        &.light {
+          color: $text-muted
+        }
+
+        &.dark {
+          color: $pulse-white
+        }
+
+        &:hover {
+          background-color: darken($pastel-coral, 5%);
+        }
+      }
+    }
+  }
+}
+
+.taskContainer__tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+
+  .taskContainer__task--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    @include border-radius(10px);
+
+    &.light {
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 16px;
+      box-shadow: 4px 8px 20px 0 rgba($pastel-coral, 0.37);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    &.dark {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      box-shadow: 4px 8px 20px 0 rgba($pastel-coral, 0.37);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .taskContainer__task-text {
+      flex-grow: 1;
+      margin: 0 1.5rem;
+
+
+      &:hover,
+      &:focus {
+        outline: none;
+        transform: translateX(4%) translateY(4%);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    .task--actions {
+      display: flex;
+      gap: 1rem;
+
+      .editTask--button {
+
+        &.light {
+          color: darken($pastel-mint, 20%);
+        }
+
+        &.dark {
+          color: $pastel-mint;
+        }
+      }
+
+      .deleteTask--button {
+        &.light {
+          color: darken($pastel-coral, 20%);
+        }
+
+        &.dark {
+          color: $pastel-coral;
+        }
+      }
+
+      .editTask--button,
+      .deleteTask--button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.3rem;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+
+        &.light {
+          &:hover {
+            cursor: pointer;
+            scale: 1.2;
+            color: $text-muted;
+          }
+        }
+
+        &.dark {
+          &:hover {
+            cursor: pointer;
+            scale: 1.2;
+            color: $pulse-white;
+          }
+        }
+      }
+    }
+  }
+
+  .addTaskButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .addTask--button {
+      background-color: $primary-color;
+      color: $pulse-white;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 0.5rem 1rem;
+      font-size: 2rem;
+      transition: all 0.3s ease-in-out;
+      border: none;
+      @include border-radius(50%);
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+        cursor: pointer;
+        scale: 1.2;
+      }
+    }
+  }
+}
+
+.taskList--placeholder {
+  font-size: 0.9rem;
+  text-align: center;
+
+}

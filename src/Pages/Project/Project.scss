@@ -5,166 +5,19 @@
   display: grid;
   grid-template-columns: 1fr auto;
   font-family: $font-family;
-  box-sizing: border-box;
   height: fit-content;
   width: auto;
   overflow-y: hidden;
   overflow-x: hidden;
   @include border-radius(10px);
-  margin: 1.5rem;
-
-  p {
-    margin: 1rem;
-    word-wrap: break-word;
-    font-size: 1.2rem;
-    font-weight: 400;
-  }
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .taskContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
-}
-
-.taskContainer--item {
-  @include card;
-  padding: 0;
-  @include sakura-border;
-  background-color: $secondary-light-color;
-  color: $text-color;
-  height: min-content;
-  @include border-radius(20px);
-
-  &:hover {
-    border-color: $sakura-active-border-color;
-  }
-
-  .listHeader {
-    background-color: $sakura-border-color;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-
-    .listHeader--text {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: bold;
-      margin-left: 0.5rem;
-
-      .editList--button {
-        background-color: transparent;
-        @include border-radius(5px);
-        outline: none;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-
-        &:hover {
-          background-color: lighten($primary-color, 2%);
-        }
-      }
-    }
-
-    .list--actions {
-      display: flex;
-      justify-content: flex-end;
-
-      .deleteList--button {
-        background-color: transparent;
-        border-radius: 10px;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        padding: 0.8rem;
-        box-sizing: content-box;
-
-        &:hover {
-          background-color: darken($primary-color, 10%);
-        }
-      }
-    }
-  }
-}
-
-.taskContainer__tasks {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-
-  .taskContainer__task--item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: $background-color;
-    border: 1px solid $sakura-border-color;
-    @include border-radius(10px);
-
-    .taskContainer__task-text {
-      flex-grow: 1;
-      margin: 0 1.5rem;
-
-      &:hover,
-      &:focus {
-        outline: none;
-        transform: translateX(4%) translateY(4%);
-        transition: all 0.3s ease-in-out;
-      }
-    }
-
-    .task--actions {
-      display: flex;
-      gap: 10px;
-
-      .editTask--button,
-      .deleteTask--button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0.8rem;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: darken($primary-color, 10%);
-        }
-      }
-    }
-  }
-
-  .addTaskButtonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .addTask--button {
-      @include base-button;
-      background-color: $primary-color;
-      color: $pulse-white;
-      width: 80%;
-      padding: 1rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      box-sizing: border-box;
-      @include border-radius(15px);
-
-      &:hover {
-        background-color: darken($primary-color, 10%);
-      }
-    }
-  }
-
-  .delimiter {
-    @include delimiter;
-  }
 }
 
 .taskContainer--add_button {
@@ -174,6 +27,8 @@
   align-self: start;
   height: fit-content;
   margin-left: 1rem;
+  border: none;
+  border-radius: 15px;
 
   &:hover {
     background-color: darken($primary-color, 10%);
@@ -189,7 +44,6 @@
 
     .taskContainer--add_button {
       width: 100%;
-      border: none;
       text-align: center;
       margin-left: 0;
       @include box-shadow($box-shadow);

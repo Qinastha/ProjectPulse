@@ -2,12 +2,11 @@
 @import "~@Qinastha/pulse_library/src/styles/mixins";
 
 .profilePageWrapper {
-  height: 150vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
   background-image: url("../../assets/backgroundImage.png");
   background-size: cover;
@@ -111,9 +110,6 @@
 }
 
 @media (max-width: 768px) {
-  .profilePageWrapper {
-    height: 190vh;
-  }
 
   .profileContainer {
     &.newProfileContainer {
@@ -127,10 +123,6 @@
 }
 
 @media (min-width: 768px) and (max-width: 1180px) {
-  .profilePageWrapper {
-    height: 180vh;
-  }
-
   .profileContainer {
     &.newProfileContainer {
       width: 60vh;
