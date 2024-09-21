@@ -41,11 +41,13 @@ export const membersLoader = async () => {
   return allMembers;
 };
 
+// Fetch user data and all members
 export const userDataLoader = async () => {
   const [user, members] = await Promise.all([userLoader(), membersLoader()]);
   return { user, members };
 };
 
+// Fetch project data by id
 export const projectLoader = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
@@ -59,6 +61,7 @@ export const projectLoader = async ({ params }: { params: { id: string } }) => {
   return project;
 };
 
+// Fetch all projects and their data
 export const projectDataLoader = async () => {
   const token = localStorage.getItem("token");
 

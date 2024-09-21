@@ -12,6 +12,7 @@ import { CarouselProjects } from "./CarouselProjects/CarouselProjects";
 import { GridProjects } from "./GridProjects/GridProjects";
 import { useViewport } from "@Qinastha/pulse_library";
 
+// Render projects in a grid or carousel depending on viewport width
 export const ProjectsList: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../../hooks";
 import { setAlert } from "../../store/alertSlice";
 
+// Create a custom axios instance with base URL, timeout, and custom headers
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4000/api/",
   timeout: 100000,
@@ -11,6 +12,7 @@ const axiosInstance = axios.create({
   },
 });
 
+// Add a request interceptor to add authorization token to requests if the token is present in local storage
 axiosInstance.interceptors.request.use(
   config => {
     const token = localStorage.getItem("token") || "";

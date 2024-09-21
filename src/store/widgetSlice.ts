@@ -23,6 +23,7 @@ const initialState: IWidgetState = {
   status: "idle",
 };
 
+// Fetching all widgets data
 export const fetchAllWidgets = createAsyncThunk(
   "widget/fetchAllWidgets",
   async (fetchData: any) => {

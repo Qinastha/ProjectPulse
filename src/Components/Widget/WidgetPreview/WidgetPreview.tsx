@@ -16,6 +16,7 @@ export const WidgetPreview: React.FC<WidgetPreviewProps> = ({
   const dispatch = useAppDispatch();
   const widget = useAppSelector(getCurrentWidget);
 
+  // Close widget preview when the current widget is changed or when the component unmounts.
   useEffect(() => {
     return () => {
       dispatch(setCurrentWidget(null));

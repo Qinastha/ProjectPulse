@@ -22,6 +22,7 @@ const initialState: IProjectState = {
   status: "idle",
 };
 
+// Async for fetching all projects
 export const fetchAllProjects = createAsyncThunk(
   "project/fetchAllProjects",
   async () => {
@@ -37,6 +38,7 @@ export const fetchAllProjects = createAsyncThunk(
   },
 );
 
+// Async for fetching project by ID
 export const fetchProjectById = createAsyncThunk(
   "project/fetchProjectById",
   async (_id: string) => {
@@ -50,6 +52,7 @@ export const fetchProjectById = createAsyncThunk(
   },
 );
 
+// Async for deleting a project
 export const projectDelete = createAsyncThunk(
   "project/deleteProject",
   async (_id: string) => {
@@ -63,6 +66,7 @@ export const projectDelete = createAsyncThunk(
   },
 );
 
+// Async for deleting a project task list
 export const deleteProjectTaskList = createAsyncThunk(
   "project/deleteProjectTaskList",
   async (_id: string) => {
@@ -76,6 +80,7 @@ export const deleteProjectTaskList = createAsyncThunk(
   },
 );
 
+// Async for deleting a project task from a task list
 export const deleteProjectTask = createAsyncThunk(
   "project/deleteProjectTask",
   async ({

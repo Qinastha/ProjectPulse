@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../hooks";
 import { getAlert, hideAlert } from "../../../store/alertSlice";
 import "./Alert.scss";
 
+// Alert component to display alert messages
 export const Alert: React.FC = () => {
   const dispatch = useDispatch();
   const { message, alertType, showUser } = useAppSelector(getAlert);

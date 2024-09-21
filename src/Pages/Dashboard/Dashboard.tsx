@@ -13,6 +13,7 @@ import { FallbackLoader } from "../../core";
 
 const Widget = lazy(() => import("../../Components/Widget/Widget"));
 
+// Dashboard component - displays all widgets in a grid layout, and triggers the widget popup when clicked.
 export const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const userWidgets = useAppSelector(getUserWidgets)!;

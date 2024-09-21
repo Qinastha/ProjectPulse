@@ -33,11 +33,13 @@ const initialState: IUserState = {
   isInitial: true,
 };
 
+// Async for fetching logged user data
 export const reqUser = createAsyncThunk("users/reqUser", async () => {
   const response = await getData("user/");
   return response.value as IUser;
 });
 
+// Async for fetching all users data
 export const fetchAllUsers = createAsyncThunk(
   "users/fetchAllUsers",
   async () => {

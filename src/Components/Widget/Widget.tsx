@@ -13,6 +13,7 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
   const { viewportHeight, viewportWidth } = useViewport();
   const isHorizontal = viewportHeight < 450 && viewportWidth < 1000;
 
+  // Update chart options and data when widget data changes
   useEffect(() => {
     if (chartRef.current) {
       const chartInstance = echarts.init(chartRef.current);
@@ -84,7 +85,7 @@ const Widget: React.FC<WidgetChartProps> = ({ widget, mode }) => {
               },
               label: {
                 show: true,
-                position: "start", // or 'start', 'insideStart', 'end', 'insideEnd'
+                position: "start",
                 formatter: "{b}",
                 fontSize,
               },

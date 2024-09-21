@@ -7,6 +7,7 @@ interface PrivateRouteProps {
   children: ReactElement;
 }
 
+// PrivateRoute component to restrict access to unauthenticated users
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const navigate = useNavigate();
   const isAuthenticated = !!localStorage.getItem("token");

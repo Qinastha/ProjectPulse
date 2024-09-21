@@ -25,6 +25,7 @@ export const ManageList: React.FC<ManageListProps> = ({
 
   const [taskListName, setTaskListName] = useState<string>("");
 
+  // Fetch task list details when current task list changes
   useEffect(() => {
     if (currentTaskListId) {
       const list = taskLists?.find(
@@ -72,6 +73,8 @@ export const ManageList: React.FC<ManageListProps> = ({
     },
   ];
 
+  // Reset current task list id when mode changes to "addList" or "editList"
+  // to avoid adding or editing a task list from the wrong task list page.
   useEffect(() => {
     return () => {
       dispatch(setCurrentTaskListId(null));

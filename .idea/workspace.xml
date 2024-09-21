@@ -6,16 +6,30 @@
   <component name="ChangeListManager">
     <list default="true" id="62bd38b6-36b3-4756-8050-d98825911c5c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Layout/Layout.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PopUp/PopUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/PrivateRout/PrivateRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ProjectCard/ProjectCard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ProjectCard/ProjectCard.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ManageList/ManageList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ManageList/ManageList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ManageTask/ManageTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ManageTask/ManageTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList/ProjectTaskList.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskList/ProjectTaskList.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskPreview/ProjectTaskPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProjectTask/ProjectTaskPreview/ProjectTaskPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Widget/Widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Widget/WidgetPreview/WidgetPreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Widget/WidgetPreview/WidgetPreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Auth.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Project/Project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Project/Project.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/ManageProfile.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/CarouselProjects/CarouselProjects.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/ProjectList/ProjectsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProfile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useProject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useTask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useTask.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/Alert/Alert.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/Alert/Alert.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/FallBackLoader/FallbackLoader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/FallBackLoader/FallbackLoader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/components/Navbar/Navbar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/interceptors/authInterceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interceptors/authInterceptor.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/loaders.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/loaders.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/projectSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/projectSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/userSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/userSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/widgetSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/widgetSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,6 +313,7 @@
       <workItem from="1726861824335" duration="586000" />
       <workItem from="1726862530692" duration="290000" />
       <workItem from="1726867335545" duration="456000" />
+      <workItem from="1726942207311" duration="2472000" />
     </task>
     <servers />
   </component>

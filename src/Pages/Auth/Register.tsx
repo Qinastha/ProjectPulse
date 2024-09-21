@@ -41,6 +41,7 @@ const Register: React.FC = () => {
     }
   }, []);
 
+  // Handle form validation with regex tests
   const validateForm = () => {
     let formIsValid = true;
     const newErrors: any = {};

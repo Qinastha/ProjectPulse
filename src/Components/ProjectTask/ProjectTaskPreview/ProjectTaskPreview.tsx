@@ -33,6 +33,7 @@ export const ProjectTaskPreview: React.FC<PopUpProps> = ({
     taskStatus: task?.taskStatus,
   };
 
+  // Clean up when component unmounts
   useEffect(() => {
     return () => {
       dispatch(setCurrentTaskListId(null));

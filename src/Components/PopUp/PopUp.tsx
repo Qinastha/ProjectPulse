@@ -23,6 +23,7 @@ export interface PopUpProps {
     | "showWidget";
 }
 
+// PopUp component to display pop-up content based on the current mode
 const PopUp: React.FC<PopUpProps> = ({ handleClosePopUp, isPopUpOpen }) => {
   const mode = useAppSelector(getProjectPopMode);
   const { theme } = useTheme()!;

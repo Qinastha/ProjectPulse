@@ -44,6 +44,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
     taskStatus: task?.taskStatus || "to do",
   };
 
+  // Clear current task and task list when unmounting
   useEffect(() => {
     return () => {
       dispatch(setCurrentTaskListId(null));
