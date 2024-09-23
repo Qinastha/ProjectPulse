@@ -12,8 +12,10 @@ import {
   setCurrentTaskListId,
 } from "../../store/projectSlice";
 import { ProjectTaskList } from "../../Components";
+import { useTranslation } from "react-i18next";
 
 export const Project: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>()!;
   const project = useAppSelector(getCurrentProject)!;
@@ -82,7 +84,7 @@ export const Project: React.FC = () => {
         />
       </div>
       <button className="taskContainer--add_button" onClick={openAddList}>
-        Add another list
+        {t("project.addList")}
       </button>
     </div>
   );

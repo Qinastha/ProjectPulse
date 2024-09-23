@@ -6,8 +6,10 @@ import { LOGIN_REQUIRED_INPUTS, postData, RegisterFormData } from "../../core";
 import { useAppSelector } from "../../hooks";
 import { useTheme } from "../../core/contexts/ThemeContext";
 import { PulseForm } from "@Qinastha/pulse_library";
+import { useTranslation } from "react-i18next";
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { theme } = useTheme()!;
   const profile = useAppSelector(getProfile);
@@ -80,17 +82,17 @@ const Login: React.FC = () => {
         <PulseForm
           requiredInputs={requiredInputs}
           inputValues={inputValues}
-          formTitle={"Login"}
+          formTitle={t("login.formTitle")}
           errors={errors}
           onChange={(e: any) => updateLoginFormData(e)}
         />
 
         <p>
-          If you already have an account then{" "}
+          {t("login.if")}{" "}
           <span
             className="registerLink"
             onClick={(): void => navigate("/register")}>
-            move to registration page
+            {t("login.clickHere")}
           </span>
         </p>
 
@@ -98,7 +100,7 @@ const Login: React.FC = () => {
           className="loginButton"
           type="button"
           onClick={() => handleLogin()}>
-          Login
+          {t("button.submit")}
         </button>
       </div>
     </div>

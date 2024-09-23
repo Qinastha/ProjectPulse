@@ -5,11 +5,13 @@ import { ProfileFormData } from "../interfaces/profileFormData";
 import { useAppDispatch } from "../../hooks";
 import { setStateNull, updateProfile } from "../../store/userSlice";
 import { deleteData, postData, putData } from "../requests/httpRequests";
+import { useTranslation } from "react-i18next";
 
 export const useProfileForm = (
   initialData: ProfileFormData,
   mode: "create" | "update",
 ) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const token = localStorage.getItem("token");
@@ -45,7 +47,7 @@ export const useProfileForm = (
     const zipCodeRegex = /^\d{1,10}$/;
 
     if (!phoneNumberRegex.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = "Invalid phone number format.";
+      newErrors.phoneNumber = t("error.phoneNumber");
       formIsValid = false;
     }
 
@@ -53,13 +55,12 @@ export const useProfileForm = (
       !addressRegex.test(formData.address.street) ||
       formData.address.street.length === 0
     ) {
-      newErrors.street =
-        "Street address cannot start with symbols or be empty.";
+      newErrors.street = t("error.street");
       formIsValid = false;
     }
 
     if (!addressRegex.test(formData.address.street2)) {
-      newErrors.street2 = "Street2 address cannot start with symbols.";
+      newErrors.street2 = t("error.street2");
       formIsValid = false;
     }
 
@@ -67,13 +68,12 @@ export const useProfileForm = (
       !addressRegex.test(formData.address.city) ||
       formData.address.city.length === 0
     ) {
-      newErrors.city = "City cannot start with symbols or be empty.";
+      newErrors.city = t("error.city");
       formIsValid = false;
     }
 
     if (!zipCodeRegex.test(formData.address.zipCode)) {
-      newErrors.zipCode =
-        "Zip code must be numeric and no more than 10 digits.";
+      newErrors.zipCode = t("error.zipCode");
       formIsValid = false;
     }
 

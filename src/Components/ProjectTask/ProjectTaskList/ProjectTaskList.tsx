@@ -6,6 +6,7 @@ import "./ProjectTaskList.scss";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useTheme } from "../../../core/contexts/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 interface ProjectTaskListProps {
   project: IProject;
@@ -26,6 +27,7 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
   openPreviewTask,
   deleteTask,
 }) => {
+  const { t } = useTranslation();
   const status = useAppSelector(getProjectStatus);
   const { theme } = useTheme()!;
   return (
@@ -91,7 +93,7 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
                         ))
                       ) : (
                         <p className="taskList--placeholder">
-                          No tasks available. Please add a new one
+                          {t("projectTaskList.noTasks")}
                         </p>
                       )}
                       <div className="addTaskButtonContainer">
@@ -106,7 +108,7 @@ export const ProjectTaskList: React.FC<ProjectTaskListProps> = ({
                 ))}
             </>
           ) : (
-            <p>No task lists available.</p>
+            <p>{t("projectTaskList.noLists")}</p>
           )}
         </>
       )}

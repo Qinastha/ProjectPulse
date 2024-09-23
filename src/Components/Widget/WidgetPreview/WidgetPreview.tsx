@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { PopUpProps } from "../../PopUp/PopUp";
 import "./WidgetPreview.scss";
 import Widget from "../Widget";
+import { useTranslation } from "react-i18next";
 
 interface WidgetPreviewProps extends PopUpProps {
   mode: "showWidget";
@@ -13,6 +14,7 @@ export const WidgetPreview: React.FC<WidgetPreviewProps> = ({
   handleClosePopUp,
   mode,
 }) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const widget = useAppSelector(getCurrentWidget);
 
@@ -25,16 +27,16 @@ export const WidgetPreview: React.FC<WidgetPreviewProps> = ({
 
   return (
     <div className="widgetPreview__container">
-      <h2>{widget.name}</h2>
-      <h4>{widget.description}</h4>
-      <Widget widget={widget} mode={mode} />
-      <div className="widgetPreview__container--actions">
+      <div className="widgetPreview__container-header">
+        <h2>{widget.name}</h2>
         <button
-          className="widgetPreview__container--actions--button"
+          className="widgetPreview__container-header-button"
           onClick={handleClosePopUp}>
-          Close
+          X
         </button>
+        <h4>{widget.description}</h4>
       </div>
+      <Widget widget={widget} mode={mode} />
     </div>
   );
 };

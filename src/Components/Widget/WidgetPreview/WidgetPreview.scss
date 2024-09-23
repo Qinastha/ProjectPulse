@@ -7,20 +7,36 @@
   height: 80vh;
   padding: 5px;
 
-  h2 {
-    font-size: 3rem;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
+  .widgetPreview__container-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
 
-    &::after {
-      content: "";
-      display: block;
-      width: 35vh;
-      max-width: 60%;
-      height: 2px;
-      background-color: $primary-color;
-      margin: 10px auto 0;
+    h2 {
+      font-size: 3rem;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    &-button {
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: $primary-color;
+      transition: all 0.3s ease-in-out;
+      align-self: baseline;
+      position: absolute;
+      left: 95%;
+      transform: translateX(-50%);
+
+      &:hover {
+        color: $pastel-light-blue;
+        transform: translateX(-50%) scale(1.4);
+      }
     }
   }
 
@@ -29,22 +45,7 @@
     margin: 0;
     padding: 10px;
     text-align: center;
-  }
-
-  &--actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 4rem;
-
-    &--button {
-      @include base-button;
-      background-color: $primary-color;
-      color: $pulse-white;
-
-      &:hover {
-        background-color: darken($primary-color, 10%);
-      }
-    }
+    flex-grow: 1;
   }
 }
 
@@ -52,16 +53,14 @@
   .widgetPreview__container {
     max-width: 40vh;
 
-    &--actions {
-      margin-right: 2rem;
-    }
+    .widgetPreview__container-header {
+      h2 {
+        font-size: 1.5rem;
+      }
 
-    h2 {
-      font-size: 1.5rem;
-    }
-
-    h4 {
-      font-size: 1rem;
+      h4 {
+        font-size: 1rem;
+      }
     }
   }
 }
@@ -81,16 +80,14 @@
     padding: 10px;
     overflow: hidden;
 
-    h2 {
-      font-size: 1.3rem;
-    }
+    .widgetPreview__container-header {
+      h2 {
+        font-size: 1.3rem;
+      }
 
-    h4 {
-      font-size: 0.8rem;
-    }
-
-    &--actions {
-      margin-right: 1rem;
+      h4 {
+        font-size: 0.8rem;
+      }
     }
   }
 }

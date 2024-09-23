@@ -11,6 +11,7 @@ import {
 } from "../../../store/projectSlice";
 import { ITaskList, ITasks, TaskFormData, useTaskForm } from "../../../core";
 import { PulseForm } from "@Qinastha/pulse_library";
+import { useTranslation } from "react-i18next";
 
 interface ManageTaskProps extends PopUpProps {
   mode: "addTask" | "editTask";
@@ -20,6 +21,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
   handleClosePopUp,
   mode,
 }) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { _id, taskLists, members } = useAppSelector(getCurrentProject)!;
   const currentTaskListId = useAppSelector(getCurrentTaskListId)!;
@@ -81,7 +83,9 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
         requiredInputs={requiredInputs}
         inputValues={inputValues}
         formTitle={
-          mode === "addTask" ? `New Task` : `Edit task "${task.title}"`
+          mode === "addTask"
+            ? t("manageTask.newTask")
+            : `${t("manageTask.editTask")} ${task.title}`
         }
         isNewTask={isNewTask}
         allMembers={members}
@@ -93,7 +97,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
           className="task-pop-form__button task-pop-form__button--cancel"
           onClick={() => handleClosePopUp()}>
           {" "}
-          Cancel
+          {t("button.cancel")}
         </button>
         <button
           type="button"
@@ -103,7 +107,7 @@ export const ManageTask: React.FC<ManageTaskProps> = ({
             handleTaskSubmit();
           }}
           className="task-pop-form__button task-pop-form__button--submit">
-          {mode === "addTask" ? "Add Task" : "Save Changes"}
+          {mode === "addTask" ? t("manageTask.create") : t("manageTask.update")}
         </button>
       </div>
     </div>

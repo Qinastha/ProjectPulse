@@ -9,6 +9,7 @@ import { useProjectForm } from "../../../core";
 import "./ManageProject.scss";
 import { PulseForm } from "@Qinastha/pulse_library";
 import { getAllUsers, getUser } from "../../../store/userSlice";
+import { useTranslation } from "react-i18next";
 
 interface ManageProjectProps extends PopUpProps {
   mode: "create" | "update";
@@ -18,6 +19,7 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
   mode,
   handleClosePopUp,
 }) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const currentProject = useAppSelector(getCurrentProject);
   const allUsers = useAppSelector(getAllUsers);
@@ -58,7 +60,11 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
       <PulseForm
         requiredInputs={requiredInputs}
         inputValues={inputValues}
-        formTitle={mode === "create" ? "New Project" : "Update project"}
+        formTitle={
+          mode === "create"
+            ? t("manageProject.newTitle")
+            : t("manageProject.editTitle")
+        }
         allMembers={allUsers}
         currentUser={currentUser}
         onChange={e => handleUpdateProject(e)}
@@ -71,7 +77,7 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
                     project-pop__button--cancel"
           onClick={() => handleClosePopUp()}>
           {" "}
-          Cancel
+          {t("button.cancel")}
         </button>
         <button
           type="button"
@@ -81,7 +87,9 @@ export const ManageProject: React.FC<ManageProjectProps> = ({
             handleClosePopUp();
           }}
           className="project-pop__button project-pop__button--submit">
-          {mode === "create" ? "Add Project" : "Update Project"}{" "}
+          {mode === "create"
+            ? t("manageProject.addProject")
+            : t("manageProject.editProject")}{" "}
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
   setProject,
 } from "../../../store/projectSlice";
 import { PulseForm } from "@Qinastha/pulse_library";
+import { useTranslation } from "react-i18next";
 
 interface ManageListProps extends PopUpProps {
   mode: "addList" | "editList";
@@ -19,6 +20,7 @@ export const ManageList: React.FC<ManageListProps> = ({
   handleClosePopUp,
   mode,
 }) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { taskLists, _id } = useAppSelector(getCurrentProject)!;
   const currentTaskListId = useAppSelector(getCurrentTaskListId)!;
@@ -68,7 +70,7 @@ export const ManageList: React.FC<ManageListProps> = ({
       name: "listName",
       required: true,
       className: "form-control",
-      label: "List name",
+      label: t("manageList.listName"),
       autoComplete: "off",
     },
   ];
@@ -86,7 +88,11 @@ export const ManageList: React.FC<ManageListProps> = ({
       <PulseForm
         requiredInputs={requiredInput}
         inputValues={inputValue}
-        formTitle={mode === "addList" ? "Add new List" : "Edit List"}
+        formTitle={
+          mode === "addList"
+            ? t("manageList.addList")
+            : t("manageList.editList")
+        }
         onChange={handleListChange}
       />
       <div className="list-pop-form__actions">
@@ -94,14 +100,14 @@ export const ManageList: React.FC<ManageListProps> = ({
           type="button"
           onClick={handleClosePopUp}
           className="list-pop-form__button list-pop-form__button--cancel">
-          Cancel
+          {t("button.cancel")}
         </button>
 
         <button
           type="button"
           onClick={handleListSubmit}
           className="list-pop-form__button list-pop-form__button--submit">
-          {mode === "addList" ? "Add List" : "Edit List"}
+          {mode === "addList" ? t("button.submit") : t("button.update")}
         </button>
       </div>
     </div>

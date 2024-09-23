@@ -4,6 +4,7 @@ import "./Navbar.scss";
 import { MiniProfile } from "../MiniProfile/MiniProfile";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import { useTranslation } from "react-i18next";
 
 interface NavbarProps {
   pathname: string;
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   handlePopUpOpen,
   toggleNav,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="navTabs">
       <div className="navProfile">
@@ -35,17 +37,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="newProjectButton"
             type="button"
             onClick={handlePopUpOpen}>
-            New Project
+            {t("navbar.newProject")}
           </button>
         )}
       </div>
       <div className="navLinks nav-item">
         <NavLink to="/">
           {" "}
-          <DashboardOutlinedIcon style={{ fontSize: 20 }} /> Dashboard
+          <DashboardOutlinedIcon style={{ fontSize: 20 }} />{" "}
+          {t("navbar.dashboard")}
         </NavLink>
         <NavLink to="/projects">
-          <ArticleOutlinedIcon style={{ fontSize: 20 }} /> Projects
+          <ArticleOutlinedIcon style={{ fontSize: 20 }} />{" "}
+          {t("navbar.projects")}
         </NavLink>
       </div>
     </div>

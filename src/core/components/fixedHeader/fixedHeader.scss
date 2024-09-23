@@ -5,34 +5,32 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
   width: 100%;
 
   h1 {
     font-size: 2rem;
     margin: 0;
-    flex-grow: 1;
+    padding-right: 1rem;
     @include gradientText(8s, 45deg);
   }
 
   .headingRight {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
     width: auto;
-    flex-grow: 2;
+    flex-grow: 1;
 
     .theme-switcher {
       background-color: transparent;
       border: none;
       cursor: pointer;
-      padding: 10px;
-      margin-left: 1rem;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
       transition:
         all 0.3s ease,
         transform 0.3s ease;
-      flex: 2;
 
       &:hover {
         background-color: $box-shadow;
@@ -53,7 +51,6 @@
 
       .icon {
         font-size: 24px;
-        margin-right: 8px;
         transition: color 0.3s ease;
       }
 
@@ -64,28 +61,19 @@
       }
     }
 
-    .headingRight__menu {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-content: flex-end;
-      align-items: center;
-      flex: 1;
-      gap: 1rem;
+    .dropdown-container {
+      position: relative;
+      padding-right: 2rem;
+      box-sizing: border-box;
 
       .settingIcon {
         width: 40px;
         height: 40px;
-        margin-right: 10px;
         @include transition(transform, 0.2s);
 
         &:hover {
           transform: rotate(20deg);
         }
-      }
-
-      .dropdown-container {
-        position: relative;
       }
 
       .dropdown-menu {
@@ -117,51 +105,64 @@
           }
         }
       }
+    }
 
-      .logoutButton {
-        padding: 10px 20px;
-        background-color: $primary-color;
-        border: none;
-        @include border-radius(5px);
-        color: $pulse-white;
-        cursor: pointer;
-        @include transition(all, 0.3s);
+    .logoutButton {
+      padding: 10px 20px;
+      background-color: $primary-color;
+      border: none;
+      @include border-radius(5px);
+      color: $pulse-white;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
 
-        &:hover {
-          background-color: lighten($primary-color, 5%);
-        }
+      &:hover {
+        background-color: $pastel-light-blue;
+        color: $text-muted;
       }
     }
   }
 }
 
-@media (max-width: 767px) {
+.language-switcher {
+  box-sizing: border-box;
+  padding-right: 1rem;
+}
+
+@media (max-width: 768px) {
   .heading {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    box-sizing: border-box;
 
     h1 {
       margin: 0 auto;
+      padding-bottom: 1rem;
     }
 
-    .headingRightPart {
-      margin-top: 1rem;
-      gap: 1rem;
+    .headingRight {
       flex-direction: row;
       align-items: center;
+      justify-content: start;
+      flex-wrap: wrap;
 
       .theme-switcher {
         transition: all 0.5s ease-in-out;
+        width: 100%;
+        padding-bottom: 1rem;
+        box-sizing: border-box;
 
         span {
-          font-size: 0.8rem;
+          font-size: 1.2rem;
         }
       }
 
-      .settingIcon {
-        width: 30px;
-        height: 30px;
+      .dropdown-container,
+      .language-switcher,
+      .logoutButton {
+        flex-basis: 33%;
+        align-self: center;
+        text-align: center;
       }
     }
   }

@@ -5,6 +5,8 @@ import "./fixedHeader.scss";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { IProject } from "../../interfaces/IProject";
 import { DarkMode, LightMode } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@Qinastha/pulse_library";
 
 interface FixedHeaderProps {
   isMenuOpen: boolean;
@@ -27,6 +29,7 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
   setIsMenuOpen,
   toggleTheme,
 }) => {
+  const { t, i18n } = useTranslation();
   const getPageTitle = (pathname: string): string => {
     switch (pathname) {
       case "/":
@@ -45,6 +48,10 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
     }
   };
 
+  const switchLanguage = () => {
+    i18n.changeLanguage(i18n.language === "en" ? "ua" : "en");
+  };
+
   return (
     <div className="heading">
       <h1>{getPageTitle(pathname)}</h1>
@@ -53,37 +60,38 @@ export const FixedHeader: React.FC<FixedHeaderProps> = ({
           {theme === "light" ? (
             <div className="theme-switcher__dark">
               <DarkMode className="icon" />
-              <span>Switch to Dark Mode</span>
+              <span>{t("fixedHeader.switchDark")}</span>
             </div>
           ) : (
             <div className="theme-switcher__light">
               <LightMode className="icon" />
-              <span>Switch to Light Mode</span>
+              <span>{t("fixedHeader.switchLight")}</span>
             </div>
           )}
         </button>
-        <div className="headingRight__menu">
-          <div className="dropdown-container">
-            <img
-              className="settingIcon"
-              src={pinkBlossom}
-              alt="Settings"
-              onMouseOver={(): void => setIsMenuOpen(true)}
-            />
-            {isMenuOpen && (
-              <div className="dropdown-menu">
-                <NavLink to="/settings/profile">
-                  {" "}
-                  Profile Settings
-                  <SettingsOutlinedIcon style={{ fontSize: 16 }} />
-                </NavLink>
-              </div>
-            )}
-          </div>
-          <button className="logoutButton" onClick={handleLogout}>
-            LogOut
-          </button>
+        <div className="language-switcher">
+          <LanguageSwitcher switchLanguage={switchLanguage} />
         </div>
+        <div className="dropdown-container">
+          <img
+            className="settingIcon"
+            src={pinkBlossom}
+            alt="Settings"
+            onMouseOver={(): void => setIsMenuOpen(true)}
+          />
+          {isMenuOpen && (
+            <div className="dropdown-menu">
+              <NavLink to="/settings/profile">
+                {" "}
+                {t("fixedHeader.profile")}
+                <SettingsOutlinedIcon style={{ fontSize: 16 }} />
+              </NavLink>
+            </div>
+          )}
+        </div>
+        <button className="logoutButton" onClick={handleLogout}>
+          {t("fixedHeader.logout")}
+        </button>
       </div>
     </div>
   );

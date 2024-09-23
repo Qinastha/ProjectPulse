@@ -2,6 +2,7 @@ import React from "react";
 import { ITaskChecklistItem, IUser, TaskFormData } from "../../../core";
 import DoneOutlineOutlinedIcon from "@mui/icons-material/DoneOutlineOutlined";
 import HourglassBottomOutlinedIcon from "@mui/icons-material/HourglassBottomOutlined";
+import { useTranslation } from "react-i18next";
 
 interface TaskPreviewProps {
   taskData: TaskFormData;
@@ -12,18 +13,21 @@ export const TaskPreview: React.FC<TaskPreviewProps> = ({
   taskData,
   handleClosePopUp,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
-      <h2 className="previewTask__header">Task Preview</h2>
+      <h2 className="previewTask__header">{t("taskPreview.preview")}</h2>
       <div className="previewTask__content">
         <div className="previewTask__field">
-          <strong>Title: </strong> <span>{taskData.title}</span>
+          <strong>{t("taskPreview.title")}</strong>{" "}
+          <span>{taskData.title}</span>
         </div>
         <div className="previewTask__field">
-          <strong>Description: </strong> <span>{taskData.description}</span>
+          <strong>{t("taskPreview.description")} </strong>{" "}
+          <span>{taskData.description}</span>
         </div>
         <div className="previewTask__field">
-          <strong>Members:</strong>
+          <strong>{t("taskPreview.members")}</strong>
           <ul className="previewTask__list">
             {taskData.members?.map((member: IUser, index) => (
               <li key={index}>
@@ -35,7 +39,7 @@ export const TaskPreview: React.FC<TaskPreviewProps> = ({
           </ul>
         </div>
         <div className="previewTask__field">
-          <strong>Check List:</strong>
+          <strong>{t("taskPreview.checkList")}</strong>
           <ul className="previewTask__list">
             {taskData.checkList?.map(
               (item: ITaskChecklistItem, index: number) => (
@@ -54,7 +58,9 @@ export const TaskPreview: React.FC<TaskPreviewProps> = ({
           </ul>
         </div>
         <div className="previewTask__field">
-          <strong>Deadline: {""}</strong>
+          <strong>
+            {t("taskPreview.deadline")} {""}
+          </strong>
           <span>
             {taskData.deadLine
               ? new Date(taskData.deadLine).toLocaleDateString()
@@ -62,17 +68,19 @@ export const TaskPreview: React.FC<TaskPreviewProps> = ({
           </span>
         </div>
         <div className="previewTask__field">
-          <strong>Department:</strong> <span>{taskData.taskDepartment}</span>
+          <strong>{t("taskPreview.department")}</strong>{" "}
+          <span>{taskData.taskDepartment}</span>
         </div>
         <div className="previewTask__field">
-          <strong>Status:</strong> <span>{taskData.taskStatus}</span>
+          <strong>{t("taskPreview.status")}</strong>{" "}
+          <span>{taskData.taskStatus}</span>
         </div>
       </div>
       <div className="previewTask__actions">
         <button
           className="previewTask__button previewTask__button--cancel"
           onClick={handleClosePopUp}>
-          Close
+          {t("button.close")}
         </button>
       </div>
     </>

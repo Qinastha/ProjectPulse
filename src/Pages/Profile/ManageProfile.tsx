@@ -5,10 +5,12 @@ import { useAppSelector } from "../../hooks";
 import { useProfileForm } from "../../core";
 import { useTheme } from "../../core/contexts/ThemeContext";
 import { PulseForm } from "@Qinastha/pulse_library";
+import { useTranslation } from "react-i18next";
 
 export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
   mode,
 }) => {
+  const { t } = useTranslation();
   const profile = useAppSelector(getProfile);
   const { theme } = useTheme()!;
 
@@ -46,7 +48,7 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
         <PulseForm
           requiredInputs={requiredInputs}
           inputValues={inputValues}
-          formTitle={"Provide extra details"}
+          formTitle={t("manageProfile.title")}
           errors={errors}
           onChange={e => updateFormData(e)}
           handleFile={e => handleFile(e)}
@@ -56,7 +58,7 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
           onClick={() => handleSubmit()}
           className="submitButton">
           {" "}
-          Save Changes{" "}
+          {t("button.submit")}{" "}
         </button>
 
         {profile?.timeZone && (
@@ -65,7 +67,7 @@ export const ManageProfile: React.FC<{ mode: "create" | "update" }> = ({
             onClick={handleDelete}
             className="deleteUserButton">
             {" "}
-            Delete User{" "}
+            {t("manageProfile.deleteUser")}{" "}
           </button>
         )}
       </div>

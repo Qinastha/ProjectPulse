@@ -6,13 +6,13 @@ export const LOGIN_REQUIRED_INPUTS: RequiredInput[] = [
     name: "email",
     className: "form-control",
     required: true,
-    label: "Email",
+    label: "label.email",
   },
   {
     type: "password",
     name: "password",
     className: "form-control",
     required: true,
-    label: "Password",
+    label: "label.password",
   },
 ];

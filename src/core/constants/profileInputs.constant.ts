@@ -6,21 +6,21 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
     name: "avatar",
     className: "form-control",
     required: true,
-    label: "Profile Picture",
+    label: "label.profilePicture",
   },
   {
     type: "text",
     name: "phoneNumber",
     className: "form-control",
     required: true,
-    label: "Phone Number",
+    label: "label.phoneNumber",
   },
   {
     type: "select",
     name: "gender",
     className: "form-control",
     required: true,
-    label: "Gender",
+    label: "label.gender",
     options: [
       { value: "male", name: "Male" },
       { value: "female", name: "Female" },
@@ -32,13 +32,13 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
     name: "street",
     className: "form-control",
     required: true,
-    label: "Street",
+    label: "label.street",
   },
   {
     type: "text",
     name: "street2",
     className: "form-control",
-    label: "Apt, Suite",
+    label: "label.street2",
     required: false,
   },
   {
@@ -46,14 +46,14 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
     name: "city",
     className: "form-control",
     required: true,
-    label: "City",
+    label: "label.city",
   },
   {
     type: "select",
     name: "country",
     className: "form-control",
     required: true,
-    label: "Country",
+    label: "label.country",
     options: [
       { value: "Afghanistan", name: "AF", flag: "🇦🇫" },
       { value: "Argentina", name: "AR", flag: "🇦🇷" },
@@ -105,14 +105,14 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
     name: "zipCode",
     className: "form-control",
     required: true,
-    label: "Zip name",
+    label: "label.zipCode",
   },
   {
     type: "select",
     name: "language",
     className: "form-control",
     required: true,
-    label: "Preferred Language",
+    label: "label.language",
     options: [
       { name: "af", value: "Afrikaans", flag: "🇿🇦" },
       { name: "en-AU", value: "English (Australia)", flag: "🇦🇺" },
@@ -167,7 +167,7 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
     name: "timeZone",
     className: "form-control",
     required: true,
-    label: "Preferred Time Zone",
+    label: "label.timeZone",
     options: [
       {
         value: "Pacific/Midway (GMT-11:00)",

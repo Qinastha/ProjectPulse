@@ -8,8 +8,10 @@ import {
 } from "../../core";
 import { useTheme } from "../../core/contexts/ThemeContext";
 import { PulseForm } from "@Qinastha/pulse_library";
+import { useTranslation } from "react-i18next";
 
 const Register: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { theme } = useTheme()!;
   const [errors, setErrors] = useState<any>({});
@@ -48,14 +50,13 @@ const Register: React.FC = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(registerFormData.email)) {
-      newErrors.email = "Invalid email address.";
+      newErrors.email = t("error.email");
       formIsValid = false;
     }
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,16}$/;
     if (!passwordRegex.test(registerFormData.password)) {
-      newErrors.password =
-        "Password must contain at least one capital letter and one number, and be at least 8 characters long.";
+      newErrors.password = t("error.password");
       formIsValid = false;
     }
 
@@ -64,16 +65,14 @@ const Register: React.FC = () => {
       !nameRegex.test(registerFormData.firstName) ||
       registerFormData.firstName.length === 0
     ) {
-      newErrors.firstName =
-        "First name must start with a capital letter and contain only letters.";
+      newErrors.firstName = t("error.firstName");
       formIsValid = false;
     }
     if (
       !nameRegex.test(registerFormData.lastName) ||
       registerFormData.lastName.length === 0
     ) {
-      newErrors.lastName =
-        "Last name must start with a capital letter and contain only letters.";
+      newErrors.lastName = t("error.lastName");
       formIsValid = false;
     }
 
@@ -82,19 +81,19 @@ const Register: React.FC = () => {
       !usernameRegex.test(registerFormData.userName) ||
       registerFormData.userName.length === 0
     ) {
-      newErrors.userName = "Username cannot start with symbols or be empty.";
+      newErrors.userName = t("error.username");
       formIsValid = false;
     }
 
     const today = new Date();
     const selectedDate = new Date(registerFormData.dateOfBirth);
     if (selectedDate > today) {
-      newErrors.dateOfBirth = "Date of birth cannot be in the future.";
+      newErrors.dateOfBirth = t("error.futureDob");
       formIsValid = false;
     }
     const minDate = new Date("1900-01-01");
     if (selectedDate < minDate) {
-      newErrors.dateOfBirth = "Date of birth cannot be before 1900.";
+      newErrors.dateOfBirth = t("error.pastDob");
       formIsValid = false;
     }
 
@@ -134,15 +133,15 @@ const Register: React.FC = () => {
         <PulseForm
           requiredInputs={requiredInputs}
           inputValues={inputValues}
-          formTitle={"Register"}
+          formTitle={t("register.formTitle")}
           errors={errors}
           onChange={e => updateRegisterFormData(e)}
         />
 
         <p>
-          If you already have an account then{" "}
+          {t("register.if")}{" "}
           <span className="loginLink" onClick={(): void => navigate("/login")}>
-            visit this page
+            {t("register.clickHere")}
           </span>
         </p>
 
@@ -150,7 +149,7 @@ const Register: React.FC = () => {
           className="registerButton"
           type="button"
           onClick={() => handleRegister()}>
-          Register
+          {t("button.submit")}
         </button>
       </div>
     </div>

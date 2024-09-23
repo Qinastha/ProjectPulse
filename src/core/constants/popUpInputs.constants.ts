@@ -6,12 +6,12 @@ export const POPUP_REQUIRED_INPUTS: RequiredInput[] = [
     name: "projectAvatar",
     className: "project-pop__input",
     required: true,
-    label: "Project Picture",
+    label: "label.projectPicture",
   },
   {
     type: "text",
     name: "projectName",
-    label: "Project name",
+    label: "label.projectName",
     required: true,
     className: "project-pop__input",
     autoComplete: "off",
@@ -19,7 +19,7 @@ export const POPUP_REQUIRED_INPUTS: RequiredInput[] = [
   {
     type: "text",
     name: "projectDescription",
-    label: "Description",
+    label: "label.description",
     required: true,
     className: "project-pop__input",
     autoComplete: "off",
@@ -27,7 +27,7 @@ export const POPUP_REQUIRED_INPUTS: RequiredInput[] = [
   {
     type: "text",
     name: "members",
-    label: "Select Members",
+    label: "label.projectMembers",
     required: true,
     className: "project-pop__input",
     autoComplete: "off",

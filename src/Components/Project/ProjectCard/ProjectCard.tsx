@@ -2,6 +2,7 @@ import React from "react";
 import { IProject, IUser } from "../../../core";
 import { useTheme } from "../../../core/contexts/ThemeContext";
 import "./ProjectCard.scss";
+import { useTranslation } from "react-i18next";
 
 interface ProjectCardProps {
   project: IProject;
@@ -16,6 +17,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   handleUpdateProjectOpen,
   handleShowProject,
 }) => {
+  const { t } = useTranslation();
   const { theme } = useTheme()!;
   return (
     <div key={project._id} className={`projects-container__card ${theme}`}>
@@ -32,21 +34,24 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {project.projectDescription}
         </h5>
         <p className="projects-container__card-date">
-          <span className="label">Created At:</span>{" "}
+          <span className="label">{t("projectCard.created")}</span>{" "}
           {new Date(project.createdAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-date">
-          <span className="label">Completed At:</span>{" "}
+          <span className="label">{t("projectCard.completed")}</span>{" "}
           {new Date(project.completedAt).toLocaleDateString()}
         </p>
         <p className="projects-container__card-status">
-          <span className="label">Status:</span>{" "}
+          <span className="label">{t("projectCard.status")}</span>{" "}
           {project.isCompleted ? "Completed" : "In Progress"}
         </p>
         <p className="projects-container__card-creator">
-          <span className="label">Creator:</span> {project.creator.firstName}
+          <span className="label">{t("projectCard.creator")}</span> {""}
+          {project.creator.firstName}
         </p>
-        <p className="projects-container__card-members-title">Members:</p>
+        <p className="projects-container__card-members-title">
+          {t("projectCard.members")}
+        </p>
         <ul className="projects-container__card-members-list">
           {project.members && project.members.length > 0 ? (
             project.members.map((member: IUser) => (
@@ -58,7 +63,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             ))
           ) : (
             <li className="projects-container__card-members-item">
-              No members
+              {t("projectCard.noMembers")}
             </li>
           )}
         </ul>
@@ -67,17 +72,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <button
           className="projects-container__edit-button"
           onClick={() => handleUpdateProjectOpen(project._id)}>
-          Edit
+          {t("button.update")}
         </button>
         <button
           className="projects-container__show-button"
           onClick={() => handleShowProject(project._id)}>
-          Show
+          {t("button.show")}
         </button>
         <button
           className="projects-container__delete-button"
           onClick={() => handleDelete(project._id)}>
-          Delete
+          {t("button.delete")}
         </button>
       </div>
     </div>
