@@ -50,10 +50,10 @@ export const REGISTER_REQUIRED_INPUTS: RequiredInput[] = [
     required: true,
     label: "label.position",
     options: [
-      { value: "project manager", name: "Project Manager" },
-      { value: "developer", name: "Developer" },
-      { value: "designer", name: "Designer" },
-      { value: "tester", name: "Tester" },
+      { value: "label.project manager", name: "Project Manager" },
+      { value: "label.developer", name: "Developer" },
+      { value: "label.designer", name: "Designer" },
+      { value: "label.tester", name: "Tester" },
     ],
   },
 ];

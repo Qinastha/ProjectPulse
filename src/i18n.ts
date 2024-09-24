@@ -124,6 +124,7 @@ const additionalResources = {
       "login.formTitle": "Вхід",
       "login.if": "Якщо у вас вже є аккаунт",
       "login.clickHere": "перейдіть на сторінку реєстрації",
+      "register.formTitle": "Реєстрація",
       "register.if": "Якщо ви не маєте аккаунта",
       "register.clickHere": "перейдіть на сторінку входу",
       "project.addList": "Додати список",

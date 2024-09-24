@@ -84,7 +84,10 @@ export const useProfileForm = (
   const updateFormData = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "gender") {
+      value = value.split(".")[1];
+    }
     const isAddress = [
       "street",
       "street2",

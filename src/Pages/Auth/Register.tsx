@@ -102,7 +102,10 @@ const Register: React.FC = () => {
   };
 
   const updateRegisterFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "position") {
+      value = value.split(".")[1];
+    }
     setRegisterFormData((prevState: RegisterFormData) => ({
       ...prevState,
       [name]: value,

@@ -22,9 +22,9 @@ export const PROFILE_REQUIRED_INPUTS: RequiredInput[] = [
     required: true,
     label: "label.gender",
     options: [
-      { value: "male", name: "Male" },
-      { value: "female", name: "Female" },
-      { value: "other", name: "Other" },
+      { value: "label.male", name: "Male" },
+      { value: "label.female", name: "Female" },
+      { value: "label.other", name: "Other" },
     ],
   },
   {

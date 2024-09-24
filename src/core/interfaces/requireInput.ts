@@ -7,5 +7,9 @@ export interface RequiredInput {
   autoComplete?: string;
   min?: string;
   max?: string;
-  options?: Array<{ name: string; value: string; flag?: string }>;
+  options?: Array<{
+    name: string;
+    value: string;
+    flag?: string;
+  }>;
 }
