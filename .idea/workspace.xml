@@ -8,12 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Auth/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/constants/profileInputs.constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/profileInputs.constant.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/constants/registerInputs.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/registerInputs.constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/interfaces/requireInput.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/interfaces/requireInput.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utility/useProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useProfile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Project/ProjectCard/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Project/ProjectCard/ProjectCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Dashboard/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/constants/taskInputs.constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/constants/taskInputs.constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/utility/useTask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utility/useTask.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -303,6 +301,12 @@
       <workItem from="1727041477175" duration="495000" />
       <workItem from="1727095721906" duration="13924000" />
       <workItem from="1727183367666" duration="8750000" />
+      <workItem from="1727268914878" duration="479000" />
+      <workItem from="1727365225166" duration="1000" />
+      <workItem from="1727365294886" duration="23000" />
+      <workItem from="1729706359841" duration="183000" />
+      <workItem from="1729714705949" duration="2000" />
+      <workItem from="1729759036956" duration="9893000" />
     </task>
     <servers />
   </component>

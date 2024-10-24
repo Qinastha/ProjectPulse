@@ -10,6 +10,7 @@ import { setPopUpMode, togglePopUp } from "../../store/popUpSlice";
 import { getUserWidgets } from "../../store/userSlice";
 import { IWidget } from "../../core/interfaces/IWidget";
 import { FallbackLoader } from "../../core";
+import { getProjects } from "../../store/projectSlice";
 
 const Widget = lazy(() => import("../../Components/Widget/Widget"));
 
@@ -18,13 +19,16 @@ export const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const userWidgets = useAppSelector(getUserWidgets)!;
   const widgets = useAppSelector(getAllWidgets);
+  const projects = useAppSelector(getProjects);
 
   useEffect(() => {
     const fetchData = {
       widgetRoutes: userWidgets,
-      projectId: "66bf647703fd492812fa9458",
+      projectId: "671a65b6c394117269a4fb9a",
     };
-    dispatch(fetchAllWidgets(fetchData));
+    if (projects.length > 0) {
+      dispatch(fetchAllWidgets(fetchData));
+    }
   }, []);
 
   const triggerPopup = (widgetId: string) => {

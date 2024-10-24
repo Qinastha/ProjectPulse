@@ -32,7 +32,10 @@ export const useTaskForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     if (e?.target) {
-      const { name, value } = e.target;
+      let { name, value } = e.target;
+      if (name === "taskDepartment" || name === "taskStatus") {
+        value = value.split(".")[1];
+      }
       setTaskFormData(prevState => ({
         ...prevState,
         [name]: value,

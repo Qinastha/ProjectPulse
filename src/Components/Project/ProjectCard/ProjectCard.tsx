@@ -37,10 +37,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <span className="label">{t("projectCard.created")}</span>{" "}
           {new Date(project.createdAt).toLocaleDateString()}
         </p>
-        <p className="projects-container__card-date">
-          <span className="label">{t("projectCard.completed")}</span>{" "}
-          {new Date(project.completedAt).toLocaleDateString()}
-        </p>
         <p className="projects-container__card-status">
           <span className="label">{t("projectCard.status")}</span>{" "}
           {project.isCompleted ? "Completed" : "In Progress"}
